@@ -21,7 +21,7 @@ import Create from "./pages/Create";
 export const routes = [
   { path: '/profile', name: 'My Profile', Component: Profile },
   { path: '/poetry', name: 'Poetry', Component: Poetry },
-  { path: '/phrases', name: 'Phrases', Component: Phrases }
+  { path: '/phrases', name: 'Phrases', Component: Phrases },
   { path: '/', name: 'Home', Component: Home },
 ]
 
