@@ -13,21 +13,26 @@ import Footer from "./components/Footer";
 
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
+import Poetry from "./pages/Poetry";
 
 //import routes from "./data/routes";
 export const routes = [
   { path: '/profile', name: 'My Profile', Component: Profile },
-  { path: '/', name: 'Home', Component: Home }
+  { path: '/poetry', name: 'Poetry', Component: Poetry},
+  { path: '/', name: 'Home', Component: Home },
 ]
 
 
 function App() {
+  //const [isMobileView, setIsMobileView] = useState(window.matchMedia("(max-width: 768px)").matches);
+  //const [isMobileView, setIsMobileView] = useState(false);
+
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <NavBar />
+        <NavBar/>
         <Switch>
-          {routes.map(({ path, Component }) => (
+        {routes.map(({ path, Component }) => (
             <Route key={path} path={path}>
               {({ match }) => (
                 <CSSTransition
@@ -47,5 +52,20 @@ function App() {
     </BrowserRouter>
   );
 }
+/*
+          {routes.map(({ path, Component }) => (
+            <Route key={path} path={path}>
+              {({ match }) => (
+                <CSSTransition
+                  in={match != null}
+                  timeout={10000}
+                  unmountOnExit
+                  appear
+                >
+                  <Component />
+                </CSSTransition>
+              )}
+            </Route>
+          ))}*/
 
 export default App;

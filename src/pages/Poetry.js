@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { Paper, Grow, Grid } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
-import useCommonStyles from "../assets/common";
 
-import poems from "../data/poems.json";
+import useCommonStyles from "../assets/common";
 
 const useStyles = makeStyles({});
 
-const Home = () => {
+function Poetry() {
   const classes = useStyles();
   const common = useCommonStyles();
 
@@ -25,39 +25,21 @@ const Home = () => {
   const body = (
     <Grid container>
       <Grid item xs={12}>
-        <h1>Symon's Blog</h1>
+        <h1>Poetry</h1>
       </Grid>
       <Grid item xs={4}>
-        {poems[1]["title"]}
-        <br />
-        <br />
-        {poems[1]["body"]}
+        Poetry
       </Grid>
       <Grid item xs={2}></Grid>
       <Grid item xs={6}></Grid>
     </Grid>
   );
-
-  const mobileBody = (
-    <Grid container>
-      <Grid item xs={12}>
-        <h1>Symon's Blog</h1>
-      </Grid>
-      <Grid item xs={12}>
-        {poems[1]["title"]}
-        <br />
-        <br />
-        {poems[1]["body"]}
-      </Grid>
-    </Grid>
-  );
-
   return (
     <Grow in={true}>
       {(!isMobileView && <div className={common.bodyDiv}>{body}</div>) ||
-        (isMobileView && <div className={common.mobileBodyDiv}>{mobileBody}</div>)}
+        (isMobileView && <div className={common.mobileBodyDiv}>{body}</div>)}
     </Grow>
   );
-};
+}
 
-export default Home;
+export default Poetry;
