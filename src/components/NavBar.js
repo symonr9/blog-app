@@ -31,8 +31,8 @@ const useStyles = makeStyles({
     }
   },
   mobileNavBarDiv: {
-    overflow: 'hidden',
-    backgroundColor: 'white',
+    overflow: "hidden",
+    backgroundColor: "white",
     "& a": {
       margin: "0.5em",
       textDecoration: "none",
@@ -46,59 +46,60 @@ const useStyles = makeStyles({
 });
 
 var styles = {
-    bmBurgerButton: {
-      position: 'fixed',
-      width: '2em',
-      height: '2em',
-      marginBottom: '3em',
-      marginLeft: '1em',
-    },
-    bmBurgerBars: {
-      background: '#373a47'
-    },
-    bmBurgerBarsHover: {
-      background: '#a90000'
-    },
-    bmCrossButton: {
-      height: '24px',
-      width: '24px'
-    },
-    bmCross: {
-      background: '#bdc3c7'
-    },
-    bmMenuWrap: {
-      position: 'fixed',
-      height: '100%',
-      marginTop: '0em',
-    },
-    bmMenu: {
-      background: 'white',
-      fontSize: '1.15em',
-      overflow: 'hidden',
-    },
-    bmMorphShape: {
-      fill: '#373a47'
-    },
-    bmItemList: {
-      color: '#b8b7ad',
-      padding: '0.8em',
-      marginTop: '2em',
-    },
-    bmItem: {
-      display: 'inline-block',
-      marginBottom: '0.4em',
-      textDecoration: 'none'
-    },
-    bmOverlay: {
-      background: 'rgba(0, 0, 0, 0.3)'
-    },
+  bmBurgerButton: {
+    position: "fixed",
+    width: "2em",
+    height: "2em",
+    marginBottom: "3em",
+    marginLeft: "1em"
+  },
+  bmBurgerBars: {
+    background: "#373a47"
+  },
+  bmBurgerBarsHover: {
+    background: "#a90000"
+  },
+  bmCrossButton: {
+    height: "24px",
+    width: "24px"
+  },
+  bmCross: {
+    background: "#bdc3c7"
+  },
+  bmMenuWrap: {
+    position: "fixed",
+    height: "100%",
+    marginTop: "0em"
+  },
+  bmMenu: {
+    background: "white",
+    fontSize: "1.15em",
+    overflow: "hidden"
+  },
+  bmMorphShape: {
+    fill: "#373a47"
+  },
+  bmItemList: {
+    color: "#b8b7ad",
+    padding: "0.8em",
+    marginTop: "2em"
+  },
+  bmItem: {
+    display: "inline-block",
+    marginBottom: "0.4em",
+    textDecoration: "none"
+  },
+  bmOverlay: {
+    background: "rgba(0, 0, 0, 0.3)"
   }
-  
+};
 
 function NavBar() {
   const classes = useStyles();
 
-  const [isMobileView, setIsMobileView] = useState(window.matchMedia("(max-width: 768px)").matches);
+  const [isMobileView, setIsMobileView] = useState(
+    window.matchMedia("(max-width: 768px)").matches
+  );
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
 
   useEffect(() => {
@@ -106,30 +107,25 @@ function NavBar() {
     window.matchMedia("(max-width: 768px)").addListener(handler);
   }, []);
 
+  const body = (
+    <NavLink to={path}>
+      <Button variant="outlined">
+        {icon}
+        {name}
+      </Button>
+    </NavLink>
+  );
+
   return (
     <div>
       {(!isMobileView && (
         <div className={classes.navBarDiv}>
-          {routes.map(({ path, name, icon }) => (
-            <NavLink to={path}>
-              <Button variant="outlined">
-                {icon}
-                {name}
-              </Button>
-            </NavLink>
-          ))}
+          {routes.map(({ path, name, icon }) => ({ body }))}
         </div>
       )) ||
         (isMobileView && (
-          <Menu styles={ styles } width={ 150 } isOpen={ isOpenMobileMenu }  >
-            {routes.map(({ path, name, icon }) => (
-              <NavLink to={path}>
-                <Button variant="outlined">
-                  {icon}
-                  {name}
-                </Button>
-              </NavLink>
-            ))}
+          <Menu styles={styles} width={150} isOpen={isOpenMobileMenu}>
+            {routes.map(({ path, name, icon }) => ({ body }))}
           </Menu>
         ))}
     </div>

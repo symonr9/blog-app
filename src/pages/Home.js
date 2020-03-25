@@ -27,22 +27,6 @@ const Home = () => {
       <Grid item xs={12}>
         <h1>Symon's Blog</h1>
       </Grid>
-      <Grid item xs={4}>
-        {poems[1]["title"]}
-        <br />
-        <br />
-        {poems[1]["body"]}
-      </Grid>
-      <Grid item xs={2}></Grid>
-      <Grid item xs={6}></Grid>
-    </Grid>
-  );
-
-  const mobileBody = (
-    <Grid container>
-      <Grid item xs={12}>
-        <h1>Symon's Blog</h1>
-      </Grid>
       <Grid item xs={12}>
         {poems[1]["title"]}
         <br />
@@ -55,7 +39,7 @@ const Home = () => {
   return (
     <Grow in={true}>
       {(!isMobileView && <div className={common.bodyDiv}>{body}</div>) ||
-        (isMobileView && <div className={common.mobileBodyDiv}>{mobileBody}</div>)}
+        (isMobileView && <div className={common.mobileBodyDiv}>{body}</div>)}
     </Grow>
   );
 };
