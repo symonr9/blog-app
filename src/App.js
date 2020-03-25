@@ -6,8 +6,6 @@ import "./App.css";
 import { Provider } from "react-redux";
 import store from "./services/redux/store";
 
-import { CSSTransition } from "react-transition-group";
-
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
@@ -28,9 +26,6 @@ export const routes = [
 
 
 function App() {
-  //const [isMobileView, setIsMobileView] = useState(window.matchMedia("(max-width: 768px)").matches);
-  //const [isMobileView, setIsMobileView] = useState(false);
-
   return (
     <BrowserRouter>
       <Provider store={store}>
@@ -38,16 +33,7 @@ function App() {
         <Switch>
         {routes.map(({ path, Component }) => (
             <Route key={path} path={path}>
-              {({ match }) => (
-                <CSSTransition
-                  in={match != null}
-                  timeout={10000}
-                  unmountOnExit
-                  appear
-                >
-                  <Component />
-                </CSSTransition>
-              )}
+              <Component />
             </Route>
           ))}
         </Switch>
@@ -56,20 +42,5 @@ function App() {
     </BrowserRouter>
   );
 }
-/*
-          {routes.map(({ path, Component }) => (
-            <Route key={path} path={path}>
-              {({ match }) => (
-                <CSSTransition
-                  in={match != null}
-                  timeout={10000}
-                  unmountOnExit
-                  appear
-                >
-                  <Component />
-                </CSSTransition>
-              )}
-            </Route>
-          ))}*/
 
 export default App;
