@@ -66,7 +66,6 @@ const Login = () => {
           {errors.password && errors.password.message}
           <button type="submit">Submit</button>
         </form>
-        login
       </Grid>
     </Grid>
   );
