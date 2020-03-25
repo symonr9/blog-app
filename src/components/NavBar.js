@@ -9,11 +9,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import HomeRounded from "@material-ui/icons/HomeRounded";
 import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
 import MenuBookRoundedIcon from "@material-ui/icons/MenuBookRounded";
+import FormatQuoteRoundedIcon from '@material-ui/icons/FormatQuoteRounded';
+import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
 
 export const routes = [
   { path: "/", name: "Home", icon: <HomeRounded /> },
+  { path: "/create", name: "Create", icon: <AddCircleOutlineRoundedIcon /> },
   { path: "/poetry", name: "Poetry", icon: <MenuBookRoundedIcon /> },
-  { path: "/profile", name: "Profile", icon: <PersonRoundedIcon /> }
+  { path: "/profile", name: "Profile", icon: <PersonRoundedIcon /> },
+  { path: "/phrases", name: "Phrases", icon: <FormatQuoteRoundedIcon /> }
 ];
 
 const useStyles = makeStyles({

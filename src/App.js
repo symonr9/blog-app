@@ -14,11 +14,14 @@ import Footer from "./components/Footer";
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
 import Poetry from "./pages/Poetry";
+import Phrases from "./pages/Phrases";
+import Create from "./pages/Create";
 
 //import routes from "./data/routes";
 export const routes = [
   { path: '/profile', name: 'My Profile', Component: Profile },
-  { path: '/poetry', name: 'Poetry', Component: Poetry},
+  { path: '/poetry', name: 'Poetry', Component: Poetry },
+  { path: '/phrases', name: 'Phrases', Component: Phrases }
   { path: '/', name: 'Home', Component: Home },
 ]
 
