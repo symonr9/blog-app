@@ -37,6 +37,7 @@ const useStyles = makeStyles({
   mobileNavBarDiv: {
     overflow: "hidden",
     backgroundColor: "white",
+    marginTop: "1em",
     "& a": {
       margin: "0.5em",
       textDecoration: "none",
@@ -72,8 +73,7 @@ var styles = {
   },
   bmMenuWrap: {
     position: "fixed",
-    height: "100%",
-    marginTop: "0em"
+    height: "100%"
   },
   bmMenu: {
     background: "white",
@@ -90,7 +90,7 @@ var styles = {
   },
   bmItem: {
     display: "inline-block",
-    marginBottom: "0.4em",
+    marginTop: "2em",
     textDecoration: "none"
   },
   bmOverlay: {
@@ -128,9 +128,11 @@ function NavBar() {
     <div>
       {(!isMobileView && <div className={classes.navBarDiv}>{ body }</div>) ||
         (isMobileView && (
-          <Menu styles={styles} width={150} isOpen={isOpenMobileMenu}>
+          <div className={ classes.mobileNavBarDiv }>
+          <Menu styles={styles} width={150} isOpen={isOpenMobileMenu} >
             { body }
           </Menu>
+          </div>
         ))}
     </div>
   );
