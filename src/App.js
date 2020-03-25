@@ -14,13 +14,17 @@ import Home from "./pages/Home";
 import Poetry from "./pages/Poetry";
 import Phrases from "./pages/Phrases";
 import Create from "./pages/Create";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 //import routes from "./data/routes";
-export const routes = [
+const routes = [
   { path: '/profile', name: 'My Profile', Component: Profile },
   { path: '/poetry', name: 'Poetry', Component: Poetry },
   { path: '/phrases', name: 'Phrases', Component: Phrases },
   { path: '/create', name: 'Create', Component: Create },
+  { path: '/login', name: 'Login', Component: Login},
+  { path: '/signup', name: 'Signup', Component: Signup},
   { path: '/', name: 'Home', Component: Home },
 ]
 
