@@ -23,13 +23,10 @@ const Login = () => {
   const body = (
     <Grid container>
       <Grid item xs={12}>
-        <h1>Symon's Blog</h1>
+        <h1>Login</h1>
       </Grid>
       <Grid item xs={12}>
-        {poems[1]["title"]}
-        <br />
-        <br />
-        {poems[1]["body"]}
+        login
       </Grid>
     </Grid>
   );
