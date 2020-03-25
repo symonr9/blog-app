@@ -22,6 +22,7 @@ export const routes = [
   { path: '/profile', name: 'My Profile', Component: Profile },
   { path: '/poetry', name: 'Poetry', Component: Poetry },
   { path: '/phrases', name: 'Phrases', Component: Phrases },
+  { path: '/create', name: 'Create', Component: Create },
   { path: '/', name: 'Home', Component: Home },
 ]
 

@@ -9,8 +9,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import HomeRounded from "@material-ui/icons/HomeRounded";
 import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
 import MenuBookRoundedIcon from "@material-ui/icons/MenuBookRounded";
-import FormatQuoteRoundedIcon from '@material-ui/icons/FormatQuoteRounded';
-import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
+import FormatQuoteRoundedIcon from "@material-ui/icons/FormatQuoteRounded";
+import AddCircleOutlineRoundedIcon from "@material-ui/icons/AddCircleOutlineRounded";
 
 export const routes = [
   { path: "/", name: "Home", icon: <HomeRounded /> },
@@ -112,24 +112,24 @@ function NavBar() {
   }, []);
 
   const body = (
-    <NavLink to={path}>
-      <Button variant="outlined">
-        {icon}
-        {name}
-      </Button>
-    </NavLink>
+    <div>
+      {routes.map(({ path, name, icon }) => (
+        <NavLink to={path}>
+          <Button variant="outlined">
+            {icon}
+            {name}
+          </Button>
+        </NavLink>
+      ))}
+    </div>
   );
 
   return (
     <div>
-      {(!isMobileView && (
-        <div className={classes.navBarDiv}>
-          {routes.map(({ path, name, icon }) => ({ body }))}
-        </div>
-      )) ||
+      {(!isMobileView && <div className={classes.navBarDiv}>{ body }</div>) ||
         (isMobileView && (
           <Menu styles={styles} width={150} isOpen={isOpenMobileMenu}>
-            {routes.map(({ path, name, icon }) => ({ body }))}
+            { body }
           </Menu>
         ))}
     </div>
