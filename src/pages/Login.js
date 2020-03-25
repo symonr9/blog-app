@@ -23,13 +23,21 @@ const Login = () => {
   }, []);
 
   const { handleSubmit, register, watch, errors } = useForm();
-  
+
   const onSubmit = data => {
-    console.log(data)
+    console.log(data);
+    postData(
+      "http://localhost:3000/users/login",
+      data,
+      response => {
+        const { token } = response;
+        console.log(token);
+      }
+    );
   };
 
   //fixme
-  console.log(watch('example'));
+  console.log(watch("example"));
 
   const body = (
     <Grid container>
@@ -38,25 +46,25 @@ const Login = () => {
       </Grid>
       <Grid item xs={12}>
         <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-        name="email"
-        ref={register({
-          required: 'Required',
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-            message: "invalid email address"
-          }
-        })}
-      />
-      {errors.email && errors.email.message}
-      <input
-        name="password"
-        ref={register({
-          required: 'Required'
-        })}
-      />
-      {errors.password && errors.password.message}
-      <button type="submit">Submit</button>
+          <input
+            name="email"
+            ref={register({
+              required: "Required",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: "invalid email address"
+              }
+            })}
+          />
+          {errors.email && errors.email.message}
+          <input
+            name="password"
+            ref={register({
+              required: "Required"
+            })}
+          />
+          {errors.password && errors.password.message}
+          <button type="submit">Submit</button>
         </form>
         login
       </Grid>

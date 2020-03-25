@@ -117,7 +117,7 @@ function NavBar() {
   const body = (
     <div>
       {routes.map(({ path, name, icon }) => (
-        <NavLink to={path}>
+        <NavLink to={path} key={name}>
           <Button variant="outlined">
             {icon}
             {name}
