@@ -20,7 +20,7 @@ export const routes = [
   { path: "/login", name: "Login", icon: <SupervisorAccountRoundedIcon/> },
   { path: "/signup", name: "Signup", icon: <SupervisorAccountRoundedIcon/> },
   { path: "/profile", name: "Profile", icon: <PersonRoundedIcon /> },
-  { path: "/phrases", name: "Phrases", icon: <FormatQuoteRoundedIcon /> }
+  { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon /> }
 ];
 
 const useStyles = makeStyles({

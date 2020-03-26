@@ -27,7 +27,7 @@ const Signup = () => {
   const onSubmit = data => {
     console.log(data);
     postData(
-      "http://localhost:3000/users/signup",
+      "http://localhost:2020/users/signup",
       data,
       response => {
         const { token } = response;

@@ -9,7 +9,7 @@ import useCommonStyles from "../assets/common";
 
 const useStyles = makeStyles({});
 
-function Phrases() {
+function Quotes() {
   const classes = useStyles();
   const common = useCommonStyles();
 
@@ -25,10 +25,10 @@ function Phrases() {
   const body = (
     <Grid container>
       <Grid item xs={12}>
-        <h1>Phrases</h1>
+        <h1>Quotes</h1>
       </Grid>
       <Grid item xs={4}>
-        Phrases
+        Quotes
       </Grid>
       <Grid item xs={2}></Grid>
       <Grid item xs={6}></Grid>
@@ -42,4 +42,4 @@ function Phrases() {
   );
 }
 
-export default Phrases;
+export default Quotes;
