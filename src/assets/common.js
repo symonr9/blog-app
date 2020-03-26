@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useCommonStyles = makeStyles({
     bodyDiv: {
-        height: '80vh',
+        height: '100%',
         width: '90vw',
         marginLeft: '1em',
         marginRight: '1em',
@@ -10,7 +10,7 @@ const useCommonStyles = makeStyles({
         marginBottom: "1em",
       },
       mobileBodyDiv: {
-        height: '80vh',
+        height: '100%',
         width: '50vw',
         textAlign: 'center',
         justifyContent: 'center',
