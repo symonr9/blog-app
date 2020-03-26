@@ -34,9 +34,78 @@ const useStyles = makeStyles({
   }
 });
 
+
+const poemTypes = [
+{
+  value: "prose",
+  label: "Prose"
+},
+{
+  value: "iambic-pentameter",
+  label: "Iambic Pentameter"
+},
+{
+  value: "sonnet",
+  label: "Sonnet"
+},
+{
+  value: "custom",
+  label: "Custom"
+}
+];
+
 function Create() {
   const classes = useStyles();
   const common = useCommonStyles();
+
+  const [isMobileView, setIsMobileView] = useState(
+    window.matchMedia("(max-width: 768px)").matches
+  );
+
+  useEffect(() => {
+    const handler = e => setIsMobileView(e.matches);
+    window.matchMedia("(max-width: 768px)").addListener(handler);
+  }, []);
+
+  const { handleSubmit, register, watch, errors } = useForm();
+
+  const [type, setType] = useState("");
+  const [poemType, setPoemType] = useState("");
+  const [formInput, setFormInput] = useState(
+    <div className={classes.blankDiv}></div>
+  );
+
+  const handleTypeChange = event => {
+    setType(event.target.value);
+
+    types.map(({ value, formInput }) => {
+      if (value === event.target.value) {
+        setFormInput(formInput);
+      }
+    });
+  };
+
+  const handlePoemTypeChange = event => {
+    setPoemType(event.target.value);
+  };
+
+  const onSubmit = data => {
+    console.log(data);
+
+    /*
+    postData(
+      "http://localhost:2020/users/login",
+      data,
+      response => {
+        const { token } = response;
+        console.log(token);
+      }
+    );
+    */
+  };
+
+  console.log(watch("example"));
+
 
   const submitBtn = (
     <div className={classes.submitBtnDiv}>
@@ -50,6 +119,7 @@ function Create() {
     </Button>
     </div>
   );
+
   const types = [
     {
       value: "poetry",
@@ -77,10 +147,19 @@ function Create() {
             name="type"
             label="Type of your poem"
             placeholder="Start writing..."
+            select
+            value={poemType}
+            onChange={handlePoemTypeChange}
             variant="outlined"
             fullWidth
             className={classes.formInput}
-          /> 
+          >
+            {poemTypes.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
           <TextField
             name="notes"
             label="Notes of your poem"
@@ -109,49 +188,6 @@ function Create() {
       formInput: <div>{submitBtn}</div>
     }
   ];
-
-  const [isMobileView, setIsMobileView] = useState(
-    window.matchMedia("(max-width: 768px)").matches
-  );
-
-  useEffect(() => {
-    const handler = e => setIsMobileView(e.matches);
-    window.matchMedia("(max-width: 768px)").addListener(handler);
-  }, []);
-
-  const { handleSubmit, register, watch, errors } = useForm();
-
-  const [type, setType] = useState("");
-  const [formInput, setFormInput] = useState(
-    <div className={classes.blankDiv}></div>
-  );
-
-  const handleTypeChange = event => {
-    setType(event.target.value);
-
-    types.map(({ value, formInput }) => {
-      if (value === event.target.value) {
-        setFormInput(formInput);
-      }
-    });
-  };
-
-  const onSubmit = data => {
-    console.log(data);
-
-    /*
-    postData(
-      "http://localhost:2020/users/login",
-      data,
-      response => {
-        const { token } = response;
-        console.log(token);
-      }
-    );
-    */
-  };
-
-  console.log(watch("example"));
 
   const body = (
     <Grid container>
