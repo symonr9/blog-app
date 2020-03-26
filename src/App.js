@@ -6,27 +6,30 @@ import "./App.css";
 import { Provider } from "react-redux";
 import store from "./services/redux/store";
 
-import { CSSTransition } from "react-transition-group";
-
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
 import Poetry from "./pages/Poetry";
+import Quotes from "./pages/Quotes";
+import Create from "./pages/Create";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 //import routes from "./data/routes";
-export const routes = [
+const routes = [
   { path: '/profile', name: 'My Profile', Component: Profile },
-  { path: '/poetry', name: 'Poetry', Component: Poetry},
+  { path: '/poetry', name: 'Poetry', Component: Poetry },
+  { path: '/quotes', name: 'Quotes', Component: Quotes },
+  { path: '/create', name: 'Create', Component: Create },
+  { path: '/login', name: 'Login', Component: Login},
+  { path: '/signup', name: 'Signup', Component: Signup},
   { path: '/', name: 'Home', Component: Home },
 ]
 
 
 function App() {
-  //const [isMobileView, setIsMobileView] = useState(window.matchMedia("(max-width: 768px)").matches);
-  //const [isMobileView, setIsMobileView] = useState(false);
-
   return (
     <BrowserRouter>
       <Provider store={store}>
@@ -34,16 +37,7 @@ function App() {
         <Switch>
         {routes.map(({ path, Component }) => (
             <Route key={path} path={path}>
-              {({ match }) => (
-                <CSSTransition
-                  in={match != null}
-                  timeout={10000}
-                  unmountOnExit
-                  appear
-                >
-                  <Component />
-                </CSSTransition>
-              )}
+              <Component />
             </Route>
           ))}
         </Switch>
@@ -52,20 +46,5 @@ function App() {
     </BrowserRouter>
   );
 }
-/*
-          {routes.map(({ path, Component }) => (
-            <Route key={path} path={path}>
-              {({ match }) => (
-                <CSSTransition
-                  in={match != null}
-                  timeout={10000}
-                  unmountOnExit
-                  appear
-                >
-                  <Component />
-                </CSSTransition>
-              )}
-            </Route>
-          ))}*/
 
 export default App;

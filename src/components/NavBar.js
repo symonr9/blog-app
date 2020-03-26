@@ -9,11 +9,18 @@ import { makeStyles } from "@material-ui/core/styles";
 import HomeRounded from "@material-ui/icons/HomeRounded";
 import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
 import MenuBookRoundedIcon from "@material-ui/icons/MenuBookRounded";
+import FormatQuoteRoundedIcon from "@material-ui/icons/FormatQuoteRounded";
+import AddCircleOutlineRoundedIcon from "@material-ui/icons/AddCircleOutlineRounded";
+import SupervisorAccountRoundedIcon from '@material-ui/icons/SupervisorAccountRounded';
 
 export const routes = [
   { path: "/", name: "Home", icon: <HomeRounded /> },
+  { path: "/create", name: "Create", icon: <AddCircleOutlineRoundedIcon /> },
   { path: "/poetry", name: "Poetry", icon: <MenuBookRoundedIcon /> },
-  { path: "/profile", name: "Profile", icon: <PersonRoundedIcon /> }
+  { path: "/login", name: "Login", icon: <SupervisorAccountRoundedIcon/> },
+  { path: "/signup", name: "Signup", icon: <SupervisorAccountRoundedIcon/> },
+  { path: "/profile", name: "Profile", icon: <PersonRoundedIcon /> },
+  { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon /> }
 ];
 
 const useStyles = makeStyles({
@@ -31,8 +38,9 @@ const useStyles = makeStyles({
     }
   },
   mobileNavBarDiv: {
-    overflow: 'hidden',
-    backgroundColor: 'white',
+    overflow: "hidden",
+    backgroundColor: "white",
+    marginTop: "1em",
     "& a": {
       margin: "0.5em",
       textDecoration: "none",
@@ -46,59 +54,59 @@ const useStyles = makeStyles({
 });
 
 var styles = {
-    bmBurgerButton: {
-      position: 'fixed',
-      width: '2em',
-      height: '2em',
-      marginBottom: '3em',
-      marginLeft: '1em',
-    },
-    bmBurgerBars: {
-      background: '#373a47'
-    },
-    bmBurgerBarsHover: {
-      background: '#a90000'
-    },
-    bmCrossButton: {
-      height: '24px',
-      width: '24px'
-    },
-    bmCross: {
-      background: '#bdc3c7'
-    },
-    bmMenuWrap: {
-      position: 'fixed',
-      height: '100%',
-      marginTop: '0em',
-    },
-    bmMenu: {
-      background: 'white',
-      fontSize: '1.15em',
-      overflow: 'hidden',
-    },
-    bmMorphShape: {
-      fill: '#373a47'
-    },
-    bmItemList: {
-      color: '#b8b7ad',
-      padding: '0.8em',
-      marginTop: '2em',
-    },
-    bmItem: {
-      display: 'inline-block',
-      marginBottom: '0.4em',
-      textDecoration: 'none'
-    },
-    bmOverlay: {
-      background: 'rgba(0, 0, 0, 0.3)'
-    },
+  bmBurgerButton: {
+    position: "fixed",
+    width: "2em",
+    height: "2em",
+    marginBottom: "3em",
+    marginLeft: "1em"
+  },
+  bmBurgerBars: {
+    background: "#373a47"
+  },
+  bmBurgerBarsHover: {
+    background: "#a90000"
+  },
+  bmCrossButton: {
+    height: "24px",
+    width: "24px"
+  },
+  bmCross: {
+    background: "#bdc3c7"
+  },
+  bmMenuWrap: {
+    position: "fixed",
+    height: "100%"
+  },
+  bmMenu: {
+    background: "white",
+    fontSize: "1.15em",
+    overflow: "hidden"
+  },
+  bmMorphShape: {
+    fill: "#373a47"
+  },
+  bmItemList: {
+    color: "#b8b7ad",
+    padding: "0.8em",
+    marginTop: "2em"
+  },
+  bmItem: {
+    display: "inline-block",
+    marginTop: "2em",
+    textDecoration: "none"
+  },
+  bmOverlay: {
+    background: "rgba(0, 0, 0, 0.3)"
   }
-  
+};
 
 function NavBar() {
   const classes = useStyles();
 
-  const [isMobileView, setIsMobileView] = useState(window.matchMedia("(max-width: 768px)").matches);
+  const [isMobileView, setIsMobileView] = useState(
+    window.matchMedia("(max-width: 768px)").matches
+  );
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
 
   useEffect(() => {
@@ -106,31 +114,28 @@ function NavBar() {
     window.matchMedia("(max-width: 768px)").addListener(handler);
   }, []);
 
+  const body = (
+    <div>
+      {routes.map(({ path, name, icon }) => (
+        <NavLink to={path} key={name}>
+          <Button variant="outlined">
+            {icon}
+            {name}
+          </Button>
+        </NavLink>
+      ))}
+    </div>
+  );
+
   return (
     <div>
-      {(!isMobileView && (
-        <div className={classes.navBarDiv}>
-          {routes.map(({ path, name, icon }) => (
-            <NavLink to={path}>
-              <Button variant="outlined">
-                {icon}
-                {name}
-              </Button>
-            </NavLink>
-          ))}
-        </div>
-      )) ||
+      {(!isMobileView && <div className={classes.navBarDiv}>{ body }</div>) ||
         (isMobileView && (
-          <Menu styles={ styles } width={ 150 } isOpen={ isOpenMobileMenu }  >
-            {routes.map(({ path, name, icon }) => (
-              <NavLink to={path}>
-                <Button variant="outlined">
-                  {icon}
-                  {name}
-                </Button>
-              </NavLink>
-            ))}
+          <div className={ classes.mobileNavBarDiv }>
+          <Menu styles={styles} width={150} isOpen={isOpenMobileMenu} >
+            { body }
           </Menu>
+          </div>
         ))}
     </div>
   );
