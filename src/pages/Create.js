@@ -61,7 +61,7 @@ function Create() {
 
   const [word, setWord] = useState("test");
   const [kind, setKind] = useState("rhymes");
-  const [words, setWords] = useState(null);
+  const [words, setWords] = useState([["1", "word", "sdfd"], ["2", "sdgfd", "dfsdg"]]);
 
   const handleTypeChange = event => {
     setType(event.target.value);
@@ -82,12 +82,21 @@ function Create() {
     console.log("in onWordLookup function!");
     var data = { word: word, kind: kind };
 
-    postData("http://localhost:2020/words", data, response => {
+    postData("http://localhost:2020/words", data, 
+    response => {
       const { data } = response;
-      console.log("Post data returned");
-      console.log(data);
+      console.log("DATA: ", data);
 
-      setWords(JSON.parse(data));
+      let temp = [];
+      data.forEach(dataArr => {
+        let tempArr = [];
+        tempArr.push(dataArr.word);
+        tempArr.push(dataArr.rating);
+        temp.push(tempArr);
+      });
+
+      setWords(temp);
+      console.log(words);
     });
   };
 
@@ -145,7 +154,11 @@ function Create() {
         <Button variant="contained" color="secondary" onClick={onWordLookup}>
           Look up Dance
         </Button>
-        {words}
+             {words.map(option => (
+          <div>
+            {option}
+          </div>
+        ))}
       </Grid>
       <Grid item xs={12}>
         <form onSubmit={handleSubmit(onSubmit)}>
