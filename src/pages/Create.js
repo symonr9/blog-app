@@ -21,19 +21,39 @@ import {
 
 const useStyles = makeStyles({
   word: {
-    fontSize: '2em'
+    fontSize: "1.5em"
   },
   rating: {
-    fontSize: '1em',
-    float: 'right',
-    marginTop: '0.50em !important',
-    marginRight: '1em',
-    paddingLeft: '0.5em',
-    paddingRight: '0.5em',
-    paddingTop: '0.25em',
-    paddingBottom: '0.25em',
-    borderRadius: '100px',
-    backgroundColor: 'lightblue'
+    fontSize: "0.75em",
+    float: "right",
+    marginTop: "0.50em !important",
+    marginRight: "0.5em",
+    paddingLeft: "0.5em",
+    paddingRight: "0.5em",
+    paddingTop: "0.25em",
+    paddingBottom: "0.25em",
+    borderRadius: "100px",
+    backgroundColor: "lightblue"
+  },
+  wordCardContainer: {
+    overflowY: "scroll",
+    height: "300px",
+    display: "flex",
+    flexDirection: "column",
+    flexWrap: "wrap"
+  },
+  wordCard: {
+    width: '12em',
+    marginBottom: '0.25em',
+    marginRight: '0.25em',
+    "& :hover": {
+      backgroundColor: 'lightgray',
+      cursor: 'pointer'
+    }
+  },
+  spacing: {
+    marginTop: '0.75em',
+    marginBottom: '0.75em'
   }
 });
 
@@ -128,8 +148,7 @@ function Create() {
   const onWordLookup = () => {
     var data = { word: word, kind: kind };
 
-    postData("http://localhost:2020/words", data, 
-    response => {
+    postData("http://localhost:2020/words", data, response => {
       const { data } = response;
       let temp = [];
       data.forEach(dataArr => {
@@ -193,58 +212,53 @@ function Create() {
     <Grid container>
       <Grid item xs={12}>
         <h1>Create</h1>
-        <TextField
-        label="Look a word up"
-        variant="outlined"
-        onChange={onWordChange}
-        fullWidth
-      ></TextField>
-      <Button
-        variant="outlined"
-        onClick={onWordLookup}>
-        Look
-      </Button>
-      {selectTextField(
-            "kind",
-            "Please select a kind",
-            kind,
-            handleKindChange,
-            kinds
-        )}
-
-{/**
-********
-*******************************************
-*************************************************
-*/}
-
-        {words != null && 
-          (<Paper>
-            {words.map(option => (
-            <Paper>
-              <span className={classes.word}>
-                {option[0]}
-              </span>
-              <span className={classes.rating}>
-                {option[1]}
-              </span>
-            </Paper>
-            ))}
-          </Paper>)
-        }
-
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={6}>
         <form onSubmit={handleSubmit(onSubmit)}>
           {selectTextField(
             "poemType",
-            "Please select a type",
+            "What would you like to do?",
             type,
             handleTypeChange,
             types
           )}
           {formInput}
         </form>
+      </Grid>
+      <Grid item xs={1}></Grid>
+      <Grid item xs={5}>
+        <div classes={common.formDiv}>
+          <TextField
+            label="Look a word up"
+            variant="outlined"
+            onChange={onWordChange}
+            fullWidth
+            className={classes.spacing}
+          ></TextField>
+          {selectTextField(
+            "kind",
+            "What would you like to explore?",
+            kind,
+            handleKindChange,
+            kinds
+          )}
+          <Button 
+            variant="outlined" 
+            onClick={onWordLookup}
+            className={classes.spacing}>
+            Look
+          </Button>
+          {words != null && (
+            <Paper className={classes.wordCardContainer}>
+              {words.map(option => (
+                <Paper className={classes.wordCard}>
+                  <span className={classes.word}>{option[0]}</span>
+                  <span className={classes.rating}>{option[1]}</span>
+                </Paper>
+              ))}
+            </Paper>
+          )}
+        </div>
       </Grid>
     </Grid>
   );

@@ -27,6 +27,7 @@ const useCommonStyles = makeStyles({
   },
   formDiv: {
     "& > *": {
+      color: 'red',
       marginTop: "0.5em"
     }
   }
