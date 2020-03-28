@@ -2,16 +2,30 @@ import React, { Component }  from 'react';
 import PublishRoundedIcon from "@material-ui/icons/PublishRounded";
 import { Button, TextField, MenuItem } from "@material-ui/core";
 
-export const submitBtn = (
+const textFieldStyle = {
+  marginTop: "1em",
+  marginBottom: "1em"
+};
+
+
+const submitBtnStyle = {
+  marginTop: "2em",
+  marginBottom: "2em"
+};
+
+export const submitBtn = (value) => {
+  return(
       <Button
         variant="contained"
         color="primary"
         startIcon={<PublishRoundedIcon />}
         type="submit"
+        style={submitBtnStyle}
       >
-        Publish
+        {value}
       </Button>
   );
+};
 
   export const basicTextField = (name, label, numOfLines = 1) => {
     return (
@@ -24,6 +38,7 @@ export const submitBtn = (
         multiline={!(numOfLines == 1)}
         rows={numOfLines}
         fullWidth
+        style={textFieldStyle}
       ></TextField>
     );
   };
@@ -40,6 +55,7 @@ export const submitBtn = (
         select
         onChange={onChangeFun}
         fullWidth
+        style={textFieldStyle}
       >
         {options.map(option => (
           <MenuItem key={option.value} value={option.value}>

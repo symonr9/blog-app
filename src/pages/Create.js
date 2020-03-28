@@ -166,12 +166,12 @@ function Create() {
       value: "poetry",
       label: "compose a poem",
       formInput: (
-        <div className={common.formDiv}>
+        <div>
           {basicTextField("title", "Title")}
           {basicTextField("body", "Body", 8)}
           {basicTextField("poemType", "Type of your poem")}
           {basicTextField("notes", "Notes", 2)}
-          <div className={common.submitBtnDiv}>{submitBtn}</div>
+          {submitBtn("Publish")}
         </div>
       )
     },
@@ -179,10 +179,10 @@ function Create() {
       value: "quotes",
       label: "remember a quote",
       formInput: (
-        <div className={common.formDiv}>
+        <div>
           {basicTextField("text", "A quote to remember", 3)}
           {basicTextField("author", "Who said it?")}
-          <div className={common.submitBtnDiv}>{submitBtn}</div>
+          {submitBtn("Publish")}
         </div>
       )
     },
@@ -190,10 +190,10 @@ function Create() {
       value: "prose",
       label: "write some prose",
       formInput: (
-        <div className={common.formDiv}>
+        <div>
           {basicTextField("title", "Title")}
           {basicTextField("body", "Body", 12)}
-          <div className={common.submitBtnDiv}>{submitBtn}</div>
+          {submitBtn("Publish")}
         </div>
       )
     },
@@ -201,8 +201,8 @@ function Create() {
       value: "lists",
       label: "make a list",
       formInput: (
-        <div className={common.formDiv}>
-          <div className={common.submitBtnDiv}>{submitBtn}</div>
+        <div>
+          {submitBtn("Publish")}
         </div>
       )
     }

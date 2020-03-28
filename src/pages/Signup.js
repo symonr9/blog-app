@@ -7,6 +7,12 @@ import { Paper, Grow, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import useCommonStyles from "../assets/common";
 
+import {
+  submitBtn,
+  basicTextField
+} from "../components/FormElements";
+
+
 const useStyles = makeStyles({});
 
 const Signup = () => {
@@ -36,9 +42,6 @@ const Signup = () => {
     );
   };
 
-  //fixme
-  console.log(watch("example"));
-
   const body = (
     <Grid container>
       <Grid item xs={12}>
@@ -46,32 +49,10 @@ const Signup = () => {
       </Grid>
       <Grid item xs={12}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input
-            name="email"
-            ref={register({
-              required: "Required",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: "invalid email address"
-              }
-            })}
-          />
-          <input
-            name="username"
-            ref={register({
-              required: "Required"
-            })}
-          />
-          {errors.username && errors.username.message}
-          {errors.email && errors.email.message}
-          <input
-            name="password"
-            ref={register({
-              required: "Required"
-            })}
-          />
-          {errors.password && errors.password.message}
-          <button type="submit">Submit</button>
+          {basicTextField("email", "Email")}
+          {basicTextField("username", "Username")}
+          {basicTextField("password", "Password")}
+          {submitBtn("Submit")}
         </form>
       </Grid>
     </Grid>

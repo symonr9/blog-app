@@ -21,10 +21,6 @@ const useCommonStyles = makeStyles({
   blankDiv: {
     marginTop: "20em"
   },
-  submitBtnDiv: {
-    marginTop: "2em",
-    marginBottom: "2em"
-  },
   formDiv: {
     "& > *": {
       color: 'red',
