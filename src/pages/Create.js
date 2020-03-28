@@ -6,7 +6,8 @@ import { getData, postData } from "../services/api";
 
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import MUIRichTextEditor from "mui-rte";
-import { Button, Grow, Grid, TextField, MenuItem } from "@material-ui/core";
+
+import { Button, Grow, Grid, TextField, Paper, Badge } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -18,7 +19,23 @@ import {
   selectTextField
 } from "../components/FormElements";
 
-const useStyles = makeStyles({});
+const useStyles = makeStyles({
+  word: {
+    fontSize: '2em'
+  },
+  rating: {
+    fontSize: '1em',
+    float: 'right',
+    marginTop: '0.50em !important',
+    marginRight: '1em',
+    paddingLeft: '0.5em',
+    paddingRight: '0.5em',
+    paddingTop: '0.25em',
+    paddingBottom: '0.25em',
+    borderRadius: '100px',
+    backgroundColor: 'lightblue'
+  }
+});
 
 const poemTypes = [
   {
@@ -36,6 +53,29 @@ const poemTypes = [
   {
     value: "Custom",
     label: "Custom"
+  }
+];
+
+const kinds = [
+  {
+    value: "synonyms",
+    label: "Synonyms"
+  },
+  {
+    value: "antonyms",
+    label: "Antonyms"
+  },
+  {
+    value: "narrower",
+    label: "Narrower"
+  },
+  {
+    value: "broader",
+    label: "Broader"
+  },
+  {
+    value: "rhymes",
+    label: "Rhymes"
   }
 ];
 
@@ -59,9 +99,9 @@ function Create() {
     <div className={common.blankDiv}></div>
   );
 
-  const [word, setWord] = useState("test");
+  const [word, setWord] = useState("");
   const [kind, setKind] = useState("rhymes");
-  const [words, setWords] = useState([["1", "word", "sdfd"], ["2", "sdgfd", "dfsdg"]]);
+  const [words, setWords] = useState(null);
 
   const handleTypeChange = event => {
     setType(event.target.value);
@@ -73,20 +113,24 @@ function Create() {
     });
   };
 
+  const handleKindChange = event => {
+    setKind(event.target.value);
+  };
+
   const onSubmit = data => {
     console.log(data);
   };
 
+  const onWordChange = event => {
+    setWord(event.target.value);
+  };
+
   const onWordLookup = () => {
-    // console.log(word, kind);
-    console.log("in onWordLookup function!");
     var data = { word: word, kind: kind };
 
     postData("http://localhost:2020/words", data, 
     response => {
       const { data } = response;
-      console.log("DATA: ", data);
-
       let temp = [];
       data.forEach(dataArr => {
         let tempArr = [];
@@ -94,9 +138,7 @@ function Create() {
         tempArr.push(dataArr.rating);
         temp.push(tempArr);
       });
-
       setWords(temp);
-      console.log(words);
     });
   };
 
@@ -151,14 +193,46 @@ function Create() {
     <Grid container>
       <Grid item xs={12}>
         <h1>Create</h1>
-        <Button variant="contained" color="secondary" onClick={onWordLookup}>
-          Look up Dance
-        </Button>
-             {words.map(option => (
-          <div>
-            {option}
-          </div>
-        ))}
+        <TextField
+        label="Look a word up"
+        variant="outlined"
+        onChange={onWordChange}
+        fullWidth
+      ></TextField>
+      <Button
+        variant="outlined"
+        onClick={onWordLookup}>
+        Look
+      </Button>
+      {selectTextField(
+            "kind",
+            "Please select a kind",
+            kind,
+            handleKindChange,
+            kinds
+        )}
+
+{/**
+********
+*******************************************
+*************************************************
+*/}
+
+        {words != null && 
+          (<Paper>
+            {words.map(option => (
+            <Paper>
+              <span className={classes.word}>
+                {option[0]}
+              </span>
+              <span className={classes.rating}>
+                {option[1]}
+              </span>
+            </Paper>
+            ))}
+          </Paper>)
+        }
+
       </Grid>
       <Grid item xs={12}>
         <form onSubmit={handleSubmit(onSubmit)}>
