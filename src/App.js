@@ -19,25 +19,31 @@ import Signup from "./pages/Signup";
 
 //import routes from "./data/routes";
 const routes = [
-  { path: '/profile', name: 'My Profile', Component: Profile },
-  { path: '/poetry', name: 'Poetry', Component: Poetry },
-  { path: '/quotes', name: 'Quotes', Component: Quotes },
-  { path: '/create', name: 'Create', Component: Create },
-  { path: '/login', name: 'Login', Component: Login},
-  { path: '/signup', name: 'Signup', Component: Signup},
-  { path: '/', name: 'Home', Component: Home },
-]
+  { path: "/profile", name: "My Profile", Component: Profile },
+  { path: "/poetry", name: "Poetry", Component: Poetry },
+  { path: "/quotes", name: "Quotes", Component: Quotes },
+  { path: "/create", name: "Create", Component: Create },
+  { path: "/login", name: "Login", Component: Login },
+  { path: "/signup", name: "Signup", Component: Signup },
+  { path: "/", name: "Home", Component: Home }
+];
 
+const backgroundDiv = {
+  background:
+    "linear-gradient(to bottom, #3359ae 4%, #34b09b 20%, #ebe5d9 50%)"
+};
 
 function App() {
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <NavBar/>
+        <NavBar />
         <Switch>
-        {routes.map(({ path, Component }) => (
+          {routes.map(({ path, Component }) => (
             <Route key={path} path={path}>
-              <Component />
+              <div style={backgroundDiv}>
+                <Component />
+              </div>
             </Route>
           ))}
         </Switch>

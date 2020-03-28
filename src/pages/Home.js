@@ -25,6 +25,7 @@ const Home = () => {
   const body = (
     <Grid container>
       <Grid item xs={12}>
+        {!isMobileView && (<div className={common.spacingTop}></div>)}
         <h1>Symon's Blog</h1>
       </Grid>
       <Grid item xs={12}>

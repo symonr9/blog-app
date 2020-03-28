@@ -48,6 +48,7 @@ const Login = () => {
   const body = (
     <Grid container>
       <Grid item xs={12}>
+      {!isMobileView && (<div className={common.spacingTop}></div>)}
         <h1>Login</h1>
       </Grid>
       <Grid item xs={12}>

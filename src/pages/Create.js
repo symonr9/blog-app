@@ -54,7 +54,7 @@ const useStyles = makeStyles({
   spacing: {
     marginTop: '0.75em',
     marginBottom: '0.75em'
-  }
+  },
 });
 
 const poemTypes = [
@@ -211,6 +211,7 @@ function Create() {
   const body = (
     <Grid container>
       <Grid item xs={12}>
+        {!isMobileView && (<div className={common.spacingTop}></div>)}
         <h1>Create</h1>
       </Grid>
       <Grid item xs={6}>

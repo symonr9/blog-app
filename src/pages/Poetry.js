@@ -25,6 +25,7 @@ function Poetry() {
   const body = (
     <Grid container>
       <Grid item xs={12}>
+      {!isMobileView && (<div className={common.spacingTop}></div>)}
         <h1>Poetry</h1>
       </Grid>
       <Grid item xs={4}>
