@@ -40,7 +40,6 @@ const useStyles = makeStyles({
   mobileNavBarDiv: {
     overflow: "hidden",
     backgroundColor: "white",
-    marginTop: "1em",
     "& a": {
       margin: "0.5em",
       textDecoration: "none",
@@ -71,7 +70,8 @@ var styles = {
     width: "2em",
     height: "2em",
     marginBottom: "3em",
-    marginLeft: "1em"
+    marginLeft: "1em",
+    marginTop: "1em",
   },
   bmBurgerBars: {
     background: "#373a47"

@@ -40,10 +40,46 @@ const useStyles = makeStyles({
     height: "300px",
     display: "flex",
     flexDirection: "column",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    marginBottom: '1em',
+    borderRadius: '10px',
+    boxShadow: "5px 5px #bebebe"
   },
   wordCard: {
     width: '12em',
+    marginBottom: '0.25em',
+    marginRight: '0.25em',
+    "& :hover": {
+      backgroundColor: 'lightgray',
+      cursor: 'pointer'
+    }
+  },
+  mobileWord: {
+    fontSize: "1em"
+  },
+  mobileRating: {
+    fontSize: "0.5em",
+    float: "right",
+    marginTop: "0.50em !important",
+    marginRight: "0.5em",
+    paddingLeft: "0.5em",
+    paddingRight: "0.5em",
+    paddingTop: "0.25em",
+    paddingBottom: "0.25em",
+    borderRadius: "100px",
+    backgroundColor: "lightblue"
+  },
+  mobileWordCardContainer: {
+    overflowY: "scroll",
+    height: "200px",
+    display: "flex",
+    flexDirection: "column",
+    marginBottom: '1em',
+    borderRadius: '10px',
+    boxShadow: "5px 5px #bebebe"
+  },
+  mobileWordCard: {
+    width: '8em',
     marginBottom: '0.25em',
     marginRight: '0.25em',
     "& :hover": {
@@ -216,13 +252,22 @@ function Create() {
       </Grid>
       <Grid item xs={6}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {selectTextField(
+          {!isMobileView && (selectTextField(
             "poemType",
             "What would you like to do?",
             type,
             handleTypeChange,
-            types
-          )}
+            types))
+            ||
+            (isMobileView && (
+              selectTextField(
+                "poemType",
+                "Select type",
+                type,
+                handleTypeChange,
+                types)
+            ))
+          }
           {formInput}
         </form>
       </Grid>
@@ -236,13 +281,24 @@ function Create() {
             fullWidth
             className={classes.spacing}
           ></TextField>
-          {selectTextField(
+          {!isMobileView && (selectTextField(
             "kind",
             "What would you like to explore?",
             kind,
             handleKindChange,
             kinds
-          )}
+            ))
+            ||
+            (isMobileView && (
+              selectTextField(
+                "kind",
+                "What to search?",
+                kind,
+                handleKindChange,
+                kinds
+                )
+            ))
+          }
           <Button 
             variant="outlined" 
             onClick={onWordLookup}
@@ -250,11 +306,11 @@ function Create() {
             Look
           </Button>
           {words != null && (
-            <Paper className={classes.wordCardContainer}>
+            <Paper className={(!isMobileView && classes.wordCardContainer || (isMobileView && classes.mobileWordCardContainer))}>
               {words.map(option => (
-                <Paper className={classes.wordCard}>
-                  <span className={classes.word}>{option[0]}</span>
-                  <span className={classes.rating}>{option[1]}</span>
+                <Paper className={(!isMobileView && classes.wordCard || (isMobileView && classes.mobileWordCard))}>
+                  <span className={(!isMobileView && classes.word || (isMobileView && classes.mobileWord))}>{option[0]}</span>
+                  <span className={(!isMobileView && classes.rating || (isMobileView && classes.mobileRating))}>{option[1]}</span>
                 </Paper>
               ))}
             </Paper>
@@ -266,8 +322,7 @@ function Create() {
 
   return (
     <Grow in={true}>
-      {(!isMobileView && <div className={common.bodyDiv}>{body}</div>) ||
-        (isMobileView && <div className={common.mobileBodyDiv}>{body}</div>)}
+      {<div className={(!isMobileView && common.bodyDiv || (isMobileView && common.mobileBodyDiv))}>{body}</div>}
     </Grow>
   );
 }
