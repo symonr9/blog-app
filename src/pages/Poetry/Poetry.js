@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import { Paper, Grow, Grid } from "@material-ui/core";
+import { Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { getData } from "../services/api";
+import { getData } from "../../services/api";
 
-import useCommonStyles from "../assets/common";
+import useCommonStyles from "../../assets/common";
 
 
 const useStyles = makeStyles({
@@ -82,10 +82,6 @@ function Poetry() {
     return () => (isSubscribed = false);
   }, []);
 
-  if (!poems) {
-    return null;
-  }
-
   console.log(poems);
 
   const body = (
@@ -96,7 +92,7 @@ function Poetry() {
       </Grid>
       <Grid item xs={12}>
         <div className={classes.poemContainerDiv}>
-        {poems.map((poem, index) => {
+        {poems && (poems.map((poem, index) => {
           if(poem.isPublic){
             return (
                 <Paper key={poem._id} elevation={7} className={classes.poemDiv} >
@@ -107,7 +103,10 @@ function Poetry() {
                 </Paper>
             );
           }
-        })}
+        }))
+        ||
+        (!poems && (<div><CircularProgress /></div>))
+        }
         </div>
       </Grid>
     </Grid>

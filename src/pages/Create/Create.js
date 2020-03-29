@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import { getData, postData } from "../services/api";
+import { getData, postData } from "../../services/api";
 
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import MUIRichTextEditor from "mui-rte";
@@ -12,13 +12,13 @@ import MuiAlert from '@material-ui/lab/Alert';
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import useCommonStyles from "../assets/common";
+import useCommonStyles from "../../assets/common";
 
 import {
   submitBtn,
   basicTextField,
   selectTextField
-} from "../components/FormElements";
+} from "../../components/FormElements";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;

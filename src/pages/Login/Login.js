@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-import { postData } from "../services/api";
+import { postData } from "../../services/api";
 import { Paper, Grow, TextField, Grid } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
-import useCommonStyles from "../assets/common";
+import useCommonStyles from "../../assets/common";
 
 import {
   submitBtn,
   basicTextField
-} from "../components/FormElements";
+} from "../../components/FormElements";
 
 
 const useStyles = makeStyles({});
