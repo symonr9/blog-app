@@ -9,13 +9,13 @@ import store from "./services/redux/store";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
-import Profile from "./pages/Profile";
-import Home from "./pages/Home";
-import Poetry from "./pages/Poetry";
-import Quotes from "./pages/Quotes";
-import Create from "./pages/Create";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Profile from "./pages/Profile/Profile";
+import Home from "./pages/Home/Home";
+import Poetry from "./pages/Poetry/Poetry";
+import Quotes from "./pages/Quotes/Quotes";
+import Create from "./pages/Create/Create";
+import Login from "./pages/Login/Login";
+import Signup from "./pages/Signup/Signup";
 
 //import routes from "./data/routes";
 const routes = [

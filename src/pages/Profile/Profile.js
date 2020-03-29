@@ -3,13 +3,11 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { Paper, Grow, Grid } from "@material-ui/core";
 
-import { makeStyles } from "@material-ui/core/styles";
+import useCommonStyles from "../../assets/common";
 
-import useCommonStyles from "../assets/common";
+import { useStyles } from "./exports";
 
-const useStyles = makeStyles({});
-
-function Poetry() {
+function Profile() {
   const classes = useStyles();
   const common = useCommonStyles();
 
@@ -26,10 +24,10 @@ function Poetry() {
     <Grid container>
       <Grid item xs={12}>
       {!isMobileView && (<div className={common.spacingTop}></div>)}
-        <h1>Poetry</h1>
+        <h1>Profile</h1>
       </Grid>
       <Grid item xs={4}>
-        Poetry
+        Profile
       </Grid>
       <Grid item xs={2}></Grid>
       <Grid item xs={6}></Grid>
@@ -43,4 +41,4 @@ function Poetry() {
   );
 }
 
-export default Poetry;
+export default Profile;

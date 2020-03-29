@@ -3,11 +3,9 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { Paper, Grow, Grid } from "@material-ui/core";
 
-import { makeStyles } from "@material-ui/core/styles";
+import useCommonStyles from "../../assets/common";
 
-import useCommonStyles from "../assets/common";
-
-const useStyles = makeStyles({});
+import { useStyles } from "./exports";
 
 function Quotes() {
   const classes = useStyles();

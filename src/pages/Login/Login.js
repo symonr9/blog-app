@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-import { getData, postData } from "../services/api";
-import { Paper, Grow, Grid } from "@material-ui/core";
-
-import { makeStyles } from "@material-ui/core/styles";
-import useCommonStyles from "../assets/common";
+import { postData } from "../../services/api";
+import { Paper, Grow, TextField, Grid } from "@material-ui/core";
+import useCommonStyles from "../../assets/common";
+import { getServerURL } from "../../config/config";
 
 import {
   submitBtn,
   basicTextField
-} from "../components/FormElements";
+} from "../../components/FormElements";
 
+import { useStyles } from "./exports";
 
-const useStyles = makeStyles({});
-
-const Signup = () => {
+const Login = () => {
   const classes = useStyles();
   const common = useCommonStyles();
 
@@ -32,9 +30,7 @@ const Signup = () => {
 
   const onSubmit = data => {
     console.log(data);
-    postData(
-      "http://localhost:2020/users/signup",
-      data,
+    postData(getServerURL("users/login"), data,
       response => {
         const { token } = response;
         console.log(token);
@@ -46,14 +42,13 @@ const Signup = () => {
     <Grid container>
       <Grid item xs={12}>
       {!isMobileView && (<div className={common.spacingTop}></div>)}
-        <h1>Signup</h1>
+        <h1>Login</h1>
       </Grid>
       <Grid item xs={12}>
         <form onSubmit={handleSubmit(onSubmit)}>
           {basicTextField("email", "Email")}
-          {basicTextField("username", "Username")}
           {basicTextField("password", "Password")}
-          {submitBtn("Submit")}
+          {submitBtn("Login")}
         </form>
       </Grid>
     </Grid>
@@ -67,4 +62,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
