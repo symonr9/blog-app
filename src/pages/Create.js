@@ -6,73 +6,132 @@ import { getData, postData } from "../services/api";
 
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import MUIRichTextEditor from "mui-rte";
-import PublishRoundedIcon from "@material-ui/icons/PublishRounded";
-import {
-  Button,
-  Paper,
-  Grow,
-  Grid,
-  TextField,
-  MenuItem
-} from "@material-ui/core";
+
+import { Button, Grow, Grid, TextField, Paper, Badge } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
 
 import useCommonStyles from "../assets/common";
 
+import {
+  submitBtn,
+  basicTextField,
+  selectTextField
+} from "../components/FormElements";
+
 const useStyles = makeStyles({
-  blankDiv: {
-    marginTop: "20em"
+  word: {
+    fontSize: "1.5em"
   },
-  typeSelect: {
-    marginBottom: "1em"
+  rating: {
+    fontSize: "0.75em",
+    float: "right",
+    marginTop: "0.50em !important",
+    marginRight: "0.5em",
+    paddingLeft: "0.5em",
+    paddingRight: "0.5em",
+    paddingTop: "0.25em",
+    paddingBottom: "0.25em",
+    borderRadius: "100px",
+    backgroundColor: "lightblue"
   },
-  submitBtnDiv: {
-    marginTop: "2em",
-    marginBottom: "2em"
+  wordCardContainer: {
+    overflowY: "scroll",
+    height: "300px",
+    display: "flex",
+    flexDirection: "column",
+    flexWrap: "wrap",
+    marginBottom: '1em',
+    borderRadius: '10px',
+    boxShadow: "5px 5px #bebebe"
   },
-  formInput: {
-    marginTop: "0.5em"
-  }
-});
-
-const defaultTheme = createMuiTheme();
-
-Object.assign(defaultTheme, {
-  overrides: {
-    MUIRichTextEditor: {
-      root: {
-        marginTop: "0.5em",
-        width: "100%",
-        border: "1px solid lightgray",
-        borderRadius: "5px"
-      },
-      editor: {
-        height: "15em",
-        maxHeight: "100vh",
-        overflow: "auto",
-        marginLeft: "1em"
-      }
+  wordCard: {
+    width: '12em',
+    marginBottom: '0.25em',
+    marginRight: '0.25em',
+    "& :hover": {
+      backgroundColor: 'lightgray',
+      cursor: 'pointer'
     }
-  }
+  },
+  mobileWord: {
+    fontSize: "1em"
+  },
+  mobileRating: {
+    fontSize: "0.5em",
+    float: "right",
+    marginTop: "0.50em !important",
+    marginRight: "0.5em",
+    paddingLeft: "0.5em",
+    paddingRight: "0.5em",
+    paddingTop: "0.25em",
+    paddingBottom: "0.25em",
+    borderRadius: "100px",
+    backgroundColor: "lightblue"
+  },
+  mobileWordCardContainer: {
+    overflowY: "scroll",
+    height: "200px",
+    display: "flex",
+    flexDirection: "column",
+    marginBottom: '1em',
+    borderRadius: '10px',
+    boxShadow: "5px 5px #bebebe"
+  },
+  mobileWordCard: {
+    width: '8em',
+    marginBottom: '0.25em',
+    marginRight: '0.25em',
+    "& :hover": {
+      backgroundColor: 'lightgray',
+      cursor: 'pointer'
+    }
+  },
+  spacing: {
+    marginTop: '0.75em',
+    marginBottom: '0.75em'
+  },
 });
 
 const poemTypes = [
   {
-    value: "prose",
+    value: "Prose",
     label: "Prose"
   },
   {
-    value: "iambic-pentameter",
+    value: "Iambic Pentameter",
     label: "Iambic Pentameter"
   },
   {
-    value: "sonnet",
+    value: "Sonnet",
     label: "Sonnet"
   },
   {
-    value: "custom",
+    value: "Custom",
     label: "Custom"
+  }
+];
+
+const kinds = [
+  {
+    value: "synonyms",
+    label: "Synonyms"
+  },
+  {
+    value: "antonyms",
+    label: "Antonyms"
+  },
+  {
+    value: "narrower",
+    label: "Narrower"
+  },
+  {
+    value: "broader",
+    label: "Broader"
+  },
+  {
+    value: "rhymes",
+    label: "Rhymes"
   }
 ];
 
@@ -92,10 +151,13 @@ function Create() {
   const { handleSubmit, register, watch, errors } = useForm();
 
   const [type, setType] = useState("");
-  const [poemType, setPoemType] = useState("");
   const [formInput, setFormInput] = useState(
-    <div className={classes.blankDiv}></div>
+    <div className={common.blankDiv}></div>
   );
+
+  const [word, setWord] = useState("");
+  const [kind, setKind] = useState("rhymes");
+  const [words, setWords] = useState(null);
 
   const handleTypeChange = event => {
     setType(event.target.value);
@@ -107,83 +169,32 @@ function Create() {
     });
   };
 
-  const handlePoemTypeChange = event => {
-    setPoemType(event.target.value);
-  };
-
-  let rtePoemInput = useRef(null);
-
-  const handleRTEClick = event => {
-    rtePoemInput.current.focus();
+  const handleKindChange = event => {
+    setKind(event.target.value);
   };
 
   const onSubmit = data => {
     console.log(data);
-
-    /*
-    postData(
-      "http://localhost:2020/users/login",
-      data,
-      response => {
-        const { token } = response;
-        console.log(token);
-      }
-    );
-    */
   };
 
-  const submitBtn = (
-    <div className={classes.submitBtnDiv}>
-      <Button
-        variant="contained"
-        color="primary"
-        startIcon={<PublishRoundedIcon />}
-        type="submit"
-      >
-        Publish
-      </Button>
-    </div>
-  );
-
-  const richTextEditor = (id, name, numOfLines = 1) => {
-    return <div>sds</div>;
+  const onWordChange = event => {
+    setWord(event.target.value);
   };
 
-  const basicTextField = (name, label, numOfLines = 1) => {
-    return (
-      <TextField
-        name={name}
-        label={label}
-        placeholder="Start writing..."
-        variant="outlined"
-        multiline={!(numOfLines == 1)}
-        rows={numOfLines}
-        fullWidth
-        className={classes.formInput}
-      ></TextField>
-    );
-  };
+  const onWordLookup = () => {
+    var data = { word: word, kind: kind };
 
-  const selectTextField = (name, label, value, onChangeFun, options) => {
-    return (
-      <TextField
-        name={name}
-        label={label}
-        placeholder="Start writing..."
-        variant="outlined"
-        value={value}
-        select
-        onChange={onChangeFun}
-        fullWidth
-        className={classes.formInput}
-      >
-        {options.map(option => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </TextField>
-    );
+    postData("http://localhost:2020/words", data, response => {
+      const { data } = response;
+      let temp = [];
+      data.forEach(dataArr => {
+        let tempArr = [];
+        tempArr.push(dataArr.word);
+        tempArr.push(dataArr.rating);
+        temp.push(tempArr);
+      });
+      setWords(temp);
+    });
   };
 
   const types = [
@@ -191,8 +202,134 @@ function Create() {
       value: "poetry",
       label: "compose a poem",
       formInput: (
-        <div className={classes.formDiv}>
-          {basicTextField("title", "Title of your masterpiece")}
+        <div>
+          {basicTextField("title", "Title")}
+          {basicTextField("body", "Body", 8)}
+          {basicTextField("poemType", "Type of your poem")}
+          {basicTextField("notes", "Notes", 2)}
+          {submitBtn("Publish")}
+        </div>
+      )
+    },
+    {
+      value: "quotes",
+      label: "remember a quote",
+      formInput: (
+        <div>
+          {basicTextField("text", "A quote to remember", 3)}
+          {basicTextField("author", "Who said it?")}
+          {submitBtn("Publish")}
+        </div>
+      )
+    },
+    {
+      value: "prose",
+      label: "write some prose",
+      formInput: (
+        <div>
+          {basicTextField("title", "Title")}
+          {basicTextField("body", "Body", 12)}
+          {submitBtn("Publish")}
+        </div>
+      )
+    },
+    {
+      value: "lists",
+      label: "make a list",
+      formInput: (
+        <div>
+          {submitBtn("Publish")}
+        </div>
+      )
+    }
+  ];
+
+  const body = (
+    <Grid container>
+      <Grid item xs={12}>
+        {!isMobileView && (<div className={common.spacingTop}></div>)}
+        <h1>Create</h1>
+      </Grid>
+      <Grid item xs={6}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {!isMobileView && (selectTextField(
+            "poemType",
+            "What would you like to do?",
+            type,
+            handleTypeChange,
+            types))
+            ||
+            (isMobileView && (
+              selectTextField(
+                "poemType",
+                "Select type",
+                type,
+                handleTypeChange,
+                types)
+            ))
+          }
+          {formInput}
+        </form>
+      </Grid>
+      <Grid item xs={1}></Grid>
+      <Grid item xs={5}>
+        <div classes={common.formDiv}>
+          <TextField
+            label="Look a word up"
+            variant="outlined"
+            onChange={onWordChange}
+            fullWidth
+            className={classes.spacing}
+          ></TextField>
+          {!isMobileView && (selectTextField(
+            "kind",
+            "What would you like to explore?",
+            kind,
+            handleKindChange,
+            kinds
+            ))
+            ||
+            (isMobileView && (
+              selectTextField(
+                "kind",
+                "What to search?",
+                kind,
+                handleKindChange,
+                kinds
+                )
+            ))
+          }
+          <Button 
+            variant="outlined" 
+            onClick={onWordLookup}
+            className={classes.spacing}>
+            Look
+          </Button>
+          {words != null && (
+            <Paper className={(!isMobileView && classes.wordCardContainer || (isMobileView && classes.mobileWordCardContainer))}>
+              {words.map(option => (
+                <Paper className={(!isMobileView && classes.wordCard || (isMobileView && classes.mobileWordCard))}>
+                  <span className={(!isMobileView && classes.word || (isMobileView && classes.mobileWord))}>{option[0]}</span>
+                  <span className={(!isMobileView && classes.rating || (isMobileView && classes.mobileRating))}>{option[1]}</span>
+                </Paper>
+              ))}
+            </Paper>
+          )}
+        </div>
+      </Grid>
+    </Grid>
+  );
+
+  return (
+    <Grow in={true}>
+      {<div className={(!isMobileView && common.bodyDiv || (isMobileView && common.mobileBodyDiv))}>{body}</div>}
+    </Grow>
+  );
+}
+
+export default Create;
+
+/*
 
           <MuiThemeProvider theme={defaultTheme}>
             <MUIRichTextEditor
@@ -208,76 +345,5 @@ function Create() {
             />
           </MuiThemeProvider>
 
-          {selectTextField(
-            "poemType",
-            "Type of your poem",
-            poemType,
-            handlePoemTypeChange,
-            poemTypes
-          )}
-          {basicTextField("notes", "Notes of your poem", 2)}
-
-          {submitBtn}
-        </div>
-      )
-    },
-    {
-      value: "quotes",
-      label: "remember a quote",
-      formInput: <div>
-        {basicTextField("text", "A quote to remember", 3)}
-        {basicTextField("author", "Who said it?")}
-        {submitBtn}
-      </div>
-    },
-    {
-      value: "prose",
-      label: "write some prose",
-      formInput: <div>{submitBtn}</div>
-    },
-    {
-      value: "lists",
-      label: "make a list",
-      formInput: <div>{submitBtn}</div>
-    }
-  ];
-
-  const body = (
-    <Grid container>
-      <Grid item xs={12}>
-        <h1>Create</h1>
-      </Grid>
-      <Grid item xs={12}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <TextField
-            id="typeSelectId"
-            name="type"
-            select
-            label="I want to..."
-            value={type}
-            onChange={handleTypeChange}
-            helperText="Please select a type"
-            variant="outlined"
-            className={classes.typeSelect}
-          >
-            {types.map(option => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          {formInput}
-        </form>
-      </Grid>
-    </Grid>
-  );
-
-  return (
-    <Grow in={true}>
-      {(!isMobileView && <div className={common.bodyDiv}>{body}</div>) ||
-        (isMobileView && <div className={common.mobileBodyDiv}>{body}</div>)}
-    </Grow>
-  );
-}
-
-export default Create;
+        
+*/

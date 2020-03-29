@@ -9,7 +9,9 @@ const postConfig = {
 export const postData = (url, body, successCb) => {
 	axios
 		.post(url, body, postConfig)
-		.then(response => successCb(response.data))
+		.then(response => {
+			successCb(response.data);
+		})
 		.catch(error => {
 			console.log(error)
 		})

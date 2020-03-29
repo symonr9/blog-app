@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
-import { stack as Menu } from "react-burger-menu";
+import { slide as Menu } from "react-burger-menu";
 
 import { Paper, Grow, Button, TextField, FormControl } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -40,7 +40,6 @@ const useStyles = makeStyles({
   mobileNavBarDiv: {
     overflow: "hidden",
     backgroundColor: "white",
-    marginTop: "1em",
     "& a": {
       margin: "0.5em",
       textDecoration: "none",
@@ -50,7 +49,19 @@ const useStyles = makeStyles({
       }
     }
   },
-  iconDiv: {}
+  removeFocus: {
+    "& :focus": {
+      outline: "none !important",
+      boxShadow: "none"
+    },
+    "& :active": {
+      outline: "none !important",
+      boxShadow: "none"
+    }
+  },
+  navBtn: {
+    marginBottom: '1em'
+  }
 });
 
 var styles = {
@@ -59,7 +70,8 @@ var styles = {
     width: "2em",
     height: "2em",
     marginBottom: "3em",
-    marginLeft: "1em"
+    marginLeft: "1em",
+    marginTop: "1em",
   },
   bmBurgerBars: {
     background: "#373a47"
@@ -81,7 +93,7 @@ var styles = {
   bmMenu: {
     background: "white",
     fontSize: "1.15em",
-    overflow: "hidden"
+    overflow: "hidden",
   },
   bmMorphShape: {
     fill: "#373a47"
@@ -118,7 +130,7 @@ function NavBar() {
     <div>
       {routes.map(({ path, name, icon }) => (
         <NavLink to={path} key={name}>
-          <Button variant="outlined">
+          <Button className={classes.navBtn} variant="outlined">
             {icon}
             {name}
           </Button>
@@ -132,7 +144,7 @@ function NavBar() {
       {(!isMobileView && <div className={classes.navBarDiv}>{ body }</div>) ||
         (isMobileView && (
           <div className={ classes.mobileNavBarDiv }>
-          <Menu styles={styles} width={150} isOpen={isOpenMobileMenu} >
+          <Menu styles={styles} className={classes.removeFocus} width={150} isOpen={isOpenMobileMenu} >
             { body }
           </Menu>
           </div>
