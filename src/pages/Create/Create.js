@@ -11,6 +11,7 @@ import { Button, Grow, Grid, TextField, Paper, Snackbar } from "@material-ui/cor
 import MuiAlert from '@material-ui/lab/Alert';
 
 import useCommonStyles from "../../assets/common";
+import { getServerURL } from "../../config/config";
 
 import {
   submitBtn,
@@ -79,7 +80,7 @@ function Create() {
   const onWordLookup = () => {
     var data = { word: word, kind: kind };
 
-    postData("http://localhost:2020/words", data, response => {
+    postData(getServerURL("words"), data, response => {
       const { data } = response;
       let temp = [];
       data.forEach(dataArr => {

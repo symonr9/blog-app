@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
 import { getData } from "../../services/api";
 import useCommonStyles from "../../assets/common";
+import { getServerURL } from "../../config/config";
 
 import { useStyles } from "./exports";
 
@@ -23,7 +24,7 @@ function Poetry() {
   }, []);
 
   const fetchData = isSubscribed => {
-    getData("http://localhost:2020/poems/", response => {
+    getData(getServerURL("poems"), response => {
       if (isSubscribed) {
         setPoems(response);
       }
@@ -35,8 +36,6 @@ function Poetry() {
     isSubscribed && fetchData(isSubscribed);
     return () => (isSubscribed = false);
   }, []);
-
-  console.log(poems);
 
   const body = (
     <Grid container>

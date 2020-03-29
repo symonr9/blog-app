@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { postData } from "../../services/api";
 import { Paper, Grow, TextField, Grid } from "@material-ui/core";
 import useCommonStyles from "../../assets/common";
+import { getServerURL } from "../../config/config";
 
 import {
   submitBtn,
@@ -29,9 +30,7 @@ const Login = () => {
 
   const onSubmit = data => {
     console.log(data);
-    postData(
-      "http://localhost:2020/users/login",
-      data,
+    postData(getServerURL("users/login"), data,
       response => {
         const { token } = response;
         console.log(token);

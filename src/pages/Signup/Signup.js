@@ -5,6 +5,7 @@ import { getData, postData } from "../../services/api";
 import { Paper, Grow, Grid } from "@material-ui/core";
 
 import useCommonStyles from "../../assets/common";
+import { getServerURL } from "../../config/config";
 
 import {
   submitBtn,
@@ -31,7 +32,7 @@ const Signup = () => {
   const onSubmit = data => {
     console.log(data);
     postData(
-      "http://localhost:2020/users/signup",
+      getServerURL("users/signup"),
       data,
       response => {
         const { token } = response;
