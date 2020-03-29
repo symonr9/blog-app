@@ -7,7 +7,8 @@ import { getData, postData } from "../services/api";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import MUIRichTextEditor from "mui-rte";
 
-import { Button, Grow, Grid, TextField, Paper, Badge } from "@material-ui/core";
+import { Button, Grow, Grid, TextField, Paper, Snackbar } from "@material-ui/core";
+import MuiAlert from '@material-ui/lab/Alert';
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -18,6 +19,10 @@ import {
   basicTextField,
   selectTextField
 } from "../components/FormElements";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles({
   word: {
@@ -173,7 +178,17 @@ function Create() {
     setKind(event.target.value);
   };
 
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setIsSnackbarOpen(false);
+  };
+
   const onSubmit = data => {
+    setIsSnackbarOpen(true);
     console.log(data);
   };
 
@@ -315,6 +330,11 @@ function Create() {
               ))}
             </Paper>
           )}
+      <Snackbar open={isSnackbarOpen} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Successfully published!
+        </Alert>
+      </Snackbar>
         </div>
       </Grid>
     </Grid>
