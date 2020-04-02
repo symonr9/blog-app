@@ -195,22 +195,3 @@ function Create() {
 }
 
 export default Create;
-
-/*
-
-          <MuiThemeProvider theme={defaultTheme}>
-            <MUIRichTextEditor
-              id="rteId"
-              name="body"
-              inlineToolBar={true}
-              placeholder="Start writing..."
-              variant="outlined"
-              fullWidth
-              inputRef={rtePoemInput}
-              onClick={handleRTEClick}
-              className={classes.formInput}
-            />
-          </MuiThemeProvider>
-
-        
-*/

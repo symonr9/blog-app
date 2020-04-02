@@ -2,13 +2,13 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useCommonStyles = makeStyles({
   bodyDiv: {
-    height: "100vh",
+    height: "100%",
     width: "90vw",
     marginLeft: "1em",
     marginRight: "1em",
   },
   mobileBodyDiv: {
-    height: "100vh",
+    height: "100%",
     width: "90vw",
     textAlign: "center",
     justifyContent: "center",
