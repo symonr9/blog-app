@@ -94,7 +94,7 @@ var styles = {
     height: "100%"
   },
   bmMenu: {
-    background: "white",
+    background: "linear-gradient(to bottom,  rgba(0,0,0,0.5) 20%, rgba(0,0,0,0.4) 80%)",
     fontSize: "1.15em",
     overflow: "hidden",
   },
@@ -109,7 +109,7 @@ var styles = {
   bmItem: {
     display: "inline-block",
     marginTop: "2em",
-    textDecoration: "none"
+    textDecoration: "none",
   },
   bmOverlay: {
     background: "rgba(0, 0, 0, 0.3)"
@@ -133,7 +133,7 @@ function NavBar() {
     <div>
       {routes.map(({ path, name, icon }) => (
         <NavLink to={path} key={name}>
-          <Button className={classes.navBtn} variant="outlined">
+          <Button className={classes.navBtn} variant="contained" color="white">
             {icon}
             {name}
           </Button>
