@@ -4,10 +4,13 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { getData, postData } from "../../services/api";
 
+import ViewColumnRoundedIcon from '@material-ui/icons/ViewColumnRounded';
+import ViewStreamRoundedIcon from '@material-ui/icons/ViewStreamRounded';
+
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import MUIRichTextEditor from "mui-rte";
 
-import { Button, Grow, Grid, TextField, Paper, Snackbar } from "@material-ui/core";
+import { Button, Grow, Grid, TextField, Paper, Snackbar, IconButton  } from "@material-ui/core";
 import MuiAlert from '@material-ui/lab/Alert';
 
 import useCommonStyles from "../../assets/common";
@@ -19,7 +22,7 @@ import {
   selectTextField
 } from "../../components/FormElements";
 
-import { useStyles, poemTypes, kinds } from "./exports";
+import { useStyles, types, poemTypes, kinds } from "./exports";
 
 function Create() {
   const classes = useStyles();
@@ -38,12 +41,14 @@ function Create() {
 
   const [type, setType] = useState("");
   const [formInput, setFormInput] = useState(
-    <div className={common.blankDiv}></div>
+    <div></div>
   );
 
   const [word, setWord] = useState("");
   const [kind, setKind] = useState("rhymes");
   const [words, setWords] = useState(null);
+
+  const [isSideView, setIsSideView] = useState(false);
 
   const handleTypeChange = event => {
     setType(event.target.value);
@@ -77,6 +82,10 @@ function Create() {
     setWord(event.target.value);
   };
 
+  const onSwitchView = event => {
+    setIsSideView(!isSideView);
+  };
+
   const onWordLookup = () => {
     var data = { word: word, kind: kind };
 
@@ -93,60 +102,12 @@ function Create() {
     });
   };
 
-  const types = [
-    {
-      value: "poetry",
-      label: "compose a poem",
-      formInput: (
-        <div>
-          {basicTextField("title", "Title")}
-          {basicTextField("body", "Body", 8)}
-          {basicTextField("poemType", "Type of your poem")}
-          {basicTextField("notes", "Notes", 2)}
-          {submitBtn("Publish")}
-        </div>
-      )
-    },
-    {
-      value: "quotes",
-      label: "remember a quote",
-      formInput: (
-        <div>
-          {basicTextField("text", "A quote to remember", 3)}
-          {basicTextField("author", "Who said it?")}
-          {submitBtn("Publish")}
-        </div>
-      )
-    },
-    {
-      value: "prose",
-      label: "write some prose",
-      formInput: (
-        <div>
-          {basicTextField("title", "Title")}
-          {basicTextField("body", "Body", 12)}
-          {submitBtn("Publish")}
-        </div>
-      )
-    },
-    {
-      value: "lists",
-      label: "make a list",
-      formInput: (
-        <div>
-          {submitBtn("Publish")}
-        </div>
-      )
-    }
-  ];
-
   const body = (
     <Grid container>
-      <Grid item xs={12}>
-        {!isMobileView && (<div className={common.spacingTop}></div>)}
+      <Grid item xs={12} className={!isSideView && (classes.bodyDiv) || isSideView && (classes.sideBodyDiv)}>
+        <div className={common.spacingTop}></div>
         <h1>Create</h1>
-      </Grid>
-      <Grid item xs={6}>
+        <div className={!isSideView && (classes.formDiv) || isSideView && (classes.sideFormDiv)}>
         <form onSubmit={handleSubmit(onSubmit)}>
           {!isMobileView && (selectTextField(
             "poemType",
@@ -166,10 +127,9 @@ function Create() {
           }
           {formInput}
         </form>
-      </Grid>
-      <Grid item xs={1}></Grid>
-      <Grid item xs={5}>
-        <div classes={common.formDiv}>
+        </div>
+        <div className={!isSideView && (classes.wordLookupDiv) || isSideView && (classes.sideWordLookupDiv)}>
+      
           <TextField
             label="Look a word up"
             variant="outlined"
@@ -201,6 +161,13 @@ function Create() {
             className={classes.spacing}>
             Look
           </Button>
+
+          <IconButton 
+          onClick={onSwitchView}
+          className={classes.switchViewBtn}>
+            {!isSideView && (<ViewColumnRoundedIcon />) || (isSideView && (<ViewStreamRoundedIcon />))}
+          </IconButton>
+
           {words != null && (
             <Paper className={(!isMobileView && classes.wordCardContainer || (isMobileView && classes.mobileWordCardContainer))}>
               {words.map(option => (
@@ -211,13 +178,13 @@ function Create() {
               ))}
             </Paper>
           )}
+          </div>
       <Snackbar open={isSnackbarOpen} autoHideDuration={3000} onClose={handleClose}>
         <MuiAlert elevation={6} variant="filled" onClose={handleClose} severity="success">
           Successfully published!
         </MuiAlert>
       </Snackbar>
-        </div>
-      </Grid>
+        </Grid>
     </Grid>
   );
 

@@ -1,6 +1,17 @@
+import React, { useEffect, useState, useRef } from "react";
+import { useForm } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
 
+import {
+  submitBtn,
+  basicTextField,
+  selectTextField
+} from "../../components/FormElements";
+
 export const useStyles = makeStyles({
+  wordLookupDiv: {
+    
+  },
   word: {
     fontSize: "1.5em"
   },
@@ -71,8 +82,79 @@ export const useStyles = makeStyles({
   spacing: {
     marginTop: "0.75em",
     marginBottom: "0.75em"
+  },
+  switchViewBtn: {
+
+  },
+  wordLookupDiv: {
+  },
+  sideWordLookupDiv: {
+    float: 'left',
+    display: 'inline-block',
+    width: '42vw',
+  },
+  formDiv: {
+  },
+  sideFormDiv: {
+    float: 'left',
+    display: 'inline-block',
+    width: '42vw',
+    marginRight: '1em',
+  },
+  bodyDiv: {
+    marginTop: '2em'
+  },
+  sideBodyDiv: {
+    marginTop: '2em',
   }
 });
+
+export const types = [
+  {
+    value: "poetry",
+    label: "compose a poem",
+    formInput: (
+      <div>
+        {basicTextField("title", "Title")}
+        {basicTextField("body", "Body", 8)}
+        {basicTextField("poemType", "Type of your poem")}
+        {basicTextField("notes", "Notes", 2)}
+        {submitBtn("Publish")}
+      </div>
+    )
+  },
+  {
+    value: "quotes",
+    label: "remember a quote",
+    formInput: (
+      <div>
+        {basicTextField("text", "A quote to remember", 3)}
+        {basicTextField("author", "Who said it?")}
+        {submitBtn("Publish")}
+      </div>
+    )
+  },
+  {
+    value: "prose",
+    label: "write some prose",
+    formInput: (
+      <div>
+        {basicTextField("title", "Title")}
+        {basicTextField("body", "Body", 12)}
+        {submitBtn("Publish")}
+      </div>
+    )
+  },
+  {
+    value: "lists",
+    label: "make a list",
+    formInput: (
+      <div>
+        {submitBtn("Publish")}
+      </div>
+    )
+  }
+];
 
 export const poemTypes = [
   {

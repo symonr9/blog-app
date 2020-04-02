@@ -9,22 +9,21 @@ const useCommonStyles = makeStyles({
   },
   mobileBodyDiv: {
     height: "100%",
-    width: "50vw",
+    width: "90vw",
     textAlign: "center",
     justifyContent: "center",
-    marginLeft: "8.5em"
+    marginLeft: "1em",
   },
   blankDiv: {
     marginTop: "20em"
   },
   formDiv: {
     "& > *": {
-      color: 'red',
       marginTop: "0.5em"
     }
   },
   spacingTop: {
-    marginTop: '6em'
+    marginBottom: '0em'
   }
   
 });

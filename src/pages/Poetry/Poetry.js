@@ -24,6 +24,7 @@ function Poetry() {
   }, []);
 
   const fetchData = isSubscribed => {
+    console.log(getServerURL("poems"));
     getData(getServerURL("poems"), response => {
       if (isSubscribed) {
         setPoems(response);
