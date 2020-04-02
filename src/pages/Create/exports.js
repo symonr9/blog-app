@@ -99,13 +99,13 @@ export const useStyles = makeStyles({
     float: 'left',
     display: 'inline-block',
     width: '42vw',
-    marginRight: '1em',
+    marginRight: '2em',
   },
   bodyDiv: {
-    marginTop: '2em'
+    marginTop: '3em'
   },
   sideBodyDiv: {
-    marginTop: '2em',
+    marginTop: '3em',
   }
 });
 

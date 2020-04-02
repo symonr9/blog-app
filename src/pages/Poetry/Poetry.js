@@ -41,34 +41,43 @@ function Poetry() {
   const body = (
     <Grid container>
       <Grid item xs={12}>
-        {!isMobileView && <div className={common.spacingTop}></div>}
+        <div className={common.spacingTop}></div>
         <h1>Poetry</h1>
-      </Grid>
-      <Grid item xs={12}>
         <div className={classes.poemContainerDiv}>
-        {poems && (poems.map((poem, index) => {
-          if(poem.isPublic){
-            return (
-                <Paper key={poem._id} elevation={7} className={classes.poemDiv} >
-                  <span className={classes.title}>{poem.title}</span>
-                  <span className={classes.createdBy}>By {poem.createdBy}</span>
-                  <span className={classes.body}>{poem.body}</span>
-                  <span className={classes.createdAt}>Created at: {poem.createdAt}</span>
-                </Paper>
-            );
-          }
-        }))
-        ||
-        (!poems && (<div><CircularProgress /></div>))
-        }
+          {(poems &&
+            poems.map((poem, index) => {
+              if (poem.isPublic) {
+                return (
+                  <Paper
+                    key={poem._id}
+                    elevation={7}
+                    className={classes.poemDiv}
+                  >
+                    <span className={classes.title}>{poem.title}</span>
+                    <span className={classes.createdBy}>
+                      By {poem.createdBy}
+                    </span>
+                    <span className={classes.body}>{poem.body}</span>
+                    <span className={classes.createdAt}>
+                      Created at: {poem.createdAt}
+                    </span>
+                  </Paper>
+                );
+              }
+            })) ||
+            (!poems && (
+              <div>
+                <CircularProgress />
+              </div>
+            ))}
         </div>
       </Grid>
     </Grid>
   );
+  
   return (
     <Grow in={true}>
-      {(!isMobileView && <div className={common.bodyDiv}>{body}</div>) ||
-        (isMobileView && <div className={common.mobileBodyDiv}>{body}</div>)}
+      {<div className={(!isMobileView && common.bodyDiv || (isMobileView && common.mobileBodyDiv))}>{body}</div>}
     </Grow>
   );
 }

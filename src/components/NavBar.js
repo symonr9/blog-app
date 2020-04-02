@@ -17,11 +17,14 @@ export const routes = [
   { path: "/", name: "Home", icon: <HomeRounded /> },
   { path: "/create", name: "Create", icon: <AddCircleOutlineRoundedIcon /> },
   { path: "/poetry", name: "Poetry", icon: <MenuBookRoundedIcon /> },
+  { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon /> }
+];
+
+/*
   { path: "/login", name: "Login", icon: <SupervisorAccountRoundedIcon/> },
   { path: "/signup", name: "Signup", icon: <SupervisorAccountRoundedIcon/> },
   { path: "/profile", name: "Profile", icon: <PersonRoundedIcon /> },
-  { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon /> }
-];
+*/
 
 const useStyles = makeStyles({
   navBarDiv: {
