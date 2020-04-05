@@ -37,19 +37,13 @@ function Create() {
     window.matchMedia("(max-width: 768px)").addListener(handler);
   }, []);
 
-  const { handleSubmit, register, watch, errors } = useForm();
 
+  /* Hooks and Handlers for Poem Type ******************** */
   const [type, setType] = useState("");
   const [formInput, setFormInput] = useState(
     <div></div>
   );
-
-  const [word, setWord] = useState("");
-  const [kind, setKind] = useState("rhymes");
-  const [words, setWords] = useState(null);
-
-  const [isSideView, setIsSideView] = useState(false);
-
+  
   const handleTypeChange = event => {
     setType(event.target.value);
 
@@ -59,42 +53,28 @@ function Create() {
       }
     });
   };
+  /******************************************************* */
 
-  //fixme: future, handleChange see if you can make this into just one function
-  const handleKindChange = event => {
-    setKind(event.target.value);
+  /* Hooks and Handlers for Side View ******************** */
+  const [isSideView, setIsSideView] = useState(false);
+
+  const onSwitchView = event => {
+    setIsSideView(!isSideView);
   };
+  /******************************************************* */
 
-  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
 
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setIsSnackbarOpen(false);
-  };
-
-  /*
-  const onSubmit = data => {
-    setIsSnackbarOpen(true);
-    console.log(data);
-    console.log(JSON.stringify(data));
-    console.log(data.body);
-  };
-  */
-
-  const onSubmit = event => {
-    console.log(event.title.value);
-    setIsSnackbarOpen(true);
- 
-  };
+  /* Hooks and Handlers for Word Finder Section ********** */
+  const [word, setWord] = useState("");
+  const [kind, setKind] = useState("rhymes");
+  const [words, setWords] = useState(null);
 
   const onWordChange = event => {
     setWord(event.target.value);
   };
 
-  const onSwitchView = event => {
-    setIsSideView(!isSideView);
+  const handleKindChange = event => {
+    setKind(event.target.value);
   };
 
   const onWordLookup = () => {
@@ -112,6 +92,26 @@ function Create() {
       setWords(temp);
     });
   };
+  /******************************************************* */
+
+
+  /* Hooks and Handlers for Submit Form ****************** */
+  const { handleSubmit, register, watch, errors } = useForm();
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setIsSnackbarOpen(false);
+  };
+
+  const onSubmit = event => {
+    console.log(event.title.value);
+    setIsSnackbarOpen(true);
+  };
+  /******************************************************* */
+
 
   const body = (
     <Grid container>

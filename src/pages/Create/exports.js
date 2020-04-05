@@ -102,10 +102,10 @@ export const types = [
     label: "compose a poem",
     formInput: (
       <div>
-        {basicTextField("title", "Title")}
-        {basicTextField("body", "Body", 8)}
-        {basicTextField("poemType", "Type of your poem")}
-        {basicTextField("notes", "Notes", 2)}
+        {basicTextField("poem_title", "Title")}
+        {basicTextField("poem_body", "Body", 8)}
+        {basicTextField("poem_type", "Type of your poem")}
+        {basicTextField("poem_notes", "Notes", 2)}
         {submitBtn("Publish")}
       </div>
     )
@@ -115,8 +115,8 @@ export const types = [
     label: "remember a quote",
     formInput: (
       <div>
-        {basicTextField("text", "A quote to remember", 3)}
-        {basicTextField("author", "Who said it?")}
+        {basicTextField("quote_text", "A quote to remember", 3)}
+        {basicTextField("quote_author", "Who said it?")}
         {submitBtn("Publish")}
       </div>
     )
@@ -126,21 +126,12 @@ export const types = [
     label: "write some prose",
     formInput: (
       <div>
-        {basicTextField("title", "Title")}
-        {basicTextField("body", "Body", 12)}
+        {basicTextField("prose_title", "Title")}
+        {basicTextField("prose_body", "Body", 12)}
         {submitBtn("Publish")}
       </div>
     )
   },
-  {
-    value: "lists",
-    label: "make a list",
-    formInput: (
-      <div>
-        {submitBtn("Publish")}
-      </div>
-    )
-  }
 ];
 
 export const poemTypes = [
