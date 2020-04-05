@@ -12,6 +12,8 @@ export const useStyles = makeStyles({
       width: '100px',
       marginRight: '1em',
       marginBottom: '1em',
+      overflowY: 'hidden',
+      maxHeight: '10em',
     },
     title: {
         fontSize: '1.3em',
@@ -22,7 +24,8 @@ export const useStyles = makeStyles({
     fontSize: '1em',
     display: 'block',
     marginTop: '0.75em',
-    marginBottom: '0.75em'
+    marginBottom: '0.75em',
+    whiteSpace: 'pre-wrap',
     },
     createdAt: {
       fontSize: '0.75em',

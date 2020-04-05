@@ -57,7 +57,7 @@ function Poetry() {
                     <span className={classes.createdBy}>
                       By {poem.createdBy}
                     </span>
-                    <span className={classes.body}>{poem.body}</span>
+                    <span className={classes.body}>{poem.body.substring(0,200)}...</span>
                     <span className={classes.createdAt}>
                       Created at: {poem.createdAt}
                     </span>

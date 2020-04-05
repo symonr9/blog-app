@@ -12,6 +12,8 @@ export const useStyles = makeStyles({
       width: '100px',
       marginRight: '1em',
       marginBottom: '1em',
+      overflowY: 'auto',
+      maxHeight: '10em',
     },
     text: {
       marginTop: '0.1em',

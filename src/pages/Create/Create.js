@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import { getData, postData } from "../../services/api";
+import { postData } from "../../services/api";
 
 import ViewColumnRoundedIcon from '@material-ui/icons/ViewColumnRounded';
 import ViewStreamRoundedIcon from '@material-ui/icons/ViewStreamRounded';
@@ -22,7 +21,7 @@ import {
   selectTextField
 } from "../../components/FormElements";
 
-import { useStyles, poemTypes, kinds } from "./exports";
+import { useStyles, kinds } from "./exports";
 
 function Create() {
   const classes = useStyles();

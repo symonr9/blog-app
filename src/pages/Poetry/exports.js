@@ -26,7 +26,8 @@ export const useStyles = makeStyles({
       fontSize: '1em',
       display: 'block',
       marginTop: '0.75em',
-      marginBottom: '0.75em'
+      marginBottom: '0.75em',
+      whiteSpace: 'pre-wrap',
     },
     notes: {
       fontSize: '0.75em',

@@ -55,7 +55,7 @@ function Prose() {
                   >
                     <span className={classes.title}>{p.title}</span>
                     <span className={classes.body}>
-                       {p.body}
+                       {p.body.substring(0,200)}...
                     </span>
                     <span className={classes.createdAt}>
                       Created at: {p.createdAt}

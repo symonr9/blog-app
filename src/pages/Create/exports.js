@@ -1,12 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useForm } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
-
-import {
-  submitBtn,
-  basicTextField,
-  selectTextField
-} from "../../components/FormElements";
 
 export const useStyles = makeStyles({
   wordLookupDiv: {
@@ -100,25 +92,6 @@ export const useStyles = makeStyles({
 //pass in the handle change function defined within
 //the Create function. There's probably a way to 
 //optimize it but for now I'll move it over.
-
-export const poemTypes = [
-  {
-    value: "Prose",
-    label: "Prose"
-  },
-  {
-    value: "Iambic Pentameter",
-    label: "Iambic Pentameter"
-  },
-  {
-    value: "Sonnet",
-    label: "Sonnet"
-  },
-  {
-    value: "Custom",
-    label: "Custom"
-  }
-];
 
 export const kinds = [
   {
