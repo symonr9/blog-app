@@ -63,7 +63,9 @@ const useStyles = makeStyles({
     }
   },
   navBtn: {
-    marginBottom: '1em'
+    marginBottom: '1em',
+    color: 'black',
+    backgroundColor: 'white'
   }
 });
 
@@ -133,7 +135,7 @@ function NavBar() {
     <div>
       {routes.map(({ path, name, icon }) => (
         <NavLink to={path} key={name}>
-          <Button className={classes.navBtn} variant="contained" color="white">
+          <Button className={classes.navBtn} variant="contained">
             {icon}
             {name}
           </Button>

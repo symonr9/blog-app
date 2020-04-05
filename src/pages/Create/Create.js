@@ -60,6 +60,7 @@ function Create() {
     });
   };
 
+  //fixme: future, handleChange see if you can make this into just one function
   const handleKindChange = event => {
     setKind(event.target.value);
   };
@@ -73,9 +74,19 @@ function Create() {
     setIsSnackbarOpen(false);
   };
 
+  /*
   const onSubmit = data => {
     setIsSnackbarOpen(true);
     console.log(data);
+    console.log(JSON.stringify(data));
+    console.log(data.body);
+  };
+  */
+
+  const onSubmit = event => {
+    console.log(event.title.value);
+    setIsSnackbarOpen(true);
+ 
   };
 
   const onWordChange = event => {
@@ -168,14 +179,14 @@ function Create() {
           </IconButton>
 
           {words != null && (
-            <Paper className={(!isMobileView && classes.wordCardContainer || (isMobileView && classes.mobileWordCardContainer))}>
+            <div className={classes.wordCardContainer}>
               {words.map(option => (
-                <Paper className={(!isMobileView && classes.wordCard || (isMobileView && classes.mobileWordCard))}>
+                <div className={(!isMobileView && classes.wordCard || (isMobileView && classes.mobileWordCard))}>
                   <span className={(!isMobileView && classes.word || (isMobileView && classes.mobileWord))}>{option[0]}</span>
                   <span className={(!isMobileView && classes.rating || (isMobileView && classes.mobileRating))}>{option[1]}</span>
-                </Paper>
+                </div>
               ))}
-            </Paper>
+            </div>
           )}
           </div>
       <Snackbar open={isSnackbarOpen} autoHideDuration={3000} onClose={handleClose}>
