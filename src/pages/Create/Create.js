@@ -22,7 +22,7 @@ import {
   selectTextField
 } from "../../components/FormElements";
 
-import { useStyles, types, poemTypes, kinds } from "./exports";
+import { useStyles, poemTypes, kinds } from "./exports";
 
 function Create() {
   const classes = useStyles();
@@ -38,27 +38,10 @@ function Create() {
   }, []);
 
 
-  /* Hooks and Handlers for Poem Type ******************** */
-  const [type, setType] = useState("");
-  const [formInput, setFormInput] = useState(
-    <div></div>
-  );
-  
-  const handleTypeChange = event => {
-    setType(event.target.value);
-
-    types.map(({ value, formInput }) => {
-      if (value === event.target.value) {
-        setFormInput(formInput);
-      }
-    });
-  };
-  /******************************************************* */
-
   /* Hooks and Handlers for Side View ******************** */
   const [isSideView, setIsSideView] = useState(false);
 
-  const onSwitchView = event => {
+  const handleSwitchView = event => {
     setIsSideView(!isSideView);
   };
   /******************************************************* */
@@ -69,7 +52,7 @@ function Create() {
   const [kind, setKind] = useState("rhymes");
   const [words, setWords] = useState(null);
 
-  const onWordChange = event => {
+  const handleWordChange = event => {
     setWord(event.target.value);
   };
 
@@ -77,7 +60,7 @@ function Create() {
     setKind(event.target.value);
   };
 
-  const onWordLookup = () => {
+  const handleWordLookup = () => {
     var data = { word: word, kind: kind };
 
     postData(getServerURL("words"), data, response => {
@@ -95,6 +78,105 @@ function Create() {
   /******************************************************* */
 
 
+  /* Hooks and Handlers For Forms ************************ */
+  const [type, setType] = useState("");
+  const [formInput, setFormInput] = useState(
+    <div></div>
+  );
+  
+  const handleTypeChange = event => {
+    setType(event.target.value);
+
+    types.map(({ value, formInput }) => {
+      if (value === event.target.value) {
+        setFormInput(formInput);
+      }
+    });
+  };
+
+  const [poemTitle, setPoemTitle] = useState("");
+  const [poemBody, setPoemBody] = useState("");
+  const [poemType, setPoemType] = useState("");
+  const [poemNotes, setPoemNotes] = useState("");
+
+  const [quoteText, setQuoteText] = useState("");
+  const [quoteAuthor, setQuoteAuthor] = useState("");
+
+  const [proseTitle, setProseTitle] = useState("");
+  const [proseBody, setProseBody] = useState("");
+
+  const handlePoemTitleChange = event => {
+    setPoemTitle(event.target.value);
+  };
+
+  const handlePoemBodyChange = event => {
+    setPoemBody(event.target.value);
+  };
+
+  const handlePoemTypeChange = event => {
+    setPoemType(event.target.value);
+  };
+
+  const handlePoemNotesChange = event => {
+    setPoemNotes(event.target.value);
+  };
+
+  const handleQuoteTextChange = event => {
+    setQuoteText(event.target.value);
+  };
+
+  const handleQuoteAuthorChange = event => {
+    setQuoteAuthor(event.target.value);
+  };
+
+  const handleProseTitleChange = event => {
+    setProseTitle(event.target.value);
+  };
+
+  const handleProseBodyChange = event => {
+    setProseBody(event.target.value);
+  };
+
+  const types = [
+    {
+      value: "poetry",
+      label: "compose a poem",
+      formInput: (
+        <div>
+          {basicTextField("poemTitle", "Title", handlePoemTitleChange)}
+          {basicTextField("poemBody", "Body", handlePoemBodyChange, 8)}
+          {basicTextField("poemType", "Type of your poem", handlePoemTypeChange)}
+          {basicTextField("poemNotes", "Notes", handlePoemNotesChange, 2)}
+          {submitBtn("Publish")}
+        </div>
+      )
+    },
+    {
+      value: "quotes",
+      label: "remember a quote",
+      formInput: (
+        <div>
+          {basicTextField("quoteText", "A quote to remember", handleQuoteTextChange, 3)}
+          {basicTextField("quoteAuthor", "Who said it?", handleQuoteAuthorChange)}
+          {submitBtn("Publish")}
+        </div>
+      )
+    },
+    {
+      value: "prose",
+      label: "write some prose",
+      formInput: (
+        <div>
+          {basicTextField("proseTitle", "Title", handleProseTitleChange)}
+          {basicTextField("proseBody", "Body", handleProseBodyChange, 12)}
+          {submitBtn("Publish")}
+        </div>
+      )
+    },
+  ];
+
+  /******************************************************* */
+
   /* Hooks and Handlers for Submit Form ****************** */
   const { handleSubmit, register, watch, errors } = useForm();
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
@@ -107,9 +189,52 @@ function Create() {
   };
 
   const onSubmit = event => {
-    console.log(event.title.value);
+    let data = {};
+    let url = "";
+
+    switch(type){
+      case "poetry":
+        data = {
+          "poemTitle": poemTitle,
+          "poemBody": poemBody, 
+          "poemType": poemType,
+          "poemNotes": poemNotes
+        };
+        url = "poems/create";
+
+        break;
+      case "quotes":
+        data = {
+          "quoteText": quoteText,
+          "quoteAuthor": quoteAuthor
+        }; 
+        url = "quotes/create";
+      
+        break;
+      case "prose":
+        data = {
+          "proseTitle": proseTitle,
+          "proseBody": proseBody
+        };
+        url = "prose/create";
+
+        break;
+      default:
+        console.log("Something went wrong..."); 
+        return 0;
+    }
+
+    postData(
+      getServerURL(url),
+      data,
+      response => {
+        console.log(response);
+      }
+    );
+
     setIsSnackbarOpen(true);
   };
+
   /******************************************************* */
 
 
@@ -143,7 +268,7 @@ function Create() {
           <TextField
             label="Look a word up"
             variant="outlined"
-            onChange={onWordChange}
+            onChange={handleWordChange}
             fullWidth
             className={classes.spacing}
           ></TextField>
@@ -167,13 +292,13 @@ function Create() {
           }
           <Button 
             variant="outlined" 
-            onClick={onWordLookup}
+            onClick={handleWordLookup}
             className={classes.spacing}>
             Look
           </Button>
 
           <IconButton 
-          onClick={onSwitchView}
+          onClick={handleSwitchView}
           className={classes.switchViewBtn}>
             {!isSideView && (<ViewColumnRoundedIcon />) || (isSideView && (<ViewStreamRoundedIcon />))}
           </IconButton>

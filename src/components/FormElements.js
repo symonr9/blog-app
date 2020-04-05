@@ -27,7 +27,7 @@ export const submitBtn = (value) => {
   );
 };
 
-  export const basicTextField = (name, label, numOfLines = 1) => {
+  export const basicTextField = (name, label, onChangeFun, numOfLines = 1) => {
     return (
       <TextField
         id={name + "TextField"}
@@ -39,6 +39,7 @@ export const submitBtn = (value) => {
         rows={numOfLines}
         fullWidth
         style={textFieldStyle}
+        onChange={onChangeFun}
       ></TextField>
     );
   };

@@ -96,43 +96,10 @@ export const useStyles = makeStyles({
   }
 });
 
-export const types = [
-  {
-    value: "poetry",
-    label: "compose a poem",
-    formInput: (
-      <div>
-        {basicTextField("poem_title", "Title")}
-        {basicTextField("poem_body", "Body", 8)}
-        {basicTextField("poem_type", "Type of your poem")}
-        {basicTextField("poem_notes", "Notes", 2)}
-        {submitBtn("Publish")}
-      </div>
-    )
-  },
-  {
-    value: "quotes",
-    label: "remember a quote",
-    formInput: (
-      <div>
-        {basicTextField("quote_text", "A quote to remember", 3)}
-        {basicTextField("quote_author", "Who said it?")}
-        {submitBtn("Publish")}
-      </div>
-    )
-  },
-  {
-    value: "prose",
-    label: "write some prose",
-    formInput: (
-      <div>
-        {basicTextField("prose_title", "Title")}
-        {basicTextField("prose_body", "Body", 12)}
-        {submitBtn("Publish")}
-      </div>
-    )
-  },
-];
+//types was here before but I took it out so I could 
+//pass in the handle change function defined within
+//the Create function. There's probably a way to 
+//optimize it but for now I'll move it over.
 
 export const poemTypes = [
   {
