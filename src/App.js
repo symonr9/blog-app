@@ -15,6 +15,7 @@ import Profile from "./pages/Profile/Profile";
 import Home from "./pages/Home/Home";
 import Poetry from "./pages/Poetry/Poetry";
 import Quotes from "./pages/Quotes/Quotes";
+import Prose from "./pages/Prose/Prose";
 import Create from "./pages/Create/Create";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
@@ -24,6 +25,7 @@ const routes = [
   { path: "/profile", name: "My Profile", Component: Profile },
   { path: "/poetry", name: "Poetry", Component: Poetry },
   { path: "/quotes", name: "Quotes", Component: Quotes },
+  { path: "/prose", name: "Prose", Component: Prose },
   { path: "/create", name: "Create", Component: Create },
   { path: "/login", name: "Login", Component: Login },
   { path: "/signup", name: "Signup", Component: Signup },

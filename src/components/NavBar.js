@@ -12,12 +12,14 @@ import MenuBookRoundedIcon from "@material-ui/icons/MenuBookRounded";
 import FormatQuoteRoundedIcon from "@material-ui/icons/FormatQuoteRounded";
 import AddCircleOutlineRoundedIcon from "@material-ui/icons/AddCircleOutlineRounded";
 import SupervisorAccountRoundedIcon from '@material-ui/icons/SupervisorAccountRounded';
+import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 
 export const routes = [
   { path: "/", name: "Home", icon: <HomeRounded /> },
   { path: "/create", name: "Create", icon: <AddCircleOutlineRoundedIcon /> },
   { path: "/poetry", name: "Poetry", icon: <MenuBookRoundedIcon /> },
-  { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon /> }
+  { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon /> },
+  { path: "/prose", name: "Prose", icon: <DescriptionRoundedIcon />},
 ];
 
 /*
