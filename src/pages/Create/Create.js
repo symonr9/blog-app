@@ -195,26 +195,26 @@ function Create() {
     switch(type){
       case "poetry":
         data = {
-          "poemTitle": poemTitle,
-          "poemBody": poemBody, 
-          "poemType": poemType,
-          "poemNotes": poemNotes
+          "title": poemTitle,
+          "body": poemBody, 
+          "type": poemType,
+          "notes": poemNotes
         };
         url = "poems/create";
 
         break;
       case "quotes":
         data = {
-          "quoteText": quoteText,
-          "quoteAuthor": quoteAuthor
+          "text": quoteText,
+          "author": quoteAuthor
         }; 
         url = "quotes/create";
       
         break;
       case "prose":
         data = {
-          "proseTitle": proseTitle,
-          "proseBody": proseBody
+          "title": proseTitle,
+          "body": proseBody
         };
         url = "prose/create";
 
