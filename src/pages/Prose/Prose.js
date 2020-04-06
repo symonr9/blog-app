@@ -8,8 +8,6 @@ import { getServerURL } from "../../config/config";
 
 import { useStyles } from "./exports";
 
-import Comments from "../../components/Comments";
-
 function Prose() {
   const classes = useStyles();
   const common = useCommonStyles();
@@ -74,7 +72,6 @@ function Prose() {
               </div>
             ))}
         </div>
-        <Comments />
       </Grid>
     </Grid>
   );

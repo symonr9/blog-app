@@ -10,5 +10,5 @@ export const getServerURL = (param) => {
     if(isDevelopmentServer){
         URL = DEVL_URL;
     }
-    return  + param.toString();
+    return URL + param.toString();
 };
