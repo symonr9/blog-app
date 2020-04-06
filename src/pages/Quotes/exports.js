@@ -22,6 +22,7 @@ export const useStyles = makeStyles({
       fontStyle: 'italic',
       color: 'black',
       textDecoration: 'none',
+      whiteSpace: 'pre-wrap',
     },
     author: {
       fontSize: '1.1em',

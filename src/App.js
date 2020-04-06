@@ -24,9 +24,7 @@ import Signup from "./pages/Signup/Signup";
 //import routes from "./data/routes";
 const routes = [
   { path: "/profile", name: "My Profile", Component: Profile },
-  { path: "/poetry/:urlId", name: "Poetry", Component: Single },
-  { path: "/quotes/:urlId", name: "Quotes", Component: Single },
-  { path: "/prose/:urlId", name: "Prose", Component: Single },
+  { path: "/:type/:urlId", name: "Single", Component: Single },
   { path: "/poetry", name: "Poetry", Component: Poetry },
   { path: "/quotes", name: "Quotes", Component: Quotes },
   { path: "/prose", name: "Prose", Component: Prose },
