@@ -16,6 +16,7 @@ import Home from "./pages/Home/Home";
 import Poetry from "./pages/Poetry/Poetry";
 import Quotes from "./pages/Quotes/Quotes";
 import Prose from "./pages/Prose/Prose";
+import Single from "./pages/Single/Single";
 import Create from "./pages/Create/Create";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
@@ -23,6 +24,9 @@ import Signup from "./pages/Signup/Signup";
 //import routes from "./data/routes";
 const routes = [
   { path: "/profile", name: "My Profile", Component: Profile },
+  { path: "/poetry/:id", name: "Poetry", Component: Single },
+  { path: "/quotes/:id", name: "Quotes", Component: Single },
+  { path: "/prose/:id", name: "Prose", Component: Single },
   { path: "/poetry", name: "Poetry", Component: Poetry },
   { path: "/quotes", name: "Quotes", Component: Quotes },
   { path: "/prose", name: "Prose", Component: Prose },
@@ -43,17 +47,6 @@ const useStyles = makeStyles({
     animationFillMode: 'forwards',
   },
   "@keyframes effect": {
-    /*
-    "50%": {
-      background: "linear-gradient(to bottom, #3359ae 17%, #34b09b 30%, #ebe5d9 38%)",
-      //background: 'green',
-    },
-    "100%": {
-      background: "linear-gradient(to bottom, #3359ae 4%, #34b09b 20%, #ebe5d9 50%)",
-      //background: 'purple',
-    },
-    */
-    
     "0%": {
       background: "linear-gradient(to bottom, #3359ae 4%, #34b09b 20%, #ebe5d9 50%)",
       //background: 'blue',

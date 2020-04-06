@@ -20,6 +20,8 @@ export const useStyles = makeStyles({
       fontSize: '1.6em',
       display: 'block',
       fontStyle: 'italic',
+      color: 'black',
+      textDecoration: 'none',
     },
     author: {
       fontSize: '1.1em',

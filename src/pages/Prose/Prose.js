@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
 import { getData } from "../../services/api";
@@ -55,7 +55,9 @@ function Prose() {
                     elevation={7}
                     className={classes.proseDiv}
                   >
-                    <span className={classes.title}>{p.title}</span>
+                    <NavLink to={`/prose/${p.urlId}`}>
+                      <span className={classes.title}>{p.title}</span>
+                    </NavLink>
                     <span className={classes.body}>
                        {p.body.substring(0,200)}...
                     </span>

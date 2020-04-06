@@ -1,5 +1,6 @@
+
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 import { Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
 import { getData } from "../../services/api";
@@ -10,11 +11,13 @@ import { useStyles } from "./exports";
 
 import Comments from "../../components/Comments";
 
-function Quotes() {
+function Single() {
+  const { urlId } = useParams();
+
   const classes = useStyles();
   const common = useCommonStyles();
 
-  const [quotes, setQuotes] = useState(null);
+  const [data, setData] = useState(null);
 
   const [isMobileView, setIsMobileView] = useState(
     window.matchMedia("(max-width: 768px)").matches
@@ -25,11 +28,11 @@ function Quotes() {
     window.matchMedia("(max-width: 768px)").addListener(handler);
   }, []);
 
+  //prose, quotes, poems
   const fetchData = isSubscribed => {
-    console.log(getServerURL("quotes"));
-    getData(getServerURL("quotes"), response => {
+    getData(getServerURL("prose" + urlId), response => {
       if (isSubscribed) {
-        setQuotes(response);
+        setData(response);
       }
     });
   };
@@ -40,35 +43,22 @@ function Quotes() {
     return () => (isSubscribed = false);
   }, []);
 
+  const bodyContent = (
+    <div>
+      Hello
+    </div>
+  );
+
   const body = (
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
-        <h1>Quotes</h1>
-        <div className={classes.quoteContainerDiv}>
-          {(quotes &&
-            quotes.map((quote, index) => {
-              if (quote.isPublic) {
-                return (
-                  <Paper
-                    key={quote._id}
-                    elevation={7}
-                    className={classes.quoteDiv}
-                  >
-                    <NavLink to={`/quotes/${quote.urlId}`}>
-                      <span className={classes.text}>"{quote.text}"</span>
-                    </NavLink>
-                    <span className={classes.author}>
-                       -{quote.author}
-                    </span>
-                    <span className={classes.createdAt}>
-                      Created at: {quote.createdAt}
-                    </span>
-                  </Paper>
-                );
-              }
-            })) ||
-            (!quotes && (
+        <h1>Prose</h1>
+        <div className={classes.proseContainerDiv}>
+          {(data &&
+              {bodyContent}
+            ) ||
+            (!data && (
               <div>
                 <CircularProgress />
               </div>
@@ -86,4 +76,4 @@ function Quotes() {
   );
 }
 
-export default Quotes;
+export default Single;

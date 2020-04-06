@@ -17,6 +17,8 @@ export const useStyles = makeStyles({
       fontSize: '1.3em',
       display: 'block',
       fontWeight: 'bold',
+      color: 'black',
+      textDecoration: 'none',
     },
     createdBy: {
       fontSize: '0.8em',

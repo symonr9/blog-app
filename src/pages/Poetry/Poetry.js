@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
 import { getData } from "../../services/api";
@@ -55,7 +55,9 @@ function Poetry() {
                     elevation={7}
                     className={classes.poemDiv}
                   >
-                    <span className={classes.title}>{poem.title}</span>
+                    <NavLink to={`/poetry/${poem.urlId}`}>
+                      <span className={classes.title}>{poem.title}</span>
+                    </NavLink>
                     <span className={classes.createdBy}>
                       By {poem.createdBy}
                     </span>
