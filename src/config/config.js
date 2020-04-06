@@ -1,6 +1,6 @@
 
 
-const isDevelopmentServer = true;
+const isDevelopmentServer = false;
 
 const PROD_URL = "https://blog-app-backend-sy.herokuapp.com/";
 const DEVL_URL = "http://localhost:2020/"
