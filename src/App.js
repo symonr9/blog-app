@@ -24,9 +24,9 @@ import Signup from "./pages/Signup/Signup";
 //import routes from "./data/routes";
 const routes = [
   { path: "/profile", name: "My Profile", Component: Profile },
-  { path: "/poetry/:id", name: "Poetry", Component: Single },
-  { path: "/quotes/:id", name: "Quotes", Component: Single },
-  { path: "/prose/:id", name: "Prose", Component: Single },
+  { path: "/poetry/:urlId", name: "Poetry", Component: Single },
+  { path: "/quotes/:urlId", name: "Quotes", Component: Single },
+  { path: "/prose/:urlId", name: "Prose", Component: Single },
   { path: "/poetry", name: "Poetry", Component: Poetry },
   { path: "/quotes", name: "Quotes", Component: Quotes },
   { path: "/prose", name: "Prose", Component: Prose },
@@ -95,6 +95,7 @@ const useStyles = makeStyles({
   },
 });
 
+
 function App() {
   const classes = useStyles();
   return (
@@ -103,8 +104,8 @@ function App() {
         <NavBar />
         <Switch>
           {routes.map(({ path, Component }) => (
-            <Route key={path} path={path}>
-              <div className={classes.componentDiv}>
+            <Route key={path} path={path}>   
+              <div className={classes.componentDiv}> 
                 <Component />
               </div>
             </Route>

@@ -11,7 +11,8 @@ import { useStyles } from "./exports";
 
 import Comments from "../../components/Comments";
 
-function Single() {
+
+function Single() {  
   const { urlId } = useParams();
 
   const classes = useStyles();
@@ -30,7 +31,8 @@ function Single() {
 
   //prose, quotes, poems
   const fetchData = isSubscribed => {
-    getData(getServerURL("prose" + urlId), response => {
+    console.log(urlId);
+    getData(getServerURL("prose/adamant-giant-yak"), response => {
       if (isSubscribed) {
         setData(response);
       }
@@ -45,7 +47,7 @@ function Single() {
 
   const bodyContent = (
     <div>
-      Hello
+      urlId: {urlId}
     </div>
   );
 
@@ -55,9 +57,7 @@ function Single() {
         <div className={common.spacingTop}></div>
         <h1>Prose</h1>
         <div className={classes.proseContainerDiv}>
-          {(data &&
-              {bodyContent}
-            ) ||
+          {(data && bodyContent) ||
             (!data && (
               <div>
                 <CircularProgress />
