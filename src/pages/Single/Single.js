@@ -11,8 +11,9 @@ import { useStyles } from "./exports";
 
 import Comments from "../../components/Comments";
 
-function Single() {
-  const { urlId } = useParams();
+
+function Single() {  
+  const { type, urlId } = useParams();
 
   const classes = useStyles();
   const common = useCommonStyles();
@@ -28,9 +29,16 @@ function Single() {
     window.matchMedia("(max-width: 768px)").addListener(handler);
   }, []);
 
+  let dataType = type;
+    
+  //fixme, fix this nomenclature
+  if(type == "poetry"){
+    dataType = "poems";
+  }
+
   //prose, quotes, poems
   const fetchData = isSubscribed => {
-    getData(getServerURL("prose" + urlId), response => {
+    getData(getServerURL(dataType + "/" + urlId), response => {
       if (isSubscribed) {
         setData(response);
       }
@@ -45,7 +53,51 @@ function Single() {
 
   const bodyContent = (
     <div>
-      Hello
+      {
+      (data 
+        && ( dataType == "poems" && 
+              (<div>
+                <h1>{data.title}</h1>
+                {data.createdBy}
+                <br/>
+                {data.createdAt}
+                <br/><br/>
+                {data.body}
+                <br/><br/>
+                Type: {data.type}
+                <br/>
+                Notes: {data.notes}
+                <br/><br/><br/>
+              </div>)
+              ||
+              dataType == "quotes" &&
+              (<div>
+                <i>"{data.text}"</i>
+                <br/><br/>
+                {data.author}
+                <br/><br/>
+                {data.createdBy}
+                <br/>
+                {data.createdAt}
+                <br/><br/><br/>              
+              </div>)
+              ||
+              dataType == "prose" && 
+              (<div>
+                <h1>{data.title}</h1>
+                {data.createdBy}
+                <br/>
+                {data.createdAt}
+                <br/><br/>
+                {data.body}
+                <br/><br/><br/>
+              </div>)
+              ||
+              (<div>Sorry, this does not exist.</div>)
+            )
+      )
+      }
+      <br/>
     </div>
   );
 
@@ -53,11 +105,8 @@ function Single() {
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
-        <h1>Prose</h1>
-        <div className={classes.proseContainerDiv}>
-          {(data &&
-              {bodyContent}
-            ) ||
+        <div className={classes.singleContainerDiv}>
+          {(data && bodyContent) ||
             (!data && (
               <div>
                 <CircularProgress />
