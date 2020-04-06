@@ -6,6 +6,8 @@ import { getData } from "../../services/api";
 import useCommonStyles from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
+import Comments from "../../components/Comments";
+
 import { useStyles } from "./exports";
 
 function Poetry() {
@@ -71,6 +73,7 @@ function Poetry() {
               </div>
             ))}
         </div>
+        <Comments />
       </Grid>
     </Grid>
   );

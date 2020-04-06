@@ -8,6 +8,8 @@ import { getServerURL } from "../../config/config";
 
 import { useStyles } from "./exports";
 
+import Comments from "../../components/Comments";
+
 function Quotes() {
   const classes = useStyles();
   const common = useCommonStyles();
@@ -70,6 +72,7 @@ function Quotes() {
               </div>
             ))}
         </div>
+        <Comments />
       </Grid>
     </Grid>
   );

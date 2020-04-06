@@ -22,14 +22,35 @@ const Home = () => {
   const body = (
     <Grid container>
       <Grid item xs={12}>
-        {!isMobileView && (<div className={common.spacingTop}></div>)}
+        <div className={common.spacingTop}></div>
         <h1>Symon's Blog</h1>
-      </Grid>
-      <Grid item xs={12}>
-        {poems[1]["title"]}
-        <br />
-        <br />
-        {poems[1]["body"]}
+        Hello and welcome to my blog!
+        <h2>Things to explore: </h2>
+          <ul>
+            <li>Creating new items</li>
+            <li>Poetry
+              <ul>
+                <li>All kinds of poetry, whether structured or prose.</li>
+              </ul>
+            </li>
+            <li>Quotes
+              <ul>
+                <li>Memorable quotes from people you know or from books, movies, etc.</li>
+              </ul>
+            </li>
+            <li>Prose
+              <ul>
+                <li>Reflections and notes from sermons and lectures.</li>
+              </ul>
+            </li>
+          </ul>
+        <h2>Planned Features: </h2>
+          <ul>
+            <li>Audio Clips for Spoken Word</li>
+            <li>Sermon Notes</li>
+            <li>User Authentication (Login and Signup)</li>
+            <li>Profile</li>
+          </ul>       
       </Grid>
     </Grid>
   );
