@@ -10,11 +10,11 @@ import { useStyles } from "./exports";
 
 import Comments from "../../components/Comments";
 
-function Quotes() {
+function Prose() {
   const classes = useStyles();
   const common = useCommonStyles();
 
-  const [quotes, setQuotes] = useState(null);
+  const [prose, setProse] = useState(null);
 
   const [isMobileView, setIsMobileView] = useState(
     window.matchMedia("(max-width: 768px)").matches
@@ -26,10 +26,10 @@ function Quotes() {
   }, []);
 
   const fetchData = isSubscribed => {
-    console.log(getServerURL("quotes"));
-    getData(getServerURL("quotes"), response => {
+    console.log(getServerURL("prose"));
+    getData(getServerURL("prose"), response => {
       if (isSubscribed) {
-        setQuotes(response);
+        setProse(response);
       }
     });
   };
@@ -44,31 +44,31 @@ function Quotes() {
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
-        <h1>Quotes</h1>
-        <div className={classes.quoteContainerDiv}>
-          {(quotes &&
-            quotes.map((quote, index) => {
-              if (quote.isPublic) {
+        <h1>Prose</h1>
+        <div className={classes.proseContainerDiv}>
+          {(prose &&
+            prose.map((p, index) => {
+              if (p.isPublic) {
                 return (
                   <Paper
-                    key={quote._id}
+                    key={p._id}
                     elevation={7}
-                    className={classes.quoteDiv}
+                    className={classes.proseDiv}
                   >
-                    <NavLink to={`/quotes/${quote.urlId}`}>
-                      <span className={classes.text}>"{quote.text}"</span>
+                    <NavLink to={`/prose/${p.urlId}`}>
+                      <span className={classes.title}>{p.title}</span>
                     </NavLink>
-                    <span className={classes.author}>
-                       -{quote.author}
+                    <span className={classes.body}>
+                       {p.body.substring(0,200)}...
                     </span>
                     <span className={classes.createdAt}>
-                      Created at: {quote.createdAt}
+                      Created at: {p.createdAt}
                     </span>
                   </Paper>
                 );
               }
             })) ||
-            (!quotes && (
+            (!prose && (
               <div>
                 <CircularProgress />
               </div>
@@ -86,4 +86,4 @@ function Quotes() {
   );
 }
 
-export default Quotes;
+export default Prose;

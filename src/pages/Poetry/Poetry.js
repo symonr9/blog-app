@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
 import { getData } from "../../services/api";
 import useCommonStyles from "../../assets/common";
 import { getServerURL } from "../../config/config";
+
+import Comments from "../../components/Comments";
 
 import { useStyles } from "./exports";
 
@@ -24,6 +26,7 @@ function Poetry() {
   }, []);
 
   const fetchData = isSubscribed => {
+    console.log(getServerURL("poems"));
     getData(getServerURL("poems"), response => {
       if (isSubscribed) {
         setPoems(response);
@@ -40,34 +43,46 @@ function Poetry() {
   const body = (
     <Grid container>
       <Grid item xs={12}>
-        {!isMobileView && <div className={common.spacingTop}></div>}
+        <div className={common.spacingTop}></div>
         <h1>Poetry</h1>
-      </Grid>
-      <Grid item xs={12}>
         <div className={classes.poemContainerDiv}>
-        {poems && (poems.map((poem, index) => {
-          if(poem.isPublic){
-            return (
-                <Paper key={poem._id} elevation={7} className={classes.poemDiv} >
-                  <span className={classes.title}>{poem.title}</span>
-                  <span className={classes.createdBy}>By {poem.createdBy}</span>
-                  <span className={classes.body}>{poem.body}</span>
-                  <span className={classes.createdAt}>Created at: {poem.createdAt}</span>
-                </Paper>
-            );
-          }
-        }))
-        ||
-        (!poems && (<div><CircularProgress /></div>))
-        }
+          {(poems &&
+            poems.map((poem, index) => {
+              if (poem.isPublic) {
+                return (
+                  <Paper
+                    key={poem._id}
+                    elevation={7}
+                    className={classes.poemDiv}
+                  >
+                    <NavLink to={`/poetry/${poem.urlId}`}>
+                      <span className={classes.title}>{poem.title}</span>
+                    </NavLink>
+                    <span className={classes.createdBy}>
+                      By {poem.createdBy}
+                    </span>
+                    <span className={classes.body}>{poem.body.substring(0,200)}...</span>
+                    <span className={classes.createdAt}>
+                      Created at: {poem.createdAt}
+                    </span>
+                  </Paper>
+                );
+              }
+            })) ||
+            (!poems && (
+              <div>
+                <CircularProgress />
+              </div>
+            ))}
         </div>
+        <Comments />
       </Grid>
     </Grid>
   );
+  
   return (
     <Grow in={true}>
-      {(!isMobileView && <div className={common.bodyDiv}>{body}</div>) ||
-        (isMobileView && <div className={common.mobileBodyDiv}>{body}</div>)}
+      {<div className={(!isMobileView && common.bodyDiv || (isMobileView && common.mobileBodyDiv))}>{body}</div>}
     </Grow>
   );
 }

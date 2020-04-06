@@ -14,18 +14,22 @@ export const useStyles = makeStyles({
       marginBottom: '1em',
     },
     title: {
-      fontSize: '1.5em',
-      display: 'block'
+      fontSize: '1.3em',
+      display: 'block',
+      fontWeight: 'bold',
+      color: 'black',
+      textDecoration: 'none',
     },
     createdBy: {
-      fontSize: '1em',
+      fontSize: '0.8em',
       display: 'block'
     },
     body: {
-      fontSize: '1.25em',
+      fontSize: '1em',
       display: 'block',
       marginTop: '0.75em',
-      marginBottom: '0.75em'
+      marginBottom: '0.75em',
+      whiteSpace: 'pre-wrap',
     },
     notes: {
       fontSize: '0.75em',

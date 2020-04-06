@@ -1,6 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles({
+  wordLookupDiv: {
+    
+  },
   word: {
     fontSize: "1.5em"
   },
@@ -18,30 +21,28 @@ export const useStyles = makeStyles({
   },
   wordCardContainer: {
     overflowY: "scroll",
-    height: "300px",
+    height: "15em",
     display: "flex",
     flexDirection: "column",
     flexWrap: "wrap",
     marginBottom: "1em",
     borderRadius: "10px",
-    boxShadow: "5px 5px #bebebe"
+    backgroundColor: 'transparent'
   },
   wordCard: {
     width: "12em",
     marginBottom: "0.25em",
     marginRight: "0.25em",
-    "& :hover": {
-      backgroundColor: "lightgray",
-      cursor: "pointer"
-    }
+    border: '2px solid #bebebe',
+    borderRadius: '5px',
   },
   mobileWord: {
-    fontSize: "1em"
+    fontSize: "1.5em"
   },
   mobileRating: {
-    fontSize: "0.5em",
+    fontSize: "1em",
     float: "right",
-    marginTop: "0.50em !important",
+    marginTop: '0.1em',
     marginRight: "0.5em",
     paddingLeft: "0.5em",
     paddingRight: "0.5em",
@@ -50,48 +51,47 @@ export const useStyles = makeStyles({
     borderRadius: "100px",
     backgroundColor: "lightblue"
   },
-  mobileWordCardContainer: {
-    overflowY: "scroll",
-    height: "200px",
-    display: "flex",
-    flexDirection: "column",
-    marginBottom: "1em",
-    borderRadius: "10px",
-    boxShadow: "5px 5px #bebebe"
-  },
   mobileWordCard: {
-    width: "8em",
+    width: '15em',
     marginBottom: "0.25em",
     marginRight: "0.25em",
-    "& :hover": {
-      backgroundColor: "lightgray",
-      cursor: "pointer"
-    }
+    border: '2px solid #bebebe',
+    borderRadius: '5px',
   },
   spacing: {
     marginTop: "0.75em",
     marginBottom: "0.75em"
+  },
+  switchViewBtn: {
+
+  },
+  wordLookupDiv: {
+  },
+  sideWordLookupDiv: {
+    float: 'left',
+    display: 'inline-block',
+    width: '42vw',
+  },
+  formDiv: {
+  },
+  sideFormDiv: {
+    float: 'left',
+    display: 'inline-block',
+    width: '42vw',
+    marginRight: '2em',
+  },
+  bodyDiv: {
+    marginTop: '3em'
+  },
+  sideBodyDiv: {
+    marginTop: '3em',
   }
 });
 
-export const poemTypes = [
-  {
-    value: "Prose",
-    label: "Prose"
-  },
-  {
-    value: "Iambic Pentameter",
-    label: "Iambic Pentameter"
-  },
-  {
-    value: "Sonnet",
-    label: "Sonnet"
-  },
-  {
-    value: "Custom",
-    label: "Custom"
-  }
-];
+//types was here before but I took it out so I could 
+//pass in the handle change function defined within
+//the Create function. There's probably a way to 
+//optimize it but for now I'll move it over.
 
 export const kinds = [
   {

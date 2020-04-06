@@ -23,14 +23,10 @@ function Profile() {
   const body = (
     <Grid container>
       <Grid item xs={12}>
-      {!isMobileView && (<div className={common.spacingTop}></div>)}
+        <div className={common.spacingTop}></div>
         <h1>Profile</h1>
+        <iframe src="https://open.spotify.com/embed/playlist/7c53Vxz6Y6sNBNik6at8qU" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> 
       </Grid>
-      <Grid item xs={4}>
-        Profile
-      </Grid>
-      <Grid item xs={2}></Grid>
-      <Grid item xs={6}></Grid>
     </Grid>
   );
   return (

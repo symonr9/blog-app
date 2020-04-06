@@ -12,16 +12,21 @@ import MenuBookRoundedIcon from "@material-ui/icons/MenuBookRounded";
 import FormatQuoteRoundedIcon from "@material-ui/icons/FormatQuoteRounded";
 import AddCircleOutlineRoundedIcon from "@material-ui/icons/AddCircleOutlineRounded";
 import SupervisorAccountRoundedIcon from '@material-ui/icons/SupervisorAccountRounded';
+import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 
 export const routes = [
   { path: "/", name: "Home", icon: <HomeRounded /> },
   { path: "/create", name: "Create", icon: <AddCircleOutlineRoundedIcon /> },
   { path: "/poetry", name: "Poetry", icon: <MenuBookRoundedIcon /> },
+  { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon /> },
+  { path: "/prose", name: "Prose", icon: <DescriptionRoundedIcon />},
+];
+
+/*
   { path: "/login", name: "Login", icon: <SupervisorAccountRoundedIcon/> },
   { path: "/signup", name: "Signup", icon: <SupervisorAccountRoundedIcon/> },
   { path: "/profile", name: "Profile", icon: <PersonRoundedIcon /> },
-  { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon /> }
-];
+*/
 
 const useStyles = makeStyles({
   navBarDiv: {
@@ -60,7 +65,9 @@ const useStyles = makeStyles({
     }
   },
   navBtn: {
-    marginBottom: '1em'
+    marginBottom: '1em',
+    color: 'black',
+    backgroundColor: 'white'
   }
 });
 
@@ -91,7 +98,7 @@ var styles = {
     height: "100%"
   },
   bmMenu: {
-    background: "white",
+    background: "linear-gradient(to bottom,  rgba(0,0,0,0.5) 20%, rgba(0,0,0,0.4) 80%)",
     fontSize: "1.15em",
     overflow: "hidden",
   },
@@ -106,7 +113,7 @@ var styles = {
   bmItem: {
     display: "inline-block",
     marginTop: "2em",
-    textDecoration: "none"
+    textDecoration: "none",
   },
   bmOverlay: {
     background: "rgba(0, 0, 0, 0.3)"
@@ -130,7 +137,7 @@ function NavBar() {
     <div>
       {routes.map(({ path, name, icon }) => (
         <NavLink to={path} key={name}>
-          <Button className={classes.navBtn} variant="outlined">
+          <Button className={classes.navBtn} variant="contained">
             {icon}
             {name}
           </Button>
