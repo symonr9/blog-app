@@ -18,12 +18,12 @@ const Login = () => {
   const common = useCommonStyles();
 
   const [isMobileView, setIsMobileView] = useState(
-    window.matchMedia("(max-width: 768px)").matches
+    window.matchMedia("(max-width: 1125px)").matches
   );
 
   useEffect(() => {
     const handler = e => setIsMobileView(e.matches);
-    window.matchMedia("(max-width: 768px)").addListener(handler);
+    window.matchMedia("(max-width: 1125px)").addListener(handler);
   }, []);
 
   const { handleSubmit, register, watch, errors } = useForm();
