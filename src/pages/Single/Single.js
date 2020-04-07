@@ -117,6 +117,7 @@ function Single() {
           <NavLink to={`/${type}/${urlId}/edit`}>
             <Button variant="contained">Edit</Button>
           </NavLink>
+          <br/><br/>
         </div>
         <Comments />
       </Grid>
