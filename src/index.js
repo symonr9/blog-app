@@ -7,6 +7,14 @@ import store from './services/redux/store';
 
 import * as serviceWorker from './serviceWorker';
 
+import JavascriptTimeAgo from 'javascript-time-ago';
+
+// The desired locales.
+import en from 'javascript-time-ago/locale/en';
+
+// Initialize the desired locales.
+JavascriptTimeAgo.locale(en);
+
 ReactDOM.render(
   <Provider store={store}>
     <App />

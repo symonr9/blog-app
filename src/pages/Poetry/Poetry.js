@@ -6,6 +6,8 @@ import { getData } from "../../services/api";
 import useCommonStyles from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
+import ReactTimeAgo from 'react-time-ago';
+
 import { useStyles } from "./exports";
 
 function Poetry() {
@@ -61,7 +63,7 @@ function Poetry() {
                     </span>
                     <span className={classes.body}>{poem.body.substring(0,200)}...</span>
                     <span className={classes.createdAt}>
-                      Created at: {poem.createdAt}
+                      created <ReactTimeAgo date={poem.createdAt} />
                     </span>
                   </Paper>
                 );

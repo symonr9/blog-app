@@ -7,6 +7,8 @@ import { getData } from "../../services/api";
 import useCommonStyles from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
+import ReactTimeAgo from 'react-time-ago';
+
 import { useStyles } from "./exports";
 
 import Comments from "../../components/Comments";
@@ -60,7 +62,7 @@ function Single() {
                 <h1>{data.title}</h1>
                 {data.createdBy}
                 <br/>
-                {data.createdAt}
+                created <ReactTimeAgo date={data.createdAt} />
                 <br/><br/>
                 {data.body}
                 <br/><br/>
@@ -78,7 +80,7 @@ function Single() {
                 <br/><br/>
                 {data.createdBy}
                 <br/>
-                {data.createdAt}
+                created <ReactTimeAgo date={data.createdAt} />
                 <br/><br/><br/>              
               </div>)
               ||
@@ -87,7 +89,7 @@ function Single() {
                 <h1>{data.title}</h1>
                 {data.createdBy}
                 <br/>
-                {data.createdAt}
+                 created <ReactTimeAgo date={data.createdAt} />
                 <br/><br/>
                 {data.body}
                 <br/><br/><br/>
