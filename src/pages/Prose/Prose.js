@@ -6,6 +6,8 @@ import { getData } from "../../services/api";
 import useCommonStyles from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
+import ReactTimeAgo from 'react-time-ago';
+
 import { useStyles } from "./exports";
 
 function Prose() {
@@ -57,10 +59,10 @@ function Prose() {
                       <span className={classes.title}>{p.title}</span>
                     </NavLink>
                     <span className={classes.body}>
-                       {p.body.substring(0,200)}...
+                      {p.body.substring(0,200)}...
                     </span>
                     <span className={classes.createdAt}>
-                      Created at: {p.createdAt}
+                      created <ReactTimeAgo date={p.createdAt} />
                     </span>
                   </Paper>
                 );

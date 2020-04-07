@@ -14,13 +14,18 @@ export const useStyles = makeStyles({
       marginBottom: '1em',
       overflowY: 'hidden',
       maxHeight: '10em',
+      "& a": {
+        textDecoration: 'none',
+        color: 'black',
+        "& :hover": {
+          color: 'darkblue'
+        }
+      }
     },
     title: {
         fontSize: '1.3em',
         display: 'block',
         fontWeight: 'bold',
-        color: 'black',
-        textDecoration: 'none',
     },
     body: {
     fontSize: '1em',

@@ -2,10 +2,12 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 
-import { Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
+import { Button, Grow, Grid, CircularProgress } from "@material-ui/core";
 import { getData } from "../../services/api";
 import useCommonStyles from "../../assets/common";
 import { getServerURL } from "../../config/config";
+
+import ReactTimeAgo from 'react-time-ago';
 
 import { useStyles } from "./exports";
 
@@ -60,7 +62,7 @@ function Single() {
                 <h1>{data.title}</h1>
                 {data.createdBy}
                 <br/>
-                {data.createdAt}
+                created <ReactTimeAgo date={data.createdAt} />
                 <br/><br/>
                 {data.body}
                 <br/><br/>
@@ -78,7 +80,7 @@ function Single() {
                 <br/><br/>
                 {data.createdBy}
                 <br/>
-                {data.createdAt}
+                created <ReactTimeAgo date={data.createdAt} />
                 <br/><br/><br/>              
               </div>)
               ||
@@ -87,7 +89,7 @@ function Single() {
                 <h1>{data.title}</h1>
                 {data.createdBy}
                 <br/>
-                {data.createdAt}
+                 created <ReactTimeAgo date={data.createdAt} />
                 <br/><br/>
                 {data.body}
                 <br/><br/><br/>
@@ -112,6 +114,9 @@ function Single() {
                 <CircularProgress />
               </div>
             ))}
+          <NavLink to={`/${type}/${urlId}/edit`}>
+            <Button variant="contained">Edit</Button>
+          </NavLink>
         </div>
         <Comments />
       </Grid>

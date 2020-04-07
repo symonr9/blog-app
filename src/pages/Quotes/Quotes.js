@@ -6,6 +6,8 @@ import { getData } from "../../services/api";
 import useCommonStyles from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
+import ReactTimeAgo from 'react-time-ago';
+
 import { useStyles } from "./exports";
 
 function Quotes() {
@@ -60,7 +62,7 @@ function Quotes() {
                        -{quote.author}
                     </span>
                     <span className={classes.createdAt}>
-                      Created at: {quote.createdAt}
+                      created <ReactTimeAgo date={quote.createdAt} />
                     </span>
                   </Paper>
                 );

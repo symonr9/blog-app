@@ -12,13 +12,18 @@ export const useStyles = makeStyles({
       width: '100px',
       marginRight: '1em',
       marginBottom: '1em',
+      "& a": {
+        textDecoration: 'none',
+        color: 'black',
+        "& :hover": {
+          color: 'darkblue'
+        }
+      }
     },
     title: {
       fontSize: '1.3em',
       display: 'block',
       fontWeight: 'bold',
-      color: 'black',
-      textDecoration: 'none',
     },
     createdBy: {
       fontSize: '0.8em',

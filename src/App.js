@@ -17,6 +17,7 @@ import Poetry from "./pages/Poetry/Poetry";
 import Quotes from "./pages/Quotes/Quotes";
 import Prose from "./pages/Prose/Prose";
 import Single from "./pages/Single/Single";
+import Edit from "./pages/Edit/Edit";
 import Create from "./pages/Create/Create";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
@@ -24,6 +25,7 @@ import Signup from "./pages/Signup/Signup";
 //import routes from "./data/routes";
 const routes = [
   { path: "/profile", name: "My Profile", Component: Profile },
+  { path: "/:type/:urlId/edit", name: "Edit", Component: Edit },
   { path: "/:type/:urlId", name: "Single", Component: Single },
   { path: "/poetry", name: "Poetry", Component: Poetry },
   { path: "/quotes", name: "Quotes", Component: Quotes },
