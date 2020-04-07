@@ -28,15 +28,15 @@ export const getData = (url, successCb) => {
 }
 
 
-const patchConfig = {
+const putConfig = {
 	header: {
 		'Content-Type': 'application/json'
 	}
 }
 
-export const patchData = (url, body, successCb) => {
+export const putData = (url, body, successCb) => {
 	axios
-		.patch(url, body, patchConfig)
+		.put(url, body, putConfig)
 		.then(response => successCb(response.data))
 		.catch(error => {
 			console.error(error)

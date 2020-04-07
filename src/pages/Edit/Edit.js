@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { getData, postData } from "../../services/api";
+import { getData, postData, putData } from "../../services/api";
 
 import ViewColumnRoundedIcon from '@material-ui/icons/ViewColumnRounded';
 import ViewStreamRoundedIcon from '@material-ui/icons/ViewStreamRounded';
@@ -221,7 +221,7 @@ function Edit() {
         return 0;
     }
 
-    postData(
+    putData(
       getServerURL(url),
       data,
       response => {
