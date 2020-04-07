@@ -53,7 +53,7 @@ function Quotes() {
                   <Paper
                     key={quote._id}
                     elevation={7}
-                    className={classes.quoteDiv}
+                    className={(!isMobileView && classes.quoteDiv || (isMobileView && classes.mobileQuoteDiv))}
                   >
                     <NavLink to={`/quotes/${quote.urlId}`}>
                       <span className={classes.text}>"{quote.text}"</span>

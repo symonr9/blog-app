@@ -22,6 +22,23 @@ export const useStyles = makeStyles({
         }
       },
     },
+    mobileQuoteDiv: {
+      flex: '100%',
+      padding: '10px',
+      backgroundColor: 'transparent',
+      width: '90%',
+      marginRight: '1em',
+      marginBottom: '1em',
+      overflowY: 'auto',
+      maxHeight: '10em',
+      "& a": {
+        textDecoration: 'none',
+        color: 'black',
+        "& :hover": {
+          color: 'darkblue'
+        }
+      }
+    },
     text: {
       marginTop: '0.1em',
       fontSize: '1.6em',
