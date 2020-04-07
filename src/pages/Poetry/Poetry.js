@@ -53,7 +53,7 @@ function Poetry() {
                   <Paper
                     key={poem._id}
                     elevation={7}
-                    className={classes.poemDiv}
+                    className={(!isMobileView && classes.poemDiv || (isMobileView && classes.mobilePoemDiv))}
                   >
                     <NavLink to={`/poetry/${poem.urlId}`}>
                       <span className={classes.title}>{poem.title}</span>

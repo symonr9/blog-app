@@ -22,6 +22,23 @@ export const useStyles = makeStyles({
         }
       }
     },
+    mobileProseDiv: {
+      flex: '100%',
+      padding: '10px',
+      backgroundColor: 'transparent',
+      width: '90%',
+      marginRight: '1em',
+      marginBottom: '1em',
+      overflowY: 'hidden',
+      maxHeight: '10em',
+      "& a": {
+        textDecoration: 'none',
+        color: 'black',
+        "& :hover": {
+          color: 'darkblue'
+        }
+      }
+    },
     title: {
         fontSize: '1.3em',
         display: 'block',

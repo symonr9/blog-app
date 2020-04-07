@@ -53,7 +53,7 @@ function Prose() {
                   <Paper
                     key={p._id}
                     elevation={7}
-                    className={classes.proseDiv}
+                    className={(!isMobileView && classes.proseDiv || (isMobileView && classes.mobileProseDiv))}
                   >
                     <NavLink to={`/prose/${p.urlId}`}>
                       <span className={classes.title}>{p.title}</span>
