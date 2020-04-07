@@ -17,12 +17,12 @@ function Poetry() {
   const [poems, setPoems] = useState(null);
 
   const [isMobileView, setIsMobileView] = useState(
-    window.matchMedia("(max-width: 1081px)").matches
+    window.matchMedia("(max-width: 1125px)").matches
   );
 
   useEffect(() => {
     const handler = e => setIsMobileView(e.matches);
-    window.matchMedia("(max-width: 1081px)").addListener(handler);
+    window.matchMedia("(max-width: 1125px)").addListener(handler);
   }, []);
 
   const fetchData = isSubscribed => {
