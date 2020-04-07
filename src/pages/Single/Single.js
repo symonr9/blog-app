@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 
-import { Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
+import { Button, Grow, Grid, CircularProgress } from "@material-ui/core";
 import { getData } from "../../services/api";
 import useCommonStyles from "../../assets/common";
 import { getServerURL } from "../../config/config";
@@ -114,6 +114,9 @@ function Single() {
                 <CircularProgress />
               </div>
             ))}
+          <NavLink to={`/${type}/${urlId}/edit`}>
+            <Button variant="contained">Edit</Button>
+          </NavLink>
         </div>
         <Comments />
       </Grid>

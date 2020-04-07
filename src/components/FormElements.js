@@ -44,6 +44,24 @@ export const submitBtn = (value) => {
     );
   };
 
+  export const editTextField = (name, value, label, onChangeFun, numOfLines = 1) => {
+    return (
+      <TextField
+        id={name + "TextField"}
+        name={name}
+        defaultValue={value}
+        label={label}
+        placeholder="Start writing..."
+        variant="outlined"
+        multiline={!(numOfLines == 1)}
+        rows={numOfLines}
+        fullWidth
+        style={textFieldStyle}
+        onChange={onChangeFun}
+      ></TextField>
+    );
+  };
+
  export const selectTextField = (name, label, value, onChangeFun, options) => {
     return (
       <TextField
