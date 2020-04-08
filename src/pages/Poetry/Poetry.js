@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import { Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
+
+import SortByAlphaRoundedIcon from '@material-ui/icons/SortByAlphaRounded';
+import SortRoundedIcon from '@material-ui/icons/SortRounded';
+
 import { getData } from "../../services/api";
 import useCommonStyles from "../../assets/common";
 import { getServerURL } from "../../config/config";
@@ -15,6 +19,8 @@ function Poetry() {
   const common = useCommonStyles();
 
   const [poems, setPoems] = useState(null);
+  const [sortAlpha, setSortAlpha] = useState(true);
+  const [sortDescTitle, setSortDescTitle] = useState(true);
 
   const [isMobileView, setIsMobileView] = useState(
     window.matchMedia("(max-width: 1125px)").matches
@@ -29,7 +35,11 @@ function Poetry() {
     console.log(getServerURL("poems"));
     getData(getServerURL("poems"), response => {
       if (isSubscribed) {
-        setPoems(response);
+        setPoems(response.sort((a,b) => {
+          let aTitle = a.title.toUpperCase();
+          let bTitle = b.title.toUpperCase();
+          return (aTitle < bTitle) ? -1 : (aTitle > bTitle) ? 1 : 0;
+        }));
       }
     });
   };
@@ -40,11 +50,36 @@ function Poetry() {
     return () => (isSubscribed = false);
   }, []);
 
+
+  useEffect(() => {
+    if(poems != null){
+      setPoems(poems.sort((a,b) => {
+        let aTitle = a.title.toUpperCase();
+        let bTitle = b.title.toUpperCase();
+        if(sortDesc){
+          setSortDescTitle(!sortDescTitle);
+          //Sort ascending alphatically
+          return (aTitle > bTitle) ? -1 : (aTitle < bTitle) ? 1 : 0;
+        }
+        setSortDescTitle(!sortDescTitle);
+        return (aTitle < bTitle) ? -1 : (aTitle > bTitle) ? 1 : 0;
+      }));
+    }
+  }, [sortAlpha]);
+
+
+  const sort = () => {
+    setSortAlpha(!sortAlpha);
+  };
+
   const body = (
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
         <h1>Poetry</h1>
+        <SortByAlphaRoundedIcon onClick={sort}/>
+        <SortRoundedIcon />
+          <br/><br/>
         <div className={classes.poemContainerDiv}>
           {(poems &&
             poems.map((poem, index) => {
