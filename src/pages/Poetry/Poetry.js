@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import { Chip, Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
+import { Chip, Paper, Grow, Grid, CircularProgress, Tooltip, TextField } from "@material-ui/core";
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import SortByAlphaRoundedIcon from '@material-ui/icons/SortByAlphaRounded';
 import SortRoundedIcon from '@material-ui/icons/SortRounded';
 import FaceIcon from '@material-ui/icons/Face';
 import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
+import CancelPresentationRoundedIcon from '@material-ui/icons/CancelPresentationRounded';
 
 import { getData } from "../../services/api";
 import { colors, useCommonStyles } from "../../assets/common";
@@ -20,6 +22,7 @@ function Poetry() {
   const classes = useStyles();
   const common = useCommonStyles();
 
+  const [originalPoems, setOriginalPoems] = useState(null);
   const [poems, setPoems] = useState(null);
   
   const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
@@ -30,7 +33,7 @@ function Poetry() {
   const [sortDescAuthor, setSortDescAuthor] = useState(true);
   const [sortDescDate, setSortDescDate] = useState(false);
 
-  
+  const [searchChange, setSearchChange] = useState("");
 
   const [isMobileView, setIsMobileView] = useState(
     window.matchMedia("(max-width: 1125px)").matches
@@ -42,7 +45,6 @@ function Poetry() {
   }, []);
 
   const fetchData = isSubscribed => {
-    console.log(getServerURL("poems"));
     getData(getServerURL("poems"), response => {
       if (isSubscribed) {
         setPoems(response.sort((a,b) => {
@@ -50,6 +52,7 @@ function Poetry() {
           let bTitle = b.title.toUpperCase();
           return (aTitle < bTitle) ? -1 : (aTitle > bTitle) ? 1 : 0;
         }));
+        setOriginalPoems(response);
       }
     });
   };
@@ -60,13 +63,9 @@ function Poetry() {
     return () => (isSubscribed = false);
   }, []);
 
-
   const handleSortMenuOpen = () => {
     setIsSortMenuOpen(!isSortMenuOpen);
   };
-
-
-
   
   const handleSortTitle = () => {
     setSortTitle(!sortTitle);
@@ -132,21 +131,65 @@ function Poetry() {
     }
   }, [sortDate]);
 
+  
+  const handleSearchChange = (event, obj) => {
+    if(obj != null){
+      setSearchChange(obj.title);
+    }
+  };
+
+  useEffect(() => {
+    if(poems != null){
+      console.log(originalPoems);
+      if(searchChange == ""){
+        console.log("here");
+        setPoems(originalPoems);
+        console.log(poems);
+      }
+     else{
+       console.log("in filter");
+        setPoems(poems.filter(poem => poem.title == searchChange));
+      }
+    }
+
+  }, [searchChange]);
 
   const body = (
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
         <h1>Poetry</h1>
-        <SortByAlphaRoundedIcon className={common.sortWidget} onClick={handleSortTitle}/>
-        <SortRoundedIcon className={common.sortWidget} onClick={handleSortMenuOpen}/>
-        {(isSortMenuOpen && (
-          <span>
-            <Chip variant="outlined" icon={<FaceIcon />} label="By Author" onClick={handleSortAuthor}/>
-            <Chip variant="outlined" icon={<ScheduleRoundedIcon />} label="By Date" onClick={handleSortDate}/>
-          </span>
-          )
-        )}
+        <div className={common.parametersDiv}>
+          <Autocomplete
+            options={(poems != null) && (poems.sort((a, b) => -b.title[0].toUpperCase().localeCompare(a.title[0].toUpperCase())))}
+            groupBy={(option) => option.title[0].toUpperCase()}
+            getOptionLabel={(option) => option.title}
+            style={{ width: 300 }}
+
+            onChange={handleSearchChange}
+            renderInput={(params) => <TextField {...params} label="Search" variant="outlined" />}
+          />
+          <Tooltip title="Sort">
+            <SortRoundedIcon fontSize="large" className={common.sortWidget} onClick={handleSortMenuOpen}/>
+          </Tooltip>
+          {(isSortMenuOpen && (
+            <span className={common.sortDiv}>
+              <Chip icon={<SortByAlphaRoundedIcon style={{ color: colors[4] }}/>} 
+              label="By Title" 
+              style={{ color: colors[4], backgroundColor: colors[3], marginRight: '0.3em' }}
+              onClick={handleSortTitle} />
+              <Chip icon={<FaceIcon style={{ color: colors[4] }}/>} 
+              label="By Author" 
+              style={{ color: colors[4], backgroundColor: colors[3], marginRight: '0.3em' }}
+              onClick={handleSortAuthor} />
+              <Chip icon={<ScheduleRoundedIcon style={{ color: colors[4] }}/>} 
+              label="By Date"
+              style={{ color: colors[4], backgroundColor: colors[3], marginRight: '0.3em' }} 
+              onClick={handleSortDate} />
+            </span>
+            )
+          )}
+        </div>
           <br/><br/>
         <div className={common.containerDiv}>
           {(poems &&

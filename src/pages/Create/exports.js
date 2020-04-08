@@ -66,11 +66,13 @@ export const useStyles = makeStyles({
 
   },
   wordLookupDiv: {
+    marginBottom: '5em'
   },
   sideWordLookupDiv: {
     float: 'left',
     display: 'inline-block',
     width: '42vw',
+    marginBottom: '5em'
   },
   formDiv: {
   },
