@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { getData, postData } from "../../services/api";
 import { Paper, Grow, Grid } from "@material-ui/core";
 
-import useCommonStyles from "../../assets/common";
+import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
 import {

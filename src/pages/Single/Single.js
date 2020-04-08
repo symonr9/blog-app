@@ -4,7 +4,7 @@ import { NavLink, useParams } from "react-router-dom";
 
 import { Button, Grow, Grid, CircularProgress } from "@material-ui/core";
 import { getData } from "../../services/api";
-import useCommonStyles from "../../assets/common";
+import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
 import ReactTimeAgo from 'react-time-ago';

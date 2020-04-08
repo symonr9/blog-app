@@ -12,7 +12,7 @@ import MUIRichTextEditor from "mui-rte";
 import { Button, Grow, Grid, TextField, Paper, Snackbar, IconButton  } from "@material-ui/core";
 import MuiAlert from '@material-ui/lab/Alert';
 
-import useCommonStyles from "../../assets/common";
+import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
 import {
@@ -187,6 +187,19 @@ function Create() {
     setIsSnackbarOpen(false);
   };
 
+  const clearForm = () => {
+    setPoemTitle("");
+    setPoemBody("");
+    setPoemType("");
+    setPoemNotes("");
+    
+    setQuoteText("");
+    setQuoteAuthor("");
+
+    setProseTitle("");
+    setProseBody("");
+  };
+
   const onSubmit = event => {
     let data = {};
     let url = "";
@@ -231,6 +244,7 @@ function Create() {
       }
     );
 
+    clearForm();
     setIsSnackbarOpen(true);
   };
 

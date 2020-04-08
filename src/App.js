@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import "./App.css";
-
+import { colors } from "./assets/common";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Provider } from "react-redux";
@@ -35,9 +34,15 @@ const routes = [
   { path: "/", name: "Home", Component: Home }
 ];
 
-
 const useStyles = makeStyles({
   componentDiv: {
+    background: "linear-gradient(to bottom, " 
+    + colors[1] + ","
+    + colors[1] + " 15%," 
+    + colors[2] + " 15%," 
+    + colors[2] + " 30%," 
+    + colors[3] + " 30%" 
+    + ")"
   },
 });
 

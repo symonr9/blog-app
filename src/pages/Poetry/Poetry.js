@@ -9,7 +9,7 @@ import FaceIcon from '@material-ui/icons/Face';
 import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
 
 import { getData } from "../../services/api";
-import useCommonStyles from "../../assets/common";
+import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
 import ReactTimeAgo from 'react-time-ago';

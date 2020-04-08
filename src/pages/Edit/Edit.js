@@ -13,7 +13,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 
 import ReactTimeAgo from "react-time-ago";
 
-import useCommonStyles from "../../assets/common";
+import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
 import { useStyles, kinds } from "./exports";

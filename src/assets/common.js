@@ -1,6 +1,12 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useCommonStyles = makeStyles({
+//miasa
+//export const colors = ["white", "#FC354C", "#13747D", "#0ABFBC", "#FCF7C5"];
+
+//onaso
+export const colors = ["white", "#B3EFBB", "#5FD18C", "#AB9CD2", "#FAF692"];
+
+export const useCommonStyles = makeStyles({
   bodyDiv: {
     height: "100%",
     width: "90vw",
@@ -92,5 +98,3 @@ const useCommonStyles = makeStyles({
   },
   
 });
-
-export default useCommonStyles;
