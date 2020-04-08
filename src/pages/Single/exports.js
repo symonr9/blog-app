@@ -7,5 +7,5 @@ export const useStyles = makeStyles({
             textDecoration: 'none',
             color: 'black'
         }
-    }
+    },
 });

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import { Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
 import { getData } from "../../services/api";
-import useCommonStyles from "../../assets/common";
+import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
 import ReactTimeAgo from 'react-time-ago';
@@ -45,7 +45,7 @@ function Quotes() {
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
         <h1>Quotes</h1>
-        <div className={classes.quoteContainerDiv}>
+        <div className={common.containerDiv}>
           {(quotes &&
             quotes.map((quote, index) => {
               if (quote.isPublic) {
@@ -53,7 +53,7 @@ function Quotes() {
                   <Paper
                     key={quote._id}
                     elevation={7}
-                    className={(!isMobileView && classes.quoteDiv || (isMobileView && classes.mobileQuoteDiv))}
+                    className={(!isMobileView && common.itemDiv || (isMobileView && common.mobileItemDiv))}
                   >
                     <NavLink to={`/quotes/${quote.urlId}`}>
                       <span className={classes.text}>"{quote.text}"</span>
@@ -61,7 +61,7 @@ function Quotes() {
                     <span className={classes.author}>
                        -{quote.author}
                     </span>
-                    <span className={classes.createdAt}>
+                    <span className={common.createdAt}>
                       created <ReactTimeAgo date={quote.createdAt} />
                     </span>
                   </Paper>

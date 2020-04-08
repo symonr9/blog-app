@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import { Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
 import { getData } from "../../services/api";
-import useCommonStyles from "../../assets/common";
+import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
 import ReactTimeAgo from 'react-time-ago';
@@ -45,7 +45,7 @@ function Prose() {
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
         <h1>Prose</h1>
-        <div className={classes.proseContainerDiv}>
+        <div className={common.containerDiv}>
           {(prose &&
             prose.map((p, index) => {
               if (p.isPublic) {
@@ -53,15 +53,15 @@ function Prose() {
                   <Paper
                     key={p._id}
                     elevation={7}
-                    className={(!isMobileView && classes.proseDiv || (isMobileView && classes.mobileProseDiv))}
+                    className={(!isMobileView && common.itemDiv || (isMobileView && common.mobileItemDiv))}
                   >
                     <NavLink to={`/prose/${p.urlId}`}>
-                      <span className={classes.title}>{p.title}</span>
+                      <span className={common.title}>{p.title}</span>
                     </NavLink>
-                    <span className={classes.body}>
+                    <span className={common.body}>
                       {p.body.substring(0,200)}...
                     </span>
-                    <span className={classes.createdAt}>
+                    <span className={common.createdAt}>
                       created <ReactTimeAgo date={p.createdAt} />
                     </span>
                   </Paper>

@@ -12,7 +12,7 @@ import MUIRichTextEditor from "mui-rte";
 import { Button, Grow, Grid, TextField, Paper, Snackbar, IconButton  } from "@material-ui/core";
 import MuiAlert from '@material-ui/lab/Alert';
 
-import useCommonStyles from "../../assets/common";
+import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
 import {
@@ -187,6 +187,21 @@ function Create() {
     setIsSnackbarOpen(false);
   };
 
+  const clearForm = () => {
+    document.getElementById("createForm").reset();
+    
+    setPoemTitle("");
+    setPoemBody("");
+    setPoemType("");
+    setPoemNotes("");
+    
+    setQuoteText("");
+    setQuoteAuthor("");
+
+    setProseTitle("");
+    setProseBody("");
+  };
+
   const onSubmit = event => {
     let data = {};
     let url = "";
@@ -223,6 +238,7 @@ function Create() {
         return 0;
     }
 
+    
     postData(
       getServerURL(url),
       data,
@@ -230,7 +246,8 @@ function Create() {
         console.log(response);
       }
     );
-
+    
+    clearForm();
     setIsSnackbarOpen(true);
   };
 
@@ -242,7 +259,7 @@ function Create() {
       <Grid item xs={12} className={!isSideView && (classes.bodyDiv) || isSideView && (classes.sideBodyDiv)}>
         <h1>Create</h1>
         <div className={!isSideView && (classes.formDiv) || isSideView && (classes.sideFormDiv)}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form id="createForm" onSubmit={handleSubmit(onSubmit)}>
           {!isMobileView && (selectTextField(
             "poemType",
             "What would you like to do?",
