@@ -51,12 +51,13 @@ function Poetry() {
   }, []);
 
 
+  //Sort Alphabetically
   useEffect(() => {
     if(poems != null){
       setPoems(poems.sort((a,b) => {
         let aTitle = a.title.toUpperCase();
         let bTitle = b.title.toUpperCase();
-        if(sortDesc){
+        if(sortDescTitle){
           setSortDescTitle(!sortDescTitle);
           //Sort ascending alphatically
           return (aTitle > bTitle) ? -1 : (aTitle < bTitle) ? 1 : 0;
@@ -68,7 +69,7 @@ function Poetry() {
   }, [sortAlpha]);
 
 
-  const sort = () => {
+  const handleSortAlpha = () => {
     setSortAlpha(!sortAlpha);
   };
 
@@ -77,7 +78,7 @@ function Poetry() {
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
         <h1>Poetry</h1>
-        <SortByAlphaRoundedIcon onClick={sort}/>
+        <SortByAlphaRoundedIcon onClick={handleSortAlpha}/>
         <SortRoundedIcon />
           <br/><br/>
         <div className={classes.poemContainerDiv}>
