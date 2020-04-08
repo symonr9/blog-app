@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 //export const colors = ["white", "#6e529b", "#5d3f6a", "#ffff99"];
 
 //blue and vanilla
-export const colors = ["white", "#8eb5eb", "#1d56a5", "#ffff99"];
+//export const colors = ["white", "#8eb5eb", "#1d56a5", "#ffff99"];
 
 //blue, yellow, vanilla
 //export const colors = ["white", "#246bce", "#ffff31", "#ffff99"];
@@ -20,7 +20,7 @@ export const colors = ["white", "#8eb5eb", "#1d56a5", "#ffff99"];
 //export const colors = ["white", "#246bce", "#ffffff", "#a6e7ff"];
 
 //milky chocolate
-//export const colors = ["white", "#7ba9c3", "#84563c", "#fdfff5"];
+export const colors = ["white", "#7ba9c3", "#84563c", "#fdfff5"];
 
 //pink, black, mint
 //export const colors = ["white", "#de5d83", "#010b13", "#f5fffa"];
