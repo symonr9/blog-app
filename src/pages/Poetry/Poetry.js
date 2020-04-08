@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import { Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
+import { Chip, Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
 
 import SortByAlphaRoundedIcon from '@material-ui/icons/SortByAlphaRounded';
 import SortRoundedIcon from '@material-ui/icons/SortRounded';
+import FaceIcon from '@material-ui/icons/Face';
+import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
 
 import { getData } from "../../services/api";
 import useCommonStyles from "../../assets/common";
@@ -19,8 +21,16 @@ function Poetry() {
   const common = useCommonStyles();
 
   const [poems, setPoems] = useState(null);
-  const [sortAlpha, setSortAlpha] = useState(true);
+  
+  const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
+  const [sortTitle, setSortTitle] = useState(false);
+  const [sortAuthor, setSortAuthor] = useState(false);
+  const [sortDate, setSortDate] = useState(true);
   const [sortDescTitle, setSortDescTitle] = useState(true);
+  const [sortDescAuthor, setSortDescAuthor] = useState(true);
+  const [sortDescDate, setSortDescDate] = useState(false);
+
+  
 
   const [isMobileView, setIsMobileView] = useState(
     window.matchMedia("(max-width: 1125px)").matches
@@ -51,37 +61,94 @@ function Poetry() {
   }, []);
 
 
-  //Sort Alphabetically
+  const handleSortMenuOpen = () => {
+    setIsSortMenuOpen(!isSortMenuOpen);
+  };
+
+
+
+  
+  const handleSortTitle = () => {
+    setSortTitle(!sortTitle);
+  };
+
   useEffect(() => {
     if(poems != null){
       setPoems(poems.sort((a,b) => {
-        let aTitle = a.title.toUpperCase();
-        let bTitle = b.title.toUpperCase();
-        if(sortDescTitle){
-          setSortDescTitle(!sortDescTitle);
-          //Sort ascending alphatically
-          return (aTitle > bTitle) ? -1 : (aTitle < bTitle) ? 1 : 0;
-        }
+        let aItem = a.title.toUpperCase();
+        let bItem = b.title.toUpperCase();
+
+        let isDesc = sortDescTitle;
         setSortDescTitle(!sortDescTitle);
-        return (aTitle < bTitle) ? -1 : (aTitle > bTitle) ? 1 : 0;
+        if(isDesc){
+          return (aItem > bItem) ? -1 : (aItem < bItem) ? 1 : 0;
+        }
+        return (aItem < bItem) ? -1 : (aItem > bItem) ? 1 : 0;
       }));
     }
-  }, [sortAlpha]);
+  }, [sortTitle]);
 
 
-  const handleSortAlpha = () => {
-    setSortAlpha(!sortAlpha);
+
+  const handleSortAuthor = () => {
+    setSortAuthor(!sortAuthor);
+  }
+
+  useEffect(() => {
+    if(poems != null){
+      setPoems(poems.sort((a,b) => {
+        let aItem = a.createdBy.toUpperCase();
+        let bItem = b.createdBy.toUpperCase();
+
+        let isDesc = sortDescAuthor;
+        setSortDescAuthor(!sortDescAuthor);
+        if(isDesc){
+          return (aItem > bItem) ? -1 : (aItem < bItem) ? 1 : 0;
+        }
+        return (aItem < bItem) ? -1 : (aItem > bItem) ? 1 : 0;
+      }));
+    }
+  }, [sortAuthor]);
+
+
+  const handleSortDate = () => {
+    setSortDate(!sortDate);
   };
+
+  useEffect(() => {
+    if(poems != null){
+      setPoems(poems.sort((a,b) => {
+        let aItem = new Date(a.createdAt).getTime();
+        let bItem = new Date(b.createdAt).getTime();
+
+        let isDesc = sortDescDate;
+        setSortDescDate(!sortDescDate);
+        if(isDesc){
+          return (aItem > bItem) ? -1 : (aItem < bItem) ? 1 : 0;
+        }
+        return (aItem < bItem) ? -1 : (aItem > bItem) ? 1 : 0;
+      }));
+      console.log(poems);
+    }
+  }, [sortDate]);
+
 
   const body = (
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
         <h1>Poetry</h1>
-        <SortByAlphaRoundedIcon onClick={handleSortAlpha}/>
-        <SortRoundedIcon />
+        <SortByAlphaRoundedIcon className={common.sortWidget} onClick={handleSortTitle}/>
+        <SortRoundedIcon className={common.sortWidget} onClick={handleSortMenuOpen}/>
+        {(isSortMenuOpen && (
+          <span>
+            <Chip variant="outlined" icon={<FaceIcon />} label="By Author" onClick={handleSortAuthor}/>
+            <Chip variant="outlined" icon={<ScheduleRoundedIcon />} label="By Date" onClick={handleSortDate}/>
+          </span>
+          )
+        )}
           <br/><br/>
-        <div className={classes.poemContainerDiv}>
+        <div className={common.containerDiv}>
           {(poems &&
             poems.map((poem, index) => {
               if (poem.isPublic) {
@@ -89,16 +156,16 @@ function Poetry() {
                   <Paper
                     key={poem._id}
                     elevation={7}
-                    className={(!isMobileView && classes.poemDiv || (isMobileView && classes.mobilePoemDiv))}
+                    className={(!isMobileView && common.itemDiv || (isMobileView && common.mobileItemDiv))}
                   >
                     <NavLink to={`/poetry/${poem.urlId}`}>
-                      <span className={classes.title}>{poem.title}</span>
+                      <span className={common.title}>{poem.title}</span>
                     </NavLink>
-                    <span className={classes.createdBy}>
+                    <span className={common.createdBy}>
                       By {poem.createdBy}
                     </span>
-                    <span className={classes.body}>{poem.body.substring(0,200)}...</span>
-                    <span className={classes.createdAt}>
+                    <span className={common.body}>{poem.body.substring(0,200)}...</span>
+                    <span className={common.createdAt}>
                       created <ReactTimeAgo date={poem.createdAt} />
                     </span>
                   </Paper>

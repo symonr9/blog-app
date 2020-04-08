@@ -74,7 +74,7 @@ function Single() {
               ||
               dataType == "quotes" &&
               (<div>
-                <i>"{data.text}"</i>
+                <h1><i>"{data.text}"</i></h1>
                 <br/><br/>
                 {data.author}
                 <br/><br/>
