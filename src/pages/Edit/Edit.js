@@ -189,7 +189,7 @@ function Edit() {
           "notes": poemNotes,
           "isPublic": isPublic,
         };
-        url = "poems/edit/" + _id;
+        url = "poetry/edit/" + _id;
 
         break;
       case "quotes":

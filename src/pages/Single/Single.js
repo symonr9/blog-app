@@ -70,7 +70,7 @@ function Single() {
 
     switch(type){
       case "poetry":
-        url = "poems/delete/" + _id;
+        url = "poetry/delete/" + _id;
         break;
       case "quotes":
         url = "quotes/delete/" + _id;
