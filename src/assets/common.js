@@ -1,12 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-//miasa
-//export const colors = ["white", "#FC354C", "#13747D", "#0ABFBC", "#FCF7C5"];
-
-//onaso
-//export const colors = ["white", "#B3EFBB", "#5FD18C", "#AB9CD2", "#FAF692"];
-
-
 //grape and vanilla
 //export const colors = ["white", "#6e529b", "#5d3f6a", "#ffff99"];
 
@@ -20,17 +13,13 @@ import { makeStyles } from "@material-ui/core/styles";
 //export const colors = ["white", "#246bce", "#ffffff", "#a6e7ff"];
 
 //milky chocolate
-export const colors = ["white", "#7ba9c3", "#84563c", "#fdfff5"];
+export const colors = ["white", "#7ba9c3", "#84563c", "#fdfff5", "black"];
 
 //pink, black, mint
 //export const colors = ["white", "#de5d83", "#010b13", "#f5fffa"];
 
 //penguin, white, blue, black
 //export const colors = ["white", "#fdfff5", "#318ce7", "#080808"];
-
-
-//export const colors = ["white", "#4e8be0", "#246bce", "#ffff99"];
-
 
 
 export const useCommonStyles = makeStyles({
@@ -72,9 +61,9 @@ export const useCommonStyles = makeStyles({
     marginBottom: '1em',
     "& a": {
       textDecoration: 'none',
-      color: 'black',
+      color: colors[4],
       "& :hover": {
-        color: 'darkblue',
+        color: colors[2]
       }
     }
   },
@@ -87,9 +76,9 @@ export const useCommonStyles = makeStyles({
     marginBottom: '1em',
     "& a": {
       textDecoration: 'none',
-      color: 'black',
+      color: colors[4],
       "& :hover": {
-        color: 'darkblue',
+        color: colors[2],
       }
     },
   },
@@ -119,9 +108,20 @@ export const useCommonStyles = makeStyles({
     position: 'relative',
     bottom: '0'
   },
+  sortDiv: {
+  },
   sortWidget: {
     cursor: 'pointer',
-    color: 'black',
+    color: colors[4],
+    fontSize: '4em',
+    marginLeft: '0.5em',
   },
+  sortChip: {
+    fontSize: '40em'
+  },
+  sortFilterBarDiv: {
+   display: 'flex',
+   marginBottom: '2em' 
+  }
   
 });

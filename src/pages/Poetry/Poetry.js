@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import { Chip, Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
-
-import SortByAlphaRoundedIcon from '@material-ui/icons/SortByAlphaRounded';
-import SortRoundedIcon from '@material-ui/icons/SortRounded';
-import FaceIcon from '@material-ui/icons/Face';
-import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
+import { Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
 
 import { getData } from "../../services/api";
 import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
+import SortFilterBar from '../../components/SortFilterBar';
 import ReactTimeAgo from 'react-time-ago';
 
 import { useStyles } from "./exports";
@@ -20,17 +16,20 @@ function Poetry() {
   const classes = useStyles();
   const common = useCommonStyles();
 
-  const [poems, setPoems] = useState(null);
+  const [originalPoetry, setOriginalPoetry] = useState(null);
+  const [poetry, setPoetry] = useState(null);
   
   const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
   const [sortTitle, setSortTitle] = useState(false);
   const [sortAuthor, setSortAuthor] = useState(false);
   const [sortDate, setSortDate] = useState(true);
+  const [sortRandom, setSortRandom] = useState(false);
+
   const [sortDescTitle, setSortDescTitle] = useState(true);
   const [sortDescAuthor, setSortDescAuthor] = useState(true);
-  const [sortDescDate, setSortDescDate] = useState(false);
+  const [sortDescDate, setSortDescDate] = useState(true);
 
-  
+  const [searchChange, setSearchChange] = useState("");
 
   const [isMobileView, setIsMobileView] = useState(
     window.matchMedia("(max-width: 1125px)").matches
@@ -42,14 +41,14 @@ function Poetry() {
   }, []);
 
   const fetchData = isSubscribed => {
-    console.log(getServerURL("poems"));
-    getData(getServerURL("poems"), response => {
+    getData(getServerURL("poetry"), response => {
       if (isSubscribed) {
-        setPoems(response.sort((a,b) => {
+        setPoetry(response.sort((a,b) => {
           let aTitle = a.title.toUpperCase();
           let bTitle = b.title.toUpperCase();
           return (aTitle < bTitle) ? -1 : (aTitle > bTitle) ? 1 : 0;
         }));
+        setOriginalPoetry(response);
       }
     });
   };
@@ -61,20 +60,10 @@ function Poetry() {
   }, []);
 
 
-  const handleSortMenuOpen = () => {
-    setIsSortMenuOpen(!isSortMenuOpen);
-  };
-
-
-
-  
-  const handleSortTitle = () => {
-    setSortTitle(!sortTitle);
-  };
-
+  //SORT FILTER BAR EFFECTS **************************************
   useEffect(() => {
-    if(poems != null){
-      setPoems(poems.sort((a,b) => {
+    if(poetry != null){
+      setPoetry(poetry.sort((a,b) => {
         let aItem = a.title.toUpperCase();
         let bItem = b.title.toUpperCase();
 
@@ -88,15 +77,9 @@ function Poetry() {
     }
   }, [sortTitle]);
 
-
-
-  const handleSortAuthor = () => {
-    setSortAuthor(!sortAuthor);
-  }
-
   useEffect(() => {
-    if(poems != null){
-      setPoems(poems.sort((a,b) => {
+    if(poetry != null){
+      setPoetry(poetry.sort((a,b) => {
         let aItem = a.createdBy.toUpperCase();
         let bItem = b.createdBy.toUpperCase();
 
@@ -110,47 +93,66 @@ function Poetry() {
     }
   }, [sortAuthor]);
 
-
-  const handleSortDate = () => {
-    setSortDate(!sortDate);
-  };
-
   useEffect(() => {
-    if(poems != null){
-      setPoems(poems.sort((a,b) => {
+    if(poetry != null){
+      setPoetry(poetry.sort((a,b) => {
         let aItem = new Date(a.createdAt).getTime();
         let bItem = new Date(b.createdAt).getTime();
 
         let isDesc = sortDescDate;
         setSortDescDate(!sortDescDate);
+        
         if(isDesc){
           return (aItem > bItem) ? -1 : (aItem < bItem) ? 1 : 0;
         }
         return (aItem < bItem) ? -1 : (aItem > bItem) ? 1 : 0;
       }));
-      console.log(poems);
     }
   }, [sortDate]);
 
+  useEffect(() => {
+    if(poetry != null){
+      setPoetry(poetry.sort(() => {
+        return 0.5 - Math.random();
+      }));
+    }
+  }, [sortRandom]);
+
+  useEffect(() => {
+    if(poetry != null){
+      if(searchChange == ""){
+        setPoetry(originalPoetry);
+      }
+     else{   
+        setPoetry(poetry.filter(item => item.title == searchChange));
+      }
+    }
+  }, [searchChange]);
 
   const body = (
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
         <h1>Poetry</h1>
-        <SortByAlphaRoundedIcon className={common.sortWidget} onClick={handleSortTitle}/>
-        <SortRoundedIcon className={common.sortWidget} onClick={handleSortMenuOpen}/>
-        {(isSortMenuOpen && (
-          <span>
-            <Chip variant="outlined" icon={<FaceIcon />} label="By Author" onClick={handleSortAuthor}/>
-            <Chip variant="outlined" icon={<ScheduleRoundedIcon />} label="By Date" onClick={handleSortDate}/>
-          </span>
-          )
-        )}
-          <br/><br/>
+        <SortFilterBar
+          type={"poetry"} 
+          items={poetry}
+          isSortMenuOpen={isSortMenuOpen}
+          setIsSortMenuOpen={setIsSortMenuOpen}
+          sortTitle={sortTitle}
+          setSortTitle={setSortTitle}
+          sortAuthor={sortAuthor}
+          setSortAuthor={setSortAuthor}
+          sortDate={sortDate}
+          setSortDate={setSortDate}
+          sortRandom={sortRandom}
+          setSortRandom={setSortRandom}
+          searchChange={searchChange}
+          setSearchChange={setSearchChange}
+        />
         <div className={common.containerDiv}>
-          {(poems &&
-            poems.map((poem, index) => {
+          {(poetry &&
+            poetry.map((poem, index) => {
               if (poem.isPublic) {
                 return (
                   <Paper
@@ -172,7 +174,7 @@ function Poetry() {
                 );
               }
             })) ||
-            (!poems && (
+            (!poetry && (
               <div>
                 <CircularProgress />
               </div>

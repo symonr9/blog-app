@@ -14,6 +14,8 @@ import AddCircleOutlineRoundedIcon from "@material-ui/icons/AddCircleOutlineRoun
 import SupervisorAccountRoundedIcon from '@material-ui/icons/SupervisorAccountRounded';
 import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 
+import { colors, useCommonStyles } from "../assets/common";
+
 export const routes = [
   { path: "/", name: "Home", icon: <HomeRounded /> },
   { path: "/create", name: "Create", icon: <AddCircleOutlineRoundedIcon /> },
@@ -36,21 +38,20 @@ const useStyles = makeStyles({
     "& a": {
       margin: "0.5em",
       textDecoration: "none",
-      color: "white",
+      color: colors[0],
       "& :hover": {
-        color: "black"
+        color: colors[4]
       }
     }
   },
   mobileNavBarDiv: {
     overflow: "hidden",
-    backgroundColor: "white",
     "& a": {
       margin: "0.5em",
       textDecoration: "none",
-      color: "white",
+      color: colors[0],
       "& :hover": {
-        color: "black"
+        color: colors[4]
       }
     }
   },
@@ -66,8 +67,8 @@ const useStyles = makeStyles({
   },
   navBtn: {
     marginBottom: '1em',
-    color: 'black',
-    backgroundColor: 'white'
+    color: colors[4],
+    backgroundColor: colors[3]
   }
 });
 
@@ -81,24 +82,24 @@ var styles = {
     marginTop: "1em",
   },
   bmBurgerBars: {
-    background: "#373a47"
+    background: colors[2]
   },
   bmBurgerBarsHover: {
-    background: "#a90000"
+    background: colors[3]
   },
   bmCrossButton: {
     height: "24px",
     width: "24px"
   },
   bmCross: {
-    background: "#bdc3c7"
+    background: colors[4]
   },
   bmMenuWrap: {
     position: "fixed",
     height: "100%"
   },
   bmMenu: {
-    background: "linear-gradient(to bottom,  rgba(0,0,0,0.5) 20%, rgba(0,0,0,0.4) 80%)",
+    background: "linear-gradient(to bottom," + colors[1] + " 20%," + colors[3] + " 80%)",
     fontSize: "1.15em",
     overflow: "hidden",
   },
@@ -106,7 +107,7 @@ var styles = {
     fill: "#373a47"
   },
   bmItemList: {
-    color: "#b8b7ad",
+    color: colors[1],
     padding: "0.8em",
     marginTop: "2em"
   },

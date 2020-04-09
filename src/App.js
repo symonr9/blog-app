@@ -22,20 +22,29 @@ import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 
 const routes = [
-  { path: "/profile", name: "My Profile", Component: Profile },
-  { path: "/:type/:urlId/edit", name: "Edit", Component: Edit },
-  { path: "/:type/:urlId", name: "Single", Component: Single },
-  { path: "/poetry", name: "Poetry", Component: Poetry },
-  { path: "/quotes", name: "Quotes", Component: Quotes },
-  { path: "/prose", name: "Prose", Component: Prose },
-  { path: "/create", name: "Create", Component: Create },
-  { path: "/login", name: "Login", Component: Login },
-  { path: "/signup", name: "Signup", Component: Signup },
-  { path: "/", name: "Home", Component: Home }
+  { path: "/profile", name: "My Profile", Component: Profile, bgType: 1 },
+  { path: "/:type/:urlId/edit", name: "Edit", Component: Edit, bgType: 1 },
+  { path: "/:type/:urlId", name: "Single", Component: Single, bgType: 1 },
+  { path: "/poetry", name: "Poetry", Component: Poetry, bgType: 1 },
+  { path: "/quotes", name: "Quotes", Component: Quotes, bgType: 1 },
+  { path: "/prose", name: "Prose", Component: Prose, bgType: 1 },
+  { path: "/create", name: "Create", Component: Create, bgType: 1 },
+  { path: "/login", name: "Login", Component: Login, bgType: 1 },
+  { path: "/signup", name: "Signup", Component: Signup, bgType: 1 },
+  { path: "/", name: "Home", Component: Home, bgType: 1 }
 ];
 
 const useStyles = makeStyles({
-  componentDiv: {
+  //One color header, other color base
+  bgOne: {
+    background: "linear-gradient(to bottom, " 
+    + colors[1] + ","
+    + colors[1] + " 25%,"  
+    + colors[3] + " 25%" 
+    + ")"
+  },
+  //Three color, three striped
+  bgTwo: {
     background: "linear-gradient(to bottom, " 
     + colors[1] + ","
     + colors[1] + " 15%," 
@@ -43,6 +52,10 @@ const useStyles = makeStyles({
     + colors[2] + " 30%," 
     + colors[3] + " 30%" 
     + ")"
+  },
+  //All base
+  bgThree: {
+    background: colors[3]
   },
 });
 
@@ -53,9 +66,12 @@ function App() {
       <Provider store={store}>
         <NavBar />
         <Switch>
-          {routes.map(({ path, Component }) => (
+          {routes.map(({ path, Component, bgType }) => (
             <Route key={path} path={path}>
-              <div className={classes.componentDiv}>    
+              <div className={((bgType == 1) && classes.bgOne) 
+                           || ((bgType == 2) && classes.bgTwo)
+                           || ((bgType == 3) && classes.bgThree)
+                           }>    
                 <Component />
               </div>
             </Route>
