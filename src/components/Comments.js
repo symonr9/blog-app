@@ -1,5 +1,21 @@
-import React from "react";      
+/***********************************************************************
+ * File Name: Comments.js
+ * Description: Component for the Comments section. Disqus is used to
+ * host comments. 
+ * Author: Symon Ramos symonr12@gmail.com
+ **********************************************************************/
 
+/* Library Imports ****************************************************/
+ import React from "react";   
+/**********************************************************************/
+
+   
+/**********************************************************************
+ * Function Name: Comments
+ * Parameters: None
+ * Description: Component for Comments.
+ * Notes: None
+ **********************************************************************/
 function Comments() {
     /*
     var disqus_config = function () {
@@ -8,7 +24,8 @@ function Comments() {
     };
     */
 
-    (function() { // DON'T EDIT BELOW THIS LINE
+    //This code was from Disqus to render the document.
+    (function() {
     var d = document, s = d.createElement('script');
     s.src = 'https://blog-app-3.disqus.com/embed.js';
     s.setAttribute('data-timestamp', +new Date());

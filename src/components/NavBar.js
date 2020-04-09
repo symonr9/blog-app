@@ -1,9 +1,17 @@
+/***********************************************************************
+ * File Name: NavBar.js
+ * Description: Component for the NavBar. This component is rendered on
+ * each page. Support for mobile view using a hamburger menu has been 
+ * implemented as well. The routes defined here should reflect the routes
+ * defined in the App.js (but not necessarily the other way around).
+ * Author: Symon Ramos symonr12@gmail.com
+ **********************************************************************/
+
+/* Library Imports ****************************************************/
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
-import { slide as Menu } from "react-burger-menu";
-
-import { Paper, Grow, Button, TextField, FormControl } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import HomeRounded from "@material-ui/icons/HomeRounded";
@@ -14,9 +22,15 @@ import AddCircleOutlineRoundedIcon from "@material-ui/icons/AddCircleOutlineRoun
 import SupervisorAccountRoundedIcon from '@material-ui/icons/SupervisorAccountRounded';
 import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 
-import { colors, useCommonStyles } from "../assets/common";
+import { slide as Menu } from "react-burger-menu";
+/**********************************************************************/
 
-export const routes = [
+/* Project Imports ****************************************************/
+import { colors } from "../assets/common";
+
+/**********************************************************************/
+
+const routes = [
   { path: "/", name: "Home", icon: <HomeRounded /> },
   { path: "/create", name: "Create", icon: <AddCircleOutlineRoundedIcon /> },
   { path: "/poetry", name: "Poetry", icon: <MenuBookRoundedIcon /> },
@@ -25,6 +39,7 @@ export const routes = [
 ];
 
 /*
+  //FIXME: In Development
   { path: "/login", name: "Login", icon: <SupervisorAccountRoundedIcon/> },
   { path: "/signup", name: "Signup", icon: <SupervisorAccountRoundedIcon/> },
   { path: "/profile", name: "Profile", icon: <PersonRoundedIcon /> },
@@ -72,6 +87,7 @@ const useStyles = makeStyles({
   }
 });
 
+//Styles have to be defined like this for the hamburger menu.
 var styles = {
   bmBurgerButton: {
     position: "fixed",
@@ -121,18 +137,32 @@ var styles = {
   }
 };
 
+
+/**********************************************************************
+ * Function Name: NavBar
+ * Parameters: None
+ * Description: Component for NavBar. This component is rendered on
+ * each page. Support for mobile view using a hamburger menu has been 
+ * implemented as well. 
+ * Notes: None
+ **********************************************************************/
 function NavBar() {
   const classes = useStyles();
 
+
+  /* Mobile View Handler ************************************************/
   const [isMobileView, setIsMobileView] = useState(
     window.matchMedia("(max-width: 1125px)").matches
   );
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
 
+  //Adds a listener to re-render the component when the window width changes.
   useEffect(() => {
     const handler = e => setIsMobileView(e.matches);
     window.matchMedia("(max-width: 1125px)").addListener(handler);
   }, []);
+  /**********************************************************************/
+
 
   const body = (
     <div>
