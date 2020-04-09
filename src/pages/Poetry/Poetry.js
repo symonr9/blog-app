@@ -58,6 +58,7 @@ function Poetry() {
   }, []);
 
 
+  //SORT FILTER BAR EFFECTS **************************************
   useEffect(() => {
     if(poems != null){
       setPoems(poems.sort((a,b) => {
@@ -113,7 +114,7 @@ function Poetry() {
         setPoems(originalPoems);
       }
      else{   
-        setPoems(poems.filter(poem => poem.title == searchChange));
+        setPoems(poems.filter(item => item.title == searchChange));
       }
     }
   }, [searchChange]);

@@ -35,7 +35,13 @@ const SortFilterBar = params => {
 
     const handleSearchChange = (event, obj) => {
         if(obj != null){
-          params.setSearchChange(obj.title);
+            if(type == "poetry" || type == "prose"){
+                params.setSearchChange(obj.title);
+            }
+            else if(type == "quotes"){
+                params.setSearchChange(obj.text);
+            }
+          
         }
     };
 
@@ -60,25 +66,30 @@ const SortFilterBar = params => {
         onClick={handleSortDate} />
     );
 
+    const searchBar = (
+        <Autocomplete
+        options={(params.items != null && params.items)}
+        groupBy={(option) => (((type == "poetry" || type == "prose") && option.title[0].toUpperCase()) || (type == "quotes" && option.author.toUpperCase()))}
+        getOptionLabel={(option) => ((type == "poetry" || type == "prose") && option.title) || ((type == "quotes") && option.text)}
+        style={{ width: 300 }}
+        onChange={handleSearchChange}
+        renderInput={(p) => <TextField {...p} label="Search" variant="outlined" />}
+        />
+    );
+
     const sortMenu = (
-        <span className={common.sortDiv}>
-            {(type == "poetry" || type == "prose") && titleChip}
-            {authorChip}
-            {dateChip}
+        <span>
+            {searchBar}
+            <span className={common.sortDiv}>
+                {(type == "poetry" || type == "prose") && titleChip}
+                {authorChip}
+                {dateChip}
+            </span>
         </span>
     );
 
-
     return (
         <div className={common.sortFilterBarDiv}>
-            <Autocomplete
-            options={(params.items != null && params.items)}
-            groupBy={(option) => option.title[0].toUpperCase()}
-            getOptionLabel={(option) => option.title}
-            style={{ width: 300 }}
-            onChange={handleSearchChange}
-            renderInput={(p) => <TextField {...p} label="Search" variant="outlined" />}
-            />
             <Tooltip title="Sort">
                 <SortRoundedIcon fontSize="large" className={common.sortWidget} onClick={handleSortMenuOpen}/>
             </Tooltip>
