@@ -59,6 +59,8 @@ function Poetry() {
   const [sortDescAuthor, setSortDescAuthor] = useState(true);
   const [sortDescDate, setSortDescDate] = useState(true);
 
+  const [isFullText, setIsFullText] = useState(false);
+
   const [searchChange, setSearchChange] = useState("");
 
   useEffect(() => {
@@ -147,6 +149,8 @@ function Poetry() {
           setSortDate={setSortDate}
           sortRandom={sortRandom}
           setSortRandom={setSortRandom}
+          isFullText={isFullText}
+          setIsFullText={setIsFullText}
           searchChange={searchChange}
           setSearchChange={setSearchChange}
         />
@@ -162,7 +166,8 @@ function Poetry() {
                     link={`/poetry/${poem.urlId}`}
                     title={poem.title}
                     createdBy={poem.createdBy}
-                    body={poem.body.substring(0,200) + '...'}
+                    body={(!isFullText && poem.body.substring(0,200) + '...')
+                    || (isFullText && poem.body)}
                     createdAt={poem.createdAt}
                   />
                 );
