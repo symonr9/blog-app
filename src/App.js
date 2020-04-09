@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import AddToHomescreen from 'react-add-to-homescreen';
 
 import { colors } from "./assets/common";
 import { makeStyles } from "@material-ui/core/styles";
@@ -61,6 +62,13 @@ const useStyles = makeStyles({
 
 function App() {
   const classes = useStyles();
+
+  const handleAddToHomescreenClick = () => {
+    alert(`
+      1. Open Share menu
+      2. Tap on "Add to Home Screen" button`);
+  };
+
   return (
     <BrowserRouter>
       <Provider store={store}>
@@ -78,6 +86,7 @@ function App() {
           ))}
         </Switch>
         <Footer />
+        <AddToHomescreen onAddToHomescreenClick={handleAddToHomescreenClick} />
       </Provider>
     </BrowserRouter>
   );
