@@ -109,6 +109,7 @@ export const useCommonStyles = makeStyles({
     bottom: '0'
   },
   sortDiv: {
+    marginBottom: '1em',
     marginRight: '1em'
   },
   sortWidget: {
@@ -120,7 +121,8 @@ export const useCommonStyles = makeStyles({
     fontSize: '40m'
   },
   parametersDiv: {
-    
+   display: 'flex',
+   marginBottom: '2em' 
   }
   
 });

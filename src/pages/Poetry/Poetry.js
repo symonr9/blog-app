@@ -74,8 +74,8 @@ function Poetry() {
   useEffect(() => {
     if(poems != null){
       setPoems(poems.sort((a,b) => {
-        let aItem = a.title.toUpperCase();
-        let bItem = b.title.toUpperCase();
+        let aItem = a.body.toUpperCase();
+        let bItem = b.body.toUpperCase();
 
         let isDesc = sortDescTitle;
         setSortDescTitle(!sortDescTitle);
@@ -84,6 +84,8 @@ function Poetry() {
         }
         return (aItem < bItem) ? -1 : (aItem > bItem) ? 1 : 0;
       }));
+      
+      console.log(poems);
     }
   }, [sortTitle]);
 
@@ -120,12 +122,21 @@ function Poetry() {
         let aItem = new Date(a.createdAt).getTime();
         let bItem = new Date(b.createdAt).getTime();
 
+        console.log(aItem);
+        console.log(bItem);
+
         let isDesc = sortDescDate;
         setSortDescDate(!sortDescDate);
+
+        
         if(isDesc){
-          return (aItem > bItem) ? -1 : (aItem < bItem) ? 1 : 0;
+          return 0;
+          //return aItem > bItem;
+          //return (aItem > bItem) ? -1 : (aItem < bItem) ? 1 : 0;
         }
-        return (aItem < bItem) ? -1 : (aItem > bItem) ? 1 : 0;
+        return 1;
+        //return aItem < bItem;
+        //return (aItem < bItem) ? -1 : (aItem > bItem) ? 1 : 0;
       }));
       console.log(poems);
     }
@@ -190,7 +201,6 @@ function Poetry() {
             )
           )}
         </div>
-          <br/><br/>
         <div className={common.containerDiv}>
           {(poems &&
             poems.map((poem, index) => {
