@@ -7,8 +7,8 @@ import { getData } from "../../services/api";
 import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
+import ItemCard from '../../components/ItemCard';
 import SortFilterBar from '../../components/SortFilterBar';
-import ReactTimeAgo from 'react-time-ago';
 
 import { useStyles } from "./exports";
 
@@ -17,18 +17,6 @@ function Prose() {
   const common = useCommonStyles();
 
   const [prose, setProse] = useState(null);
-
-  const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
-  const [sortTitle, setSortTitle] = useState(false);
-  const [sortAuthor, setSortAuthor] = useState(false);
-  const [sortDate, setSortDate] = useState(true);
-  const [sortRandom, setSortRandom] = useState(false);
-
-  const [sortDescTitle, setSortDescTitle] = useState(true);
-  const [sortDescAuthor, setSortDescAuthor] = useState(true);
-  const [sortDescDate, setSortDescDate] = useState(false);
-
-  const [searchChange, setSearchChange] = useState("");
 
   const [isMobileView, setIsMobileView] = useState(
     window.matchMedia("(max-width: 1125px)").matches
@@ -55,6 +43,18 @@ function Prose() {
   }, []);
 
   //SORT FILTER BAR EFFECTS **************************************
+  const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
+  const [sortTitle, setSortTitle] = useState(false);
+  const [sortAuthor, setSortAuthor] = useState(false);
+  const [sortDate, setSortDate] = useState(true);
+  const [sortRandom, setSortRandom] = useState(false);
+
+  const [sortDescTitle, setSortDescTitle] = useState(true);
+  const [sortDescAuthor, setSortDescAuthor] = useState(true);
+  const [sortDescDate, setSortDescDate] = useState(false);
+
+  const [searchChange, setSearchChange] = useState("");
+
   useEffect(() => {
     if(prose != null){
       setProse(prose.sort((a,b) => {
@@ -146,24 +146,19 @@ function Prose() {
         />
         <div className={common.containerDiv}>
           {(prose &&
-            prose.map((p, index) => {
-              if (p.isPublic) {
+            prose.map((item, index) => {
+              if (item.isPublic) {
                 return (
-                  <Paper
-                    key={p._id}
-                    elevation={7}
-                    className={(!isMobileView && common.itemDiv || (isMobileView && common.mobileItemDiv))}
-                  >
-                    <NavLink to={`/prose/${p.urlId}`}>
-                      <span className={common.title}>{p.title}</span>
-                    </NavLink>
-                    <span className={common.body}>
-                      {p.body.substring(0,200)}...
-                    </span>
-                    <span className={common.createdAt}>
-                      created <ReactTimeAgo date={p.createdAt} />
-                    </span>
-                  </Paper>
+                  <ItemCard 
+                  type={"prose"}
+                  key={item._id}
+                  isMobileView={isMobileView}
+                  link={`/prose/${item.urlId}`}
+                  title={item.title}
+                  createdBy={item.createdBy}
+                  body={item.body.substring(0,200) + '...'}
+                  createdAt={item.createdAt}
+                  />
                 );
               }
             })) ||
