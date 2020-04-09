@@ -21,8 +21,10 @@ function Quotes() {
   const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
   const [sortAuthor, setSortAuthor] = useState(false);
   const [sortDate, setSortDate] = useState(true);
+  const [sortRandom, setSortRandom] = useState(false);
+
   const [sortDescAuthor, setSortDescAuthor] = useState(true);
-  const [sortDescDate, setSortDescDate] = useState(false);
+  const [sortDescDate, setSortDescDate] = useState(true);
 
   const [searchChange, setSearchChange] = useState("");
 
@@ -54,8 +56,8 @@ function Quotes() {
   useEffect(() => {
     if(quotes != null){
       setQuotes(quotes.sort((a,b) => {
-        let aItem = a.createdBy.toUpperCase();
-        let bItem = b.createdBy.toUpperCase();
+        let aItem = a.author.toUpperCase();
+        let bItem = b.author.toUpperCase();
 
         let isDesc = sortDescAuthor;
         setSortDescAuthor(!sortDescAuthor);
@@ -86,6 +88,14 @@ function Quotes() {
 
   useEffect(() => {
     if(quotes != null){
+      setQuotes(quotes.sort(() => {
+        return 0.5 - Math.random();
+      }));
+    }
+  }, [sortRandom]);
+
+  useEffect(() => {
+    if(quotes != null){
       if(searchChange == ""){
         //setQuotes(originalquotes);
       }
@@ -109,6 +119,8 @@ function Quotes() {
           setSortAuthor={setSortAuthor}
           sortDate={sortDate}
           setSortDate={setSortDate}
+          sortRandom={sortRandom}
+          setSortRandom={setSortRandom}
           searchChange={searchChange}
           setSearchChange={setSearchChange}
         />

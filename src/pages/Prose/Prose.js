@@ -22,6 +22,8 @@ function Prose() {
   const [sortTitle, setSortTitle] = useState(false);
   const [sortAuthor, setSortAuthor] = useState(false);
   const [sortDate, setSortDate] = useState(true);
+  const [sortRandom, setSortRandom] = useState(false);
+
   const [sortDescTitle, setSortDescTitle] = useState(true);
   const [sortDescAuthor, setSortDescAuthor] = useState(true);
   const [sortDescDate, setSortDescDate] = useState(false);
@@ -104,6 +106,14 @@ function Prose() {
 
   useEffect(() => {
     if(prose != null){
+      setProse(prose.sort(() => {
+        return 0.5 - Math.random();
+      }));
+    }
+  }, [sortRandom]);
+
+  useEffect(() => {
+    if(prose != null){
       if(searchChange == ""){
         //setProse(originalProse);
       }
@@ -129,6 +139,8 @@ function Prose() {
           setSortAuthor={setSortAuthor}
           sortDate={sortDate}
           setSortDate={setSortDate}
+          sortRandom={sortRandom}
+          setSortRandom={setSortRandom}
           searchChange={searchChange}
           setSearchChange={setSearchChange}
         />

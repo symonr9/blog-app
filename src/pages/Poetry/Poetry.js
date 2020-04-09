@@ -23,9 +23,11 @@ function Poetry() {
   const [sortTitle, setSortTitle] = useState(false);
   const [sortAuthor, setSortAuthor] = useState(false);
   const [sortDate, setSortDate] = useState(true);
+  const [sortRandom, setSortRandom] = useState(false);
+
   const [sortDescTitle, setSortDescTitle] = useState(true);
   const [sortDescAuthor, setSortDescAuthor] = useState(true);
-  const [sortDescDate, setSortDescDate] = useState(false);
+  const [sortDescDate, setSortDescDate] = useState(true);
 
   const [searchChange, setSearchChange] = useState("");
 
@@ -110,6 +112,14 @@ function Poetry() {
 
   useEffect(() => {
     if(poetry != null){
+      setPoetry(poetry.sort(() => {
+        return 0.5 - Math.random();
+      }));
+    }
+  }, [sortRandom]);
+
+  useEffect(() => {
+    if(poetry != null){
       if(searchChange == ""){
         setPoetry(originalPoetry);
       }
@@ -135,6 +145,8 @@ function Poetry() {
           setSortAuthor={setSortAuthor}
           sortDate={sortDate}
           setSortDate={setSortDate}
+          sortRandom={sortRandom}
+          setSortRandom={setSortRandom}
           searchChange={searchChange}
           setSearchChange={setSearchChange}
         />
