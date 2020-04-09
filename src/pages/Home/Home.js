@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { Paper, Grow, Grid } from "@material-ui/core";
 
 import { colors, useCommonStyles } from "../../assets/common";
-import poems from "../../data/poems.json";
 import { useStyles } from "./exports";
 
 const Home = () => {
