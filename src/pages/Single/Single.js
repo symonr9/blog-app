@@ -16,6 +16,7 @@ import Comments from "../../components/Comments";
 
 
 function Single() {  
+  //type is poetry, quotes, prose
   const { type, urlId } = useParams();
 
   const classes = useStyles();
@@ -33,16 +34,9 @@ function Single() {
     window.matchMedia("(max-width: 1125px)").addListener(handler);
   }, []);
 
-  let dataType = type;
-    
-  //fixme, fix this nomenclature
-  if(type == "poetry"){
-    dataType = "poems";
-  }
-
-  //prose, quotes, poems
+  //prose, quotes, poetry
   const fetchData = isSubscribed => {
-    getData(getServerURL(dataType + "/" + urlId), response => {
+    getData(getServerURL(type + "/" + urlId), response => {
       if (isSubscribed) {
         setData(response);
         setId(response._id);
@@ -105,7 +99,7 @@ function Single() {
     <div>
       {
       (data 
-        && ( dataType == "poems" && 
+        && ( type == "poetry" && 
               (<div>
                 <h1>{data.title}</h1>
                 {data.createdBy}
@@ -120,7 +114,7 @@ function Single() {
                 <br/><br/><br/>
               </div>)
               ||
-              dataType == "quotes" &&
+              type == "quotes" &&
               (<div>
                 <h1><i>"{data.text}"</i></h1>
                 <br/><br/>
@@ -132,7 +126,7 @@ function Single() {
                 <br/><br/><br/>              
               </div>)
               ||
-              dataType == "prose" && 
+              type == "prose" && 
               (<div>
                 <h1>{data.title}</h1>
                 {data.createdBy}

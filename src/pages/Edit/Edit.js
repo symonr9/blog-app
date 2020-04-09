@@ -27,6 +27,7 @@ import {
 
 
 function Edit() {  
+  //type is poetry, prose, quotes
   const { type, urlId } = useParams();
 
   const classes = useStyles();
@@ -132,32 +133,25 @@ function Edit() {
 
   /******************************************************* */
 
-  let dataType = type;
-    
-  //fixme, fix this nomenclature
-  if(type == "poetry"){
-    dataType = "poems";
-  }
-
-  //prose, quotes, poems
+  //prose, quotes, poetry
   const fetchData = isSubscribed => {
-    getData(getServerURL(dataType + "/" + urlId), response => {
+    getData(getServerURL(type + "/" + urlId), response => {
       if (isSubscribed) {
         setData(response);
         setId(response._id);
         setIsPublic(response.isPublic);
 
-        if(dataType == "poems"){
+        if(type == "poetry"){
           setPoemTitle(response.title);
           setPoemBody(response.body);
           setPoemType(response.type);
           setPoemNotes(response.notes);
         }
-        else if(dataType == "quotes"){
+        else if(type == "quotes"){
           setQuoteText(response.text);
           setQuoteAuthor(response.author);
         }
-        else if(dataType == "prose"){
+        else if(type == "prose"){
           setProseTitle(response.title);
           setProseBody(response.body);
         }
@@ -239,7 +233,7 @@ function Edit() {
     <div>
       {
       (data 
-        && ( dataType == "poems" && 
+        && ( type == "poetry" && 
               (<div>
                 {editTextField("poemTitle", data.title, "Title", handlePoemTitleChange)}
                 {editTextField("poemBody", data.body, "Body", handlePoemBodyChange, 8)}
@@ -253,7 +247,7 @@ function Edit() {
                 <br/><br/><br/>
               </div>)
               ||
-              dataType == "quotes" &&
+              type == "quotes" &&
               (<div>
                 {editTextField("quoteText", data.text, "A quote to remember", handleQuoteTextChange, 3)}
                 {editTextField("quoteAuthor", data.author, "Who said it?", handleQuoteAuthorChange)}
@@ -265,7 +259,7 @@ function Edit() {
                 <br/><br/><br/>        
               </div>)
               ||
-              dataType == "prose" && 
+              type == "prose" && 
               (<div>
                 {editTextField("proseTitle", data.title, "Title", handleProseTitleChange)}
                 {editTextField("proseBody", data.body, "Body", handleProseBodyChange, 12)}

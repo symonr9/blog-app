@@ -16,8 +16,8 @@ function Poetry() {
   const classes = useStyles();
   const common = useCommonStyles();
 
-  const [originalPoems, setOriginalPoems] = useState(null);
-  const [poems, setPoems] = useState(null);
+  const [originalPoetry, setOriginalPoetry] = useState(null);
+  const [poetry, setPoetry] = useState(null);
   
   const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
   const [sortTitle, setSortTitle] = useState(false);
@@ -39,14 +39,14 @@ function Poetry() {
   }, []);
 
   const fetchData = isSubscribed => {
-    getData(getServerURL("poems"), response => {
+    getData(getServerURL("poetry"), response => {
       if (isSubscribed) {
-        setPoems(response.sort((a,b) => {
+        setPoetry(response.sort((a,b) => {
           let aTitle = a.title.toUpperCase();
           let bTitle = b.title.toUpperCase();
           return (aTitle < bTitle) ? -1 : (aTitle > bTitle) ? 1 : 0;
         }));
-        setOriginalPoems(response);
+        setOriginalPoetry(response);
       }
     });
   };
@@ -60,8 +60,8 @@ function Poetry() {
 
   //SORT FILTER BAR EFFECTS **************************************
   useEffect(() => {
-    if(poems != null){
-      setPoems(poems.sort((a,b) => {
+    if(poetry != null){
+      setPoetry(poetry.sort((a,b) => {
         let aItem = a.title.toUpperCase();
         let bItem = b.title.toUpperCase();
 
@@ -76,8 +76,8 @@ function Poetry() {
   }, [sortTitle]);
 
   useEffect(() => {
-    if(poems != null){
-      setPoems(poems.sort((a,b) => {
+    if(poetry != null){
+      setPoetry(poetry.sort((a,b) => {
         let aItem = a.createdBy.toUpperCase();
         let bItem = b.createdBy.toUpperCase();
 
@@ -92,8 +92,8 @@ function Poetry() {
   }, [sortAuthor]);
 
   useEffect(() => {
-    if(poems != null){
-      setPoems(poems.sort((a,b) => {
+    if(poetry != null){
+      setPoetry(poetry.sort((a,b) => {
         let aItem = new Date(a.createdAt).getTime();
         let bItem = new Date(b.createdAt).getTime();
 
@@ -109,12 +109,12 @@ function Poetry() {
   }, [sortDate]);
 
   useEffect(() => {
-    if(poems != null){
+    if(poetry != null){
       if(searchChange == ""){
-        setPoems(originalPoems);
+        setPoetry(originalPoetry);
       }
      else{   
-        setPoems(poems.filter(item => item.title == searchChange));
+        setPoetry(poetry.filter(item => item.title == searchChange));
       }
     }
   }, [searchChange]);
@@ -126,7 +126,7 @@ function Poetry() {
         <h1>Poetry</h1>
         <SortFilterBar
           type={"poetry"} 
-          items={poems}
+          items={poetry}
           isSortMenuOpen={isSortMenuOpen}
           setIsSortMenuOpen={setIsSortMenuOpen}
           sortTitle={sortTitle}
@@ -139,8 +139,8 @@ function Poetry() {
           setSearchChange={setSearchChange}
         />
         <div className={common.containerDiv}>
-          {(poems &&
-            poems.map((poem, index) => {
+          {(poetry &&
+            poetry.map((poem, index) => {
               if (poem.isPublic) {
                 return (
                   <Paper
@@ -162,7 +162,7 @@ function Poetry() {
                 );
               }
             })) ||
-            (!poems && (
+            (!poetry && (
               <div>
                 <CircularProgress />
               </div>

@@ -39,8 +39,8 @@ const useStyles = makeStyles({
   bgOne: {
     background: "linear-gradient(to bottom, " 
     + colors[1] + ","
-    + colors[1] + " 12%,"  
-    + colors[3] + " 12%" 
+    + colors[1] + " 25%,"  
+    + colors[3] + " 25%" 
     + ")"
   },
   //Three color, three striped

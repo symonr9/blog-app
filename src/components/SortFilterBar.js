@@ -71,7 +71,7 @@ const SortFilterBar = params => {
         options={(params.items != null && params.items)}
         groupBy={(option) => (((type == "poetry" || type == "prose") && option.title[0].toUpperCase()) || (type == "quotes" && option.author.toUpperCase()))}
         getOptionLabel={(option) => ((type == "poetry" || type == "prose") && option.title) || ((type == "quotes") && option.text)}
-        style={{ width: 300 }}
+        style={{ width: '20em', marginBottom: '1em' }}
         onChange={handleSearchChange}
         renderInput={(p) => <TextField {...p} label="Search" variant="outlined" />}
         />

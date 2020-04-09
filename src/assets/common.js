@@ -109,8 +109,6 @@ export const useCommonStyles = makeStyles({
     bottom: '0'
   },
   sortDiv: {
-    marginBottom: '1em',
-    marginRight: '1em'
   },
   sortWidget: {
     cursor: 'pointer',
@@ -119,7 +117,7 @@ export const useCommonStyles = makeStyles({
     marginLeft: '0.5em',
   },
   sortChip: {
-    fontSize: '40m'
+    fontSize: '40em'
   },
   sortFilterBarDiv: {
    display: 'flex',
