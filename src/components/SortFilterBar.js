@@ -9,6 +9,7 @@ import SortRoundedIcon from '@material-ui/icons/SortRounded';
 import FaceIcon from '@material-ui/icons/Face';
 import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
 import CasinoRoundedIcon from '@material-ui/icons/CasinoRounded';
+import ViewHeadlineRoundedIcon from '@material-ui/icons/ViewHeadlineRounded';
 
 import { colors, useCommonStyles } from "../assets/common";
 
@@ -36,6 +37,10 @@ const SortFilterBar = params => {
 
     const handleSortRandom = () => {
         params.setSortRandom(!params.sortRandom);
+    };
+
+    const handleIsFullText = () => {
+        params.setIsFullText(!params.isFullText);
     };
 
     const handleSearchChange = (event, obj) => {
@@ -78,6 +83,13 @@ const SortFilterBar = params => {
         onClick={handleSortRandom} />
     );
 
+    const fullTextChip = (
+        <Chip icon={<ViewHeadlineRoundedIcon style={{ color: colors[4] }}/>} 
+        label="View Full Text"
+        style={{ color: colors[4], backgroundColor: colors[3], marginRight: '0.3em' }} 
+        onClick={handleIsFullText} />
+    );
+
     const searchBar = (
         <Autocomplete
         options={(params.items != null && params.items)}
@@ -97,6 +109,7 @@ const SortFilterBar = params => {
                 {authorChip}
                 {dateChip}
                 {randomChip}
+                {(type == "poetry" || type == "prose") && fullTextChip}
             </span>
         </span>
     );

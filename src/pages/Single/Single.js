@@ -116,6 +116,7 @@ function Single() {
               ||
               type == "quotes" &&
               (<div>
+                <br/><br/>
                 <h1><i>"{data.text}"</i></h1>
                 <br/><br/>
                 {data.author}

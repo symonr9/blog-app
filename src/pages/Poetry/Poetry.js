@@ -7,8 +7,8 @@ import { getData } from "../../services/api";
 import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
+import ItemCard from '../../components/ItemCard';
 import SortFilterBar from '../../components/SortFilterBar';
-import ReactTimeAgo from 'react-time-ago';
 
 import { useStyles } from "./exports";
 
@@ -18,18 +18,6 @@ function Poetry() {
 
   const [originalPoetry, setOriginalPoetry] = useState(null);
   const [poetry, setPoetry] = useState(null);
-  
-  const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
-  const [sortTitle, setSortTitle] = useState(false);
-  const [sortAuthor, setSortAuthor] = useState(false);
-  const [sortDate, setSortDate] = useState(true);
-  const [sortRandom, setSortRandom] = useState(false);
-
-  const [sortDescTitle, setSortDescTitle] = useState(true);
-  const [sortDescAuthor, setSortDescAuthor] = useState(true);
-  const [sortDescDate, setSortDescDate] = useState(true);
-
-  const [searchChange, setSearchChange] = useState("");
 
   const [isMobileView, setIsMobileView] = useState(
     window.matchMedia("(max-width: 1125px)").matches
@@ -61,6 +49,20 @@ function Poetry() {
 
 
   //SORT FILTER BAR EFFECTS **************************************
+  const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
+  const [sortTitle, setSortTitle] = useState(false);
+  const [sortAuthor, setSortAuthor] = useState(false);
+  const [sortDate, setSortDate] = useState(true);
+  const [sortRandom, setSortRandom] = useState(false);
+
+  const [sortDescTitle, setSortDescTitle] = useState(true);
+  const [sortDescAuthor, setSortDescAuthor] = useState(true);
+  const [sortDescDate, setSortDescDate] = useState(true);
+
+  const [isFullText, setIsFullText] = useState(false);
+
+  const [searchChange, setSearchChange] = useState("");
+
   useEffect(() => {
     if(poetry != null){
       setPoetry(poetry.sort((a,b) => {
@@ -147,6 +149,8 @@ function Poetry() {
           setSortDate={setSortDate}
           sortRandom={sortRandom}
           setSortRandom={setSortRandom}
+          isFullText={isFullText}
+          setIsFullText={setIsFullText}
           searchChange={searchChange}
           setSearchChange={setSearchChange}
         />
@@ -155,22 +159,17 @@ function Poetry() {
             poetry.map((poem, index) => {
               if (poem.isPublic) {
                 return (
-                  <Paper
+                  <ItemCard 
+                    type={"poetry"}
                     key={poem._id}
-                    elevation={7}
-                    className={(!isMobileView && common.itemDiv || (isMobileView && common.mobileItemDiv))}
-                  >
-                    <NavLink to={`/poetry/${poem.urlId}`}>
-                      <span className={common.title}>{poem.title}</span>
-                    </NavLink>
-                    <span className={common.createdBy}>
-                      By {poem.createdBy}
-                    </span>
-                    <span className={common.body}>{poem.body.substring(0,200)}...</span>
-                    <span className={common.createdAt}>
-                      created <ReactTimeAgo date={poem.createdAt} />
-                    </span>
-                  </Paper>
+                    isMobileView={isMobileView}
+                    link={`/poetry/${poem.urlId}`}
+                    title={poem.title}
+                    createdBy={poem.createdBy}
+                    body={(!isFullText && poem.body.substring(0,200) + '...')
+                    || (isFullText && poem.body)}
+                    createdAt={poem.createdAt}
+                  />
                 );
               }
             })) ||
