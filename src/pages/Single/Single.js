@@ -4,7 +4,7 @@ import { NavLink, useParams } from "react-router-dom";
 
 import { Button, Grow, Grid, CircularProgress, Modal, Backdrop, Fade, Snackbar } from "@material-ui/core";
 import MuiAlert from '@material-ui/lab/Alert';
-import { getData, deleteRequest } from "../../services/api";
+import { getData, deleteData } from "../../services/api";
 import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
@@ -84,7 +84,7 @@ function Single() {
     }
 
     console.log("URL: ", getServerURL(url));
-    deleteRequest(
+    deleteData(
       getServerURL(url),
       response => {
         console.log(response);
