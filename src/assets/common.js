@@ -116,11 +116,12 @@ export const useCommonStyles = makeStyles({
     cursor: 'pointer',
     color: colors[4],
     fontSize: '4em',
+    marginLeft: '0.5em',
   },
   sortChip: {
     fontSize: '40m'
   },
-  parametersDiv: {
+  sortFilterBarDiv: {
    display: 'flex',
    marginBottom: '2em' 
   }

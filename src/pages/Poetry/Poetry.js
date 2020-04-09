@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import { Chip, Paper, Grow, Grid, CircularProgress, Tooltip, TextField } from "@material-ui/core";
-import Autocomplete from '@material-ui/lab/Autocomplete';
-
-import SortByAlphaRoundedIcon from '@material-ui/icons/SortByAlphaRounded';
-import SortRoundedIcon from '@material-ui/icons/SortRounded';
-import FaceIcon from '@material-ui/icons/Face';
-import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
-import CancelPresentationRoundedIcon from '@material-ui/icons/CancelPresentationRounded';
+import { Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
 
 import { getData } from "../../services/api";
 import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
+import SortFilterBar from '../../components/SortFilterBar';
 import ReactTimeAgo from 'react-time-ago';
 
 import { useStyles } from "./exports";
@@ -63,13 +57,6 @@ function Poetry() {
     return () => (isSubscribed = false);
   }, []);
 
-  const handleSortMenuOpen = () => {
-    setIsSortMenuOpen(!isSortMenuOpen);
-  };
-  
-  const handleSortTitle = () => {
-    setSortTitle(!sortTitle);
-  };
 
   useEffect(() => {
     if(poems != null){
@@ -87,12 +74,6 @@ function Poetry() {
     }
   }, [sortTitle]);
 
-
-
-  const handleSortAuthor = () => {
-    setSortAuthor(!sortAuthor);
-  }
-
   useEffect(() => {
     if(poems != null){
       setPoems(poems.sort((a,b) => {
@@ -109,23 +90,14 @@ function Poetry() {
     }
   }, [sortAuthor]);
 
-
-  const handleSortDate = () => {
-    setSortDate(!sortDate);
-  };
-
   useEffect(() => {
     if(poems != null){
       setPoems(poems.sort((a,b) => {
         let aItem = new Date(a.createdAt).getTime();
         let bItem = new Date(b.createdAt).getTime();
 
-        console.log(aItem);
-        console.log(bItem);
-
         let isDesc = sortDescDate;
         setSortDescDate(!sortDescDate);
-
         
         if(isDesc){
           return (aItem > bItem) ? -1 : (aItem < bItem) ? 1 : 0;
@@ -135,28 +107,15 @@ function Poetry() {
     }
   }, [sortDate]);
 
-  
-  const handleSearchChange = (event, obj) => {
-    if(obj != null){
-      setSearchChange(obj.title);
-    }
-  };
-
   useEffect(() => {
     if(poems != null){
-      
-      console.log(originalPoems);
       if(searchChange == ""){
-        console.log("here");
         setPoems(originalPoems);
-        console.log(poems);
       }
      else{   
-       console.log("in filter");
         setPoems(poems.filter(poem => poem.title == searchChange));
       }
     }
-
   }, [searchChange]);
 
   const body = (
@@ -164,36 +123,20 @@ function Poetry() {
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
         <h1>Poetry</h1>
-        <div className={common.parametersDiv}>
-          <Autocomplete
-            options={(poems != null && poems)}
-            groupBy={(option) => option.title[0].toUpperCase()}
-            getOptionLabel={(option) => option.title}
-            style={{ width: 300 }}
-            onChange={handleSearchChange}
-            renderInput={(params) => <TextField {...params} label="Search" variant="outlined" />}
-          />
-          <Tooltip title="Sort">
-            <SortRoundedIcon fontSize="large" className={common.sortWidget} onClick={handleSortMenuOpen}/>
-          </Tooltip>
-          {(isSortMenuOpen && (
-            <span className={common.sortDiv}>
-              <Chip icon={<SortByAlphaRoundedIcon style={{ color: colors[4] }}/>} 
-              label="By Title" 
-              style={{ color: colors[4], backgroundColor: colors[3], marginRight: '0.3em' }}
-              onClick={handleSortTitle} />
-              <Chip icon={<FaceIcon style={{ color: colors[4] }}/>} 
-              label="By Author" 
-              style={{ color: colors[4], backgroundColor: colors[3], marginRight: '0.3em' }}
-              onClick={handleSortAuthor} />
-              <Chip icon={<ScheduleRoundedIcon style={{ color: colors[4] }}/>} 
-              label="By Date"
-              style={{ color: colors[4], backgroundColor: colors[3], marginRight: '0.3em' }} 
-              onClick={handleSortDate} />
-            </span>
-            )
-          )}
-        </div>
+        <SortFilterBar
+          type={"poetry"} 
+          items={poems}
+          isSortMenuOpen={isSortMenuOpen}
+          setIsSortMenuOpen={setIsSortMenuOpen}
+          sortTitle={sortTitle}
+          setSortTitle={setSortTitle}
+          sortAuthor={sortAuthor}
+          setSortAuthor={setSortAuthor}
+          sortDate={sortDate}
+          setSortDate={setSortDate}
+          searchChange={searchChange}
+          setSearchChange={setSearchChange}
+        />
         <div className={common.containerDiv}>
           {(poems &&
             poems.map((poem, index) => {
