@@ -74,8 +74,8 @@ function Poetry() {
   useEffect(() => {
     if(poems != null){
       setPoems(poems.sort((a,b) => {
-        let aItem = a.body.toUpperCase();
-        let bItem = b.body.toUpperCase();
+        let aItem = a.title.toUpperCase();
+        let bItem = b.title.toUpperCase();
 
         let isDesc = sortDescTitle;
         setSortDescTitle(!sortDescTitle);
@@ -84,8 +84,6 @@ function Poetry() {
         }
         return (aItem < bItem) ? -1 : (aItem > bItem) ? 1 : 0;
       }));
-      
-      console.log(poems);
     }
   }, [sortTitle]);
 
@@ -130,15 +128,10 @@ function Poetry() {
 
         
         if(isDesc){
-          return 0;
-          //return aItem > bItem;
-          //return (aItem > bItem) ? -1 : (aItem < bItem) ? 1 : 0;
+          return (aItem > bItem) ? -1 : (aItem < bItem) ? 1 : 0;
         }
-        return 1;
-        //return aItem < bItem;
-        //return (aItem < bItem) ? -1 : (aItem > bItem) ? 1 : 0;
+        return (aItem < bItem) ? -1 : (aItem > bItem) ? 1 : 0;
       }));
-      console.log(poems);
     }
   }, [sortDate]);
 
@@ -151,13 +144,14 @@ function Poetry() {
 
   useEffect(() => {
     if(poems != null){
+      
       console.log(originalPoems);
       if(searchChange == ""){
         console.log("here");
         setPoems(originalPoems);
         console.log(poems);
       }
-     else{
+     else{   
        console.log("in filter");
         setPoems(poems.filter(poem => poem.title == searchChange));
       }
@@ -172,11 +166,10 @@ function Poetry() {
         <h1>Poetry</h1>
         <div className={common.parametersDiv}>
           <Autocomplete
-            options={(poems != null) && (poems.sort((a, b) => -b.title[0].toUpperCase().localeCompare(a.title[0].toUpperCase())))}
+            options={(poems != null && poems)}
             groupBy={(option) => option.title[0].toUpperCase()}
             getOptionLabel={(option) => option.title}
             style={{ width: 300 }}
-
             onChange={handleSearchChange}
             renderInput={(params) => <TextField {...params} label="Search" variant="outlined" />}
           />
