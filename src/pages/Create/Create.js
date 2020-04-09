@@ -214,7 +214,7 @@ function Create() {
           "type": poemType,
           "notes": poemNotes
         };
-        url = "poems/create";
+        url = "poetry/create";
 
         break;
       case "quotes":
