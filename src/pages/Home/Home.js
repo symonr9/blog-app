@@ -24,33 +24,22 @@ const Home = () => {
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
         <h1>Symon's Blog</h1>
+        <br/>
         Hello and welcome to my blog!
-        <h2>Things to explore: </h2>
-          <ul>
-            <li>Creating new items</li>
-            <li>Poetry
-              <ul>
-                <li>All kinds of poetry, whether structured or prose.</li>
-              </ul>
-            </li>
-            <li>Quotes
-              <ul>
-                <li>Memorable quotes from people you know or from books, movies, etc.</li>
-              </ul>
-            </li>
-            <li>Prose
-              <ul>
-                <li>Reflections and notes from sermons and lectures.</li>
-              </ul>
-            </li>
-          </ul>
-        <h2>Planned Features: </h2>
-          <ul>
-            <li>Audio Clips for Spoken Word</li>
-            <li>Sermon Notes</li>
-            <li>User Authentication (Login and Signup)</li>
-            <li>Profile</li>
-          </ul>       
+        <br/><br/>
+
+        This is a progressive web application (PWA) that I wrote to host some of the writings that I've done.
+        This includes poems and prose, in addition to quotes that I've heard from others that I like to 
+        re-visit. 
+        <br/><br/>
+
+        This PWA was created using ReactJS on the front-end and Node on the back-end. Because this is a PWA,
+        this application can be visible on browser or mobile for offline use. This application can be added
+        to the home screen on both iOS and Android.
+        <br/><br/>
+
+        <br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/>
       </Grid>
     </Grid>
   );
