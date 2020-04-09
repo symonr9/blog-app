@@ -53,6 +53,8 @@ function Prose() {
   const [sortDescAuthor, setSortDescAuthor] = useState(true);
   const [sortDescDate, setSortDescDate] = useState(false);
 
+  const [isFullText, setIsFullText] = useState(false);
+
   const [searchChange, setSearchChange] = useState("");
 
   useEffect(() => {
@@ -141,6 +143,8 @@ function Prose() {
           setSortDate={setSortDate}
           sortRandom={sortRandom}
           setSortRandom={setSortRandom}
+          isFullText={isFullText}
+          setIsFullText={setIsFullText}
           searchChange={searchChange}
           setSearchChange={setSearchChange}
         />
@@ -156,7 +160,8 @@ function Prose() {
                   link={`/prose/${item.urlId}`}
                   title={item.title}
                   createdBy={item.createdBy}
-                  body={item.body.substring(0,200) + '...'}
+                  body={(!isFullText && item.body.substring(0,200) + '...')
+                  || (isFullText && item.body)}
                   createdAt={item.createdAt}
                   />
                 );
