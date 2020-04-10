@@ -38,15 +38,15 @@ import Signup from "./pages/Signup/Signup";
 /**********************************************************************/
 
 const routes = [
-  { path: "/profile", name: "My Profile", Component: Profile, bgType: 1 },
-  { path: "/:type/:urlId/edit", name: "Edit", Component: Edit, bgType: 1 },
+  { path: "/profile", name: "My Profile", Component: Profile, bgType: 3 },
+  { path: "/:type/:urlId/edit", name: "Edit", Component: Edit, bgType: 3 },
   { path: "/:type/:urlId", name: "Single", Component: Single, bgType: 3 },
-  { path: "/poetry", name: "Poetry", Component: Poetry, bgType: 1 },
-  { path: "/quotes", name: "Quotes", Component: Quotes, bgType: 1 },
-  { path: "/prose", name: "Prose", Component: Prose, bgType: 1 },
-  { path: "/create", name: "Create", Component: Create, bgType: 1 },
-  { path: "/login", name: "Login", Component: Login, bgType: 1 },
-  { path: "/signup", name: "Signup", Component: Signup, bgType: 1 },
+  { path: "/poetry", name: "Poetry", Component: Poetry, bgType: 3 },
+  { path: "/quotes", name: "Quotes", Component: Quotes, bgType: 3 },
+  { path: "/prose", name: "Prose", Component: Prose, bgType: 3 },
+  { path: "/create", name: "Create", Component: Create, bgType: 3 },
+  { path: "/login", name: "Login", Component: Login, bgType: 3 },
+  { path: "/signup", name: "Signup", Component: Signup, bgType: 3 },
   { path: "/", name: "Home", Component: Home, bgType: 3 }
 ];
 
