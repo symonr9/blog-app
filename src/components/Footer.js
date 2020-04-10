@@ -1,5 +1,13 @@
-import React, { useState } from "react";
+/***********************************************************************
+ * File Name: Footer.js
+ * Description: Component for the Footer section.
+ * Author: Symon Ramos symonr12@gmail.com
+ **********************************************************************/
+
+ /* Library Imports ****************************************************/
+import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
+/**********************************************************************/
 
 const useStyles = makeStyles({
 	footerDiv: {
@@ -18,7 +26,12 @@ const useStyles = makeStyles({
     }
 });
 
-
+/**********************************************************************
+ * Function Name: Footer
+ * Parameters: None
+ * Description: Component for Footer.
+ * Notes: None
+ **********************************************************************/
 function Footer() {
     const classes = useStyles();
 
@@ -27,7 +40,6 @@ function Footer() {
             <a href="https://github.com/symonr9/portfolio-website" target="_blank">Created by Symon Ramos :)</a>
         </div>
     );
-
 }
 
 export default Footer;

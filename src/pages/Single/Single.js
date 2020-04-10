@@ -1,41 +1,70 @@
 
+/***********************************************************************
+ * File Name: Single.js
+ * Description: Single page. Renders the component to create the page 
+ * based on the url parameter and the type passed in.
+ * Author: Symon Ramos symonr12@gmail.com
+ **********************************************************************/
+
+
+/* Library Imports ****************************************************/
 import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 
-import { Button, Grow, Grid, CircularProgress, Modal, Backdrop, Fade, Snackbar } from "@material-ui/core";
+import { Button, Grow, Grid, CircularProgress, Snackbar } from "@material-ui/core";
 import MuiAlert from '@material-ui/lab/Alert';
-import { getData, deleteRequest } from "../../services/api";
-import { colors, useCommonStyles } from "../../assets/common";
-import { getServerURL } from "../../config/config";
 
 import ReactTimeAgo from 'react-time-ago';
+/**********************************************************************/
 
+/* Project Imports ****************************************************/
+import { getData, deleteData } from "../../services/api";
+import { useCommonStyles } from "../../assets/common";
+import { getServerURL } from "../../config/config";
 import { useStyles } from "./exports";
 
 import Comments from "../../components/Comments";
+/**********************************************************************/
 
 
+/**********************************************************************
+ * Function Name: Single
+ * Parameters: None
+ * Description: Component for the Single page.
+ * Notes: None
+ **********************************************************************/
 function Single() {  
-  //type is poetry, quotes, prose
   const { type, urlId } = useParams();
 
   const classes = useStyles();
   const common = useCommonStyles();
 
+  //Data type for these hooks are arrays.
+  //data can be poetry, quotes, or prose depending on the type.
   const [data, setData] = useState(null);
   const [_id, setId] = useState("");
 
+  /* Mobile View Handler ************************************************/
   const [isMobileView, setIsMobileView] = useState(
     window.matchMedia("(max-width: 1125px)").matches
   );
 
+  //Adds a listener to re-render the component when the window width changes.
   useEffect(() => {
     const handler = e => setIsMobileView(e.matches);
     window.matchMedia("(max-width: 1125px)").addListener(handler);
   }, []);
+  /**********************************************************************/
 
-  //prose, quotes, poetry
+/**********************************************************************
+ * Function Name: fetchData
+ * Parameters: isSubscribed variable ensures that the component isn't
+ * loaded until after the fetch request is completed.
+ * Description: Fetches the data of the item being looked at. 
+ * Notes: None
+ **********************************************************************/
   const fetchData = isSubscribed => {
+    //GETs the data from the server. URI determined by url params.
     getData(getServerURL(type + "/" + urlId), response => {
       if (isSubscribed) {
         setData(response);
@@ -44,12 +73,15 @@ function Single() {
     });
   };
 
+  //Run fetchData on the first render. When the second parameter is an 
+  //empty array, the useEffect function will only be executed on page load.
   useEffect(() => {
     let isSubscribed = true;
     isSubscribed && fetchData(isSubscribed);
     return () => (isSubscribed = false);
   }, []);
 
+  /* Snackbar ***********************************************************/
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
 
   const handleClose = (event, reason) => {
@@ -58,7 +90,10 @@ function Single() {
     }
     setIsSnackbarOpen(false);
   };
+  /**********************************************************************/
 
+
+  /* Delete Item Functionality ******************************************/
   const [isDeleteConfim, setIsDeleteConfirm] = useState(false);
 
   const handleDeleteBtnClick = () => {
@@ -68,9 +103,10 @@ function Single() {
   const handleDelete = () => {
     let url = "";
 
+    //type is defined based on the initial Select input value.
     switch(type){
       case "poetry":
-        url = "poems/delete/" + _id;
+        url = "poetry/delete/" + _id;
         break;
       case "quotes":
         url = "quotes/delete/" + _id;
@@ -83,8 +119,8 @@ function Single() {
         return 0;
     }
 
-    console.log("URL: ", getServerURL(url));
-    deleteRequest(
+    //Delete Request for DELETE on the server.
+    deleteData(
       getServerURL(url),
       response => {
         console.log(response);
@@ -93,8 +129,10 @@ function Single() {
 
     setIsSnackbarOpen(true);
   };
+  /**********************************************************************/
 
-
+  
+  //Dynamically determine the body content for the form.
   const bodyContent = (
     <div>
       {

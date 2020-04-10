@@ -1,22 +1,29 @@
+/***********************************************************************
+ * File Name: Edit.js
+ * Description: Edit page. This component has the form dynamically defined
+ * based on the data type (poetry, prose, quotes). Similar to the Create page.
+ * Author: Symon Ramos symonr12@gmail.com
+ **********************************************************************/
 
+
+/* Library Imports ****************************************************/
 import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { getData, postData, putData } from "../../services/api";
+import { Button, Grow, Grid, TextField, Paper, Snackbar, CircularProgress, IconButton  } from "@material-ui/core";
+import MuiAlert from '@material-ui/lab/Alert';
 
 import ViewColumnRoundedIcon from '@material-ui/icons/ViewColumnRounded';
 import ViewStreamRoundedIcon from '@material-ui/icons/ViewStreamRounded';
 
-import { Button, Grow, Grid, TextField, Paper, Snackbar, CircularProgress, IconButton  } from "@material-ui/core";
-import MuiAlert from '@material-ui/lab/Alert';
-
 import ReactTimeAgo from "react-time-ago";
+/**********************************************************************/
 
+/* Project Imports ****************************************************/
+import { getData, postData, putData } from "../../services/api";
 import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
-
-import { useStyles, kinds } from "./exports";
 
 import {
   submitBtn,
@@ -25,24 +32,38 @@ import {
   selectTextField
 } from "../../components/FormElements";
 
+import { useStyles, kinds } from "./exports";
+/**********************************************************************/
 
+
+/**********************************************************************
+ * Function Name: Edit
+ * Parameters: URL parameters include type and urlId. The URL route is 
+ * /:type/:urlId/edit.
+ * Description: Component for the Edit page.
+ * Notes: None
+ **********************************************************************/
 function Edit() {  
-  //type is poetry, prose, quotes
   const { type, urlId } = useParams();
 
   const classes = useStyles();
   const common = useCommonStyles();
 
+  //Data type for these hooks are arrays.
+  //data can be poetry, quotes, or prose depending on the type.
   const [data, setData] = useState(null);
 
+  /* Mobile View Handler ************************************************/
   const [isMobileView, setIsMobileView] = useState(
     window.matchMedia("(max-width: 1125px)").matches
   );
 
+  //Adds a listener to re-render the component when the window width changes.
   useEffect(() => {
     const handler = e => setIsMobileView(e.matches);
     window.matchMedia("(max-width: 1125px)").addListener(handler);
   }, []);
+  /**********************************************************************/
 
   
   /* Hooks and Handlers for Side View ******************** */
@@ -67,6 +88,12 @@ function Edit() {
     setKind(event.target.value);
   };
 
+  /**********************************************************************
+   * Function Name: handleWordLookup
+   * Parameters: Uses the "word" and "kind" hooks.
+   * Description: Component for the entire application.
+   * Notes: None
+   **********************************************************************/
   const handleWordLookup = () => {
     var data = { word: word, kind: kind };
 
@@ -130,17 +157,25 @@ function Edit() {
   const handleProseBodyChange = event => {
     setProseBody(event.target.value);
   };
-
   /******************************************************* */
 
-  //prose, quotes, poetry
+
+/**********************************************************************
+ * Function Name: fetchData
+ * Parameters: isSubscribed variable ensures that the component isn't
+ * loaded until after the fetch request is completed.
+ * Description: Fetches the data of the item being looked at. 
+ * Notes: None
+ **********************************************************************/
   const fetchData = isSubscribed => {
+    //GETs the data from the server. URI determined by url params.
     getData(getServerURL(type + "/" + urlId), response => {
       if (isSubscribed) {
         setData(response);
         setId(response._id);
         setIsPublic(response.isPublic);
 
+        //Get data and assign them to the appropriate forms.
         if(type == "poetry"){
           setPoemTitle(response.title);
           setPoemBody(response.body);
@@ -159,6 +194,8 @@ function Edit() {
     });
   };
 
+  //Run fetchData on the first render. When the second parameter is an 
+  //empty array, the useEffect function will only be executed on page load.
   useEffect(() => {
     let isSubscribed = true;
     isSubscribed && fetchData(isSubscribed);
@@ -166,7 +203,7 @@ function Edit() {
   }, []);
 
   /* Hooks and Handlers for Submit Form ****************** */
-  const { handleSubmit, register, watch, errors } = useForm();
+  const { handleSubmit } = useForm();
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
 
   const handleClose = (event, reason) => {
@@ -176,10 +213,18 @@ function Edit() {
     setIsSnackbarOpen(false);
   };
 
-  const onSubmit = event => {
+ /**********************************************************************
+ * Function Name: onSubmit
+ * Parameters: None (uses hooks)
+ * Description: Creates a put request with the forms as dynamically 
+ * defined based on the type of data being submitted.
+ * Notes: None
+ **********************************************************************/
+  const onSubmit = () => {
     let data = {};
     let url = "";
 
+    //type is defined based on the initial Select input value.
     switch(type){
       case "poetry":
         data = {
@@ -189,7 +234,7 @@ function Edit() {
           "notes": poemNotes,
           "isPublic": isPublic,
         };
-        url = "poems/edit/" + _id;
+        url = "poetry/edit/" + _id;
 
         break;
       case "quotes":
@@ -215,6 +260,7 @@ function Edit() {
         return 0;
     }
 
+    //Put Request to UPDATE on the server.
     putData(
       getServerURL(url),
       data,
@@ -228,7 +274,7 @@ function Edit() {
 
   /******************************************************* */
 
-
+  //Dynamically determine the body content for the form.
   const bodyContent = (
     <div>
       {

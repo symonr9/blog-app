@@ -1,5 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+/***********************************************************************
+ * File Name: SortFilterBar.js
+ * Description: Component for the SortFilterBar. This component is used 
+ * on the browse pages (for Poetry, Quotes, Prose) to sort and filter 
+ * the items. It is used on those pages.
+ * Author: Symon Ramos symonr12@gmail.com
+ **********************************************************************/
+
+/* Library Imports ****************************************************/
+import React from "react";
 
 import { Chip, Tooltip, TextField } from "@material-ui/core";
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -10,13 +18,43 @@ import FaceIcon from '@material-ui/icons/Face';
 import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
 import CasinoRoundedIcon from '@material-ui/icons/CasinoRounded';
 import ViewHeadlineRoundedIcon from '@material-ui/icons/ViewHeadlineRounded';
+/**********************************************************************/
 
+/* Project Imports ****************************************************/
 import { colors, useCommonStyles } from "../assets/common";
 
+/**********************************************************************/
+
+
+
+/**********************************************************************
+ * Function Name: SortFilterBar
+ * Parameters: The expected parameters differ based on the "type"  
+ * parameter that is passed into the component upon use. The types and 
+ * parameters are as follows: 
+ *      - poetry
+ *          - items, isSortMenuOpen, setIsSortMenuOpen, sortTitle, 
+ *          - setSortTitle, isFullText, setIsFullText, sortAuthor,
+ *          - setSortAuthor, sortDate, setSortDate, sortRandom, 
+ *          - setSortRandom, searchChange, setSearchChange
+ *      - quotes
+ *          - items, isSortMenuOpen, setIsSortMenuOpen, sortAuthor,
+ *          - setSortAuthor, sortDate, setSortDate, sortRandom, 
+ *          - setSortRandom, searchChange, setSearchChange
+ *      - prose
+ *          - items, isSortMenuOpen, setIsSortMenuOpen, sortTitle, 
+ *          - setSortTitle, isFullText, setIsFullText, sortAuthor,
+ *          - setSortAuthor, sortDate, setSortDate, sortRandom, 
+ *          - setSortRandom, searchChange, setSearchChange
+ * 
+ * Description: Component for the SortFilterBar. This component is used 
+ * on the browse pages (for Poetry, Quotes, Prose) to sort and filter 
+ * the items.
+ * Notes: None
+ **********************************************************************/
 const SortFilterBar = params => {
     const common = useCommonStyles();
 
-    //poetry, quotes, prose
     const type = params.type;
 
     const handleSortMenuOpen = () => {
@@ -90,6 +128,7 @@ const SortFilterBar = params => {
         onClick={handleIsFullText} />
     );
 
+    //Different JSX elemnts are rendered based on the type passed in.
     const searchBar = (
         <Autocomplete
         options={(params.items != null && params.items)}
@@ -101,6 +140,7 @@ const SortFilterBar = params => {
         />
     );
 
+    //Different JSX elemnts are rendered based on the type passed in.
     const sortMenu = (
         <span>
             {searchBar}

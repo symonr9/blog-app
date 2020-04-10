@@ -1,11 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import AddToHomescreen from 'react-add-to-homescreen';
+/***********************************************************************
+ * File Name: App.js
+ * Description: This is the root component that is rendered
+ * for the application. Here, react-router-dom routes and
+ * components are defined. The background is defined here as well.
+ * Author: Symon Ramos symonr12@gmail.com
+ **********************************************************************/
 
-import { colors } from "./assets/common";
+/* Library Imports ****************************************************/
+import React from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Provider } from "react-redux";
+
+import AddToHomescreen from 'react-add-to-homescreen';
+/**********************************************************************/
+
+/* Project Imports ****************************************************/
+import { colors } from "./assets/common";
+
 import store from "./services/redux/store";
 
 import NavBar from "./components/NavBar";
@@ -21,18 +35,19 @@ import Edit from "./pages/Edit/Edit";
 import Create from "./pages/Create/Create";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
+/**********************************************************************/
 
 const routes = [
-  { path: "/profile", name: "My Profile", Component: Profile, bgType: 1 },
-  { path: "/:type/:urlId/edit", name: "Edit", Component: Edit, bgType: 1 },
+  { path: "/profile", name: "My Profile", Component: Profile, bgType: 3 },
+  { path: "/:type/:urlId/edit", name: "Edit", Component: Edit, bgType: 3 },
   { path: "/:type/:urlId", name: "Single", Component: Single, bgType: 3 },
-  { path: "/poetry", name: "Poetry", Component: Poetry, bgType: 1 },
-  { path: "/quotes", name: "Quotes", Component: Quotes, bgType: 1 },
-  { path: "/prose", name: "Prose", Component: Prose, bgType: 1 },
-  { path: "/create", name: "Create", Component: Create, bgType: 1 },
-  { path: "/login", name: "Login", Component: Login, bgType: 1 },
-  { path: "/signup", name: "Signup", Component: Signup, bgType: 1 },
-  { path: "/", name: "Home", Component: Home, bgType: 1 }
+  { path: "/poetry", name: "Poetry", Component: Poetry, bgType: 3 },
+  { path: "/quotes", name: "Quotes", Component: Quotes, bgType: 3 },
+  { path: "/prose", name: "Prose", Component: Prose, bgType: 3 },
+  { path: "/create", name: "Create", Component: Create, bgType: 3 },
+  { path: "/login", name: "Login", Component: Login, bgType: 3 },
+  { path: "/signup", name: "Signup", Component: Signup, bgType: 3 },
+  { path: "/", name: "Home", Component: Home, bgType: 3 }
 ];
 
 const useStyles = makeStyles({
@@ -60,9 +75,18 @@ const useStyles = makeStyles({
   },
 });
 
+/**********************************************************************
+ * Function Name: App
+ * Parameters: None
+ * Description: Component for the entire application.
+ * Notes: None
+ **********************************************************************/
 function App() {
   const classes = useStyles();
 
+  //Add to HomeScreen alert message that appears when iOS or Android
+  //is used. When you add the app to the home screen, it becomes a PWA
+  //and is installed for offline use on mobile devices.
   const handleAddToHomescreenClick = () => {
     alert(`
       1. Open Share menu

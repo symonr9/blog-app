@@ -1,5 +1,12 @@
+/***********************************************************************
+ * File Name: common.js
+ * Description: Common stylings used throughout the entire application.
+ * Author: Symon Ramos symonr12@gmail.com
+ **********************************************************************/
+
 import { makeStyles } from "@material-ui/core/styles";
 
+/* Color Schemes ****************************************************/
 //grape and vanilla
 //export const colors = ["white", "#6e529b", "#5d3f6a", "#ffff99"];
 
@@ -20,9 +27,11 @@ export const colors = ["white", "#7ba9c3", "#84563c", "#fdfff5", "black"];
 
 //penguin, white, blue, black
 //export const colors = ["white", "#fdfff5", "#318ce7", "#080808"];
+/**********************************************************************/
 
 
 export const useCommonStyles = makeStyles({
+  /* Component Styles  ************************************************/
   bodyDiv: {
     height: "100%",
     width: "90vw",
@@ -47,6 +56,7 @@ export const useCommonStyles = makeStyles({
   spacingTop: {
     marginBottom: '4em'
   },
+  /* Item Card Styles  ************************************************/
   containerDiv: {
     display: 'flex',
     flexFlow: "row wrap",
@@ -108,6 +118,7 @@ export const useCommonStyles = makeStyles({
     position: 'relative',
     bottom: '0'
   },
+  /* Sort and Filter Styles  ************************************************/
   sortDiv: {
   },
   sortWidget: {

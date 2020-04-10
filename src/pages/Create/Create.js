@@ -1,17 +1,29 @@
+/***********************************************************************
+ * File Name: Create.js
+ * Description: Create page. The ability to create poetry, prose, and 
+ * quotes is here. A word-finder widget is also included in order to 
+ * allow the user to search for rhymes, synonyms, and more.
+ * Author: Symon Ramos symonr12@gmail.com
+ **********************************************************************/
+
+
+/* Library Imports ****************************************************/
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { postData } from "../../services/api";
-
-import ViewColumnRoundedIcon from '@material-ui/icons/ViewColumnRounded';
-import ViewStreamRoundedIcon from '@material-ui/icons/ViewStreamRounded';
-
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import MUIRichTextEditor from "mui-rte";
 
 import { Button, Grow, Grid, TextField, Paper, Snackbar, IconButton  } from "@material-ui/core";
 import MuiAlert from '@material-ui/lab/Alert';
 
+import ViewColumnRoundedIcon from '@material-ui/icons/ViewColumnRounded';
+import ViewStreamRoundedIcon from '@material-ui/icons/ViewStreamRounded';
+
+/**********************************************************************/
+
+/* Project Imports ****************************************************/
+import { postData } from "../../services/api";
+import { useStyles, kinds } from "./exports";
 import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
@@ -20,21 +32,31 @@ import {
   basicTextField,
   selectTextField
 } from "../../components/FormElements";
+/**********************************************************************/
 
-import { useStyles, kinds } from "./exports";
 
+
+/**********************************************************************
+ * Function Name: Create
+ * Parameters: None
+ * Description: Component for the Create page.
+ * Notes: None
+ **********************************************************************/
 function Create() {
   const classes = useStyles();
   const common = useCommonStyles();
 
+  /* Mobile View Handler ************************************************/
   const [isMobileView, setIsMobileView] = useState(
     window.matchMedia("(max-width: 1125px)").matches
   );
 
+  //Adds a listener to re-render the component when the window width changes.
   useEffect(() => {
     const handler = e => setIsMobileView(e.matches);
     window.matchMedia("(max-width: 1125px)").addListener(handler);
   }, []);
+  /**********************************************************************/
 
 
   /* Hooks and Handlers for Side View ******************** */
@@ -59,9 +81,16 @@ function Create() {
     setKind(event.target.value);
   };
 
+  /**********************************************************************
+   * Function Name: handleWordLookup
+   * Parameters: Uses the "word" and "kind" hooks.
+   * Description: Component for the entire application.
+   * Notes: None
+   **********************************************************************/
   const handleWordLookup = () => {
     var data = { word: word, kind: kind };
 
+    //Execute API request to look for words.
     postData(getServerURL("words"), data, response => {
       const { data } = response;
       let temp = [];
@@ -136,6 +165,7 @@ function Create() {
     setProseBody(event.target.value);
   };
 
+  //Defines the options for the dropdown and the form that is dynamically rendered.
   const types = [
     {
       value: "poetry",
@@ -173,11 +203,10 @@ function Create() {
       )
     },
   ];
-
   /******************************************************* */
 
   /* Hooks and Handlers for Submit Form ****************** */
-  const { handleSubmit, register, watch, errors } = useForm();
+  const { handleSubmit } = useForm();
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
 
   const handleClose = (event, reason) => {
@@ -202,10 +231,18 @@ function Create() {
     setProseBody("");
   };
 
-  const onSubmit = event => {
+ /**********************************************************************
+ * Function Name: onSubmit
+ * Parameters: None (uses hooks)
+ * Description: Creates a post request with the forms as dynamically 
+ * defined based on the type of data being submitted.
+ * Notes: None
+ **********************************************************************/
+  const onSubmit = () => {
     let data = {};
     let url = "";
 
+    //type is defined based on the initial Select input value.
     switch(type){
       case "poetry":
         data = {
@@ -238,7 +275,7 @@ function Create() {
         return 0;
     }
 
-    
+    //Post Request to CREATE on the server.
     postData(
       getServerURL(url),
       data,
@@ -250,10 +287,10 @@ function Create() {
     clearForm();
     setIsSnackbarOpen(true);
   };
-
   /******************************************************* */
 
 
+  //Define the body.
   const body = (
     <Grid container>
       <Grid item xs={12} className={!isSideView && (classes.bodyDiv) || isSideView && (classes.sideBodyDiv)}>
@@ -280,7 +317,6 @@ function Create() {
         </form>
         </div>
         <div className={!isSideView && (classes.wordLookupDiv) || isSideView && (classes.sideWordLookupDiv)}>
-      
           <TextField
             label="Look a word up"
             variant="outlined"
@@ -293,8 +329,7 @@ function Create() {
             "What would you like to explore?",
             kind,
             handleKindChange,
-            kinds
-            ))
+            kinds))
             ||
             (isMobileView && (
               selectTextField(
@@ -302,8 +337,7 @@ function Create() {
                 "What to search?",
                 kind,
                 handleKindChange,
-                kinds
-                )
+                kinds)
             ))
           }
           <Button 
