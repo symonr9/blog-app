@@ -118,7 +118,7 @@ export const putData = (url, body, successCb) => {
  * Description: Api request for DELETE operation.
  * Notes: None
  **********************************************************************/
-export const deleteRequest = (url, successCb) => {
+export const deleteData = (url, successCb) => {
 	axios
 		.delete(url)
 		.then(response => successCb(response.data))

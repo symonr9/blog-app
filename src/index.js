@@ -6,41 +6,6 @@
  * Author: Symon Ramos symonr12@gmail.com
  **********************************************************************/
 
-/* Library Imports ****************************************************/
-
-/**********************************************************************/
-
-/* Project Imports ****************************************************/
-
-/**********************************************************************/
-
-/**********************************************************************
- * Function Name: App
- * Parameters: None
- * Description: Component for the entire application.
- * Notes: None
- **********************************************************************/
-
-
-  /* Mobile View Handler ************************************************/
-  const [isMobileView, setIsMobileView] = useState(
-    window.matchMedia("(max-width: 1125px)").matches
-  );
-
-  //Adds a listener to re-render the component when the window width changes.
-  useEffect(() => {
-    const handler = e => setIsMobileView(e.matches);
-    window.matchMedia("(max-width: 1125px)").addListener(handler);
-  }, []);
-  /**********************************************************************/
-
-
-
-
-
-
-
-
 
 /* Library Imports ****************************************************/
 import React from 'react';
