@@ -26,7 +26,6 @@
   const [isMobileView, setIsMobileView] = useState(
     window.matchMedia("(max-width: 1125px)").matches
   );
-  const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
 
   //Adds a listener to re-render the component when the window width changes.
   useEffect(() => {

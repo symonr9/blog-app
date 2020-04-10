@@ -1,33 +1,63 @@
+/***********************************************************************
+ * File Name: Poetry.js
+ * Description: Poetry page. Component to browse poetry. Utilizes 
+ * abstracted ItemCard and SortFilterBar components shared with the 
+ * Prose and Quotes components.
+ * Author: Symon Ramos symonr12@gmail.com
+ **********************************************************************/
+
+/* Library Imports ****************************************************/
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 
-import { Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
+import { Grow, Grid, CircularProgress } from "@material-ui/core";
+/**********************************************************************/
 
+/* Project Imports ****************************************************/
 import { getData } from "../../services/api";
-import { colors, useCommonStyles } from "../../assets/common";
+import { useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
 import ItemCard from '../../components/ItemCard';
 import SortFilterBar from '../../components/SortFilterBar';
 
 import { useStyles } from "./exports";
+/**********************************************************************/
 
+
+/**********************************************************************
+ * Function Name: Poetry
+ * Parameters: None
+ * Description: Component for the Poetry section.
+ * Notes: None
+ **********************************************************************/
 function Poetry() {
   const classes = useStyles();
   const common = useCommonStyles();
 
+  //Data type for these hooks are arrays.
   const [originalPoetry, setOriginalPoetry] = useState(null);
   const [poetry, setPoetry] = useState(null);
 
+  /* Mobile View Handler ************************************************/
   const [isMobileView, setIsMobileView] = useState(
     window.matchMedia("(max-width: 1125px)").matches
   );
 
+  //Adds a listener to re-render the component when the window width changes.
   useEffect(() => {
     const handler = e => setIsMobileView(e.matches);
     window.matchMedia("(max-width: 1125px)").addListener(handler);
   }, []);
+  /**********************************************************************/
 
+
+/**********************************************************************
+ * Function Name: fetchData
+ * Parameters: isSubscribed variable ensures that the component isn't
+ * loaded until after the fetch request is completed.
+ * Description: Fetches the data of the items being looked at. 
+ * Notes: None
+ **********************************************************************/
   const fetchData = isSubscribed => {
     getData(getServerURL("poetry"), response => {
       if (isSubscribed) {
@@ -36,11 +66,14 @@ function Poetry() {
           let bTitle = b.title.toUpperCase();
           return (aTitle < bTitle) ? -1 : (aTitle > bTitle) ? 1 : 0;
         }));
+
         setOriginalPoetry(response);
       }
     });
   };
 
+  //Run fetchData on the first render. When the second parameter is an 
+  //empty array, the useEffect function will only be executed on page load.
   useEffect(() => {
     let isSubscribed = true;
     isSubscribed && fetchData(isSubscribed);
@@ -49,6 +82,10 @@ function Poetry() {
 
 
   //SORT FILTER BAR EFFECTS **************************************
+  //These hooks are passed into the SortFilterBar component and used
+  //there. They have to be defined in the parent component in order to 
+  //perform operations on the parent component data hooks to render 
+  //other parts of the page.
   const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
   const [sortTitle, setSortTitle] = useState(false);
   const [sortAuthor, setSortAuthor] = useState(false);
@@ -63,6 +100,9 @@ function Poetry() {
 
   const [searchChange, setSearchChange] = useState("");
 
+  //Runs whenever the second parameter hook is changed.
+  //If the setter is passed into a child component and called, 
+  //the useEffect() will still run.
   useEffect(() => {
     if(poetry != null){
       setPoetry(poetry.sort((a,b) => {

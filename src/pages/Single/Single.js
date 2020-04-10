@@ -39,6 +39,7 @@ function Single() {
   const classes = useStyles();
   const common = useCommonStyles();
 
+  //Data type for these hooks are arrays.
   //data can be poetry, quotes, or prose depending on the type.
   const [data, setData] = useState(null);
   const [_id, setId] = useState("");

@@ -1,34 +1,62 @@
+/***********************************************************************
+ * File Name: Prose.js
+ * Description: Prose page. Component to browse prose. Utilizes 
+ * abstracted ItemCard and SortFilterBar components shared with the 
+ * Poetry and Quotes components.
+ * Author: Symon Ramos symonr12@gmail.com
+ **********************************************************************/
+
+/* Library Imports ****************************************************/
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 
-import { Paper, Grow, Grid, CircularProgress } from "@material-ui/core";
+import { Grow, Grid, CircularProgress } from "@material-ui/core";
+/**********************************************************************/
 
+/* Project Imports ****************************************************/
 import { getData } from "../../services/api";
-import { colors, useCommonStyles } from "../../assets/common";
+import { useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
 import ItemCard from '../../components/ItemCard';
 import SortFilterBar from '../../components/SortFilterBar';
 
 import { useStyles } from "./exports";
+/**********************************************************************/
 
+
+/**********************************************************************
+ * Function Name: Prose
+ * Parameters: None
+ * Description: Component for the Prose section.
+ * Notes: None
+ **********************************************************************/
 function Prose() {
   const classes = useStyles();
   const common = useCommonStyles();
 
+  //Data type for these hooks are arrays.
   const [prose, setProse] = useState(null);
 
+  /* Mobile View Handler ************************************************/
   const [isMobileView, setIsMobileView] = useState(
     window.matchMedia("(max-width: 1125px)").matches
   );
 
+  //Adds a listener to re-render the component when the window width changes.
   useEffect(() => {
     const handler = e => setIsMobileView(e.matches);
     window.matchMedia("(max-width: 1125px)").addListener(handler);
   }, []);
+  /**********************************************************************/
 
+/**********************************************************************
+ * Function Name: fetchData
+ * Parameters: isSubscribed variable ensures that the component isn't
+ * loaded until after the fetch request is completed.
+ * Description: Fetches the data of the items being looked at. 
+ * Notes: None
+ **********************************************************************/
   const fetchData = isSubscribed => {
-    console.log(getServerURL("prose"));
     getData(getServerURL("prose"), response => {
       if (isSubscribed) {
         setProse(response);
@@ -36,6 +64,8 @@ function Prose() {
     });
   };
 
+  //Run fetchData on the first render. When the second parameter is an 
+  //empty array, the useEffect function will only be executed on page load.
   useEffect(() => {
     let isSubscribed = true;
     isSubscribed && fetchData(isSubscribed);
@@ -43,6 +73,10 @@ function Prose() {
   }, []);
 
   //SORT FILTER BAR EFFECTS **************************************
+  //These hooks are passed into the SortFilterBar component and used
+  //there. They have to be defined in the parent component in order to 
+  //perform operations on the parent component data hooks to render 
+  //other parts of the page.
   const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
   const [sortTitle, setSortTitle] = useState(false);
   const [sortAuthor, setSortAuthor] = useState(false);
@@ -57,6 +91,9 @@ function Prose() {
 
   const [searchChange, setSearchChange] = useState("");
 
+  //Runs whenever the second parameter hook is changed.
+  //If the setter is passed into a child component and called, 
+  //the useEffect() will still run.
   useEffect(() => {
     if(prose != null){
       setProse(prose.sort((a,b) => {
