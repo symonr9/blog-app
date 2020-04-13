@@ -31,6 +31,5 @@ export default function rootReducer(state = {}, action) {
     return {
       username: usernameReducer(state.username, action),
       userToken: userTokenReducer(state.userToken, action)
-
     };
   }

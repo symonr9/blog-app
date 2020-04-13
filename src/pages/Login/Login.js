@@ -1,53 +1,122 @@
-import React, { useState, useEffect } from "react";
+/***********************************************************************
+ * File Name: Login.js
+ * Description: Login page. The ability to login and signup here.
+ * Author: Symon Ramos symonr12@gmail.com
+ **********************************************************************/
+
+ /* Library Imports ****************************************************/
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { postData } from "../../services/api";
+import { NavLink, useHistory } from "react-router-dom";
+
 import { Paper, Grow, TextField, Grid } from "@material-ui/core";
+import MuiAlert from '@material-ui/lab/Alert';
+/**********************************************************************/
+
+/* Project Imports ****************************************************/
+import { postData } from "../../services/api";
+import { useStyles } from "./exports";
 import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
+
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../services/redux/actions";
 
 import {
   submitBtn,
   basicTextField
 } from "../../components/FormElements";
+/**********************************************************************/
 
-import { useStyles } from "./exports";
 
+/**********************************************************************
+ * Function Name: Login
+ * Parameters: None
+ * Description: Component for the Login page.
+ * Notes: None
+ **********************************************************************/
 const Login = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  
+  const session_username = useSelector(state => state.username);
+  const session_token = useSelector(state => state.userToken);
+
   const classes = useStyles();
   const common = useCommonStyles();
 
+  /* Mobile View Handler ************************************************/
   const [isMobileView, setIsMobileView] = useState(
     window.matchMedia("(max-width: 1125px)").matches
   );
 
+  //Adds a listener to re-render the component when the window width changes.
   useEffect(() => {
     const handler = e => setIsMobileView(e.matches);
     window.matchMedia("(max-width: 1125px)").addListener(handler);
   }, []);
+  /**********************************************************************/
 
-  const { handleSubmit, register, watch, errors } = useForm();
+  /* Hooks and Handlers For Submit Form ****************** */
+  const { handleSubmit } = useForm();
 
-  const onSubmit = data => {
-    console.log(data);
-    postData(getServerURL("users/login"), data,
-      response => {
-        const { token } = response;
-        console.log(token);
-      }
-    );
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleUsernameChange = event => {
+    setUsername(event.target.value);
   };
+
+  const handlePasswordChange = event => {
+    setPassword(event.target.value);
+  };
+
+
+/**********************************************************************
+ * Function Name: onSubmit
+ * Parameters: None (uses hooks)
+ * Description: Creates a post request with the forms as dynamically 
+ * defined based on the type of data being submitted.
+ * Notes: None
+ **********************************************************************/
+  const onSubmit = () => {
+    let data = {
+      "username": username,
+      "password": password
+    };
+    let url = "users/login";
+
+    postData(getServerURL("users/login"), data,
+    response => {
+      const { token, username } = response;
+
+      //Save login credentials into redux store for cross-application use.
+      dispatch(loginUser(token, username));
+
+      //Redirect to home page.
+      history.push("/");
+    }
+    );
+
+  };
+
+  /******************************************************* */
+
+  
 
   const body = (
     <Grid container>
       <Grid item xs={12}>
       {!isMobileView && (<div className={common.spacingTop}></div>)}
         <h1>Login</h1>
+        Logged In User: {session_username}
+        Token: {session_token}
       </Grid>
       <Grid item xs={12}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {basicTextField("email", "Email")}
-          {basicTextField("password", "Password")}
+          {basicTextField("username", "Username", handleUsernameChange)}
+          {basicTextField("password", "Password", handlePasswordChange)}
           {submitBtn("Login")}
         </form>
       </Grid>

@@ -36,6 +36,7 @@ const routes = [
   { path: "/poetry", name: "Poetry", icon: <MenuBookRoundedIcon /> },
   { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon /> },
   { path: "/prose", name: "Prose", icon: <DescriptionRoundedIcon />},
+  { path: "/login", name: "Login", icon: <SupervisorAccountRoundedIcon/> },
 ];
 
 /*
