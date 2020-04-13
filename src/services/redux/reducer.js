@@ -1,19 +1,36 @@
 import { combineReducers } from "redux";
 
 import {
-    TEST
+    LOGIN_USER,
+    LOGOUT_USER
 } from './actions';
 
-function testReducer(state = [], action) {
+function usernameReducer(state = null, action) {
     switch (action.type) {
-      default:
-        return state;
+        case LOGIN_USER:
+            return action.username;
+        case LOGOUT_USER:
+            return null;
+        default:
+            return state;
     }
-  }
+};
 
+function userTokenReducer(state = null, action) {
+  switch (action.type) {
+      case LOGIN_USER:
+          return action.userToken;
+      case LOGOUT_USER:
+          return null;
+      default:
+          return state;
+  }
+};
 
 export default function rootReducer(state = {}, action) {
     return {
-      test: testReducer(state.test, action)
+      username: usernameReducer(state.username, action),
+      userToken: userTokenReducer(state.userToken, action)
+
     };
   }
