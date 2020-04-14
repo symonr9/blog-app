@@ -55,6 +55,7 @@ function Single() {
   //data can be poetry, quotes, or prose depending on the type.
   const [data, setData] = useState(null);
   const [_id, setId] = useState("");
+  const [isValidUser, setIsValidUser] = useState(false);
 
   /* Mobile View Handler ************************************************/
   const [isMobileView, setIsMobileView] = useState(
@@ -81,6 +82,10 @@ function Single() {
       if (isSubscribed) {
         setData(response);
         setId(response._id);
+
+        if((response.createdBy === sessionUsername) && (isLoggedIn)){
+          setIsValidUser(true);
+        }
       }
     });
   };
@@ -115,7 +120,7 @@ function Single() {
   const handleDelete = () => {
     let url = "";
 
-    if(isLoggedIn){
+    if(isValidUser){
       //type is defined based on the initial Select input value.
       switch(type){
         case "poetry":
@@ -137,15 +142,13 @@ function Single() {
         getServerURL(url),
         response => {
           console.log(response);
+          setIsSnackbarOpen(true);
+          setTimeout(() => {
+            history.push("/");
+          }, 2000);
         }
       );
     }
-
-    setIsSnackbarOpen(true);
-
-    setTimeout(() => {
-      history.push("/");
-    }, 2000);
   };
   /**********************************************************************/
 
@@ -214,7 +217,7 @@ function Single() {
               </div>
             ))}
 
-          {isLoggedIn && (
+          {isValidUser && (
             <span>
               <NavLink to={`/${type}/${urlId}/edit`}>
                   <Button variant="contained">Edit</Button>
