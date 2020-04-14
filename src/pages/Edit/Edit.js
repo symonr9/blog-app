@@ -240,52 +240,57 @@ function Edit() {
     let data = {};
     let url = "";
 
-    //type is defined based on the initial Select input value.
-    switch(type){
-      case "poetry":
-        data = {
-          "title": poemTitle,
-          "body": poemBody, 
-          "type": poemType,
-          "notes": poemNotes,
-          "isPublic": isPublic,
-        };
-        url = "poetry/edit/" + _id;
+    if(isLoggedIn){
+      //type is defined based on the initial Select input value.
+      switch(type){
+        case "poetry":
+          data = {
+            "title": poemTitle,
+            "body": poemBody, 
+            "type": poemType,
+            "notes": poemNotes,
+            "isPublic": isPublic,
+            "createdBy": sessionUsername,
+          };
+          url = "poetry/edit/" + _id;
 
-        break;
-      case "quotes":
-        data = {
-          "text": quoteText,
-          "author": quoteAuthor,
-          "isPublic": isPublic,
-        }; 
-        url = "quotes/edit/" + _id;
-      
-        break;
-      case "prose":
-        data = {
-          "title": proseTitle,
-          "body": proseBody,
-          "isPublic": isPublic,
-        };
-        url = "prose/edit/" + _id;
+          break;
+        case "quotes":
+          data = {
+            "text": quoteText,
+            "author": quoteAuthor,
+            "isPublic": isPublic,
+            "createdBy": sessionUsername,
+          }; 
+          url = "quotes/edit/" + _id;
+        
+          break;
+        case "prose":
+          data = {
+            "title": proseTitle,
+            "body": proseBody,
+            "isPublic": isPublic,
+            "createdBy": sessionUsername,
+          };
+          url = "prose/edit/" + _id;
 
-        break;
-      default:
-        console.log("Something went wrong..."); 
-        return 0;
+          break;
+        default:
+          console.log("Something went wrong..."); 
+          return 0;
+      }
+
+      //Put Request to UPDATE on the server.
+      putData(
+        getServerURL(url),
+        data,
+        response => {
+          console.log(response);
+          setIsSnackbarOpen(true);
+        }
+      );
     }
 
-    //Put Request to UPDATE on the server.
-    putData(
-      getServerURL(url),
-      data,
-      response => {
-        console.log(response);
-      }
-    );
-
-    setIsSnackbarOpen(true);
   };
 
   /******************************************************* */
