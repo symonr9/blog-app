@@ -100,18 +100,18 @@ const Signup = () => {
       "username": username,
       "password": password
     };
+    
+      postData(getServerURL("users/signup"), data,
+        response => {
+          const { token, username } = response;
 
-    postData(getServerURL("users/signup"), data,
-    response => {
-      const { token, username } = response;
+          //Save login credentials into redux store for cross-application use.
+          dispatch(loginUser(token, username));
 
-      //Save login credentials into redux store for cross-application use.
-      dispatch(loginUser(token, username));
-
-      //Redirect to home page.
-      history.push("/");
-    }
-    );
+          //Redirect to home page.
+          history.push("/");
+        },
+      );
 
   };
   /******************************************************* */
