@@ -6,8 +6,10 @@
 
  /* Library Imports ****************************************************/
  import React, { useEffect, useState } from "react";
+ import { NavLink } from "react-router-dom";
  import { useForm } from "react-hook-form";
  
+ import { useDispatch, useSelector } from "react-redux";
  import { useHistory } from "react-router-dom";
  
  import { Grow, Grid } from "@material-ui/core";
@@ -19,7 +21,6 @@
  import { colors, useCommonStyles } from "../../assets/common";
  import { getServerURL } from "../../config/config";
  
- import { useDispatch, useSelector } from "react-redux";
  import { loginUser } from "../../services/redux/actions";
  
  import {
@@ -43,12 +44,12 @@ const Signup = () => {
   //!! checks for undefined, null, and empty values
   const isLoggedIn = !!sessionUsername;
 
-  if(isLoggedIn){
-
-  }
-
   const history = useHistory();
   const dispatch = useDispatch();
+  
+  if(isLoggedIn){
+    history.push("/redirect");
+  }
   /**********************************************************************/
 
   const classes = useStyles();
