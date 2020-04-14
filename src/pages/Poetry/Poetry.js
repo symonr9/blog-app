@@ -62,11 +62,18 @@ function Poetry() {
     getData(getServerURL("poetry"), response => {
       if (isSubscribed) {
         setPoetry(response.sort((a,b) => {
-          let aTitle = a.title.toUpperCase();
-          let bTitle = b.title.toUpperCase();
-          return (aTitle < bTitle) ? -1 : (aTitle > bTitle) ? 1 : 0;
+          let aItem = new Date(a.createdAt).getTime();
+          let bItem = new Date(b.createdAt).getTime();
+  
+          let isDesc = sortDescDate;
+          setSortDescDate(!sortDescDate);
+          
+          if(isDesc){
+            return (aItem > bItem) ? -1 : (aItem < bItem) ? 1 : 0;
+          }
+          return (aItem < bItem) ? -1 : (aItem > bItem) ? 1 : 0;
         }));
-
+        
         setOriginalPoetry(response);
       }
     });

@@ -8,7 +8,7 @@
 //Change this variable locally to use development server.
 //Please make sure not to add this file into future commits if pushing 
 //to master
-const isDevelopmentServer = true;
+const isDevelopmentServer = false;
 /**********************************************************************/
 
 const PROD_URL = "https://blog-app-backend-sy.herokuapp.com/";

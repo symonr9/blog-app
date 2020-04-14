@@ -258,50 +258,55 @@ function Create() {
     let data = {};
     let url = "";
 
-    //type is defined based on the initial Select input value.
-    switch(type){
-      case "poetry":
-        data = {
-          "title": poemTitle,
-          "body": poemBody, 
-          "type": poemType,
-          "notes": poemNotes
-        };
-        url = "poetry/create";
+    if(isLoggedIn){
+      //type is defined based on the initial Select input value.
+      switch(type){
+        case "poetry":
+          data = {
+            "title": poemTitle,
+            "body": poemBody, 
+            "type": poemType,
+            "notes": poemNotes,
+            "createdBy": sessionUsername
+          };
+          url = "poetry/create";
 
-        break;
-      case "quotes":
-        data = {
-          "text": quoteText,
-          "author": quoteAuthor
-        }; 
-        url = "quotes/create";
-      
-        break;
-      case "prose":
-        data = {
-          "title": proseTitle,
-          "body": proseBody
-        };
-        url = "prose/create";
+          break;
+        case "quotes":
+          data = {
+            "text": quoteText,
+            "author": quoteAuthor,
+            "createdBy": sessionUsername
+          }; 
+          url = "quotes/create";
+        
+          break;
+        case "prose":
+          data = {
+            "title": proseTitle,
+            "body": proseBody,
+            "createdBy": sessionUsername
+          };
+          url = "prose/create";
 
-        break;
-      default:
-        console.log("Something went wrong..."); 
-        return 0;
-    }
-
-    //Post Request to CREATE on the server.
-    postData(
-      getServerURL(url),
-      data,
-      response => {
-        console.log(response);
+          break;
+        default:
+          console.log("Something went wrong..."); 
+          return 0;
       }
-    );
+
+      //Post Request to CREATE on the server.
+      postData(
+        getServerURL(url),
+        data,
+        response => {
+          console.log(response);
+          clearForm();
+          setIsSnackbarOpen(true);
+        }
+      );
+    }
     
-    clearForm();
-    setIsSnackbarOpen(true);
   };
   /******************************************************* */
 

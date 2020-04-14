@@ -59,7 +59,18 @@ function Prose() {
   const fetchData = isSubscribed => {
     getData(getServerURL("prose"), response => {
       if (isSubscribed) {
-        setProse(response);
+        setProse(response.sort((a,b) => {
+          let aItem = new Date(a.createdAt).getTime();
+          let bItem = new Date(b.createdAt).getTime();
+  
+          let isDesc = sortDescDate;
+          setSortDescDate(!sortDescDate);
+          
+          if(isDesc){
+            return (aItem > bItem) ? -1 : (aItem < bItem) ? 1 : 0;
+          }
+          return (aItem < bItem) ? -1 : (aItem > bItem) ? 1 : 0;
+        }));
       }
     });
   };

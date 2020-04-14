@@ -1,24 +1,70 @@
+/***********************************************************************
+ * File Name: Profile.js
+ * Description: Profile page. 
+ * Author: Symon Ramos symonr12@gmail.com
+ **********************************************************************/
+
+ /* Library Imports ****************************************************/
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
-import { Paper, Grow, Grid } from "@material-ui/core";
+import { useHistory } from "react-router-dom"; 
+import { useSelector } from "react-redux";
 
+import MUIRichTextEditor from "mui-rte";
+
+import { Button, Grow, Grid, TextField, Paper, Snackbar, IconButton  } from "@material-ui/core";
+import MuiAlert from '@material-ui/lab/Alert';
+/**********************************************************************/
+
+/* Project Imports ****************************************************/
+import { postData } from "../../services/api";
+import { useStyles, kinds } from "./exports";
 import { colors, useCommonStyles } from "../../assets/common";
+import { getServerURL } from "../../config/config";
 
-import { useStyles } from "./exports";
+import {
+  submitBtn,
+  basicTextField,
+  selectTextField
+} from "../../components/FormElements";
+/**********************************************************************/
 
+
+/**********************************************************************
+ * Function Name: Profile
+ * Parameters: None
+ * Description: Component for the Profile page.
+ * Notes: None
+ **********************************************************************/
 function Profile() {
+  /* Authentication Handling ********************************************/
+  const sessionUsername = useSelector(state => state.username);
+
+  //!! checks for undefined, null, and empty values
+  const isLoggedIn = !!sessionUsername;
+
+  const history = useHistory();
+
+  if(!isLoggedIn){
+    history.push("/redirect");
+  }
+  /**********************************************************************/
+  
   const classes = useStyles();
   const common = useCommonStyles();
 
+  /* Mobile View Handler ************************************************/
   const [isMobileView, setIsMobileView] = useState(
     window.matchMedia("(max-width: 1125px)").matches
   );
 
+  //Adds a listener to re-render the component when the window width changes.
   useEffect(() => {
     const handler = e => setIsMobileView(e.matches);
     window.matchMedia("(max-width: 1125px)").addListener(handler);
   }, []);
+  /**********************************************************************/
 
   const body = (
     <Grid container>
