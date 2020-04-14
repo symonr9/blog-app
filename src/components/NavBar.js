@@ -158,7 +158,7 @@ var styles = {
 function NavBar() {
   /* Authentication Handling ********************************************/
   const username = useSelector(state => state.username);
-  console.log("User logged in: ", username);
+
   //!! checks for undefined, null, and empty values
   const isLoggedIn = !!username;
 

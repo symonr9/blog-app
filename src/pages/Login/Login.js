@@ -1,6 +1,6 @@
 /***********************************************************************
  * File Name: Login.js
- * Description: Login page. The ability to login and signup here.
+ * Description: Login page. The ability to login here.
  * Author: Symon Ramos symonr12@gmail.com
  **********************************************************************/
 
@@ -8,10 +8,9 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-import { Paper, Grow, TextField, Grid } from "@material-ui/core";
-import MuiAlert from '@material-ui/lab/Alert';
+import { Grow, Grid } from "@material-ui/core";
 /**********************************************************************/
 
 /* Project Imports ****************************************************/
@@ -25,7 +24,8 @@ import { loginUser } from "../../services/redux/actions";
 
 import {
   submitBtn,
-  basicTextField
+  basicTextField,
+  passwordTextField
 } from "../../components/FormElements";
 /**********************************************************************/
 
@@ -39,9 +39,6 @@ import {
 const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  
-  const session_username = useSelector(state => state.username);
-  const session_token = useSelector(state => state.userToken);
 
   const classes = useStyles();
   const common = useCommonStyles();
@@ -85,7 +82,6 @@ const Login = () => {
       "username": username,
       "password": password
     };
-    let url = "users/login";
 
     postData(getServerURL("users/login"), data,
     response => {
@@ -100,23 +96,19 @@ const Login = () => {
     );
 
   };
-
   /******************************************************* */
 
-  
 
   const body = (
     <Grid container>
       <Grid item xs={12}>
       {!isMobileView && (<div className={common.spacingTop}></div>)}
         <h1>Login</h1>
-        Logged In User: {session_username}
-        Token: {session_token}
       </Grid>
       <Grid item xs={12}>
         <form onSubmit={handleSubmit(onSubmit)}>
           {basicTextField("username", "Username", handleUsernameChange)}
-          {basicTextField("password", "Password", handlePasswordChange)}
+          {passwordTextField("password", "Password", handlePasswordChange)}
           {submitBtn("Login")}
         </form>
       </Grid>
