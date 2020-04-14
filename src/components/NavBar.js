@@ -11,6 +11,9 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -28,23 +31,28 @@ import { slide as Menu } from "react-burger-menu";
 /* Project Imports ****************************************************/
 import { colors } from "../assets/common";
 
+import { logoutUser } from "../services/redux/actions";
 /**********************************************************************/
 
-const routes = [
+
+const loggedInRoutes = [
+  { path: "/", name: "Home", icon: <HomeRounded />, isLogOut: false },
+  { path: "/create", name: "Create", icon: <AddCircleOutlineRoundedIcon />, isLogOut: false },
+  { path: "/poetry", name: "Poetry", icon: <MenuBookRoundedIcon />, isLogOut: false },
+  { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon />, isLogOut: false },
+  { path: "/prose", name: "Prose", icon: <DescriptionRoundedIcon />, isLogOut: false },
+  { path: "/profile", name: "Profile", icon: <PersonRoundedIcon />, isLogOut: false },
+  { path: "/", name: "Logout", icon: <SupervisorAccountRoundedIcon/>, isLogOut: true },
+];
+
+const loggedOutRoutes = [
   { path: "/", name: "Home", icon: <HomeRounded /> },
-  { path: "/create", name: "Create", icon: <AddCircleOutlineRoundedIcon /> },
   { path: "/poetry", name: "Poetry", icon: <MenuBookRoundedIcon /> },
   { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon /> },
   { path: "/prose", name: "Prose", icon: <DescriptionRoundedIcon />},
   { path: "/login", name: "Login", icon: <SupervisorAccountRoundedIcon/> },
-];
-
-/*
-  //FIXME: In Development
-  { path: "/login", name: "Login", icon: <SupervisorAccountRoundedIcon/> },
   { path: "/signup", name: "Signup", icon: <SupervisorAccountRoundedIcon/> },
-  { path: "/profile", name: "Profile", icon: <PersonRoundedIcon /> },
-*/
+];
 
 const useStyles = makeStyles({
   navBarDiv: {
@@ -148,6 +156,16 @@ var styles = {
  * Notes: None
  **********************************************************************/
 function NavBar() {
+  /* Authentication Handling ********************************************/
+  const username = useSelector(state => state.username);
+  console.log("User logged in: ", username);
+  //!! checks for undefined, null, and empty values
+  const isLoggedIn = !!username;
+
+  const history = useHistory();
+  const dispatch = useDispatch();
+  /**********************************************************************/
+
   const classes = useStyles();
 
 
@@ -164,17 +182,38 @@ function NavBar() {
   }, []);
   /**********************************************************************/
 
+  const logout = () => {
+    //Save login credentials into redux store for cross-application use.
+    dispatch(logoutUser());
+
+    //Redirect to home page.
+    history.push("/");
+  };
 
   const body = (
     <div>
-      {routes.map(({ path, name, icon }) => (
-        <NavLink to={path} key={name}>
-          <Button className={classes.navBtn} variant="contained">
-            {icon}
-            {name}
-          </Button>
-        </NavLink>
-      ))}
+      {isLoggedIn && (
+        loggedInRoutes.map(({ path, name, icon, isLogOut }) => (
+          <NavLink to={path} key={name}>
+            <Button className={classes.navBtn} variant="contained" onClick={(isLogOut && logout)}>
+              {icon}
+              {name}
+            </Button>
+          </NavLink>
+        ))
+      )
+      ||
+      !isLoggedIn && (
+        loggedOutRoutes.map(({ path, name, icon }) => (
+          <NavLink to={path} key={name}>
+            <Button className={classes.navBtn} variant="contained">
+              {icon}
+              {name}
+            </Button>
+          </NavLink>
+        ))
+      )
+      }
     </div>
   );
 
