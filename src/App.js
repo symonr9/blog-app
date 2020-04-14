@@ -35,6 +35,8 @@ import Edit from "./pages/Edit/Edit";
 import Create from "./pages/Create/Create";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
+
+import Redirect from "./pages/Redirect/Redirect";
 /**********************************************************************/
 
 const routes = [
@@ -47,6 +49,7 @@ const routes = [
   { path: "/create", name: "Create", Component: Create, bgType: 3 },
   { path: "/login", name: "Login", Component: Login, bgType: 3 },
   { path: "/signup", name: "Signup", Component: Signup, bgType: 3 },
+  { path: "/redirect", name: "Redirect", Component: Redirect, bgType: 3 },
   { path: "/", name: "Home", Component: Home, bgType: 3 }
 ];
 
