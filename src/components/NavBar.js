@@ -107,7 +107,7 @@ var styles = {
     marginTop: "1em",
   },
   bmBurgerBars: {
-    background: colors[2]
+    background: colors[4]
   },
   bmBurgerBarsHover: {
     background: colors[3]

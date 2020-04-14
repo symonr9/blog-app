@@ -287,6 +287,7 @@ function Edit() {
         response => {
           console.log(response);
           setIsSnackbarOpen(true);
+          history.push("/");
         }
       );
     }
