@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom"; 
 import { useSelector } from "react-redux";
 
-import { Button, Grow, Grid, TextField, Paper, Snackbar, CircularProgress, IconButton  } from "@material-ui/core";
+import { Button, Grow, Grid, TextField, Paper, Snackbar, CircularProgress, IconButton, responsiveFontSizes  } from "@material-ui/core";
 import MuiAlert from '@material-ui/lab/Alert';
 
 import ViewColumnRoundedIcon from '@material-ui/icons/ViewColumnRounded';
@@ -190,6 +190,10 @@ function Edit() {
         setData(response);
         setId(response._id);
         setIsPublic(response.isPublic);
+
+        if(response.createdBy !== sessionUsername){
+          history.push("/redirect");
+        }
 
         //Get data and assign them to the appropriate forms.
         if(type == "poetry"){
