@@ -11,6 +11,9 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 
+import { useHistory } from "react-router-dom"; 
+import { useSelector } from "react-redux";
+
 import { Button, Grow, Grid, CircularProgress, Snackbar } from "@material-ui/core";
 import MuiAlert from '@material-ui/lab/Alert';
 
@@ -34,6 +37,15 @@ import Comments from "../../components/Comments";
  * Notes: None
  **********************************************************************/
 function Single() {  
+  /* Authentication Handling ********************************************/
+  const sessionUsername = useSelector(state => state.username);
+
+  //!! checks for undefined, null, and empty values
+  const isLoggedIn = !!sessionUsername;
+
+  const history = useHistory();
+  /**********************************************************************/
+
   const { type, urlId } = useParams();
 
   const classes = useStyles();
@@ -103,31 +115,37 @@ function Single() {
   const handleDelete = () => {
     let url = "";
 
-    //type is defined based on the initial Select input value.
-    switch(type){
-      case "poetry":
-        url = "poetry/delete/" + _id;
-        break;
-      case "quotes":
-        url = "quotes/delete/" + _id;
-        break;
-      case "prose":
-        url = "prose/delete/" + _id;
-        break;
-      default:
-        console.log("Something went wrong..."); 
-        return 0;
+    if(isLoggedIn){
+      //type is defined based on the initial Select input value.
+      switch(type){
+        case "poetry":
+          url = "poetry/delete/" + _id;
+          break;
+        case "quotes":
+          url = "quotes/delete/" + _id;
+          break;
+        case "prose":
+          url = "prose/delete/" + _id;
+          break;
+        default:
+          console.log("Something went wrong..."); 
+          return 0;
+      }
+
+      //Delete Request for DELETE on the server.
+      deleteData(
+        getServerURL(url),
+        response => {
+          console.log(response);
+        }
+      );
     }
 
-    //Delete Request for DELETE on the server.
-    deleteData(
-      getServerURL(url),
-      response => {
-        console.log(response);
-      }
-    );
-
     setIsSnackbarOpen(true);
+
+    setTimeout(() => {
+      history.push("/");
+    }, 2000);
   };
   /**********************************************************************/
 
@@ -195,24 +213,29 @@ function Single() {
                 <CircularProgress />
               </div>
             ))}
-          <NavLink to={`/${type}/${urlId}/edit`}>
-            <Button variant="contained">Edit</Button>
-          </NavLink>
-            &nbsp;&nbsp;&nbsp;
-            <Button variant="contained" color="secondary" onClick={handleDeleteBtnClick}>Delete</Button>
-            <br/><br/>
-            {isDeleteConfim && 
-              <div>
-                  Are you sure? &nbsp;&nbsp;&nbsp;
-                  <Button variant="contained" color="secondary" onClick={handleDelete}>Yes</Button>
-              </div>}
+
+          {isLoggedIn && (
+            <span>
+              <NavLink to={`/${type}/${urlId}/edit`}>
+                  <Button variant="contained">Edit</Button>
+                </NavLink>
+                  &nbsp;&nbsp;&nbsp;
+                  <Button variant="contained" color="secondary" onClick={handleDeleteBtnClick}>Delete</Button>
+                  <br/><br/>
+                  {isDeleteConfim && 
+                    <div>
+                        Are you sure? &nbsp;&nbsp;&nbsp;
+                        <Button variant="contained" color="secondary" onClick={handleDelete}>Yes</Button>
+                    </div>}
+              <Snackbar open={isSnackbarOpen} autoHideDuration={3000} onClose={handleClose}>
+                <MuiAlert elevation={6} variant="filled" onClose={handleClose} severity="info">
+                  Successfully deleted!
+                </MuiAlert>
+              </Snackbar>
+            </span>
+          )}
           <br/><br/>
-        </div>
-        <Snackbar open={isSnackbarOpen} autoHideDuration={3000} onClose={handleClose}>
-          <MuiAlert elevation={6} variant="filled" onClose={handleClose} severity="info">
-            Successfully deleted!
-          </MuiAlert>
-        </Snackbar>
+          </div>
         <Comments />
       </Grid>
     </Grid>
