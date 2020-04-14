@@ -63,6 +63,24 @@ export const basicTextField = (name, label, onChangeFun, numOfLines = 1) => {
   );
 };
 
+export const passwordTextField = (name, label, onChangeFun, numOfLines = 1) => {
+  return (
+    <TextField
+      id={name + "TextField"}
+      name={name}
+      type="password"
+      label={label}
+      placeholder="Start writing..."
+      variant="outlined"
+      multiline={!(numOfLines == 1)}
+      rows={numOfLines}
+      fullWidth
+      style={textFieldStyle}
+      onChange={onChangeFun}
+    ></TextField>
+  );
+};
+
 export const editTextField = (
   name,
   value,

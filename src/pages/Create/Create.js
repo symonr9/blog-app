@@ -11,6 +11,9 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
+import { useHistory } from "react-router-dom"; 
+import { useSelector } from "react-redux";
+
 import MUIRichTextEditor from "mui-rte";
 
 import { Button, Grow, Grid, TextField, Paper, Snackbar, IconButton  } from "@material-ui/core";
@@ -43,6 +46,19 @@ import {
  * Notes: None
  **********************************************************************/
 function Create() {
+  /* Authentication Handling ********************************************/
+  const sessionUsername = useSelector(state => state.username);
+
+  //!! checks for undefined, null, and empty values
+  const isLoggedIn = !!sessionUsername;
+
+  const history = useHistory();
+
+  if(!isLoggedIn){
+    history.push("/redirect");
+  }
+  /**********************************************************************/
+
   const classes = useStyles();
   const common = useCommonStyles();
 

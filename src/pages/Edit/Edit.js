@@ -11,6 +11,9 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
+import { useHistory } from "react-router-dom"; 
+import { useSelector } from "react-redux";
+
 import { Button, Grow, Grid, TextField, Paper, Snackbar, CircularProgress, IconButton  } from "@material-ui/core";
 import MuiAlert from '@material-ui/lab/Alert';
 
@@ -44,6 +47,19 @@ import { useStyles, kinds } from "./exports";
  * Notes: None
  **********************************************************************/
 function Edit() {  
+  /* Authentication Handling ********************************************/
+  const sessionUsername = useSelector(state => state.username);
+
+  //!! checks for undefined, null, and empty values
+  const isLoggedIn = !!sessionUsername;
+
+  const history = useHistory();
+
+  if(!isLoggedIn){
+    history.push("/redirect");
+  }
+  /**********************************************************************/
+
   const { type, urlId } = useParams();
 
   const classes = useStyles();
