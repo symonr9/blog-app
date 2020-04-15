@@ -83,10 +83,10 @@ const SortFilterBar = params => {
 
     const handleSearchChange = (event, obj) => {
         if(obj != null){
-            if(type == "poetry" || type == "prose"){
+            if(type === "poetry" || type === "prose"){
                 params.setSearchChange(obj.title);
             }
-            else if(type == "quotes"){
+            else if(type === "quotes"){
                 params.setSearchChange(obj.text);
             }
           
@@ -132,8 +132,8 @@ const SortFilterBar = params => {
     const searchBar = (
         <Autocomplete
         options={(params.items != null && params.items)}
-        groupBy={(option) => (((type == "poetry" || type == "prose") && option.title[0].toUpperCase()) || (type == "quotes" && option.author.toUpperCase()))}
-        getOptionLabel={(option) => ((type == "poetry" || type == "prose") && option.title) || ((type == "quotes") && option.text)}
+        groupBy={(option) => (((type ==="poetry" || type === "prose") && option.title[0].toUpperCase()) || (type === "quotes" && option.author.toUpperCase()))}
+        getOptionLabel={(option) => ((type === "poetry" || type === "prose") && option.title) || ((type === "quotes") && option.text)}
         style={{ width: '15em', marginBottom: '1em' }}
         onChange={handleSearchChange}
         renderInput={(p) => <TextField {...p} label="Search" variant="outlined" />}
@@ -145,11 +145,11 @@ const SortFilterBar = params => {
         <span>
             {searchBar}
             <span className={common.sortDiv}>
-                {(type == "poetry" || type == "prose") && titleChip}
+                {(type === "poetry" || type === "prose") && titleChip}
                 {authorChip}
                 {dateChip}
                 {randomChip}
-                {(type == "poetry" || type == "prose") && fullTextChip}
+                {(type === "poetry" || type === "prose") && fullTextChip}
             </span>
         </span>
     );

@@ -158,7 +158,7 @@ function Single() {
     <div>
       {
       (data 
-        && ( type == "poetry" && 
+        && ( type === "poetry" && 
               (<div>
                 <h1>{data.title}</h1>
                 {data.createdBy}
@@ -173,7 +173,7 @@ function Single() {
                 <br/><br/><br/>
               </div>)
               ||
-              type == "quotes" &&
+              type === "quotes" &&
               (<div>
                 <br/><br/>
                 <h1><i>"{data.text}"</i></h1>
@@ -186,7 +186,7 @@ function Single() {
                 <br/><br/><br/>              
               </div>)
               ||
-              type == "prose" && 
+              type === "prose" && 
               (<div>
                 <h1>{data.title}</h1>
                 {data.createdBy}

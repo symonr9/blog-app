@@ -145,9 +145,8 @@ function Create() {
         default: 
           break;
       }
-
+      
       temp.push(tempArr);
-    });
       setWords(temp);
     });
   };
