@@ -40,7 +40,7 @@ import Redirect from "./pages/Redirect/Redirect";
 /**********************************************************************/
 
 const routes = [
-  { path: "/profile", name: "My Profile", Component: Profile, bgType: 3 },
+  { path: "/profile/:username", name: "My Profile", Component: Profile, bgType: 3 },
   { path: "/:type/:urlId/edit", name: "Edit", Component: Edit, bgType: 3 },
   { path: "/:type/:urlId", name: "Single", Component: Single, bgType: 3 },
   { path: "/poetry", name: "Poetry", Component: Poetry, bgType: 3 },

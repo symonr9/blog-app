@@ -36,26 +36,6 @@ import { colors } from "../assets/common";
 import { logoutUser } from "../services/redux/actions";
 /**********************************************************************/
 
-
-const loggedInRoutes = [
-  { path: "/", name: "Home", icon: <HomeRounded />, isLogOut: false },
-  { path: "/create", name: "Create", icon: <AddCircleOutlineRoundedIcon />, isLogOut: false },
-  { path: "/poetry", name: "Poetry", icon: <MenuBookRoundedIcon />, isLogOut: false },
-  { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon />, isLogOut: false },
-  { path: "/prose", name: "Prose", icon: <DescriptionRoundedIcon />, isLogOut: false },
-  { path: "/profile", name: "Profile", icon: <PersonRoundedIcon />, isLogOut: false },
-  { path: "/", name: "Logout", icon: <SupervisorAccountRoundedIcon/>, isLogOut: true },
-];
-
-const loggedOutRoutes = [
-  { path: "/", name: "Home", icon: <HomeRounded /> },
-  { path: "/poetry", name: "Poetry", icon: <MenuBookRoundedIcon /> },
-  { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon /> },
-  { path: "/prose", name: "Prose", icon: <DescriptionRoundedIcon />},
-  { path: "/login", name: "Login", icon: <SupervisorAccountRoundedIcon/> },
-  { path: "/signup", name: "Signup", icon: <SupervisorAccountRoundedIcon/> },
-];
-
 const useStyles = makeStyles({
   navBarDiv: {
     position: "fixed",
@@ -200,9 +180,7 @@ function NavBar() {
   const handleBackBtnClick = () => {
     history.goBack();
   };
-
   /**********************************************************************/
-
 
   const handleLogoutBtnClick = () => {
     //Save login credentials into redux store for cross-application use.
@@ -211,6 +189,25 @@ function NavBar() {
     //Redirect to home page.
     history.push("/");
   };
+
+  const loggedInRoutes = [
+    { path: "/", name: "Home", icon: <HomeRounded />, isLogOut: false },
+    { path: "/create", name: "Create", icon: <AddCircleOutlineRoundedIcon />, isLogOut: false },
+    { path: "/poetry", name: "Poetry", icon: <MenuBookRoundedIcon />, isLogOut: false },
+    { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon />, isLogOut: false },
+    { path: "/prose", name: "Prose", icon: <DescriptionRoundedIcon />, isLogOut: false },
+    { path: "/profile/" + username, name: "Profile", icon: <PersonRoundedIcon />, isLogOut: false },
+    { path: "/", name: "Logout", icon: <SupervisorAccountRoundedIcon/>, isLogOut: true },
+  ];
+  
+  const loggedOutRoutes = [
+    { path: "/", name: "Home", icon: <HomeRounded /> },
+    { path: "/poetry", name: "Poetry", icon: <MenuBookRoundedIcon /> },
+    { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon /> },
+    { path: "/prose", name: "Prose", icon: <DescriptionRoundedIcon />},
+    { path: "/login", name: "Login", icon: <SupervisorAccountRoundedIcon/> },
+    { path: "/signup", name: "Signup", icon: <SupervisorAccountRoundedIcon/> },
+  ];
 
   const body = (
     <div>
