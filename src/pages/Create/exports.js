@@ -15,7 +15,7 @@ export const useStyles = makeStyles({
   },
   wordCardContainer: {
     overflowY: "scroll",
-    height: "15em",
+    height: "28em",
     display: "flex",
     flexDirection: "column",
     flexWrap: "wrap",
@@ -24,7 +24,7 @@ export const useStyles = makeStyles({
     backgroundColor: 'transparent'
   },
   wordCard: {
-    width: "12em",
+    width: "10em",
     marginBottom: "0.25em",
     marginRight: "0.25em",
     border: '2px solid #bebebe',
@@ -34,7 +34,7 @@ export const useStyles = makeStyles({
     fontSize: "1.25em"
   },
   mobileWordCard: {
-    width: '15em',
+    width: '13em',
     marginBottom: "0.25em",
     marginRight: "0.25em",
     border: '2px solid #bebebe',
