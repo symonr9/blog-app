@@ -86,7 +86,7 @@ function Create() {
 
   /* Hooks and Handlers for Word Finder Section ********** */
   const [word, setWord] = useState("");
-  const [kind, setKind] = useState("rhymes");
+  const [kind, setKind] = useState("");
   const [words, setWords] = useState(null);
   let wordKey = 0;
 
@@ -95,9 +95,12 @@ function Create() {
   };
 
   const handleKindChange = event => {
+    let newKind = event.target.value;
     setWords(null);
-    setKind(event.target.value);
+    setKind(newKind);
+    handleWordLookup(word, newKind);
   };
+
 
   const kinds = [
     {
@@ -137,7 +140,7 @@ function Create() {
    * require different rendering and handling than the other lookup 
    * kinds.
    **********************************************************************/
-  const handleWordLookup = () => {
+  const handleWordLookup = (word, kind) => {
     var data = { word: word, kind: kind };
 
     //Execute API request to look for words.
@@ -444,12 +447,6 @@ function Create() {
                 kinds)
             ))
           }
-          <Button 
-            variant="outlined" 
-            onClick={handleWordLookup}
-            className={classes.spacing}>
-            Look
-          </Button>
 
           <IconButton 
           onClick={handleSwitchView}
