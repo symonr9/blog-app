@@ -11,19 +11,7 @@ export const useStyles = makeStyles({
     
   },
   word: {
-    fontSize: "1.5em"
-  },
-  rating: {
-    fontSize: "0.75em",
-    float: "right",
-    marginTop: "0.50em !important",
-    marginRight: "0.5em",
-    paddingLeft: "0.5em",
-    paddingRight: "0.5em",
-    paddingTop: "0.25em",
-    paddingBottom: "0.25em",
-    borderRadius: "100px",
-    backgroundColor: "lightblue"
+    fontSize: "1.25em"
   },
   wordCardContainer: {
     overflowY: "scroll",
@@ -43,19 +31,7 @@ export const useStyles = makeStyles({
     borderRadius: '5px',
   },
   mobileWord: {
-    fontSize: "1.5em"
-  },
-  mobileRating: {
-    fontSize: "1em",
-    float: "right",
-    marginTop: '0.1em',
-    marginRight: "0.5em",
-    paddingLeft: "0.5em",
-    paddingRight: "0.5em",
-    paddingTop: "0.25em",
-    paddingBottom: "0.25em",
-    borderRadius: "100px",
-    backgroundColor: "lightblue"
+    fontSize: "1.25em"
   },
   mobileWordCard: {
     width: '15em',
@@ -95,31 +71,3 @@ export const useStyles = makeStyles({
     marginTop: '3em',
   }
 });
-
-
-export const kinds = [
-  {
-    value: "definitions",
-    label: "Definitions"
-  },
-  {
-    value: "examples",
-    label: "Examples"
-  },
-  {
-    value: "synonyms",
-    label: "Synonyms"
-  },
-  {
-    value: "antonyms",
-    label: "Antonyms"
-  },
-  {
-    value: "pronunciation",
-    label: "Pronunciation"
-  },
-  {
-    value: "rhymes",
-    label: "Rhymes"
-  }
-];

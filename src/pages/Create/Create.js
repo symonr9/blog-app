@@ -26,7 +26,7 @@ import ViewStreamRoundedIcon from '@material-ui/icons/ViewStreamRounded';
 
 /* Project Imports ****************************************************/
 import { postData } from "../../services/api";
-import { useStyles, kinds } from "./exports";
+import { useStyles } from "./exports";
 import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
@@ -88,65 +88,118 @@ function Create() {
   const [word, setWord] = useState("");
   const [kind, setKind] = useState("rhymes");
   const [words, setWords] = useState(null);
+  let wordKey = 0;
 
   const handleWordChange = event => {
     setWord(event.target.value);
   };
 
   const handleKindChange = event => {
+    setWords(null);
     setKind(event.target.value);
   };
 
+  const kinds = [
+    {
+      value: "definitions",
+      label: "Definitions"
+    },
+    {
+      value: "examples",
+      label: "Examples"
+    },
+    {
+      value: "synonyms",
+      label: "Synonyms"
+    },
+    {
+      value: "antonyms",
+      label: "Antonyms"
+    },
+    {
+      value: "pronunciation",
+      label: "Pronunciation"
+    },
+    {
+      value: "rhymes",
+      label: "Rhymes"
+    }
+  ];
+  
   /**********************************************************************
    * Function Name: handleWordLookup
-   * Parameters: Uses the "word" and "kind" hooks.
-   * Description: Component for the entire application.
-   * Notes: None
+   * Parameters: Uses the "word" and "kind" hooks, selected from user 
+   * input. 
+   * Description: Uses WordsAPI on RapidAPI to retrieve different data
+   * for a given word. Because the format is different, the data needs
+   * to be parsed depending on the kind of lookup being performed. 
+   * Notes: Definitions and Pronunciations have arrays of objects and 
+   * require different rendering and handling than the other lookup 
+   * kinds.
    **********************************************************************/
   const handleWordLookup = () => {
     var data = { word: word, kind: kind };
 
     //Execute API request to look for words.
     postData(getServerURL("words"), data, response => {
-      const { data } = response;
       let temp = [];
 
-      switch(kinds){
+      switch(kind){
         case "definitions":
-          data.definitions.forEach(item => {
+          //{word: ---, definitions: [{"definition": "xxx", "partOfSpeech": "xxx"}, {"definition": "xxx", "partOfSpeech": "xxx"}]}
+          response.definitions.forEach(item => {
+            let itemArr = [];
+
+            itemArr.push(item.definition);
+            itemArr.push(item.partOfSpeech);
+
+            temp.push(itemArr);
+          });
+          break;
+        case "examples": //works
+          //{word: ---, examples: ["xxx", "xxx", "xxx"]}
+          response.examples.forEach(item => {
             temp.push(item);
           });
           break;
-        case "examples":
-          data.examples.forEach(item => {
+        case "synonyms": //works
+          //{word: ---, synonyms: ["xxx", "xxx", "xxx"]}
+          response.synonyms.forEach(item => {
             temp.push(item);
           });
           break;
-        case "synonyms":
-          data.synonyms.forEach(item => {
-            temp.push(item);
-          });
-          break;
-        case "antonyms":
-          data.antonyms.forEach(item => {
+        case "antonyms": //works
+          //{word: ---, antonyms: ["xxx", "xxx", "xxx"]}
+          response.antonyms.forEach(item => {
             temp.push(item);
           });
           break;
         case "pronunciation":
-          data.pronunciation.forEach(item => {
-            temp.push(item);
-          });
+          //{word: ---, pronunciation: {"all": "xxx", "noun": "xxx", "verb": "xxx"}}
+          let itemArr = [];
+          let item = response.pronunciation;
+
+          itemArr.push(item.all);
+
+          if('noun' in item){
+            itemArr.push(item.noun);
+          }
+          if('verb' in item){
+            itemArr.push(item.verb);
+          }
+          
+          temp.push(itemArr);
           break;
-        case "rhymes":
-          data.rhymes.forEach(item => {
+        case "rhymes": //works
+          //{word: ---, rhymes: {all: ["xxx", "xxx", "xxx"]}}
+          response.rhymes.all.forEach(item => {
             temp.push(item);
           });
           break;
         default: 
           break;
       }
-      
-      temp.push(tempArr);
+
       setWords(temp);
     });
   };
@@ -365,7 +418,6 @@ function Create() {
                 types)
             ))
           }
-          {formInput}
         </form>
         </div>
         <div className={!isSideView && (classes.wordLookupDiv) || isSideView && (classes.sideWordLookupDiv)}>
@@ -405,17 +457,31 @@ function Create() {
             {!isSideView && (<ViewColumnRoundedIcon />) || (isSideView && (<ViewStreamRoundedIcon />))}
           </IconButton>
 
-          {words != null && (
-            <div className={classes.wordCardContainer}>
-              {words.map(option => (
-                <div className={(!isMobileView && classes.wordCard || (isMobileView && classes.mobileWordCard))}>
-                  <span className={(!isMobileView && classes.word || (isMobileView && classes.mobileWord))}>{option[0]}</span>
-                  <span className={(!isMobileView && classes.rating || (isMobileView && classes.mobileRating))}>{option[1]}</span>
-                </div>
-              ))}
-            </div>
-          )}
-          </div>
+          {words && 
+          (<div className={classes.wordCardContainer}>
+            {words && words.map(option => (
+              <div className={(!isMobileView && classes.wordCard || (isMobileView && classes.mobileWordCard))} key={wordKey++}>
+                {/* [0] --> definition, [1] --> part of speech */}
+                {kind === "definitions" && (
+                  <span>
+                    <span className={(!isMobileView && classes.word || (isMobileView && classes.mobileWord))}>Definition {wordKey} ({option[1]}): </span>
+                    <span className={(!isMobileView && classes.word || (isMobileView && classes.mobileWord))}>{option[0]}</span>
+                  </span>
+                )}
+                {/* [0] --> all, [1] --> noun, [2] --> verb */}
+                {kind === "pronunciation" && (
+                  <span>
+                    <span className={(!isMobileView && classes.word || (isMobileView && classes.mobileWord))}>{option[0]}</span>
+                  </span>
+                )}
+                {(kind === "rhymes" || kind === "synonyms" || kind === "antonyms" || kind === "examples") && (
+                  <span className={(!isMobileView && classes.word || (isMobileView && classes.mobileWord))}>{option}</span>
+                )}
+              </div>
+            ))
+            }
+          </div>)}
+        </div>
       <Snackbar open={isSnackbarOpen} autoHideDuration={3000} onClose={handleClose}>
         <MuiAlert elevation={6} variant="filled" onClose={handleClose} severity="success">
           Successfully published!
