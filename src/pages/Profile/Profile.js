@@ -106,8 +106,10 @@ function Profile() {
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
-        <h1>Profile</h1>
-        <div className={common.containerDiv}>
+        <h1>{username}'s profile</h1>
+
+          <h2>Poetry</h2>
+          <div className={classes.profileContainerDiv}>
           {(poetry &&
             poetry.map((poem, index) => {
               if (poem.isPublic) {
@@ -130,8 +132,58 @@ function Profile() {
                 <CircularProgress />
               </div>
             ))}
-        </div>
+            </div>
 
+            <h2>Quotes</h2>
+            <div className={classes.profileContainerDiv}>
+            {(quotes &&
+            quotes.map((quote, index) => {
+              if (quote.isPublic) {
+                return (
+                  <ItemCard 
+                  type={"quotes"}
+                  key={quote._id}
+                  isMobileView={isMobileView}
+                  link={`/quotes/${quote.urlId}`}
+                  text={quote.text}
+                  author={quote.author}
+                  createdAt={quote.createdAt}
+                />
+                );
+              }
+            })) ||
+            (!quotes && (
+              <div>
+                <CircularProgress />
+              </div>
+            ))}
+            </div>
+
+            <h2>Prose</h2>
+            <div className={classes.profileContainerDiv}>
+            {(prose &&
+            prose.map((item, index) => {
+              if (item.isPublic) {
+                return (
+                  <ItemCard 
+                  type={"prose"}
+                  key={item._id}
+                  isMobileView={isMobileView}
+                  link={`/prose/${item.urlId}`}
+                  title={item.title}
+                  createdBy={item.createdBy}
+                  body={(item.body.substring(0,200) + '...')}
+                  createdAt={item.createdAt}
+                  />
+                );
+              }
+            })) ||
+            (!prose && (
+              <div>
+                <CircularProgress />
+              </div>
+            ))}
+            </div>
       </Grid>
     </Grid>
   );
