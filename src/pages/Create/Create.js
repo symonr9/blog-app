@@ -96,12 +96,16 @@ function Create() {
 
   const handleKindChange = event => {
     let newKind = event.target.value;
+
     setWords(null);
     setKind(newKind);
+
+    //Perform word lookup.
     handleWordLookup(word, newKind);
   };
 
 
+  //Options for wordLookup selection
   const kinds = [
     {
       value: "definitions",
@@ -421,6 +425,7 @@ function Create() {
                 types)
             ))
           }
+          {formInput}
         </form>
         </div>
         <div className={!isSideView && (classes.wordLookupDiv) || isSideView && (classes.sideWordLookupDiv)}>
