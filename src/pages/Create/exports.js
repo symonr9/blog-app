@@ -96,12 +96,16 @@ export const useStyles = makeStyles({
   }
 });
 
-//types was here before but I took it out so I could 
-//pass in the handle change function defined within
-//the Create function. There's probably a way to 
-//optimize it but for now I'll move it over.
 
 export const kinds = [
+  {
+    value: "definitions",
+    label: "Definitions"
+  },
+  {
+    value: "examples",
+    label: "Examples"
+  },
   {
     value: "synonyms",
     label: "Synonyms"
@@ -111,12 +115,8 @@ export const kinds = [
     label: "Antonyms"
   },
   {
-    value: "narrower",
-    label: "Narrower"
-  },
-  {
-    value: "broader",
-    label: "Broader"
+    value: "pronunciation",
+    label: "Pronunciation"
   },
   {
     value: "rhymes",

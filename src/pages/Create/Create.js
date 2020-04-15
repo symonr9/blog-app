@@ -110,12 +110,44 @@ function Create() {
     postData(getServerURL("words"), data, response => {
       const { data } = response;
       let temp = [];
-      data.forEach(dataArr => {
-        let tempArr = [];
-        tempArr.push(dataArr.word);
-        tempArr.push(dataArr.rating);
-        temp.push(tempArr);
-      });
+
+      switch(kinds){
+        case "definitions":
+          data.definitions.forEach(item => {
+            temp.push(item);
+          });
+          break;
+        case "examples":
+          data.examples.forEach(item => {
+            temp.push(item);
+          });
+          break;
+        case "synonyms":
+          data.synonyms.forEach(item => {
+            temp.push(item);
+          });
+          break;
+        case "antonyms":
+          data.antonyms.forEach(item => {
+            temp.push(item);
+          });
+          break;
+        case "pronunciation":
+          data.pronunciation.forEach(item => {
+            temp.push(item);
+          });
+          break;
+        case "rhymes":
+          data.rhymes.forEach(item => {
+            temp.push(item);
+          });
+          break;
+        default: 
+          break;
+      }
+
+      temp.push(tempArr);
+    });
       setWords(temp);
     });
   };
