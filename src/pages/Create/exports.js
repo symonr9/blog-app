@@ -53,7 +53,7 @@ export const useStyles = makeStyles({
   sideWordLookupDiv: {
     float: 'left',
     display: 'inline-block',
-    width: '42vw',
+    width: '36vw',
     marginBottom: '5em'
   },
   formDiv: {
@@ -61,7 +61,7 @@ export const useStyles = makeStyles({
   sideFormDiv: {
     float: 'left',
     display: 'inline-block',
-    width: '42vw',
+    width: '40vw',
     marginRight: '2em',
   },
   bodyDiv: {
