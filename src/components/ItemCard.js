@@ -100,11 +100,11 @@ const ItemCard = params => {
         key={params.key}
         elevation={7}
         className={(!params.isMobileView && common.itemDiv || (params.isMobileView && common.mobileItemDiv))}>
-            {(type == "poetry" || type == "prose") && titleSection}
-            {(type == "poetry" || type == "prose") && createdBySection}
-            {(type == "quotes") && textSection}
-            {(type == "quotes") && authorSection}
-            {(type == "poetry" || type == "prose") && bodySection}
+            {(type === "poetry" || type === "prose") && titleSection}
+            {(type === "poetry" || type === "prose") && createdBySection}
+            {(type === "quotes") && textSection}
+            {(type === "quotes") && authorSection}
+            {(type === "poetry" || type === "prose") && bodySection}
             {createdAtSection}  
         </Paper>
     );

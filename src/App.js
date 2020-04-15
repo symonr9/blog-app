@@ -103,9 +103,9 @@ function App() {
         <Switch>
           {routes.map(({ path, Component, bgType }) => (
             <Route key={path} path={path}>
-              <div className={((bgType == 1) && classes.bgOne) 
-                           || ((bgType == 2) && classes.bgTwo)
-                           || ((bgType == 3) && classes.bgThree)
+              <div className={((bgType === 1) && classes.bgOne) 
+                           || ((bgType === 2) && classes.bgTwo)
+                           || ((bgType === 3) && classes.bgThree)
                            }>    
                 <Component />
               </div>

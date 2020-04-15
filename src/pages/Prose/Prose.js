@@ -164,11 +164,11 @@ function Prose() {
 
   useEffect(() => {
     if(prose != null){
-      if(searchChange == ""){
+      if(searchChange === ""){
         //setProse(originalProse);
       }
      else{   
-        setProse(prose.filter(item => item.title == searchChange));
+        setProse(prose.filter(item => item.title === searchChange));
       }
     }
   }, [searchChange]);

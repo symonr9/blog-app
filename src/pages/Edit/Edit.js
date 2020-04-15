@@ -196,17 +196,17 @@ function Edit() {
         }
 
         //Get data and assign them to the appropriate forms.
-        if(type == "poetry"){
+        if(type === "poetry"){
           setPoemTitle(response.title);
           setPoemBody(response.body);
           setPoemType(response.type);
           setPoemNotes(response.notes);
         }
-        else if(type == "quotes"){
+        else if(type === "quotes"){
           setQuoteText(response.text);
           setQuoteAuthor(response.author);
         }
-        else if(type == "prose"){
+        else if(type === "prose"){
           setProseTitle(response.title);
           setProseBody(response.body);
         }
@@ -305,7 +305,7 @@ function Edit() {
     <div>
       {
       (data 
-        && ( type == "poetry" && 
+        && ( type === "poetry" && 
               (<div>
                 {editTextField("poemTitle", data.title, "Title", handlePoemTitleChange)}
                 {editTextField("poemBody", data.body, "Body", handlePoemBodyChange, 8)}
@@ -319,7 +319,7 @@ function Edit() {
                 <br/><br/><br/>
               </div>)
               ||
-              type == "quotes" &&
+              type === "quotes" &&
               (<div>
                 {editTextField("quoteText", data.text, "A quote to remember", handleQuoteTextChange, 3)}
                 {editTextField("quoteAuthor", data.author, "Who said it?", handleQuoteAuthorChange)}
@@ -331,7 +331,7 @@ function Edit() {
                 <br/><br/><br/>        
               </div>)
               ||
-              type == "prose" && 
+              type === "prose" && 
               (<div>
                 {editTextField("proseTitle", data.title, "Title", handleProseTitleChange)}
                 {editTextField("proseBody", data.body, "Body", handleProseBodyChange, 12)}

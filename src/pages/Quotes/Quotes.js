@@ -152,10 +152,10 @@ function Quotes() {
 
   useEffect(() => {
     if (quotes != null) {
-      if (searchChange == "") {
+      if (searchChange === "") {
         //setQuotes(originalquotes);
       } else {
-        setQuotes(quotes.filter(item => item.text == searchChange));
+        setQuotes(quotes.filter(item => item.text === searchChange));
       }
     }
   }, [searchChange]);

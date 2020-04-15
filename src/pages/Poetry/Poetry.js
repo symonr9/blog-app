@@ -169,7 +169,7 @@ function Poetry() {
 
   useEffect(() => {
     if(poetry != null){
-      if(searchChange == ""){
+      if(searchChange === ""){
         setPoetry(originalPoetry);
       }
      else{   
