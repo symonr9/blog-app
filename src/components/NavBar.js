@@ -11,7 +11,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@material-ui/core";
@@ -24,6 +24,8 @@ import FormatQuoteRoundedIcon from "@material-ui/icons/FormatQuoteRounded";
 import AddCircleOutlineRoundedIcon from "@material-ui/icons/AddCircleOutlineRounded";
 import SupervisorAccountRoundedIcon from '@material-ui/icons/SupervisorAccountRounded';
 import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
+import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
+
 
 import { slide as Menu } from "react-burger-menu";
 /**********************************************************************/
@@ -91,6 +93,12 @@ const useStyles = makeStyles({
   },
   navBtn: {
     marginBottom: '1em',
+    color: colors[4],
+    backgroundColor: colors[3]
+  },
+  backBtn: {
+    marginTop: '1em',
+    marginLeft: '1em',
     color: colors[4],
     backgroundColor: colors[3]
   }
@@ -182,7 +190,21 @@ function NavBar() {
   }, []);
   /**********************************************************************/
 
-  const logout = () => {
+  
+  /* Back Button Handling ************************************************/
+  let location = useLocation();
+
+  //The back button appears on the Single and Edit pages.
+  const isBackBtn = ((location.pathname.split("/").length - 1) > 1);
+
+  const handleBackBtnClick = () => {
+    history.goBack();
+  };
+
+  /**********************************************************************/
+
+
+  const handleLogoutBtnClick = () => {
     //Save login credentials into redux store for cross-application use.
     dispatch(logoutUser());
 
@@ -195,7 +217,7 @@ function NavBar() {
       {isLoggedIn && (
         loggedInRoutes.map(({ path, name, icon, isLogOut }) => (
           <NavLink to={path} key={name}>
-            <Button className={classes.navBtn} variant="contained" onClick={(isLogOut && logout)}>
+            <Button className={classes.navBtn} variant="contained" onClick={(isLogOut && handleLogoutBtnClick)}>
               {icon}
               {name}
             </Button>
@@ -214,6 +236,12 @@ function NavBar() {
         ))
       )
       }
+      {isBackBtn && (
+        <Button className={classes.navBtn} variant="contained" onClick={handleBackBtnClick}>
+          {<ArrowBackRoundedIcon />}
+        </Button>
+        )
+      }
     </div>
   );
 
@@ -221,11 +249,20 @@ function NavBar() {
     <div>
       {(!isMobileView && <div className={classes.navBarDiv}>{ body }</div>) ||
         (isMobileView && (
+          !isBackBtn && 
+          (
           <div className={ classes.mobileNavBarDiv }>
           <Menu styles={styles} className={classes.removeFocus} width={150} isOpen={isOpenMobileMenu} >
             { body }
           </Menu>
           </div>
+          )
+          ||
+          isBackBtn && (
+            <Button className={classes.backBtn} variant="contained" onClick={handleBackBtnClick}>
+              {<ArrowBackRoundedIcon />}
+            </Button>
+            )
         ))}
     </div>
   );
