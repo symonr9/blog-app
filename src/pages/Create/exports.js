@@ -72,9 +72,9 @@ export const useStyles = makeStyles({
   },
 
   dropZoneDiv: {
-    padding: '4em',
+    padding: '1em',
     borderRadius: '5px',
     border: 'solid 2px grey',
-    cursor: 'pointer'
+    cursor: 'pointer',
   }
 });

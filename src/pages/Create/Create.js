@@ -243,6 +243,7 @@ function Create() {
   const [proseBody, setProseBody] = useState("");
 
   const [docTitle, setDocTitle] = useState("");
+  const [docDescription, setDocDescription] = useState("");
   const [docDiv, setDocDiv] = useState(<div></div>);
 
   const handlePoemTitleChange = event => {
@@ -281,14 +282,17 @@ function Create() {
     setDocTitle(event.target.value);
   };
 
-  const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
-  
-  const files = acceptedFiles.map(file => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
+  const handleDocDescriptionChange = event => {
+    setDocDescription(event.target.value);
+  };
 
+  const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
+
+  useEffect(() => {
+    setDocDiv([
+    <span>{acceptedFiles[0] && acceptedFiles[0].path}</span>
+    ])
+  }, [acceptedFiles]);
 
   //Defines the options for the dropdown and the form that is dynamically rendered.
   const types = [
@@ -333,14 +337,13 @@ function Create() {
       formInput: (
         <div>
           {basicTextField("docTitle", "Title", handleDocTitleChange)}
+          {basicTextField("docDescription", "Description", handleDocDescriptionChange, 2)}
           <section className="container">
             <div {...getRootProps({className: 'dropzone'})} className={classes.dropZoneDiv}>
               <input {...getInputProps()} />
               <p>Drag and Drop or click to select a file</p>
-              <ul>{files}</ul>
             </div>
           </section>
-          {submitBtn("Publish")}
         </div>
       )
     },
@@ -393,7 +396,8 @@ function Create() {
             "body": poemBody, 
             "type": poemType,
             "notes": poemNotes,
-            "createdBy": sessionUsername
+            "createdBy": sessionUsername,
+            "isPublic": true
           };
           url = "poetry/create";
 
@@ -402,7 +406,8 @@ function Create() {
           data = {
             "text": quoteText,
             "author": quoteAuthor,
-            "createdBy": sessionUsername
+            "createdBy": sessionUsername,
+            "isPublic": true
           }; 
           url = "quotes/create";
         
@@ -411,11 +416,36 @@ function Create() {
           data = {
             "title": proseTitle,
             "body": proseBody,
-            "createdBy": sessionUsername
+            "createdBy": sessionUsername,
+            "isPublic": true
           };
           url = "prose/create";
 
           break;
+        case "upload":
+          data = {
+            "title": docTitle,
+            "description": docDescription,
+            file: acceptedFiles[0],
+            "isPublic": true
+          };
+          url = "documents/upload";
+
+          console.log("in upload: ", data);
+
+          //Post Request to CREATE on the server.
+          postData(
+            getServerURL(url),
+            data,
+            response => {
+              console.log(response);
+              clearForm();
+              setIsSnackbarOpen(true);
+            },
+            true //isUpload, changes the header to multipart/form-data
+          );
+
+          return;
         default:
           console.log("Something went wrong..."); 
           return 0;
@@ -461,6 +491,8 @@ function Create() {
             ))
           }
           {formInput}
+          {type === "upload" && (<span><br/>File: {docDiv}<br/></span>)}
+          {type === "upload" && (submitBtn("Publish"))}
         </form>
         </div>
         <div className={!isSideView && (classes.wordLookupDiv) || isSideView && (classes.sideWordLookupDiv)}>
