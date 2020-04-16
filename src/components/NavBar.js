@@ -80,7 +80,8 @@ const useStyles = makeStyles({
     marginTop: '1em',
     marginLeft: '1em',
     color: colors[4],
-    backgroundColor: colors[3]
+    backgroundColor: colors[3],
+    position: 'fixed',
   }
 });
 
@@ -232,12 +233,6 @@ function NavBar() {
           </NavLink>
         ))
       )
-      }
-      {isBackBtn && (
-        <Button className={classes.navBtn} variant="contained" onClick={handleBackBtnClick}>
-          {<ArrowBackRoundedIcon />}
-        </Button>
-        )
       }
     </div>
   );
