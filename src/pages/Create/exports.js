@@ -69,5 +69,12 @@ export const useStyles = makeStyles({
   },
   sideBodyDiv: {
     marginTop: '3em',
+  },
+
+  dropZoneDiv: {
+    padding: '4em',
+    borderRadius: '5px',
+    border: 'solid 2px grey',
+    cursor: 'pointer'
   }
 });

@@ -8,13 +8,15 @@
 
 
 /* Library Imports ****************************************************/
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 
 import { useHistory } from "react-router-dom"; 
 import { useSelector } from "react-redux";
 
 import MUIRichTextEditor from "mui-rte";
+
+import { useDropzone } from 'react-dropzone';
 
 import { Button, Grow, Grid, TextField, Paper, Snackbar, IconButton  } from "@material-ui/core";
 import MuiAlert from '@material-ui/lab/Alert';
@@ -240,6 +242,9 @@ function Create() {
   const [proseTitle, setProseTitle] = useState("");
   const [proseBody, setProseBody] = useState("");
 
+  const [docTitle, setDocTitle] = useState("");
+  const [docDiv, setDocDiv] = useState(<div></div>);
+
   const handlePoemTitleChange = event => {
     setPoemTitle(event.target.value);
   };
@@ -271,6 +276,19 @@ function Create() {
   const handleProseBodyChange = event => {
     setProseBody(event.target.value);
   };
+
+  const handleDocTitleChange = event => {
+    setDocTitle(event.target.value);
+  };
+
+  const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
+  
+  const files = acceptedFiles.map(file => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
+  ));
+
 
   //Defines the options for the dropdown and the form that is dynamically rendered.
   const types = [
@@ -305,6 +323,23 @@ function Create() {
         <div>
           {basicTextField("proseTitle", "Title", handleProseTitleChange)}
           {basicTextField("proseBody", "Body", handleProseBodyChange, 12)}
+          {submitBtn("Publish")}
+        </div>
+      )
+    },
+    {
+      value: "upload",
+      label: "upload a document",
+      formInput: (
+        <div>
+          {basicTextField("docTitle", "Title", handleDocTitleChange)}
+          <section className="container">
+            <div {...getRootProps({className: 'dropzone'})} className={classes.dropZoneDiv}>
+              <input {...getInputProps()} />
+              <p>Drag and Drop or click to select a file</p>
+              <ul>{files}</ul>
+            </div>
+          </section>
           {submitBtn("Publish")}
         </div>
       )
