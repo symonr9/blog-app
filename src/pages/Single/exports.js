@@ -6,6 +6,9 @@
 
 import { makeStyles } from "@material-ui/core/styles";
 
+import { colors } from "../../assets/common";
+
+
 export const useStyles = makeStyles({
     singleContainerDiv: {
         whiteSpace: 'pre-wrap',
@@ -14,4 +17,7 @@ export const useStyles = makeStyles({
             color: 'black'
         }
     },
+    title: {
+        color: colors[5]
+    }
 });

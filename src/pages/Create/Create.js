@@ -88,7 +88,7 @@ function Create() {
   const [word, setWord] = useState("");
   const [kind, setKind] = useState("");
   const [words, setWords] = useState(null);
-  let wordKey = 1;
+  let wordKey = 0;
 
   const handleWordChange = event => {
     setWord(event.target.value);

@@ -12,6 +12,8 @@ import { Button, TextField, MenuItem } from "@material-ui/core";
 import PublishRoundedIcon from "@material-ui/icons/PublishRounded";
 /**********************************************************************/
 
+import { colors } from "../assets/common";
+
 //Custom stylings.
 const textFieldStyle = {
   marginTop: "1em",
@@ -19,6 +21,8 @@ const textFieldStyle = {
 };
 
 const submitBtnStyle = {
+  color: colors[4],
+  backgroundColor: colors[1],
   marginTop: "2em",
   marginBottom: "2em",
 };

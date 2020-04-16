@@ -9,9 +9,7 @@
 
 /* Library Imports ****************************************************/
 import React, { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
-
-import { useHistory } from "react-router-dom"; 
+import { NavLink, useParams, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { Button, Grow, Grid, CircularProgress, Snackbar } from "@material-ui/core";
@@ -160,8 +158,12 @@ function Single() {
       (data 
         && ( type === "poetry" && 
               (<div>
-                <h1>{data.title}</h1>
-                {data.createdBy}
+                <h1 classes={classes.title}>{data.title}</h1>
+                <NavLink to={"/profile" + "/" + data.createdBy}>
+                    <span className={common.createdBy}>
+                        By {data.createdBy}
+                    </span>
+                </NavLink>  
                 <br/>
                 created <ReactTimeAgo date={data.createdAt} />
                 <br/><br/>
@@ -176,11 +178,15 @@ function Single() {
               type === "quotes" &&
               (<div>
                 <br/><br/>
-                <h1><i>"{data.text}"</i></h1>
+                <h1 classes={classes.title}><i>"{data.text}"</i></h1>
                 <br/><br/>
                 {data.author}
                 <br/><br/>
-                {data.createdBy}
+                <NavLink to={"/profile" + "/" + data.createdBy}>
+                    <span className={common.createdBy}>
+                        By {data.createdBy}
+                    </span>
+                </NavLink>  
                 <br/>
                 created <ReactTimeAgo date={data.createdAt} />
                 <br/><br/><br/>              
@@ -188,8 +194,12 @@ function Single() {
               ||
               type === "prose" && 
               (<div>
-                <h1>{data.title}</h1>
-                {data.createdBy}
+                <h1 classes={classes.title}>{data.title}</h1>
+                <NavLink to={"/profile" + "/" + data.createdBy}>
+                    <span className={common.createdBy}>
+                        By {data.createdBy}
+                    </span>
+                </NavLink>  
                 <br/>
                  created <ReactTimeAgo date={data.createdAt} />
                 <br/><br/>

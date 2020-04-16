@@ -40,17 +40,61 @@ import Redirect from "./pages/Redirect/Redirect";
 /**********************************************************************/
 
 const routes = [
-  { path: "/profile", name: "My Profile", Component: Profile, bgType: 3 },
-  { path: "/:type/:urlId/edit", name: "Edit", Component: Edit, bgType: 3 },
-  { path: "/:type/:urlId", name: "Single", Component: Single, bgType: 3 },
-  { path: "/poetry", name: "Poetry", Component: Poetry, bgType: 3 },
-  { path: "/quotes", name: "Quotes", Component: Quotes, bgType: 3 },
-  { path: "/prose", name: "Prose", Component: Prose, bgType: 3 },
-  { path: "/create", name: "Create", Component: Create, bgType: 3 },
-  { path: "/login", name: "Login", Component: Login, bgType: 3 },
-  { path: "/signup", name: "Signup", Component: Signup, bgType: 3 },
-  { path: "/redirect", name: "Redirect", Component: Redirect, bgType: 3 },
-  { path: "/", name: "Home", Component: Home, bgType: 3 }
+  { path: "/profile/:username", 
+    name: "My Profile", 
+    Component: Profile, 
+    bgType: 1
+  },
+  { path: "/:type/:urlId/edit", 
+    name: "Edit", 
+    Component: Edit, 
+    bgType: 2 
+  },
+  { path: "/:type/:urlId", 
+    name: "Single", 
+    Component: Single, 
+    bgType: 2 
+  },
+  { path: "/poetry", 
+    name: "Poetry", 
+    Component: Poetry, 
+    bgType: 3 
+  },
+  { path: "/quotes", 
+    name: "Quotes", 
+    Component: Quotes, 
+    bgType: 3 
+  },
+  { path: "/prose", 
+    name: "Prose", 
+    Component: Prose, 
+    bgType: 3 
+  },
+  { path: "/create", 
+    name: "Create", 
+    Component: Create, 
+    bgType: 2 
+  },
+  { path: "/login", 
+    name: "Login", 
+    Component: Login, 
+    bgType: 2 
+  },
+  { path: "/signup", 
+    name: "Signup", 
+    Component: Signup, 
+    bgType: 2 
+  },
+  { path: "/redirect", 
+    name: "Redirect", 
+    Component: Redirect, 
+    bgType: 1 
+  },
+  { path: "/", 
+    name: "Home", 
+    Component: Home, 
+    bgType: 1 
+  }
 ];
 
 const useStyles = makeStyles({
@@ -58,24 +102,59 @@ const useStyles = makeStyles({
   bgOne: {
     background: "linear-gradient(to bottom, " 
     + colors[1] + ","
-    + colors[1] + " 25%,"  
-    + colors[3] + " 25%" 
-    + ")"
+    + colors[1] + " 25%,"
+    + colors[2] + " 25%,"
+    + colors[2] + " 35%,"  
+    + colors[3] + " 35%" 
+    + ")",
+    "& h1, h2": {
+      color: colors[5] + " !important"
+    },
+    "& span": {
+      color: colors[4]
+    }
+  },
+  //One color small header, other color base
+  bgTwo: {
+    background: "linear-gradient(to bottom, " 
+    + colors[1] + ","
+    + colors[1] + " 12%,"  
+    + colors[3] + " 12%" 
+    + ")",
+    "& h1, h2": {
+      color: colors[5] + " !important"
+    },
+    "& span": {
+      color: colors[4]
+    }
   },
   //Three color, three striped
-  bgTwo: {
+  bgThree: {
     background: "linear-gradient(to bottom, " 
     + colors[1] + ","
     + colors[1] + " 15%," 
     + colors[2] + " 15%," 
     + colors[2] + " 30%," 
     + colors[3] + " 30%" 
-    + ")"
+    + ")",
+    "& h1, h2": {
+      color: colors[5] + " !important"
+    },
+    "& span": {
+      color: colors[4]
+    }
   },
   //All base
-  bgThree: {
-    background: colors[3]
+  bgFour: {
+    background: colors[3],
+    "& h1, h2": {
+      color: colors[5] + " !important"
+    },
+    "& span": {
+      color: colors[4]
+    }
   },
+
 });
 
 /**********************************************************************
@@ -106,6 +185,7 @@ function App() {
               <div className={((bgType === 1) && classes.bgOne) 
                            || ((bgType === 2) && classes.bgTwo)
                            || ((bgType === 3) && classes.bgThree)
+                           || ((bgType === 4) && classes.bgFour)
                            }>    
                 <Component />
               </div>

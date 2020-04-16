@@ -6,4 +6,14 @@
 
 import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles({});
+export const useStyles = makeStyles({
+    profileContainerDiv: {
+        height: '20em',
+        overflowY: 'scroll',
+        display: 'flex',
+        flexFlow: 'row wrap',
+        marginBottom: '2em',
+        border: 'solid 1px grey',
+        borderRadius: '10px',
+    }
+});

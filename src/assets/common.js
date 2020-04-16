@@ -7,26 +7,29 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 /* Color Schemes ****************************************************/
-//grape and vanilla
-//export const colors = ["white", "#6e529b", "#5d3f6a", "#ffff99"];
+/* [white, primary, secondary, base, font, accent] 
+ *
+ * primary: light, will have the header
+ * secondary: dark or matching
+ * base: should be light
+ * font: font color, should be dark. includes navbar buttons
+ * accent: headers and titles, should be dark
+ * 
+ * bg1 = primary 25%, base 75%
+ * bg2 = primary 15%, secondary 15%, base 70%
+ * bg3 = base 100%
+ */
 
-//blue and vanilla
-//export const colors = ["white", "#8eb5eb", "#1d56a5", "#ffff99"];
 
-//blue, yellow, vanilla
-//export const colors = ["white", "#246bce", "#ffff31", "#ffff99"];
+//celestial blue, maize, old lace, onyx, charleston green
+//export const colors = ["white", "#3E92CC", "#FFEC60", "#F7F5E6", "#333745", "#232630"];
 
-//blueeee
-//export const colors = ["white", "#246bce", "#ffffff", "#a6e7ff"];
+//stil de graine yellow, jet, beige, cafe noir, smokey black
+export const colors = ["white", "#F5CB5C", "#333533", "#F5F7DC", "#4F3421", "#0D0A0B"];
 
-//milky chocolate
-export const colors = ["white", "#7ba9c3", "#84563c", "#fdfff5", "black"];
+//maximum blue green, wild orchard, beige, maastricht blue 
+//export const colors = ["white", "#2EC4B6", "#CE7DA5", "#F5F7DC", "#493657", "#493657"];
 
-//pink, black, mint
-//export const colors = ["white", "#de5d83", "#010b13", "#f5fffa"];
-
-//penguin, white, blue, black
-//export const colors = ["white", "#fdfff5", "#318ce7", "#080808"];
 /**********************************************************************/
 
 
@@ -43,7 +46,7 @@ export const useCommonStyles = makeStyles({
     width: "90vw",
     textAlign: "center",
     justifyContent: "center",
-    marginLeft: "1em",
+    marginLeft: "1em"
   },
   blankDiv: {
     marginTop: "20em"
@@ -96,6 +99,10 @@ export const useCommonStyles = makeStyles({
     fontSize: '1.3em',
     display: 'block',
     fontWeight: 'bold',
+    color: colors[5] + " !important",
+    "& :hover": {
+      color: colors[4] + " !important"
+    }
   },
   body: {
     fontSize: '1em',
@@ -106,7 +113,9 @@ export const useCommonStyles = makeStyles({
   },
   createdBy: {
     fontSize: '0.8em',
-    display: 'block'
+    display: 'block',
+    color: colors[5] + " !important",
+
   },
   smallText: {
     fontSize: '0.75em',

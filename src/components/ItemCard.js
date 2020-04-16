@@ -68,9 +68,11 @@ const ItemCard = params => {
     );
 
     const createdBySection = (
-        <span className={common.createdBy}>
-            By {params.createdBy}
-        </span>
+        <NavLink to={"/profile" + "/" + params.createdBy}>
+            <span className={common.createdBy}>
+                By {params.createdBy}
+            </span>
+        </NavLink>  
     );
 
     const bodySection = (
