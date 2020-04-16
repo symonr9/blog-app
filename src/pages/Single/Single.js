@@ -158,7 +158,7 @@ function Single() {
       (data 
         && ( type === "poetry" && 
               (<div>
-                <h1>{data.title}</h1>
+                <h1 classes={classes.title}>{data.title}</h1>
                 <NavLink to={"/profile" + "/" + data.createdBy}>
                     <span className={common.createdBy}>
                         By {data.createdBy}
@@ -178,7 +178,7 @@ function Single() {
               type === "quotes" &&
               (<div>
                 <br/><br/>
-                <h1><i>"{data.text}"</i></h1>
+                <h1 classes={classes.title}><i>"{data.text}"</i></h1>
                 <br/><br/>
                 {data.author}
                 <br/><br/>
@@ -194,7 +194,7 @@ function Single() {
               ||
               type === "prose" && 
               (<div>
-                <h1>{data.title}</h1>
+                <h1 classes={classes.title}>{data.title}</h1>
                 <NavLink to={"/profile" + "/" + data.createdBy}>
                     <span className={common.createdBy}>
                         By {data.createdBy}

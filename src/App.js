@@ -107,8 +107,8 @@ const useStyles = makeStyles({
     + colors[2] + " 35%,"  
     + colors[3] + " 35%" 
     + ")",
-    "& h1": {
-      color: colors[2] + " !important"
+    "& h1, h2": {
+      color: colors[5] + " !important"
     },
     "& span": {
       color: colors[4]
@@ -121,8 +121,8 @@ const useStyles = makeStyles({
     + colors[1] + " 12%,"  
     + colors[3] + " 12%" 
     + ")",
-    "& h1": {
-      color: colors[2] + " !important"
+    "& h1, h2": {
+      color: colors[5] + " !important"
     },
     "& span": {
       color: colors[4]
@@ -137,8 +137,8 @@ const useStyles = makeStyles({
     + colors[2] + " 30%," 
     + colors[3] + " 30%" 
     + ")",
-    "& h1": {
-      color: colors[2] + " !important"
+    "& h1, h2": {
+      color: colors[5] + " !important"
     },
     "& span": {
       color: colors[4]
@@ -147,8 +147,8 @@ const useStyles = makeStyles({
   //All base
   bgFour: {
     background: colors[3],
-    "& h1": {
-      color: colors[2] + " !important"
+    "& h1, h2": {
+      color: colors[5] + " !important"
     },
     "& span": {
       color: colors[4]
