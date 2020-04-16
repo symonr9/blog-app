@@ -94,37 +94,37 @@ const SortFilterBar = params => {
     };
 
     const titleChip = (            
-        <Chip icon={<SortByAlphaRoundedIcon style={{ color: colors[4] }}/>} 
+        <Chip icon={<SortByAlphaRoundedIcon style={{ color: colors[5] }}/>} 
         label="By Title" 
-        style={{ color: colors[4], backgroundColor: colors[3], marginRight: '0.3em' }}
+        style={{ color: colors[5], backgroundColor: colors[3], marginRight: '0.3em' }}
         onClick={handleSortTitle} />
     );
 
     const authorChip = (
         <Chip icon={<FaceIcon style={{ color: colors[4] }}/>} 
         label="By Author" 
-        style={{ color: colors[4], backgroundColor: colors[3], marginRight: '0.3em' }}
+        style={{ color: colors[5], backgroundColor: colors[3], marginRight: '0.3em' }}
         onClick={handleSortAuthor} />
     );
 
     const dateChip = (
         <Chip icon={<ScheduleRoundedIcon style={{ color: colors[4] }}/>} 
         label="By Date"
-        style={{ color: colors[4], backgroundColor: colors[3], marginRight: '0.3em' }} 
+        style={{ color: colors[5], backgroundColor: colors[3], marginRight: '0.3em' }} 
         onClick={handleSortDate} />
     );
     
     const randomChip = (
         <Chip icon={<CasinoRoundedIcon style={{ color: colors[4] }}/>} 
         label="By Random"
-        style={{ color: colors[4], backgroundColor: colors[3], marginRight: '0.3em' }} 
+        style={{ color: colors[5], backgroundColor: colors[3], marginRight: '0.3em' }} 
         onClick={handleSortRandom} />
     );
 
     const fullTextChip = (
         <Chip icon={<ViewHeadlineRoundedIcon style={{ color: colors[4] }}/>} 
         label="View Full Text"
-        style={{ color: colors[4], backgroundColor: colors[3], marginRight: '0.3em' }} 
+        style={{ color: colors[5], backgroundColor: colors[3], marginRight: '0.3em' }} 
         onClick={handleIsFullText} />
     );
 

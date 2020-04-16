@@ -96,10 +96,10 @@ var styles = {
     marginTop: "1em",
   },
   bmBurgerBars: {
-    background: colors[4]
+    background: colors[2]
   },
   bmBurgerBarsHover: {
-    background: colors[3]
+    background: colors[5]
   },
   bmCrossButton: {
     height: "24px",
@@ -113,7 +113,13 @@ var styles = {
     height: "100%"
   },
   bmMenu: {
-    background: "linear-gradient(to bottom," + colors[1] + " 20%," + colors[3] + " 80%)",
+    background: "linear-gradient(to bottom, " 
+    + colors[1] + ","
+    + colors[1] + " 25%," 
+    + colors[2] + " 25%," 
+    + colors[2] + " 50%," 
+    + colors[3] + " 50%" 
+    + ")",
     fontSize: "1.15em",
     overflow: "hidden",
   },
