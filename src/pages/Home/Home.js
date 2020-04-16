@@ -44,7 +44,7 @@ const Home = () => {
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
         <h1>Symon's Blog</h1>
-        <br/>
+        <br/><br/><br/><br/><br/>
         Hello and welcome to my blog!
         <br/><br/>
 
@@ -59,7 +59,7 @@ const Home = () => {
         <br/><br/>
 
         <br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/>
+        <br/><br/><br/>
       </Grid>
     </Grid>
   );

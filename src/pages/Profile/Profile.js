@@ -106,8 +106,8 @@ function Profile() {
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
-        <h1>{username}'s profile</h1>
-
+        <h1>{username}'s Profile</h1>
+          <br/>
           <h2>Poetry</h2>
           <div className={classes.profileContainerDiv}>
           {(poetry &&

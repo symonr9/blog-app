@@ -129,6 +129,7 @@ const Signup = () => {
           {passwordTextField("password", "Password", handlePasswordChange)}
           {submitBtn("Sign Up")}
         </form>
+        <br/><br/>
       </Grid>
     </Grid>
   );
