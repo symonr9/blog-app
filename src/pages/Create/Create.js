@@ -331,22 +331,6 @@ function Create() {
         </div>
       )
     },
-    {
-      value: "upload",
-      label: "upload a document",
-      formInput: (
-        <div>
-          {basicTextField("docTitle", "Title", handleDocTitleChange)}
-          {basicTextField("docDescription", "Description", handleDocDescriptionChange, 2)}
-          <section className="container">
-            <div {...getRootProps({className: 'dropzone'})} className={classes.dropZoneDiv}>
-              <input {...getInputProps()} />
-              <p>Drag and Drop or click to select a file</p>
-            </div>
-          </section>
-        </div>
-      )
-    },
   ];
   /******************************************************* */
 
@@ -422,30 +406,6 @@ function Create() {
           url = "prose/create";
 
           break;
-        case "upload":
-          data = {
-            "title": docTitle,
-            "description": docDescription,
-            file: acceptedFiles[0],
-            "isPublic": true
-          };
-          url = "documents/upload";
-
-          console.log("in upload: ", data);
-
-          //Post Request to CREATE on the server.
-          postData(
-            getServerURL(url),
-            data,
-            response => {
-              console.log(response);
-              clearForm();
-              setIsSnackbarOpen(true);
-            },
-            true //isUpload, changes the header to multipart/form-data
-          );
-
-          return;
         default:
           console.log("Something went wrong..."); 
           return 0;
@@ -491,8 +451,6 @@ function Create() {
             ))
           }
           {formInput}
-          {type === "upload" && (<span><br/>File: {docDiv}<br/></span>)}
-          {type === "upload" && (submitBtn("Publish"))}
         </form>
         </div>
         <div className={!isSideView && (classes.wordLookupDiv) || isSideView && (classes.sideWordLookupDiv)}>
