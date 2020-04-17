@@ -34,12 +34,14 @@ import { slide as Menu } from "react-burger-menu";
 import { colors } from "../assets/common";
 
 import { logoutUser } from "../services/redux/actions";
+
+import logo from "../assets/logo2.svg";
 /**********************************************************************/
 
 const useStyles = makeStyles({
   navBarDiv: {
     position: "fixed",
-    top: "0",
+    top: "0.25em",
     margin: "1em",
     "& a": {
       margin: "0.5em",
@@ -72,7 +74,12 @@ const useStyles = makeStyles({
     }
   },
   navBtn: {
-    marginBottom: '1em',
+    marginBottom: '0.5em',
+    color: colors[4],
+    backgroundColor: colors[3]
+  },
+  mobileNavBtn: {
+    marginTop: '1.25em',
     color: colors[4],
     backgroundColor: colors[3]
   },
@@ -82,6 +89,19 @@ const useStyles = makeStyles({
     color: colors[4],
     backgroundColor: colors[3],
     position: 'fixed',
+  },
+  logo: {
+    width: '10em',
+    height: '10em',
+    position: 'fixed',
+    marginBottom: '10em'
+  },
+  mobileLogo: {
+    width: '10em',
+    height: '10em',
+    position: 'fixed',
+    margin: '0 !important',
+    top: '0'
   }
 });
 
@@ -198,7 +218,6 @@ function NavBar() {
   };
 
   const loggedInRoutes = [
-    { path: "/", name: "Home", icon: <HomeRounded />, isLogOut: false },
     { path: "/create", name: "Create", icon: <AddCircleOutlineRoundedIcon />, isLogOut: false },
     { path: "/poetry", name: "Poetry", icon: <MenuBookRoundedIcon />, isLogOut: false },
     { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon />, isLogOut: false },
@@ -208,7 +227,6 @@ function NavBar() {
   ];
   
   const loggedOutRoutes = [
-    { path: "/", name: "Home", icon: <HomeRounded /> },
     { path: "/poetry", name: "Poetry", icon: <MenuBookRoundedIcon /> },
     { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon /> },
     { path: "/prose", name: "Prose", icon: <DescriptionRoundedIcon />},
@@ -218,10 +236,15 @@ function NavBar() {
 
   const body = (
     <div>
+      <NavLink to={"/"}>
+        <Button>
+          {<img src={logo} alt="logo" className={!isMobileView ? classes.logo : classes.mobileLogo} />}
+        </Button>
+      </NavLink>
       {isLoggedIn && (
         loggedInRoutes.map(({ path, name, icon, isLogOut }) => (
           <NavLink to={path} key={name}>
-            <Button className={classes.navBtn} variant="contained" onClick={(isLogOut && handleLogoutBtnClick)}>
+            <Button className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained" onClick={(isLogOut && handleLogoutBtnClick)}>
               {icon}
               {name}
             </Button>
@@ -232,7 +255,7 @@ function NavBar() {
       !isLoggedIn && (
         loggedOutRoutes.map(({ path, name, icon }) => (
           <NavLink to={path} key={name}>
-            <Button className={classes.navBtn} variant="contained">
+            <Button className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained">
               {icon}
               {name}
             </Button>
