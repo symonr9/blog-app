@@ -61,17 +61,8 @@ function Quotes() {
     getData(getServerURL("quotes"), response => {
       if (isSubscribed) {
         setQuotes(
-          response.sort((a, b) => {
-            let aItem = new Date(a.createdAt).getTime();
-            let bItem = new Date(b.createdAt).getTime();
-  
-            let isDesc = sortDescDate;
-            setSortDescDate(!sortDescDate);
-  
-            if (isDesc) {
-              return aItem > bItem ? -1 : aItem < bItem ? 1 : 0;
-            }
-            return aItem < bItem ? -1 : aItem > bItem ? 1 : 0;
+          response.sort(() => {
+            return 0.5 - Math.random();
           })
         );
       }
