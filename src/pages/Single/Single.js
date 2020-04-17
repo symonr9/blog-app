@@ -164,7 +164,6 @@ function Single() {
                         By {data.createdBy}
                     </span>
                 </NavLink>  
-                <br/>
                 created <ReactTimeAgo date={data.createdAt} />
                 <br/><br/>
                 {data.body}
@@ -187,7 +186,6 @@ function Single() {
                         By {data.createdBy}
                     </span>
                 </NavLink>  
-                <br/>
                 created <ReactTimeAgo date={data.createdAt} />
                 <br/><br/><br/>              
               </div>)
@@ -200,7 +198,6 @@ function Single() {
                         By {data.createdBy}
                     </span>
                 </NavLink>  
-                <br/>
                  created <ReactTimeAgo date={data.createdAt} />
                 <br/><br/>
                 {data.body}
@@ -219,6 +216,7 @@ function Single() {
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
+        <br/><br/>
         <div className={classes.singleContainerDiv}>
           {(data && bodyContent) ||
             (!data && (
