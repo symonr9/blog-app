@@ -53,7 +53,7 @@ const routes = [
   { path: "/:type/:urlId", 
     name: "Single", 
     Component: Single, 
-    bgType: 2 
+    bgType: 4
   },
   { path: "/poetry", 
     name: "Poetry", 
