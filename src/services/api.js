@@ -18,6 +18,13 @@ const jsonConfig = {
 	}
 }
 
+//Define the data as a JSON object for the server to receive.
+const uploadConfig = {
+	header: {
+		'Content-Type': 'multipart/form-data'
+	}
+}
+
 /**********************************************************************
  * Function Name: postData
  * Parameters:
@@ -37,9 +44,9 @@ const jsonConfig = {
  * Description: Api request for CREATE operation.
  * Notes: None
  **********************************************************************/
-export const postData = (url, body, successCb) => {
+export const postData = (url, body, successCb, isUpload = false) => {
 	axios
-		.post(url, body, jsonConfig)
+		.post(url, body, ((isUpload === false) ? jsonConfig : uploadConfig))
 		.then(response => {
 			successCb(response.data);
 		})

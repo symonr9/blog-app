@@ -8,13 +8,15 @@
 
 
 /* Library Imports ****************************************************/
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 
 import { useHistory } from "react-router-dom"; 
 import { useSelector } from "react-redux";
 
 import MUIRichTextEditor from "mui-rte";
+
+import { useDropzone } from 'react-dropzone';
 
 import { Button, Grow, Grid, TextField, Paper, Snackbar, IconButton  } from "@material-ui/core";
 import MuiAlert from '@material-ui/lab/Alert';
@@ -240,6 +242,10 @@ function Create() {
   const [proseTitle, setProseTitle] = useState("");
   const [proseBody, setProseBody] = useState("");
 
+  const [docTitle, setDocTitle] = useState("");
+  const [docDescription, setDocDescription] = useState("");
+  const [docDiv, setDocDiv] = useState(<div></div>);
+
   const handlePoemTitleChange = event => {
     setPoemTitle(event.target.value);
   };
@@ -271,6 +277,22 @@ function Create() {
   const handleProseBodyChange = event => {
     setProseBody(event.target.value);
   };
+
+  const handleDocTitleChange = event => {
+    setDocTitle(event.target.value);
+  };
+
+  const handleDocDescriptionChange = event => {
+    setDocDescription(event.target.value);
+  };
+
+  const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
+
+  useEffect(() => {
+    setDocDiv([
+    <span>{acceptedFiles[0] && acceptedFiles[0].path}</span>
+    ])
+  }, [acceptedFiles]);
 
   //Defines the options for the dropdown and the form that is dynamically rendered.
   const types = [
@@ -358,7 +380,8 @@ function Create() {
             "body": poemBody, 
             "type": poemType,
             "notes": poemNotes,
-            "createdBy": sessionUsername
+            "createdBy": sessionUsername,
+            "isPublic": true
           };
           url = "poetry/create";
 
@@ -367,7 +390,8 @@ function Create() {
           data = {
             "text": quoteText,
             "author": quoteAuthor,
-            "createdBy": sessionUsername
+            "createdBy": sessionUsername,
+            "isPublic": true
           }; 
           url = "quotes/create";
         
@@ -376,7 +400,8 @@ function Create() {
           data = {
             "title": proseTitle,
             "body": proseBody,
-            "createdBy": sessionUsername
+            "createdBy": sessionUsername,
+            "isPublic": true
           };
           url = "prose/create";
 
