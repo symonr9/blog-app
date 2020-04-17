@@ -13,6 +13,8 @@
 /* Project Imports ****************************************************/
 import { useCommonStyles } from "../../assets/common";
 import { useStyles } from "./exports";
+
+import icon from "../../assets/logo.svg";
 /**********************************************************************/
 
 
@@ -43,24 +45,18 @@ const Home = () => {
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
-        <h1>Symon's Blog</h1>
-        <br/><br/><br/><br/><br/>
+        <br/>
+        <span className={classes.introTitle}>The things we stay alive for</span>
+        <br/>
+        <span className={classes.introQuote}>We don't read and write poetry because it's cute. 
+        We read and write poetry because we are members of the human race. 
+        And the human race is filled with passion. 
+        And medicine, law, business, engineering, these are noble pursuits and necessary to sustain life. 
+        But poetry, beauty, romance, love... these are what we stay alive for.</span>
         <br/><br/><br/>
-        Hello and welcome to my blog!
-        <br/><br/>
-
-        This is a progressive web application (PWA) that I wrote to host some of the writings that I've done.
-        This includes poems and prose, in addition to quotes that I've heard from others that I like to 
-        re-visit. 
-        <br/><br/>
-
-        This PWA was created using ReactJS on the front-end and Node on the back-end. Because this is a PWA,
-        this application can be visible on browser or mobile for offline use. This application can be added
-        to the home screen on both iOS and Android.
-        <br/><br/>
-
-        <br/><br/><br/><br/><br/>
-        <br/><br/><br/>
+        <center>
+          <object id="my-svg" type="image/svg+xml" className={classes.homeLogo} data={icon}></object>
+        </center>
       </Grid>
     </Grid>
   );
