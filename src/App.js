@@ -118,8 +118,8 @@ const useStyles = makeStyles({
   bgTwo: {
     background: "linear-gradient(to bottom, " 
     + colors[1] + ","
-    + colors[1] + " 12%,"  
-    + colors[3] + " 12%" 
+    + colors[1] + " 14%,"  
+    + colors[3] + " 14%" 
     + ")",
     "& h1, h2": {
       color: colors[5] + " !important"
