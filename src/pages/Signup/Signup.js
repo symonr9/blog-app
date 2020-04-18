@@ -120,6 +120,7 @@ const Signup = () => {
     <Grid container>
       <Grid item xs={12}>
       {!isMobileView && (<div className={common.spacingTop}></div>)}
+      <br/>
         <h1>Signup</h1>
       </Grid>
       <Grid item xs={12}>

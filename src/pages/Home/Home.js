@@ -44,19 +44,17 @@ const Home = () => {
   const body = (
     <Grid container>
       <Grid item xs={12}>
-        <div className={common.spacingTop}></div>
-        <br/>
+        <center>
+          <object id="my-svg" type="image/svg+xml" className={!isMobileView ? classes.logo : classes.mobileLogo} data={icon}></object>
+        </center>
         <span className={classes.introTitle}>The things we stay alive for</span>
         <br/>
         <span className={classes.introQuote}>We don't read and write poetry because it's cute. 
         We read and write poetry because we are members of the human race. 
         And the human race is filled with passion. 
         And medicine, law, business, engineering, these are noble pursuits and necessary to sustain life. 
-        But poetry, beauty, romance, love... these are what we stay alive for.</span>
+        But poetry, beauty, romance, love... these are what we stay alive for. -Mr.Keating, Dead Poets Society</span>
         <br/><br/><br/>
-        <center>
-          <object id="my-svg" type="image/svg+xml" className={classes.homeLogo} data={icon}></object>
-        </center>
       </Grid>
     </Grid>
   );
