@@ -185,8 +185,7 @@ function Profile() {
   );
   return (
     <Grow in={true}>
-      {(!isMobileView && <div className={common.bodyDiv}>{body}</div>) ||
-        (isMobileView && <div className={common.mobileBodyDiv}>{body}</div>)}
+      {<div className={!isMobileView ? common.bodyDiv : common.mobileBodyDiv}>{body}</div>}
     </Grow>
   );
 }
