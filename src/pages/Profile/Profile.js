@@ -38,10 +38,6 @@ function Profile() {
   const isLoggedIn = !!sessionUsername;
 
   const history = useHistory();
-
-  if(!isLoggedIn){
-    history.push("/redirect");
-  }
   /**********************************************************************/
   
   const classes = useStyles();
