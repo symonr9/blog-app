@@ -142,6 +142,6 @@ export const useCommonStyles = makeStyles({
   sortFilterBarDiv: {
    display: 'flex',
    marginBottom: '2em' 
-  }
+  },
   
 });

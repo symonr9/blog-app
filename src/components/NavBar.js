@@ -238,7 +238,7 @@ function NavBar() {
     <div>
       <NavLink to={"/"}>
         <Button>
-          {<img src={logo} alt="logo" className={!isMobileView ? classes.logo : classes.mobileLogo} />}
+          {<object type="image/svg+xml" className={!isMobileView ? classes.logo : classes.mobileLogo} data={logo}></object>}
         </Button>
       </NavLink>
       {isLoggedIn && (

@@ -8,11 +8,16 @@ import { makeStyles } from "@material-ui/core/styles";
 import { colors } from "../../assets/common";
 
 export const useStyles = makeStyles({
-    homeLogo: {
-        width: '40em',
-        height: '40em',
-        margin: '0',
+    logo: {
+        width: '70vw',
+        height: '75vh',
+        margin: '0 !important',
+        marginTop: '0em !important',
+        marginBottom: '0em !important',
         textAlign: 'center',
+    },
+    mobileLogo: {
+
     },
     introTitle: {
         fontSize: '4em',

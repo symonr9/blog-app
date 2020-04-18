@@ -93,7 +93,7 @@ const routes = [
   { path: "/", 
     name: "Home", 
     Component: Home, 
-    bgType: 1 
+    bgType: 2 
   }
 ];
 
