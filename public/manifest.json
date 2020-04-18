@@ -3,13 +3,13 @@
   "name": "Symon's Blog PWA",
   "icons": [
     {
-      "src": "logo.svg",
+      "src": "logo.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/svg"
+      "type": "image/png"
     },
     {
-      "src": "logo.svg",
-      "type": "image/svg",
+      "src": "logo.png",
+      "type": "image/png",
       "sizes": "192x192"
     }
   ],
