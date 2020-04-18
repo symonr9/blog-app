@@ -241,6 +241,12 @@ function NavBar() {
           {<object type="image/svg+xml" className={!isMobileView ? classes.logo : classes.mobileLogo} data={logo}></object>}
         </Button>
       </NavLink>
+      <NavLink to={"/"}>
+        <Button className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained">
+          <HomeRounded />
+          Home
+        </Button>
+      </NavLink>
       {isLoggedIn && (
         loggedInRoutes.map(({ path, name, icon, isLogOut }) => (
           <NavLink to={path} key={name}>

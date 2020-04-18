@@ -17,7 +17,7 @@ export const useStyles = makeStyles({
         textAlign: 'center',
     },
     mobileLogo: {
-
+        marginTop: '5em !important'
     },
     introTitle: {
         fontSize: '4em',
