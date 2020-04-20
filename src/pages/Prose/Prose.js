@@ -19,6 +19,7 @@ import { getServerURL } from "../../config/config";
 
 import ItemCard from '../../components/ItemCard';
 import SortFilterBar from '../../components/SortFilterBar';
+import CoolPagination from '../../components/CoolPagination';
 
 import { useStyles } from "./exports";
 /**********************************************************************/
@@ -59,9 +60,12 @@ function Prose() {
   const fetchData = isSubscribed => {
     getData(getServerURL("prose"), response => {
       if (isSubscribed) {
-        setProse(response.sort(() => {
+        const items = response.sort(() => {
           return 0.5 - Math.random();
-        }));
+        });
+        setProse(items);
+        setCurrentPage(items.slice(0, numOfItemsPerPage));
+        setNumOfPages(Math.ceil(items.length / numOfItemsPerPage));
       }
     });
   };
@@ -164,6 +168,33 @@ function Prose() {
     }
   }, [searchChange]);
 
+
+  /* PAGINATION *********************************************************/
+  const [page, setPage] = useState(1);
+  const [startIndex, setStartIndex] = useState(0);
+  const [numOfPages, setNumOfPages] = useState(1);
+  const [numOfItemsPerPage, setNumOfItemsPerPage] = useState(9);
+  const [currentPage, setCurrentPage] = useState(null);
+
+  //Executes whenever page changes.
+  useEffect(() => {
+    if(currentPage !== null){
+      
+      if(numOfItemsPerPage === prose.length){
+        setCurrentPage(prose.slice(0, prose.length));
+        return;
+      }
+      setCurrentPage(prose.slice(startIndex, startIndex + numOfItemsPerPage));
+    }
+  }, [page, sortTitle, sortAuthor, sortDate, sortRandom, searchChange, prose, numOfItemsPerPage]);
+
+  useEffect(() => {
+    if(prose !== null){
+      setNumOfPages(Math.ceil(prose.length / numOfItemsPerPage));
+    }
+  }, [numOfItemsPerPage]);
+  /**********************************************************************/  
+
   const body = (
     <Grid container>
       <Grid item xs={12}>
@@ -186,10 +217,26 @@ function Prose() {
           setIsFullText={setIsFullText}
           searchChange={searchChange}
           setSearchChange={setSearchChange}
+          numOfItemsPerPage={numOfItemsPerPage}
+          setNumOfItemsPerPage={setNumOfItemsPerPage}
+          isMobileView={isMobileView}
+        />
+        <CoolPagination 
+          type={"prose"}
+          location={"top"}
+          items={prose}
+          page={page}
+          setPage={setPage}
+          setStartIndex={setStartIndex}
+          numOfPages={numOfPages}
+          numOfItemsPerPage={numOfItemsPerPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          isMobileView={isMobileView}
         />
         <div className={common.containerDiv}>
-          {(prose &&
-            prose.map((item, index) => {
+          {(currentPage &&
+            currentPage.map((item, index) => {
               if (item.isPublic) {
                 return (
                   <ItemCard 
@@ -211,6 +258,19 @@ function Prose() {
                 <CircularProgress />
               </div>
             ))}
+        <CoolPagination 
+          type={"prose"}
+          location={"bottom"}
+          items={prose}
+          page={page}
+          setPage={setPage}
+          setStartIndex={setStartIndex}
+          numOfPages={numOfPages}
+          numOfItemsPerPage={numOfItemsPerPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          isMobileView={isMobileView}
+        />
         </div>
       </Grid>
     </Grid>
