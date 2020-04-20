@@ -10,6 +10,7 @@
 import React from "react";
 
 import { Chip, Tooltip, TextField } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import SortByAlphaRoundedIcon from '@material-ui/icons/SortByAlphaRounded';
@@ -23,10 +24,20 @@ import ViewHeadlineRoundedIcon from '@material-ui/icons/ViewHeadlineRounded';
 /* Project Imports ****************************************************/
 import { colors, useCommonStyles } from "../assets/common";
 
-
 import { selectTextField } from "./FormElements";
 /**********************************************************************/
 
+
+
+const useStyles = makeStyles({
+    searchBarInput: {
+
+    },
+    numOfItemsSelect: {
+
+    }
+
+});
 
 
 /**********************************************************************
@@ -55,6 +66,7 @@ import { selectTextField } from "./FormElements";
  * Notes: None
  **********************************************************************/
 const SortFilterBar = params => {
+    const classes = useStyles();
     const common = useCommonStyles();
 
     const type = params.type;
@@ -97,9 +109,9 @@ const SortFilterBar = params => {
 
     const itemLength = params.items !== null ? params.items.length : 0;
 
-    const handleNumOfItemsPerPageChange = (event, value) => {
-        if(value < itemLength){
-            params.setNumOfItemsPerPage(value);
+    const handleNumOfItemsPerPageChange = (event, obj) => {
+        if(obj.props.value < itemLength){
+            params.setNumOfItemsPerPage(obj.props.value);
         }
     };
 
@@ -141,7 +153,7 @@ const SortFilterBar = params => {
     const numOfItemsPerPageSelect = (
         selectTextField(
             "numOfItemsPerPageSelect",
-            "How many items would you like to display?",
+            "Items to display?",
             params.numOfItemsPerPage,
             handleNumOfItemsPerPageChange,
             [
@@ -157,7 +169,7 @@ const SortFilterBar = params => {
         options={(params.items != null && params.items)}
         groupBy={(option) => (((type ==="poetry" || type === "prose") && option.title[0].toUpperCase()) || (type === "quotes" && option.author.toUpperCase()))}
         getOptionLabel={(option) => ((type === "poetry" || type === "prose") && option.title) || ((type === "quotes") && option.text)}
-        style={{ width: '15em', marginBottom: '1em' }}
+        style={{ width: '30em', marginBottom: '1em' }}
         onChange={handleSearchChange}
         renderInput={(p) => <TextField {...p} label="Search" variant="outlined" />}
         />
@@ -166,14 +178,15 @@ const SortFilterBar = params => {
     //Different JSX elemnts are rendered based on the type passed in.
     const sortMenu = (
         <span>
-            {searchBar}
-            {numOfItemsPerPageSelect}
+            <span className={classes.searchBarInput}>{searchBar}</span>
+
             <span className={common.sortDiv}>
                 {(type === "poetry" || type === "prose") && titleChip}
                 {authorChip}
                 {dateChip}
                 {randomChip}
                 {(type === "poetry" || type === "prose") && fullTextChip}
+                <span className={classes.numOfItemsSelect}>{numOfItemsPerPageSelect}</span>
             </span>
         </span>
     );
