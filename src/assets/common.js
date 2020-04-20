@@ -140,8 +140,25 @@ export const useCommonStyles = makeStyles({
     fontSize: '40em'
   },
   sortFilterBarDiv: {
-   display: 'flex',
+   display: 'inline-block',
    marginBottom: '2em' 
   },
+  mobileSortFilterBarDiv: {
+    display: 'inline-block'
+  },
+
+  topPagination: {
+    float: 'right'
+  },
+  mobileTopPagination: {
+   
+  },
+  bottomPagination: {
+    float: 'right',
+    marginTop: '2em',
+  },
+  mobileBottomPagination: {
+   
+  }
   
 });
