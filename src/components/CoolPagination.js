@@ -14,7 +14,6 @@ import Pagination from '@material-ui/lab/Pagination';
 
 /* Project Imports ****************************************************/
 import { colors, useCommonStyles } from "../assets/common";
-
 /**********************************************************************/
 
 
@@ -56,7 +55,8 @@ const CoolPagination = params => {
                 : ((params.location === "top") 
                     ? common.mobileTopPagination
                     : common.bottomPagination)}>
-                <Pagination count={params.numOfPages} 
+                <Pagination 
+                    count={params.numOfPages} 
                     color="secondary" 
                     page={params.page} 
                     onChange={handlePageChange}
