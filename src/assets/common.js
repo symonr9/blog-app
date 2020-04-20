@@ -85,7 +85,9 @@ export const useCommonStyles = makeStyles({
     padding: '10px',
     backgroundColor: 'transparent',
     width: '90%',
+    marginLeft: '1em',
     marginRight: '1em',
+    marginTop: '1em',
     marginBottom: '1em',
     "& a": {
       textDecoration: 'none',
@@ -144,21 +146,21 @@ export const useCommonStyles = makeStyles({
    marginBottom: '2em' 
   },
   mobileSortFilterBarDiv: {
-    display: 'inline-block'
+    display: 'inline-block',
+    marginBottom: '1em'
   },
 
   topPagination: {
     float: 'right'
   },
   mobileTopPagination: {
-   
   },
   bottomPagination: {
     float: 'right',
     marginTop: '2em',
   },
   mobileBottomPagination: {
-   
+   marginTop: '2em'
   }
   
 });
