@@ -23,6 +23,8 @@ import ViewHeadlineRoundedIcon from '@material-ui/icons/ViewHeadlineRounded';
 /* Project Imports ****************************************************/
 import { colors, useCommonStyles } from "../assets/common";
 
+
+import { selectTextField } from "./FormElements";
 /**********************************************************************/
 
 
@@ -93,6 +95,14 @@ const SortFilterBar = params => {
         }
     };
 
+    const itemLength = params.items !== null ? params.items.length : 0;
+
+    const handleNumOfItemsPerPageChange = (event, value) => {
+        if(value < itemLength){
+            params.setNumOfItemsPerPage(value);
+        }
+    };
+
     const titleChip = (            
         <Chip icon={<SortByAlphaRoundedIcon style={{ color: colors[5] }}/>} 
         label="By Title" 
@@ -128,6 +138,19 @@ const SortFilterBar = params => {
         onClick={handleIsFullText} />
     );
 
+    const numOfItemsPerPageSelect = (
+        selectTextField(
+            "numOfItemsPerPageSelect",
+            "How many items would you like to display?",
+            params.numOfItemsPerPage,
+            handleNumOfItemsPerPageChange,
+            [
+                {value: 9, label: '9'}, 
+                {value: 18, label: '18'}, 
+                {value: 27, label: '27'}, 
+                {value: itemLength, label: 'all'}])
+    );
+
     //Different JSX elemnts are rendered based on the type passed in.
     const searchBar = (
         <Autocomplete
@@ -144,6 +167,7 @@ const SortFilterBar = params => {
     const sortMenu = (
         <span>
             {searchBar}
+            {numOfItemsPerPageSelect}
             <span className={common.sortDiv}>
                 {(type === "poetry" || type === "prose") && titleChip}
                 {authorChip}
@@ -159,8 +183,7 @@ const SortFilterBar = params => {
             <Tooltip title="Sort">
                 <SortRoundedIcon fontSize="large" className={common.sortWidget} onClick={handleSortMenuOpen}/>
             </Tooltip>
-            {(params.isSortMenuOpen && (sortMenu)
-            )}
+            {(params.isSortMenuOpen && (sortMenu))}
         </div>
     );
 
