@@ -10,9 +10,6 @@
 import React, { useEffect, useState } from "react";
 
 import { Grow, Grid, CircularProgress } from "@material-ui/core";
-import Pagination from '@material-ui/lab/Pagination';
-
-import paginate from 'paginate-array';
 /**********************************************************************/
 
 /* Project Imports ****************************************************/
@@ -22,6 +19,7 @@ import { getServerURL } from "../../config/config";
 
 import ItemCard from '../../components/ItemCard';
 import SortFilterBar from '../../components/SortFilterBar';
+import CoolPagination from '../../components/CoolPagination';
 
 import { useStyles } from "./exports";
 /**********************************************************************/
@@ -58,27 +56,17 @@ function Poetry() {
   const [page, setPage] = useState(1);
   const [startIndex, setStartIndex] = useState(0);
   const [numOfPages, setNumOfPages] = useState(1);
-  const [numOfItemsPerPage, SetNumOfItemsPerPage] = useState(9);
+  const [numOfItemsPerPage, setNumOfItemsPerPage] = useState(9);
   const [currentPage, setCurrentPage] = useState(null);
 
-  //value: page selected
-  const handlePageChange = (event, value) => {
-    setPage(value);
-
-    let newStartIndex = ((value - 1) * numOfItemsPerPage);
-
-    if(value === 1){ 
-      newStartIndex = 0;
-    }
-
-    setStartIndex(newStartIndex);
-  };
-
+  //Executes whenever page changes.
   useEffect(() => {
     if(currentPage !== null){
       setCurrentPage(poetry.slice(startIndex, startIndex + numOfItemsPerPage));
     }
   }, [page]);
+
+  
   /**********************************************************************/
 
 
@@ -222,12 +210,24 @@ function Poetry() {
           setIsFullText={setIsFullText}
           searchChange={searchChange}
           setSearchChange={setSearchChange}
+          numOfItemsPerPage={numOfItemsPerPage}
+          setNumOfItemsPerPage={setNumOfItemsPerPage}
           isMobileView={isMobileView}
         />
-        {(poetry && (
-              <span className={!isMobileView ? common.topPagination : common.mobileTopPagination}>
-                <Pagination count={numOfPages} color="secondary" page={page} onChange={handlePageChange}/>
-              </span>))}
+
+        <CoolPagination 
+          type={"poetry"}
+          location={"top"}
+          items={poetry}
+          page={page}
+          setPage={setPage}
+          setStartIndex={setStartIndex}
+          numOfPages={numOfPages}
+          numOfItemsPerPage={numOfItemsPerPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          isMobileView={isMobileView}
+        />
         <div className={common.containerDiv}>
           {(currentPage &&
             currentPage.map((poem, index) => {
@@ -252,10 +252,19 @@ function Poetry() {
                 <CircularProgress />
               </div>
             ))}
-                    {(poetry && (
-              <span className={!isMobileView ? common.bottomPagination : common.mobileBottomPagination}>
-                <Pagination count={numOfPages} color="secondary" page={page} onChange={handlePageChange}/>
-              </span>))}
+            <CoolPagination 
+              type={"poetry"}
+              location={"bottom"}
+              items={poetry}
+              page={page}
+              setPage={setPage}
+              setStartIndex={setStartIndex}
+              numOfPages={numOfPages}
+              numOfItemsPerPage={numOfItemsPerPage}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              isMobileView={isMobileView}
+            />
         </div>
       </Grid>
     </Grid>
