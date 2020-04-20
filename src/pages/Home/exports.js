@@ -32,6 +32,6 @@ export const useStyles = makeStyles({
         marginTop: '2em'
     },
     homeSpacingDiv: {
-        marginTop: '23em'
+        marginTop: '25em'
     }
 });
