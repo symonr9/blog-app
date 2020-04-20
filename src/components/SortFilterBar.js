@@ -155,7 +155,7 @@ const SortFilterBar = params => {
     );
 
     return (
-        <div className={common.sortFilterBarDiv}>
+        <div className={!params.isMobileView ? common.sortFilterBarDiv : common.mobileSortFilterBarDiv}>
             <Tooltip title="Sort">
                 <SortRoundedIcon fontSize="large" className={common.sortWidget} onClick={handleSortMenuOpen}/>
             </Tooltip>
