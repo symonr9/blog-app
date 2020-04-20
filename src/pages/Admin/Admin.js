@@ -65,21 +65,6 @@ function Admin() {
  * Notes: None
  **********************************************************************/
   const fetchData = isSubscribed => {
-    getData(getServerURL("poetry/user/" + username), response => {
-      if (isSubscribed) {
-        setPoetry(response);
-      }
-    });
-    getData(getServerURL("quotes/user/" + username), response => {
-      if (isSubscribed) {
-        setQuotes(response);
-      }
-    });
-    getData(getServerURL("prose/user/" + username), response => {
-      if (isSubscribed) {
-        setProse(response);
-      }
-    });
   };
 
   //Run fetchData on the first render. When the second parameter is an 
