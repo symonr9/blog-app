@@ -52,25 +52,6 @@ function Poetry() {
   
 
 
-  /* PAGINATION *********************************************************/
-  const [page, setPage] = useState(1);
-  const [startIndex, setStartIndex] = useState(0);
-  const [numOfPages, setNumOfPages] = useState(1);
-  const [numOfItemsPerPage, setNumOfItemsPerPage] = useState(9);
-  const [currentPage, setCurrentPage] = useState(null);
-
-  //Executes whenever page changes.
-  useEffect(() => {
-    if(currentPage !== null){
-      setCurrentPage(poetry.slice(startIndex, startIndex + numOfItemsPerPage));
-    }
-  }, [page]);
-
-  
-  /**********************************************************************/
-
-
-
 /**********************************************************************
  * Function Name: fetchData
  * Parameters: isSubscribed variable ensures that the component isn't
@@ -187,6 +168,24 @@ function Poetry() {
     }
   }, [searchChange]);
   
+
+
+  /* PAGINATION *********************************************************/
+  const [page, setPage] = useState(1);
+  const [startIndex, setStartIndex] = useState(0);
+  const [numOfPages, setNumOfPages] = useState(1);
+  const [numOfItemsPerPage, setNumOfItemsPerPage] = useState(9);
+  const [currentPage, setCurrentPage] = useState(null);
+
+  //Executes whenever page changes.
+  useEffect(() => {
+    if(currentPage !== null){
+      setCurrentPage(poetry.slice(startIndex, startIndex + numOfItemsPerPage));
+    }
+  }, [page, sortTitle, sortAuthor, sortDate, sortRandom, searchChange]);
+  /**********************************************************************/
+
+
 
   const body = (
     <Grid container>
