@@ -10,11 +10,14 @@
 import React, { useEffect, useState } from "react";
 
 import { Grow, Grid, CircularProgress } from "@material-ui/core";
+import Pagination from '@material-ui/lab/Pagination';
+
+import paginate from 'paginate-array';
 /**********************************************************************/
 
 /* Project Imports ****************************************************/
 import { getData } from "../../services/api";
-import { useCommonStyles } from "../../assets/common";
+import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
 import ItemCard from '../../components/ItemCard';
@@ -35,7 +38,6 @@ function Poetry() {
   const common = useCommonStyles();
 
   //Data type for these hooks are arrays.
-  const [originalPoetry, setOriginalPoetry] = useState(null);
   const [poetry, setPoetry] = useState(null);
 
   /* Mobile View Handler ************************************************/
@@ -49,6 +51,36 @@ function Poetry() {
     window.matchMedia("(max-width: 1125px)").addListener(handler);
   }, []);
   /**********************************************************************/
+  
+
+
+  /* PAGINATION *********************************************************/
+  const [page, setPage] = useState(1);
+  const [startIndex, setStartIndex] = useState(0);
+  const [numOfPages, setNumOfPages] = useState(1);
+  const [numOfItemsPerPage, SetNumOfItemsPerPage] = useState(9);
+  const [currentPage, setCurrentPage] = useState(null);
+
+  //value: page selected
+  const handlePageChange = (event, value) => {
+    setPage(value);
+
+    let newStartIndex = ((value - 1) * numOfItemsPerPage);
+
+    if(value === 1){ 
+      newStartIndex = 0;
+    }
+
+    setStartIndex(newStartIndex);
+  };
+
+  useEffect(() => {
+    if(currentPage !== null){
+      setCurrentPage(poetry.slice(startIndex, startIndex + numOfItemsPerPage));
+    }
+  }, [page]);
+  /**********************************************************************/
+
 
 
 /**********************************************************************
@@ -61,11 +93,12 @@ function Poetry() {
   const fetchData = isSubscribed => {
     getData(getServerURL("poetry"), response => {
       if (isSubscribed) {
-        setPoetry(response.sort(() => {
+        const items = response.sort(() => {
           return 0.5 - Math.random();
-        }));
-        
-        setOriginalPoetry(response);
+        });
+        setPoetry(items);
+        setCurrentPage(items.slice(0, numOfItemsPerPage));
+        setNumOfPages(Math.ceil(items.length / numOfItemsPerPage));
       }
     });
   };
@@ -160,14 +193,12 @@ function Poetry() {
 
   useEffect(() => {
     if(poetry != null){
-      if(searchChange === ""){
-        setPoetry(originalPoetry);
-      }
-     else{   
+      if(searchChange !== ""){  
         setPoetry(poetry.filter(item => item.title == searchChange));
       }
     }
   }, [searchChange]);
+  
 
   const body = (
     <Grid container>
@@ -191,10 +222,15 @@ function Poetry() {
           setIsFullText={setIsFullText}
           searchChange={searchChange}
           setSearchChange={setSearchChange}
+          isMobileView={isMobileView}
         />
+        {(poetry && (
+              <span className={!isMobileView ? common.topPagination : common.mobileTopPagination}>
+                <Pagination count={numOfPages} color="secondary" page={page} onChange={handlePageChange}/>
+              </span>))}
         <div className={common.containerDiv}>
-          {(poetry &&
-            poetry.map((poem, index) => {
+          {(currentPage &&
+            currentPage.map((poem, index) => {
               if (poem.isPublic) {
                 return (
                   <ItemCard 
@@ -216,6 +252,10 @@ function Poetry() {
                 <CircularProgress />
               </div>
             ))}
+                    {(poetry && (
+              <span className={!isMobileView ? common.bottomPagination : common.mobileBottomPagination}>
+                <Pagination count={numOfPages} color="secondary" page={page} onChange={handlePageChange}/>
+              </span>))}
         </div>
       </Grid>
     </Grid>
