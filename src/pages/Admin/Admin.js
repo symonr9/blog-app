@@ -9,7 +9,8 @@ import React, { useEffect, useState, forwardRef } from "react";
 import { NavLink, useParams, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { Grow, Grid, CircularProgress } from "@material-ui/core";
+import { Grow, Grid, Snackbar } from "@material-ui/core";
+import MuiAlert from '@material-ui/lab/Alert';
 import MaterialTable from 'material-table';
 
 import AddBox from '@material-ui/icons/AddBox';
@@ -102,6 +103,15 @@ function Admin() {
   }, []);
   /**********************************************************************/
 
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setIsSnackbarOpen(false);
+  };
+
   /**********************************************************************
  * Function Name: fetchData
  * Parameters: isSubscribed variable ensures that the component isn't
@@ -116,8 +126,7 @@ function Admin() {
           return 0.5 - Math.random();
         }); 
         for(let i = 0; i < items.length; i++){
-          items[i].type = "poetry";
-          items[i].body = items[i].body.substring(0,100) + "...";
+          items[i].itemType = "poetry";
         }
         setPoetry(items);
       }
@@ -128,8 +137,7 @@ function Admin() {
           return 0.5 - Math.random();
         }); 
         for(let i = 0; i < items.length; i++){
-          items[i].type = "quotes";
-          items[i].text = items[i].text.substring(0,100) + "...";
+          items[i].itemType = "quotes";
         }
         setQuotes(items);
       }
@@ -140,8 +148,7 @@ function Admin() {
           return 0.5 - Math.random();
         }); 
         for(let i = 0; i < items.length; i++){
-          items[i].type = "prose";
-          items[i].body = items[i].body.substring(0,100) + "...";
+          items[i].itemType = "prose";
         }
         setProse(items);
       }
@@ -156,33 +163,181 @@ function Admin() {
     return () => (isSubscribed = false);
   }, []);
 
-  const columns = [
-    { title: 'Type', field: 'type', hidden: true },
+  const PoetryColumns = [
+    { title: 'Item Type', field: 'itemType', hidden: true },
+    { title: 'ID', field: '_id', hidden: true },
     { title: 'Title', field: 'title' },
-    { title: 'Body', field: 'body' },
+    { title: 'Type', field: 'type' },
+    { title: 'Notes', field: 'notes' },
+    { title: 'Body', field: 'body', render: row => <span>{row.body.substring(0,100) + "..."}</span> },
+    { title: 'Is Public', field: 'isPublic' },
     { title: 'Created By', field: 'createdBy', readonly: true },
     { title: 'Created At', field: 'createdAt', readonly: true }
   ];
 
-  const QuoteColumns = [
-    { title: 'Type', field: 'type', hidden: true },
+  const QuotesColumns = [
+    { title: 'Item Type', field: 'itemType', hidden: true },
+    { title: 'ID', field: '_id', hidden: true },
     { title: 'Text', field: 'text' },
     { title: 'Author', field: 'author' },
+    { title: 'Is Public', field: 'isPublic' },
     { title: 'Created By', field: 'createdBy', readonly: true },
     { title: 'Created At', field: 'createdAt', readonly: true }
   ];
+
+  const ProseColumns = [
+    { title: 'Item Type', field: 'itemType', hidden: true },
+    { title: 'ID', field: '_id', hidden: true },
+    { title: 'Title', field: 'title' },
+    { title: 'Body', field: 'body' },
+    { title: 'Is Public', field: 'isPublic' },
+    { title: 'Created By', field: 'createdBy', readonly: true },
+    { title: 'Created At', field: 'createdAt', readonly: true }
+  ];
+
 
   //title, body
   const handleRowAdd = (event) => {
-    console.log(event);
+    let data = {};
+    let url = "";
+
+    if(isLoggedIn){
+      //type is defined based on the initial Select input value.
+      switch(event.itemType){
+        case "poetry":
+          data = {
+            "title": event.title,
+            "body": event.body, 
+            "type": event.type,
+            "notes": event.notes,
+            "createdBy": event.createdBy,
+            "isPublic": event.isPublic
+          };
+          url = "poetry/create";
+
+          break;
+        case "quotes":
+          data = {
+            "text": event.text,
+            "author": event.author,
+            "createdBy": event.createdBy,
+            "isPublic": event.isPublic
+          }; 
+          url = "quotes/create";
+        
+          break;
+        case "prose":
+          data = {
+            "title": event.title,
+            "body": event.body,
+            "createdBy": event.createdBy,
+            "isPublic": event.isPublic
+          };
+          url = "prose/create";
+
+          break;
+        default:
+          console.log("Something went wrong..."); 
+          return 0;
+      }
+
+      //Post Request to CREATE on the server.
+      postData(
+        getServerURL(url),
+        data,
+        response => {
+          console.log(response);
+          setIsSnackbarOpen(true);
+        }
+      );
+    }
   };
 
   const handleRowUpdate = (event) => {
-    console.log(event);
+    let data = {};
+    let url = "";
+
+    if(isLoggedIn){
+      //type is defined based on the initial Select input value.
+      switch(event.itemType){
+        case "poetry":
+          data = {
+            "title": event.title,
+            "body": event.body, 
+            "type": event.type,
+            "notes": event.notes,
+            "isPublic": event.isPublic,
+            "createdBy": event.createdBy,
+          };
+          url = "poetry/edit/" + event._id;
+
+          break;
+        case "quotes":
+          data = {
+            "text": event.text,
+            "author": event.author,
+            "isPublic": event.isPublic,
+            "createdBy": event.createdBy,
+          }; 
+          url = "quotes/edit/" + event._id;
+        
+          break;
+        case "prose":
+          data = {
+            "title": event.title,
+            "body": event.body,
+            "isPublic": event.isPublic,
+            "createdBy": event.createdBy,
+          };
+          url = "prose/edit/" + event._id;
+
+          break;
+        default:
+          console.log("Something went wrong..."); 
+          return 0;
+      }
+
+      //Put Request to UPDATE on the server.
+      putData(
+        getServerURL(url),
+        data,
+        response => {
+          console.log(response);
+          setIsSnackbarOpen(true);
+        }
+      );
+    }
   };
 
   const handleRowDelete = (event) => {
-    console.log(event);
+    let url = "";
+
+    if(isLoggedIn){
+      //type is defined based on the initial Select input value.
+      switch(event.itemType){
+        case "poetry":
+          url = "poetry/delete/" + event._id;
+          break;
+        case "quotes":
+          url = "quotes/delete/" + event._id;
+          break;
+        case "prose":
+          url = "prose/delete/" + event._id;
+          break;
+        default:
+          console.log("Something went wrong..."); 
+          return 0;
+      }
+
+      //Delete Request for DELETE on the server.
+      deleteData(
+        getServerURL(url),
+        response => {
+          console.log(response);
+          setIsSnackbarOpen(true);
+        }
+      );
+    }
   };
 
 
@@ -193,7 +348,7 @@ function Admin() {
         <h1>Admin</h1>
         <MaterialTable
           title="Poetry"
-          columns={columns}
+          columns={PoetryColumns}
           data={poetry}
           editable={{
             onRowAdd: handleRowAdd,
@@ -205,7 +360,7 @@ function Admin() {
         <br/>
         <MaterialTable
           title="Quotes"
-          columns={QuoteColumns}
+          columns={QuotesColumns}
           data={quotes}
           editable={{
             onRowAdd: handleRowAdd,
@@ -217,7 +372,7 @@ function Admin() {
         <br/>
         <MaterialTable
           title="Prose"
-          columns={columns}
+          columns={ProseColumns}
           data={prose}
           editable={{
             onRowAdd: handleRowAdd,
@@ -227,6 +382,11 @@ function Admin() {
           icons={tableIcons} 
         />
         <br/>
+        <Snackbar open={isSnackbarOpen} autoHideDuration={3000} onClose={handleClose}>
+          <MuiAlert elevation={6} variant="filled" onClose={handleClose} severity="success">
+            Successful operation!
+          </MuiAlert>
+        </Snackbar>
       </Grid>
     </Grid>
   );
