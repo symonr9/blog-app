@@ -160,7 +160,7 @@ const SortFilterBar = params => {
                 {value: 9, label: '9'}, 
                 {value: 18, label: '18'}, 
                 {value: 27, label: '27'}, 
-                {value: itemLength, label: 'all'}])
+                {value: 45, label: '45'}])
     );
 
     //Different JSX elemnts are rendered based on the type passed in.

@@ -180,11 +180,21 @@ function Poetry() {
   //Executes whenever page changes.
   useEffect(() => {
     if(currentPage !== null){
+      
+      if(numOfItemsPerPage === poetry.length){
+        setCurrentPage(poetry.slice(0, poetry.length));
+        return;
+      }
       setCurrentPage(poetry.slice(startIndex, startIndex + numOfItemsPerPage));
     }
-  }, [page, sortTitle, sortAuthor, sortDate, sortRandom, searchChange]);
-  /**********************************************************************/
+  }, [page, sortTitle, sortAuthor, sortDate, sortRandom, searchChange, poetry, numOfItemsPerPage]);
 
+  useEffect(() => {
+    if(poetry !== null){
+      setNumOfPages(Math.ceil(poetry.length / numOfItemsPerPage));
+    }
+  }, [numOfItemsPerPage]);
+  /**********************************************************************/
 
 
   const body = (
@@ -213,7 +223,6 @@ function Poetry() {
           setNumOfItemsPerPage={setNumOfItemsPerPage}
           isMobileView={isMobileView}
         />
-
         <CoolPagination 
           type={"poetry"}
           location={"top"}
