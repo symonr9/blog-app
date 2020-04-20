@@ -254,7 +254,7 @@ function Single() {
 
   return (
     <Grow in={true}>
-      {<div className={(!isMobileView && common.bodyDiv || (isMobileView && common.mobileBodyDiv))}>{body}</div>}
+      {<div className={!isMobileView ? common.bodyDiv : common.mobileBodyDiv}>{body}</div>}
     </Grow>
   );
 }

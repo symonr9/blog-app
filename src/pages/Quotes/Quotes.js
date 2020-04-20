@@ -19,6 +19,7 @@ import { getServerURL } from "../../config/config";
 
 import ItemCard from '../../components/ItemCard';
 import SortFilterBar from '../../components/SortFilterBar';
+import CoolPagination from '../../components/CoolPagination';
 
 import { useStyles } from "./exports";
 /**********************************************************************/
@@ -60,11 +61,12 @@ function Quotes() {
   const fetchData = isSubscribed => {
     getData(getServerURL("quotes"), response => {
       if (isSubscribed) {
-        setQuotes(
-          response.sort(() => {
-            return 0.5 - Math.random();
-          })
-        );
+        const items = response.sort(() => {
+          return 0.5 - Math.random();
+        });
+        setQuotes(items);
+        setCurrentPage(items.slice(0, numOfItemsPerPage));
+        setNumOfPages(Math.ceil(items.length / numOfItemsPerPage));
       }
     });
   };
@@ -151,6 +153,34 @@ function Quotes() {
     }
   }, [searchChange]);
 
+
+  /* PAGINATION *********************************************************/
+  const [page, setPage] = useState(1);
+  const [startIndex, setStartIndex] = useState(0);
+  const [numOfPages, setNumOfPages] = useState(1);
+  const [numOfItemsPerPage, setNumOfItemsPerPage] = useState(9);
+  const [currentPage, setCurrentPage] = useState(null);
+
+  //Executes whenever page changes.
+  useEffect(() => {
+    if(currentPage !== null){
+      
+      if(numOfItemsPerPage === quotes.length){
+        setCurrentPage(quotes.slice(0, quotes.length));
+        return;
+      }
+      setCurrentPage(quotes.slice(startIndex, startIndex + numOfItemsPerPage));
+    }
+  }, [page, sortAuthor, sortDate, sortRandom, searchChange, quotes, numOfItemsPerPage]);
+
+  useEffect(() => {
+    if(quotes !== null){
+      setNumOfPages(Math.ceil(quotes.length / numOfItemsPerPage));
+    }
+  }, [numOfItemsPerPage]);
+  /**********************************************************************/
+
+
   const body = (
     <Grid container>
       <Grid item xs={12}>
@@ -169,10 +199,26 @@ function Quotes() {
           setSortRandom={setSortRandom}
           searchChange={searchChange}
           setSearchChange={setSearchChange}
+          numOfItemsPerPage={numOfItemsPerPage}
+          setNumOfItemsPerPage={setNumOfItemsPerPage}
+          isMobileView={isMobileView}
+        />
+        <CoolPagination 
+          type={"quotes"}
+          location={"top"}
+          items={quotes}
+          page={page}
+          setPage={setPage}
+          setStartIndex={setStartIndex}
+          numOfPages={numOfPages}
+          numOfItemsPerPage={numOfItemsPerPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          isMobileView={isMobileView}
         />
         <div className={common.containerDiv}>
-          {(quotes &&
-            quotes.map((quote, index) => {
+          {(currentPage &&
+            currentPage.map((quote, index) => {
               if (quote.isPublic) {
                 return (
                   <ItemCard 
@@ -192,6 +238,19 @@ function Quotes() {
                 <CircularProgress />
               </div>
             ))}
+        <CoolPagination 
+          type={"quotes"}
+          location={"bottom"}
+          items={quotes}
+          page={page}
+          setPage={setPage}
+          setStartIndex={setStartIndex}
+          numOfPages={numOfPages}
+          numOfItemsPerPage={numOfItemsPerPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          isMobileView={isMobileView}
+        />
         </div>
       </Grid>
     </Grid>
@@ -199,16 +258,7 @@ function Quotes() {
 
   return (
     <Grow in={true}>
-      {
-        <div
-          className={
-            (!isMobileView && common.bodyDiv) ||
-            (isMobileView && common.mobileBodyDiv)
-          }
-        >
-          {body}
-        </div>
-      }
+      {<div className={!isMobileView ? common.bodyDiv : common.mobileBodyDiv}>{body}</div>}
     </Grow>
   );
 }

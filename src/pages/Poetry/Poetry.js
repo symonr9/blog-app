@@ -14,11 +14,12 @@ import { Grow, Grid, CircularProgress } from "@material-ui/core";
 
 /* Project Imports ****************************************************/
 import { getData } from "../../services/api";
-import { useCommonStyles } from "../../assets/common";
+import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
 import ItemCard from '../../components/ItemCard';
 import SortFilterBar from '../../components/SortFilterBar';
+import CoolPagination from '../../components/CoolPagination';
 
 import { useStyles } from "./exports";
 /**********************************************************************/
@@ -35,7 +36,6 @@ function Poetry() {
   const common = useCommonStyles();
 
   //Data type for these hooks are arrays.
-  const [originalPoetry, setOriginalPoetry] = useState(null);
   const [poetry, setPoetry] = useState(null);
 
   /* Mobile View Handler ************************************************/
@@ -49,6 +49,7 @@ function Poetry() {
     window.matchMedia("(max-width: 1125px)").addListener(handler);
   }, []);
   /**********************************************************************/
+  
 
 
 /**********************************************************************
@@ -61,11 +62,12 @@ function Poetry() {
   const fetchData = isSubscribed => {
     getData(getServerURL("poetry"), response => {
       if (isSubscribed) {
-        setPoetry(response.sort(() => {
+        const items = response.sort(() => {
           return 0.5 - Math.random();
-        }));
-        
-        setOriginalPoetry(response);
+        });
+        setPoetry(items);
+        setCurrentPage(items.slice(0, numOfItemsPerPage));
+        setNumOfPages(Math.ceil(items.length / numOfItemsPerPage));
       }
     });
   };
@@ -160,14 +162,40 @@ function Poetry() {
 
   useEffect(() => {
     if(poetry != null){
-      if(searchChange === ""){
-        setPoetry(originalPoetry);
-      }
-     else{   
+      if(searchChange !== ""){  
         setPoetry(poetry.filter(item => item.title == searchChange));
       }
     }
   }, [searchChange]);
+  
+
+
+  /* PAGINATION *********************************************************/
+  const [page, setPage] = useState(1);
+  const [startIndex, setStartIndex] = useState(0);
+  const [numOfPages, setNumOfPages] = useState(1);
+  const [numOfItemsPerPage, setNumOfItemsPerPage] = useState(9);
+  const [currentPage, setCurrentPage] = useState(null);
+
+  //Executes whenever page changes.
+  useEffect(() => {
+    if(currentPage !== null){
+      
+      if(numOfItemsPerPage === poetry.length){
+        setCurrentPage(poetry.slice(0, poetry.length));
+        return;
+      }
+      setCurrentPage(poetry.slice(startIndex, startIndex + numOfItemsPerPage));
+    }
+  }, [page, sortTitle, sortAuthor, sortDate, sortRandom, searchChange, poetry, numOfItemsPerPage]);
+
+  useEffect(() => {
+    if(poetry !== null){
+      setNumOfPages(Math.ceil(poetry.length / numOfItemsPerPage));
+    }
+  }, [numOfItemsPerPage]);
+  /**********************************************************************/
+
 
   const body = (
     <Grid container>
@@ -191,10 +219,26 @@ function Poetry() {
           setIsFullText={setIsFullText}
           searchChange={searchChange}
           setSearchChange={setSearchChange}
+          numOfItemsPerPage={numOfItemsPerPage}
+          setNumOfItemsPerPage={setNumOfItemsPerPage}
+          isMobileView={isMobileView}
+        />
+        <CoolPagination 
+          type={"poetry"}
+          location={"top"}
+          items={poetry}
+          page={page}
+          setPage={setPage}
+          setStartIndex={setStartIndex}
+          numOfPages={numOfPages}
+          numOfItemsPerPage={numOfItemsPerPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          isMobileView={isMobileView}
         />
         <div className={common.containerDiv}>
-          {(poetry &&
-            poetry.map((poem, index) => {
+          {(currentPage &&
+            currentPage.map((poem, index) => {
               if (poem.isPublic) {
                 return (
                   <ItemCard 
@@ -216,6 +260,19 @@ function Poetry() {
                 <CircularProgress />
               </div>
             ))}
+            <CoolPagination 
+              type={"poetry"}
+              location={"bottom"}
+              items={poetry}
+              page={page}
+              setPage={setPage}
+              setStartIndex={setStartIndex}
+              numOfPages={numOfPages}
+              numOfItemsPerPage={numOfItemsPerPage}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              isMobileView={isMobileView}
+            />
         </div>
       </Grid>
     </Grid>
@@ -223,7 +280,7 @@ function Poetry() {
   
   return (
     <Grow in={true}>
-      {<div className={(!isMobileView && common.bodyDiv || (isMobileView && common.mobileBodyDiv))}>{body}</div>}
+      {<div className={!isMobileView ? common.bodyDiv : common.mobileBodyDiv}>{body}</div>}
     </Grow>
   );
 }

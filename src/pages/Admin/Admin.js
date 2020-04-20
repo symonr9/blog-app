@@ -1,6 +1,6 @@
 /***********************************************************************
- * File Name: Profile.js
- * Description: Profile page. 
+ * File Name: Admin.js
+ * Description: Admin page. 
  * Author: Symon Ramos symonr12@gmail.com
  **********************************************************************/
 
@@ -25,12 +25,12 @@ import { useStyles } from "./exports";
 
 
 /**********************************************************************
- * Function Name: Profile
+ * Function Name: Admin
  * Parameters: None
- * Description: Component for the Profile page.
+ * Description: Component for the Admin page.
  * Notes: None
  **********************************************************************/
-function Profile() {
+function Admin() {
   /* Authentication Handling ********************************************/
   const sessionUsername = useSelector(state => state.username);
 
@@ -56,11 +56,6 @@ function Profile() {
     window.matchMedia("(max-width: 1125px)").addListener(handler);
   }, []);
   /**********************************************************************/
-
-
-  const [poetry, setPoetry] = useState(null);
-  const [quotes, setQuotes] = useState(null);
-  const [prose, setProse] = useState(null);
 
   /**********************************************************************
  * Function Name: fetchData
@@ -95,91 +90,11 @@ function Profile() {
     return () => (isSubscribed = false);
   }, []);
 
-
-  /*        <iframe src="https://open.spotify.com/embed/playlist/7c53Vxz6Y6sNBNik6at8qU" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> */
-
   const body = (
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
-        <h1>{username}'s Profile</h1>
-          <br/>
-          <h2>Poetry</h2>
-          <div className={classes.profileContainerDiv}>
-          {(poetry &&
-            poetry.map((poem, index) => {
-              if (poem.isPublic) {
-                return (
-                  <ItemCard 
-                    type={"poetry"}
-                    key={poem._id}
-                    isMobileView={isMobileView}
-                    link={`/poetry/${poem.urlId}`}
-                    title={poem.title}
-                    createdBy={poem.createdBy}
-                    body={(poem.body.substring(0,200) + '...')}
-                    createdAt={poem.createdAt}
-                  />
-                );
-              }
-            })) ||
-            (!poetry && (
-              <div>
-                <CircularProgress />
-              </div>
-            ))}
-            </div>
-
-            <h2>Quotes</h2>
-            <div className={classes.profileContainerDiv}>
-            {(quotes &&
-            quotes.map((quote, index) => {
-              if (quote.isPublic) {
-                return (
-                  <ItemCard 
-                  type={"quotes"}
-                  key={quote._id}
-                  isMobileView={isMobileView}
-                  link={`/quotes/${quote.urlId}`}
-                  text={quote.text}
-                  author={quote.author}
-                  createdAt={quote.createdAt}
-                />
-                );
-              }
-            })) ||
-            (!quotes && (
-              <div>
-                <CircularProgress />
-              </div>
-            ))}
-            </div>
-
-            <h2>Prose</h2>
-            <div className={classes.profileContainerDiv}>
-            {(prose &&
-            prose.map((item, index) => {
-              if (item.isPublic) {
-                return (
-                  <ItemCard 
-                  type={"prose"}
-                  key={item._id}
-                  isMobileView={isMobileView}
-                  link={`/prose/${item.urlId}`}
-                  title={item.title}
-                  createdBy={item.createdBy}
-                  body={(item.body.substring(0,200) + '...')}
-                  createdAt={item.createdAt}
-                  />
-                );
-              }
-            })) ||
-            (!prose && (
-              <div>
-                <CircularProgress />
-              </div>
-            ))}
-            </div>
+        <h1>Admin</h1>
       </Grid>
     </Grid>
   );
@@ -190,4 +105,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Admin;
