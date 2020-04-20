@@ -223,6 +223,7 @@ function NavBar() {
     { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon />, isLogOut: false },
     { path: "/prose", name: "Prose", icon: <DescriptionRoundedIcon />, isLogOut: false },
     { path: "/profile/" + username, name: "Profile", icon: <PersonRoundedIcon />, isLogOut: false },
+    { path: "/admin", name: "Admin", icon: <PersonRoundedIcon />, isLogOut: false},
     { path: "/", name: "Logout", icon: <SupervisorAccountRoundedIcon/>, isLogOut: true },
   ];
   
