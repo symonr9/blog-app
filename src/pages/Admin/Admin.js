@@ -173,7 +173,7 @@ function Admin() {
     { title: 'ID', field: '_id', hidden: true },
     { title: 'Title', field: 'title' },
     { title: 'Type', field: 'type' },
-    { title: 'Notes', field: 'notes' },
+    { title: 'Notes', field: 'notes', render: row => <span>{row.notes.substring(0,10) + "..."}</span> },
     { title: 'Body', field: 'body', render: row => <span>{row.body.substring(0,100) + "..."}</span> },
     { title: 'Is Public', field: 'isPublic' },
     { title: 'Created By', field: 'createdBy', readonly: true },
