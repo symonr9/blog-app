@@ -44,9 +44,7 @@ const Home = () => {
   const body = (
     <Grid container>
       <Grid item xs={12}>
-        <center>
-          <object id="my-svg" type="image/svg+xml" className={!isMobileView ? classes.logo : classes.mobileLogo} data={icon}></object>
-        </center>
+        <div className={classes.homeSpacingDiv}></div>
         <span className={classes.introTitle}>The things we stay alive for</span>
         <br/>
         <span className={classes.introQuote}>We don't read and write poetry because it's cute. 

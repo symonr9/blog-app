@@ -12,7 +12,7 @@ export const useStyles = makeStyles({
         width: '70vw',
         height: '75vh',
         margin: '0 !important',
-        marginTop: '0em !important',
+        marginTop: '10em !important',
         marginBottom: '0em !important',
         textAlign: 'center',
     },
@@ -22,7 +22,7 @@ export const useStyles = makeStyles({
     introTitle: {
         fontSize: '4em',
         color: colors[5],
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     introQuote: {
         marginTop: '2em',
@@ -30,5 +30,8 @@ export const useStyles = makeStyles({
     },
     introSub: {
         marginTop: '2em'
+    },
+    homeSpacingDiv: {
+        marginTop: '25em'
     }
 });

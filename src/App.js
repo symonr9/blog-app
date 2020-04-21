@@ -35,6 +35,7 @@ import Edit from "./pages/Edit/Edit";
 import Create from "./pages/Create/Create";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
+import Admin from "./pages/Admin/Admin";
 
 import Redirect from "./pages/Redirect/Redirect";
 /**********************************************************************/
@@ -85,6 +86,11 @@ const routes = [
     Component: Signup, 
     bgType: 2 
   },
+  { path: "/admin", 
+    name: "Admin", 
+    Component: Admin, 
+    bgType: 4
+  },
   { path: "/redirect", 
     name: "Redirect", 
     Component: Redirect, 
@@ -93,7 +99,7 @@ const routes = [
   { path: "/", 
     name: "Home", 
     Component: Home, 
-    bgType: 2 
+    bgType: 1
   }
 ];
 
