@@ -164,7 +164,7 @@ function Admin() {
   }, []);
 
   const PoetryColumns = [
-    { title: 'Item Type', field: 'itemType', hidden: true },
+    { title: 'Item Type', field: 'itemType', initialEditValue: 'poetry' },
     { title: 'ID', field: '_id', hidden: true },
     { title: 'Title', field: 'title' },
     { title: 'Type', field: 'type' },
@@ -176,7 +176,7 @@ function Admin() {
   ];
 
   const QuotesColumns = [
-    { title: 'Item Type', field: 'itemType', hidden: true },
+    { title: 'Item Type', field: 'itemType', initialEditValue: 'quotes' },
     { title: 'ID', field: '_id', hidden: true },
     { title: 'Text', field: 'text' },
     { title: 'Author', field: 'author' },
@@ -186,7 +186,7 @@ function Admin() {
   ];
 
   const ProseColumns = [
-    { title: 'Item Type', field: 'itemType', hidden: true },
+    { title: 'Item Type', field: 'itemType', initialEditValue: 'prose' },
     { title: 'ID', field: '_id', hidden: true },
     { title: 'Title', field: 'title' },
     { title: 'Body', field: 'body' },
@@ -200,6 +200,8 @@ function Admin() {
   const handleRowAdd = (event) => {
     let data = {};
     let url = "";
+
+    console.log(event);
 
     if(isLoggedIn){
       //type is defined based on the initial Select input value.
