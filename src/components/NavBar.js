@@ -179,6 +179,8 @@ function NavBar() {
 
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const isAdmin = username === "sy";
   /**********************************************************************/
 
   const classes = useStyles();
@@ -223,10 +225,9 @@ function NavBar() {
     { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon />, isLogOut: false },
     { path: "/prose", name: "Prose", icon: <DescriptionRoundedIcon />, isLogOut: false },
     { path: "/profile/" + username, name: "Profile", icon: <PersonRoundedIcon />, isLogOut: false },
-    { path: "/admin", name: "Admin", icon: <PersonRoundedIcon />, isLogOut: false},
     { path: "/", name: "Logout", icon: <SupervisorAccountRoundedIcon/>, isLogOut: true },
   ];
-  
+
   const loggedOutRoutes = [
     { path: "/poetry", name: "Poetry", icon: <MenuBookRoundedIcon /> },
     { path: "/quotes", name: "Quotes", icon: <FormatQuoteRoundedIcon /> },
@@ -269,6 +270,14 @@ function NavBar() {
           </NavLink>
         ))
       )
+      }
+
+      {isAdmin && (<NavLink to={"/admin"}>
+        <Button className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained">
+          <PersonRoundedIcon />
+          Admin
+        </Button>
+      </NavLink>)
       }
     </div>
   );
