@@ -9,6 +9,8 @@ import React, { useEffect, useState, forwardRef } from "react";
 import { NavLink, useParams, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import axios from "axios";
+
 import { Grow, Grid, Snackbar } from "@material-ui/core";
 import MuiAlert from '@material-ui/lab/Alert';
 import MaterialTable from 'material-table';
@@ -38,6 +40,7 @@ import { getServerURL } from "../../config/config";
 import ItemCard from '../../components/ItemCard';
 
 import { useStyles } from "./exports";
+import zIndex from "@material-ui/core/styles/zIndex";
 
 
 const tableIcons = {
@@ -73,15 +76,15 @@ function Admin() {
   /* Authentication Handling ********************************************/
   const sessionUsername = useSelector(state => state.username);
 
-  //FIXME: for now, only allow myself access to this page.
-  if(sessionUsername !== "sy"){
-    history.push("/redirect");
-  }
-
   //!! checks for undefined, null, and empty values
   const isLoggedIn = !!sessionUsername;
 
   const history = useHistory();
+
+  //FIXME: for now, only allow myself access to this page.
+  if(sessionUsername !== "sy"){
+    history.push("/redirect");
+  }
   /**********************************************************************/
   
   const classes = useStyles();
@@ -90,6 +93,8 @@ function Admin() {
   const [poetry, setPoetry] = useState([]);
   const [quotes, setQuotes] = useState([]);
   const [prose, setProse] = useState([]);
+
+  const [dataChanged, setDataChanged] = useState(false);
 
   /* Mobile View Handler ************************************************/
   const [isMobileView, setIsMobileView] = useState(
@@ -161,7 +166,7 @@ function Admin() {
     let isSubscribed = true;
     isSubscribed && fetchData(isSubscribed);
     return () => (isSubscribed = false);
-  }, []);
+  }, [dataChanged]);
 
   const PoetryColumns = [
     { title: 'Item Type', field: 'itemType', initialEditValue: 'poetry' },
@@ -178,7 +183,7 @@ function Admin() {
   const QuotesColumns = [
     { title: 'Item Type', field: 'itemType', initialEditValue: 'quotes' },
     { title: 'ID', field: '_id', hidden: true },
-    { title: 'Text', field: 'text' },
+    { title: 'Text', field: 'text', render: row => <span>{row.text.substring(0,100) + "..."}</span> },
     { title: 'Author', field: 'author' },
     { title: 'Is Public', field: 'isPublic' },
     { title: 'Created By', field: 'createdBy', readonly: true },
@@ -189,7 +194,7 @@ function Admin() {
     { title: 'Item Type', field: 'itemType', initialEditValue: 'prose' },
     { title: 'ID', field: '_id', hidden: true },
     { title: 'Title', field: 'title' },
-    { title: 'Body', field: 'body' },
+    { title: 'Body', field: 'body', render: row => <span>{row.body.substring(0,100) + "..."}</span> },
     { title: 'Is Public', field: 'isPublic' },
     { title: 'Created By', field: 'createdBy', readonly: true },
     { title: 'Created At', field: 'createdAt', readonly: true }
@@ -243,15 +248,16 @@ function Admin() {
           return 0;
       }
 
-      //Post Request to CREATE on the server.
-      postData(
-        getServerURL(url),
-        data,
-        response => {
-          console.log(response);
-          setIsSnackbarOpen(true);
-        }
-      );
+      return axios.post(getServerURL(url), data, {	header: {
+        'Content-Type': 'application/json'
+      }})
+      .then(response => {
+        return fetchData(true);
+      })
+      .catch(error => {
+        console.error(error)
+      });
+
     }
   };
 
@@ -299,15 +305,16 @@ function Admin() {
           return 0;
       }
 
-      //Put Request to UPDATE on the server.
-      putData(
-        getServerURL(url),
-        data,
-        response => {
-          console.log(response);
-          setIsSnackbarOpen(true);
-        }
-      );
+      return axios.put(getServerURL(url), data, {	header: {
+        'Content-Type': 'application/json'
+      }})
+      .then(response => {
+        return fetchData(true);
+      })
+      .catch(error => {
+        console.error(error)
+      });
+      
     }
   };
 
@@ -331,14 +338,14 @@ function Admin() {
           return 0;
       }
 
-      //Delete Request for DELETE on the server.
-      deleteData(
-        getServerURL(url),
-        response => {
-          console.log(response);
-          setIsSnackbarOpen(true);
-        }
-      );
+      return axios.delete(getServerURL(url))
+      .then(response => {
+        return fetchData(true);
+      })
+      .catch(error => {
+        console.error(error)
+      });
+
     }
   };
 
