@@ -409,6 +409,7 @@ function Create() {
   const body = (
     <Grid container>
       <Grid item xs={12} className={!isSideView && (classes.bodyDiv) || isSideView && (classes.sideBodyDiv)}>
+        <br/>
         <h1>Create</h1>
         <div className={!isSideView && (classes.formDiv) || isSideView && (classes.sideFormDiv)}>
         <form id="createForm" onSubmit={handleSubmit(onSubmit)}>
@@ -487,6 +488,7 @@ function Create() {
             }
           </div>)}
         </div>
+        <br/><br/><br/>
       <Snackbar open={isSnackbarOpen} autoHideDuration={3000} onClose={handleClose}>
         <MuiAlert elevation={6} variant="filled" onClose={handleClose} severity="success">
           Successfully published!

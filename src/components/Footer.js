@@ -9,20 +9,24 @@ import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 /**********************************************************************/
 
+import { colors } from "../assets/common";
+
 const useStyles = makeStyles({
 	footerDiv: {
-        boxShadow: '0 -1px 1px rgba(0,0,0,0.2)',
-        padding: '1em',
+        padding: '1.5em',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         '& a': {
             textDecoration: 'none',
-            color: 'black',
+            color: colors[4],
             '& :hover': {
-                color: 'gold'
+                color: colors[3]
             }
-        }
+        },
+        background: colors[1],
+        left: '0',
+        bottom: '0',
     }
 });
 
@@ -35,9 +39,11 @@ const useStyles = makeStyles({
 function Footer() {
     const classes = useStyles();
 
+    //Fixme: Taking out for the time being
+    //            <a href="https://github.com/symonr9/blog-app" target="_blank">Developed with React, NodeJS, and mongoDB</a>
     return (
         <div className={classes.footerDiv}>
-            <a href="https://github.com/symonr9/portfolio-website" target="_blank">Created by Symon Ramos :)</a>
+
         </div>
     );
 }
