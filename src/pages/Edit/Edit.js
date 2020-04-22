@@ -8,13 +8,13 @@
 
 /* Library Imports ****************************************************/
 import React, { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { useHistory } from "react-router-dom"; 
 import { useSelector } from "react-redux";
 
-import { Button, Grow, Grid, TextField, Paper, Snackbar, CircularProgress, IconButton, responsiveFontSizes  } from "@material-ui/core";
+import { Button, Grow, Grid, TextField, Snackbar, CircularProgress, IconButton  } from "@material-ui/core";
 import MuiAlert from '@material-ui/lab/Alert';
 
 import ViewColumnRoundedIcon from '@material-ui/icons/ViewColumnRounded';
@@ -25,12 +25,11 @@ import ReactTimeAgo from "react-time-ago";
 
 /* Project Imports ****************************************************/
 import { getData, postData, putData } from "../../services/api";
-import { colors, useCommonStyles } from "../../assets/common";
+import { useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
 import {
   submitBtn,
-  basicTextField,
   editTextField,
   selectTextField
 } from "../../components/FormElements";

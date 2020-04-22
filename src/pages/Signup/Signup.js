@@ -6,7 +6,6 @@
 
  /* Library Imports ****************************************************/
  import React, { useEffect, useState } from "react";
- import { NavLink } from "react-router-dom";
  import { useForm } from "react-hook-form";
  
  import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +17,7 @@
  /* Project Imports ****************************************************/
  import { postData } from "../../services/api";
  import { useStyles } from "./exports";
- import { colors, useCommonStyles } from "../../assets/common";
+ import { useCommonStyles } from "../../assets/common";
  import { getServerURL } from "../../config/config";
  
  import { loginUser } from "../../services/redux/actions";

@@ -14,7 +14,7 @@ import { Grow, Grid, CircularProgress } from "@material-ui/core";
 
 /* Project Imports ****************************************************/
 import { getData } from "../../services/api";
-import { colors, useCommonStyles } from "../../assets/common";
+import { useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
 import ItemCard from '../../components/ItemCard';

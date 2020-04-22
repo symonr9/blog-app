@@ -16,10 +16,10 @@ import { Grow, Grid } from "@material-ui/core";
 /* Project Imports ****************************************************/
 import { postData } from "../../services/api";
 import { useStyles } from "./exports";
-import { colors, useCommonStyles } from "../../assets/common";
+import { useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginUser } from "../../services/redux/actions";
 
 import {
