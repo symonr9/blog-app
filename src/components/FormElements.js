@@ -58,7 +58,7 @@ export const basicTextField = (name, label, onChangeFun, numOfLines = 1) => {
       label={label}
       placeholder="Start writing..."
       variant="outlined"
-      multiline={!(numOfLines == 1)}
+      multiline={!(numOfLines === 1)}
       rows={numOfLines}
       fullWidth
       style={textFieldStyle}
@@ -76,7 +76,7 @@ export const passwordTextField = (name, label, onChangeFun, numOfLines = 1) => {
       label={label}
       placeholder="Start writing..."
       variant="outlined"
-      multiline={!(numOfLines == 1)}
+      multiline={!(numOfLines === 1)}
       rows={numOfLines}
       fullWidth
       style={textFieldStyle}
@@ -100,7 +100,7 @@ export const editTextField = (
       label={label}
       placeholder="Start writing..."
       variant="outlined"
-      multiline={!(numOfLines == 1)}
+      multiline={!(numOfLines === 1)}
       rows={numOfLines}
       fullWidth
       style={textFieldStyle}
