@@ -12,9 +12,6 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
-
-
-import AddToHomescreen from 'react-add-to-homescreen';
 /**********************************************************************/
 
 /* Project Imports ****************************************************/
@@ -38,6 +35,12 @@ import Signup from "./pages/Signup/Signup";
 import Admin from "./pages/Admin/Admin";
 
 import Redirect from "./pages/Redirect/Redirect";
+
+import logo from "./assets/logo.svg";
+import share from "./assets/share.jpg";
+import homescreen from "./assets/homescreen.jpg";
+import addhomescreen from "./assets/addhomescreen.jpg";
+import { isIos, isInStandaloneMode } from './services/utils';
 /**********************************************************************/
 
 const routes = [
@@ -160,6 +163,26 @@ const useStyles = makeStyles({
       color: colors[4]
     }
   },
+  //Three color, three striped
+  bgMobile: {
+    background: colors[3],
+    height: '100em'
+  },
+  logo: {
+
+  },
+  shareImg: {
+    width: '8em',
+    height: '5em'
+  },
+  homescreenImg: {
+    width: '20em',
+    height: '4em'
+  },
+  addhomescreenImg: {
+    width: '16em',
+    height: '12em'
+  }
 
 });
 
@@ -171,35 +194,60 @@ const useStyles = makeStyles({
  **********************************************************************/
 function App() {
   const classes = useStyles();
-
-  //Add to HomeScreen alert message that appears when iOS or Android
-  //is used. When you add the app to the home screen, it becomes a PWA
-  //and is installed for offline use on mobile devices.
-  const handleAddToHomescreenClick = () => {
-    alert(`
-      1. Open Share menu
-      2. Tap on "Add to Home Screen" button`);
-  };
+  
+  const isMobileBrowserRender = isIos() && !isInStandaloneMode();
 
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <NavBar />
-        <Switch>
-          {routes.map(({ path, Component, bgType }) => (
-            <Route key={path} path={path}>
-              <div className={((bgType === 1) && classes.bgOne) 
-                           || ((bgType === 2) && classes.bgTwo)
-                           || ((bgType === 3) && classes.bgThree)
-                           || ((bgType === 4) && classes.bgFour)
-                           }>    
-                <Component />
-              </div>
-            </Route>
-          ))}
-        </Switch>
-        <Footer />
-        <AddToHomescreen onAddToHomescreenClick={handleAddToHomescreenClick} />
+        {
+          isMobileBrowserRender 
+          ? <div className={classes.bgMobile}>
+              {<span>
+                <object type="image/svg+xml" className={classes.logo} data={logo}></object>
+                <center>
+                  <h1>Entering Symon's Blog...</h1>
+                  <p>Please follow these steps to install the app on your mobile device:</p>
+                  <ul>
+                    <li>Step 1: Click on your device's share button.
+                      <br/><br/>
+                      <img src={share} className={classes.shareImg} />
+                    </li>
+                    
+                    <li>Step 2: Scroll down and select "Add to Home Screen".
+                      <br/><br/>
+                      <img src={homescreen} className={classes.homescreenImg} />
+                    </li>
+
+                    <li>Step 3: Click "Add" on the Top Right.
+                      <br/><br/>
+                      <img src={addhomescreen} className={classes.addhomescreenImg} />
+                    </li>
+
+                    <li>Step 4: Check the app out on your home page!
+                    </li>
+                  </ul>
+                </center>
+              </span>}
+            </div> 
+          : <span>
+              <NavBar />
+              <Switch>
+                {routes.map(({ path, Component, bgType }) => (
+                  <Route key={path} path={path}>
+                    <div className={((bgType === 1) && classes.bgOne) 
+                                || ((bgType === 2) && classes.bgTwo)
+                                || ((bgType === 3) && classes.bgThree)
+                                || ((bgType === 4) && classes.bgFour)
+                                }>    
+                      <Component />
+                    </div>
+                  </Route>
+                ))}
+              </Switch>
+              <Footer />
+            </span>
+        }
       </Provider>
     </BrowserRouter>
   );

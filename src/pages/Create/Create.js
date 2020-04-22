@@ -238,10 +238,7 @@ function Create() {
   const [proseTitle, setProseTitle] = useState("");
   const [proseBody, setProseBody] = useState("");
 
-  const [docTitle, setDocTitle] = useState("");
-  const [docDescription, setDocDescription] = useState("");
-  const [docDiv, setDocDiv] = useState(<div></div>);
-
+  
   const handlePoemTitleChange = event => {
     setPoemTitle(event.target.value);
   };
@@ -274,21 +271,6 @@ function Create() {
     setProseBody(event.target.value);
   };
 
-  const handleDocTitleChange = event => {
-    setDocTitle(event.target.value);
-  };
-
-  const handleDocDescriptionChange = event => {
-    setDocDescription(event.target.value);
-  };
-
-  const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
-
-  useEffect(() => {
-    setDocDiv([
-    <span>{acceptedFiles[0] && acceptedFiles[0].path}</span>
-    ])
-  }, [acceptedFiles]);
 
   //Defines the options for the dropdown and the form that is dynamically rendered.
   const types = [
