@@ -1,5 +1,3 @@
-import { combineReducers } from "redux";
-
 import {
     LOGIN_USER,
     LOGOUT_USER

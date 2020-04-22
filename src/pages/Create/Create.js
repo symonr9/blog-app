@@ -8,17 +8,13 @@
 
 
 /* Library Imports ****************************************************/
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { useHistory } from "react-router-dom"; 
 import { useSelector } from "react-redux";
 
-import MUIRichTextEditor from "mui-rte";
-
-import { useDropzone } from 'react-dropzone';
-
-import { Button, Grow, Grid, TextField, Paper, Snackbar, IconButton  } from "@material-ui/core";
+import { Grow, Grid, TextField, Snackbar, IconButton  } from "@material-ui/core";
 import MuiAlert from '@material-ui/lab/Alert';
 
 import ViewColumnRoundedIcon from '@material-ui/icons/ViewColumnRounded';

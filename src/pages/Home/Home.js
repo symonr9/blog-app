@@ -7,14 +7,12 @@
 
  /* Library Imports ****************************************************/
  import React, { useState, useEffect } from "react";
- import { Paper, Grow, Grid } from "@material-ui/core";
+ import { Grow, Grid } from "@material-ui/core";
 /**********************************************************************/
 
 /* Project Imports ****************************************************/
 import { useCommonStyles } from "../../assets/common";
 import { useStyles } from "./exports";
-
-import icon from "../../assets/logo.svg";
 /**********************************************************************/
 
 
