@@ -219,6 +219,10 @@ function NavBar() {
     history.push("/");
   };
 
+  //onClick needs to be defined for all the non-log out buttons to prevent warnings.
+  const placeholderClick = () => {
+  };
+
   const loggedInRoutes = [
     { path: "/create", name: "Create", icon: <AddCircleOutlineRoundedIcon />, isLogOut: false },
     { path: "/poetry", name: "Poetry", icon: <MenuBookRoundedIcon />, isLogOut: false },
@@ -252,7 +256,7 @@ function NavBar() {
       {isLoggedIn && (
         loggedInRoutes.map(({ path, name, icon, isLogOut }) => (
           <NavLink to={path} key={name}>
-            <Button className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained" onClick={(isLogOut && handleLogoutBtnClick)}>
+            <Button className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained" onClick={(isLogOut && handleLogoutBtnClick || placeholderClick)}>
               {icon}
               {name}
             </Button>
