@@ -1,68 +1,74 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Symon's Blog App
 
-## Available Scripts
+Backend Repository: https://github.com/symonr9/blog-app-backend
 
-In the project directory, you can run:
+## This is a web application I created to act as a portfolio blog for my personal writing. 
 
-### `npm start`
+## Technology Used
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Frontend
+- React
+- MaterialUI
+- React Router
+- React Redux
+- axios
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Backend
+- NodeJS
+- Express
+- MongoDB
+- Mongoose
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Features
 
-### `npm run build`
+### Completed
+- Full CRUD functionality for Poetry, Quotes, and Prose.
+- Sort, Filter, and Search Functionality on Browse pages.
+- Dynamic pagination on Browse pages.
+- Dynamic navbar menu layout (hamburger bars for mobile).
+- Word Lookup feature to search rhymes, synonyms, definitions, and more in Create Page (using WordsAPI).
+- Normal and Side-By-Side View for Word Lookup.
+- NodeJS Express Server integration with MongoDB.
+- Document Model and Schema created by leveraging Mongoose.
+- User Authentication (Login and Signup) and Tokens/Session Timeout.
+- Comments and Reaction Integration on Individual Items Pages (using Disqus).
+- Profile Page to list out user created items.
+- Admin Dashboard where admins can perform CRUD functionality on any items.
+- Mobile support to scale across iOS, Android, and tablets.
+- Responsive screen size.
+- Standalone PWA on mobile devices.
+- Splashscreen Prompt on Mobile Device Browsers prompting to install app on homescreen.
+- CI Deployment to Netlify and Heroku.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### In Development
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+#### Had we but world enough and time...
+- [ ] Upload Documents
+- [ ] Color Scheme User Personalization 
+- [ ] Enhancements to User Profile
+- [ ] Uploadable images to pair with items
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Development
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Note: Please install node and npm onto your computer. If you need help doing this, check this (article)[https://phoenixnap.com/kb/install-node-js-npm-on-windows] out. 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clone the project to your local directory (EX: In a folder you created called 'blog').
+2. Run `npm i` in the root directory.
+3. Create a .env file in your project root directory (in blog-app, not src) with the following content: `PORT=1996`.
+4. Go to `blog-app/src/config/config.js` and set `isDevelopmentServer` to true.
+5. Set-up the local development server by performing the following steps:
+  - Clone the [Backend Repo](https://github.com/symonr9/blog-app-backend) to your local directory (EX: In a folder you created called 'blog', not in the blog-app directory).
+  - Run `npm i` in the root directory.
+  - Create a .env file in the project root directory (in blog-app-backend, not src) with content for the following environmental variables: `MONGOURI` and `RAPIDAPIKEY`. These variables access the mongoDB URI and APIs from RapidAPI respectively.
+  - Run `npm start` to begin the server. 
+6. Run `npm start` run the project on local host.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Notes
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- This project was bootstrapped with Create React App.
+- `npm run build` will build the app for production to the build folder.
+- I eagerly welcome any suggestions, comments, and insights! I'm always looking to learn more about modern web application development and best practices. Thank you for taking the time to look through my code and check out my site. 
