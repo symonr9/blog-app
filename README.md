@@ -1,5 +1,6 @@
 # Symon's Blog App
 
+Link to Site: https://symon-blog.netlify.com/
 Backend Repository: https://github.com/symonr9/blog-app-backend
 
 ## This is a web application I created to act as a portfolio blog for my personal writing. 
