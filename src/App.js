@@ -195,8 +195,8 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles();
   
-  //const isMobileBrowserRender = isIos() && !isInStandaloneMode();
-  const isMobileBrowserRender = false;
+  const isMobileBrowserRender = isIos() && !isInStandaloneMode();
+
   return (
     <BrowserRouter>
       <Provider store={store}>
