@@ -8,6 +8,7 @@
 
 /* Library Imports ****************************************************/
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 
 import Pagination from '@material-ui/lab/Pagination';
 /**********************************************************************/
@@ -17,7 +18,26 @@ import { colors, useCommonStyles } from "../assets/common";
 /**********************************************************************/
 
 
+const useStyles = makeStyles({
+    topPagination: {
+        float: 'right'
+      },
+    mobileTopPagination: {
+    },
+    bottomPagination: {
+        float: 'right',
+        marginTop: '2em',
+    },
+    mobileBottomPagination: {
+        marginTop: '2em'
+    }
+      
+});
 
+const paginationStyles = {
+    marginLeft: '10em',
+    width: '1em'
+}
 /**********************************************************************
  * Function Name: CoolPagination
  * Parameters: 
@@ -25,6 +45,7 @@ import { colors, useCommonStyles } from "../assets/common";
  * Notes: None
  **********************************************************************/
 const CoolPagination = params => {
+    const classes = useStyles();
     const common = useCommonStyles();
 
     const type = params.type;
@@ -49,17 +70,19 @@ const CoolPagination = params => {
             {(<span className={
                 !params.isMobileView ? 
                 ((params.location === "top") 
-                    ? common.topPagination 
-                    : common.bottomPagination
+                    ? classes.topPagination 
+                    : classes.bottomPagination
                 ) 
                 : ((params.location === "top") 
-                    ? common.mobileTopPagination
-                    : common.bottomPagination)}>
+                    ? classes.mobileTopPagination
+                    : classes.bottomPagination)}>
                 <Pagination 
                     count={params.numOfPages} 
                     color="secondary" 
                     page={params.page} 
+                    classes={paginationStyles}
                     onChange={handlePageChange}
+                    size="small"
                 />
                 </span>)}
         </span>
