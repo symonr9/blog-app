@@ -129,38 +129,4 @@ export const useCommonStyles = makeStyles({
     position: 'relative',
     bottom: '0'
   },
-  /* Sort and Filter Styles  ************************************************/
-  sortDiv: {
-  },
-  sortWidget: {
-    cursor: 'pointer',
-    color: colors[4],
-    fontSize: '4em',
-    marginLeft: '0.5em',
-  },
-  sortChip: {
-    fontSize: '40em'
-  },
-  sortFilterBarDiv: {
-   display: 'inline-block',
-   marginBottom: '2em' 
-  },
-  mobileSortFilterBarDiv: {
-    display: 'inline-block',
-    marginBottom: '1em'
-  },
-
-  topPagination: {
-    float: 'right'
-  },
-  mobileTopPagination: {
-  },
-  bottomPagination: {
-    float: 'right',
-    marginTop: '2em',
-  },
-  mobileBottomPagination: {
-   marginTop: '2em'
-  }
-  
 });
