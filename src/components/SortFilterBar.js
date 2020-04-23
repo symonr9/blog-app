@@ -9,7 +9,7 @@
 /* Library Imports ****************************************************/
 import React from "react";
 
-import { Chip, Tooltip, TextField } from "@material-ui/core";
+import { Chip, Tooltip, TextField, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
@@ -23,22 +23,89 @@ import ViewHeadlineRoundedIcon from '@material-ui/icons/ViewHeadlineRounded';
 
 /* Project Imports ****************************************************/
 import { colors, useCommonStyles } from "../assets/common";
-
-import { selectTextField } from "./FormElements";
 /**********************************************************************/
 
 
 
+/**
+ * sortFilterBarDiv {
+ *      sortMenu {
+ *          searchBarInput { }
+ *          sortDiv { }
+ *          numOfItemsSelect { }
+ *      }
+ * }
+ */
 const useStyles = makeStyles({
-    searchBarInput: {
+    /** The Autocomplete Search Input requires customized styles. 
+     ** These are inline. */ 
+    sortDiv: {
 
     },
+    mobileSortDiv: {
+        display: 'flex',
+        flexDirection: 'column',
+        flexWrap: 'wrap',
+        width: '40%',
+        height: '8em',
+        marginLeft: '2em'
+    },
+    sortWidget: {
+        cursor: 'pointer',
+        color: colors[4],
+        fontSize: '3em',
+        marginLeft: '0.5em',
+    },
+    mobileSortWidget: {
+        cursor: 'pointer',
+        color: colors[4],
+        fontSize: '3em',
+        display: 'flex',
+        marginLeft: '0.5em',
+        marginBottom: '0.25em'
+    },
+    sortFilterBarDiv: {
+        display: 'inline-block',
+        marginBottom: '2em' 
+    },
+    mobileSortFilterBarDiv: {
+        display: 'inline',
+        marginBottom: '1em'
+    },
+    searchBarInput: {
+        display: 'flex',
+        marginLeft: '1.75em'
+    },
     numOfItemsSelect: {
-
-    }
+        display: 'flex',
+        marginTop: '1em',
+        width: '8em',
+        marginBottom: '1em',
+        marginLeft: '1.75em'
+    },
+    mobileNumOfItemsSelect: {
+        display: 'flex',
+        marginTop: '1em',
+        marginBottom: '1em',
+        width: '40%',
+        marginLeft: '1.75em'
+    },
+    sortMenu: {
+    },
 
 });
 
+const searchBarStyle = { 
+    width: '80%', 
+    marginBottom: '1em' 
+};
+
+const chipStyle = {
+    color: colors[5], 
+    backgroundColor: colors[3], 
+    marginRight: '0.75em', 
+    marginBottom : '0.75em' 
+};
 
 /**********************************************************************
  * Function Name: SortFilterBar
@@ -118,49 +185,63 @@ const SortFilterBar = params => {
     const titleChip = (            
         <Chip icon={<SortByAlphaRoundedIcon style={{ color: colors[5] }}/>} 
         label="By Title" 
-        style={{ color: colors[5], backgroundColor: colors[3], marginRight: '0.3em' }}
+        style={chipStyle}
         onClick={handleSortTitle} />
     );
 
     const authorChip = (
         <Chip icon={<FaceIcon style={{ color: colors[4] }}/>} 
         label="By Author" 
-        style={{ color: colors[5], backgroundColor: colors[3], marginRight: '0.3em' }}
+        style={chipStyle}
         onClick={handleSortAuthor} />
     );
 
     const dateChip = (
         <Chip icon={<ScheduleRoundedIcon style={{ color: colors[4] }}/>} 
         label="By Date"
-        style={{ color: colors[5], backgroundColor: colors[3], marginRight: '0.3em' }} 
+        style={chipStyle}
         onClick={handleSortDate} />
     );
     
     const randomChip = (
         <Chip icon={<CasinoRoundedIcon style={{ color: colors[4] }}/>} 
         label="By Random"
-        style={{ color: colors[5], backgroundColor: colors[3], marginRight: '0.3em' }} 
+        style={chipStyle}
         onClick={handleSortRandom} />
     );
 
     const fullTextChip = (
         <Chip icon={<ViewHeadlineRoundedIcon style={{ color: colors[4] }}/>} 
         label="View Full Text"
-        style={{ color: colors[5], backgroundColor: colors[3], marginRight: '0.3em' }} 
+        style={chipStyle}
         onClick={handleIsFullText} />
     );
 
+    const numOfItemsOptions = [
+        {value: 9, label: '9'}, 
+        {value: 18, label: '18'}, 
+        {value: 27, label: '27'}, 
+        {value: 45, label: '45'}
+    ];
+
     const numOfItemsPerPageSelect = (
-        selectTextField(
-            "numOfItemsPerPageSelect",
-            "Items to display?",
-            params.numOfItemsPerPage,
-            handleNumOfItemsPerPageChange,
-            [
-                {value: 9, label: '9'}, 
-                {value: 18, label: '18'}, 
-                {value: 27, label: '27'}, 
-                {value: 45, label: '45'}])
+        <TextField
+        id="numOfItemsPerPageSelect"
+        name="numOfItemsPerPageSelect"
+        label="Items to display?"
+        variant="outlined"
+        value={params.numOfItemsPerPage}
+        select
+        onChange={handleNumOfItemsPerPageChange}
+        fullWidth
+        className={!params.isMobileView ? classes.numOfItemsSelect : classes.mobileNumOfItemsSelect}
+        >
+            {numOfItemsOptions.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+                {option.label}
+            </MenuItem>
+            ))}
+        </TextField>
     );
 
     //Different JSX elemnts are rendered based on the type passed in.
@@ -169,7 +250,7 @@ const SortFilterBar = params => {
         options={(params.items != null && params.items)}
         groupBy={(option) => (((type ==="poetry" || type === "prose") && option.title[0].toUpperCase()) || (type === "quotes" && option.author.toUpperCase()))}
         getOptionLabel={(option) => ((type === "poetry" || type === "prose") && option.title) || ((type === "quotes") && option.text)}
-        style={{ width: '30em', marginBottom: '1em' }}
+        style={searchBarStyle}
         onChange={handleSearchChange}
         renderInput={(p) => <TextField {...p} label="Search" variant="outlined" />}
         />
@@ -177,24 +258,23 @@ const SortFilterBar = params => {
 
     //Different JSX elemnts are rendered based on the type passed in.
     const sortMenu = (
-        <span>
+        <span className={classes.sortMenu}>
             <span className={classes.searchBarInput}>{searchBar}</span>
-
-            <span className={common.sortDiv}>
+            <span className={!params.isMobileView ? classes.sortDiv : classes.mobileSortDiv}>
                 {(type === "poetry" || type === "prose") && titleChip}
                 {authorChip}
                 {dateChip}
                 {randomChip}
                 {(type === "poetry" || type === "prose") && fullTextChip}
-                <span className={classes.numOfItemsSelect}>{numOfItemsPerPageSelect}</span>
             </span>
+            {numOfItemsPerPageSelect}
         </span>
     );
 
     return (
-        <div className={!params.isMobileView ? common.sortFilterBarDiv : common.mobileSortFilterBarDiv}>
+        <div className={!params.isMobileView ? classes.sortFilterBarDiv : classes.mobileSortFilterBarDiv}>
             <Tooltip title="Sort">
-                <SortRoundedIcon fontSize="large" className={common.sortWidget} onClick={handleSortMenuOpen}/>
+                <SortRoundedIcon fontSize="large" className={!params.isMobileView ? classes.sortWidget : classes.mobileSortWidget} onClick={handleSortMenuOpen}/>
             </Tooltip>
             {(params.isSortMenuOpen && (sortMenu))}
         </div>
