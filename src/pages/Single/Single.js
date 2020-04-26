@@ -23,8 +23,6 @@ import { getData, deleteData } from "../../services/api";
 import { useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 import { useStyles } from "./exports";
-
-import Comments from "../../components/Comments";
 /**********************************************************************/
 
 
@@ -151,28 +149,61 @@ function Single() {
   /**********************************************************************/
 
   
+  const buttons = (
+    <span>
+      <br/>
+      <center>
+        <NavLink to={`/${type}/${urlId}/edit`}>
+            <Button variant="contained">Edit</Button>
+          </NavLink>
+            &nbsp;&nbsp;&nbsp;
+            <Button variant="contained" color="secondary" onClick={handleDeleteBtnClick}>Delete</Button>
+            {isDeleteConfim && 
+              <div>
+                  <br/><br/>
+                  Are you sure? &nbsp;&nbsp;&nbsp;
+                  <Button variant="contained" color="secondary" onClick={handleDelete}>Yes</Button>
+              </div>}
+        <Snackbar open={isSnackbarOpen} autoHideDuration={3000} onClose={handleClose}>
+          <MuiAlert elevation={6} variant="filled" onClose={handleClose} severity="info">
+            Successfully deleted!
+          </MuiAlert>
+        </Snackbar>
+      </center>
+    </span>
+  );
+
   //Dynamically determine the body content for the form.
   const bodyContent = (
     <div>
       {
       (data 
         && ( type === "poetry" && 
-              (<div>
-                <h1 classes={classes.title}>{data.title}</h1>
-                <NavLink to={"/profile" + "/" + data.createdBy}>
-                    <span className={common.createdBy}>
-                        By {data.createdBy}
+              (
+                <div className={classes.bgDiv}>
+                  <span className={classes.title}>{data.title}</span>
+                  <span className={classes.subheader}>
+                    <span className={classes.author}>
+                      <NavLink to={"/profile" + "/" + data.createdBy}>
+                        <span className={common.createdBy}>
+                          By {data.createdBy}
+                        </span>
+                      </NavLink>  
                     </span>
-                </NavLink>  
-                created <ReactTimeAgo date={data.createdAt} />
-                <br/><br/>
-                {data.body}
-                <br/><br/>
-                Type: {data.type}
-                <br/>
-                Notes: {data.notes}
-                <br/><br/><br/>
-              </div>)
+                    {isValidUser && buttons}
+                  </span>
+                  <div className={classes.body}>
+                    {data.body}
+                  </div>
+                  <span className={classes.subheader}>
+                    <span className={classes.notes}>
+                      Type: {data.type} 
+                      <br/><br/>
+                      Notes: {data.notes}
+                    </span>
+                  </span>
+                </div>
+              )
               ||
               type === "quotes" &&
               (<div>
@@ -224,30 +255,9 @@ function Single() {
                 <CircularProgress />
               </div>
             ))}
-
-          {isValidUser && (
-            <span>
-              <NavLink to={`/${type}/${urlId}/edit`}>
-                  <Button variant="contained">Edit</Button>
-                </NavLink>
-                  &nbsp;&nbsp;&nbsp;
-                  <Button variant="contained" color="secondary" onClick={handleDeleteBtnClick}>Delete</Button>
-                  <br/><br/>
-                  {isDeleteConfim && 
-                    <div>
-                        Are you sure? &nbsp;&nbsp;&nbsp;
-                        <Button variant="contained" color="secondary" onClick={handleDelete}>Yes</Button>
-                    </div>}
-              <Snackbar open={isSnackbarOpen} autoHideDuration={3000} onClose={handleClose}>
-                <MuiAlert elevation={6} variant="filled" onClose={handleClose} severity="info">
-                  Successfully deleted!
-                </MuiAlert>
-              </Snackbar>
-            </span>
-          )}
           <br/><br/>
           </div>
-        <Comments />
+
       </Grid>
     </Grid>
   );
