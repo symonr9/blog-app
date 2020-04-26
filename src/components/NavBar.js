@@ -31,7 +31,7 @@ import { slide as Menu } from "react-burger-menu";
 /**********************************************************************/
 
 /* Project Imports ****************************************************/
-import { colors } from "../assets/common";
+import { fonts, colors } from "../assets/common";
 
 import { logoutUser } from "../services/redux/actions";
 
@@ -76,7 +76,7 @@ const useStyles = makeStyles({
   navBtn: {
     marginBottom: '0.5em',
     color: colors[4],
-    backgroundColor: colors[3]
+    backgroundColor: colors[3],
   },
   mobileNavBtn: {
     marginTop: '1.25em',
@@ -240,6 +240,7 @@ function NavBar() {
     { path: "/signup", name: "Signup", icon: <SupervisorAccountRoundedIcon/> },
   ];
 
+  //Font Family only works for inline styles for buttons :(
   const body = (
     <div>
       <NavLink to={"/"}>
@@ -248,7 +249,7 @@ function NavBar() {
         </Button>
       </NavLink>
       <NavLink to={"/"}>
-        <Button className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained">
+        <Button style={{ fontFamily: fonts[2] }} className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained">
           <HomeRounded />
           Home
         </Button>
@@ -256,7 +257,7 @@ function NavBar() {
       {isLoggedIn && (
         loggedInRoutes.map(({ path, name, icon, isLogOut }) => (
           <NavLink to={path} key={name}>
-            <Button className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained" onClick={(isLogOut && handleLogoutBtnClick || placeholderClick)}>
+            <Button style={{ fontFamily: fonts[2] }} className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained" onClick={(isLogOut && handleLogoutBtnClick || placeholderClick)}>
               {icon}
               {name}
             </Button>
@@ -267,7 +268,7 @@ function NavBar() {
       !isLoggedIn && (
         loggedOutRoutes.map(({ path, name, icon }) => (
           <NavLink to={path} key={name}>
-            <Button className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained">
+            <Button style={{ fontFamily: fonts[2] }} className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained">
               {icon}
               {name}
             </Button>
@@ -277,7 +278,7 @@ function NavBar() {
       }
 
       {isAdmin && (<NavLink to={"/admin"}>
-        <Button className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained">
+        <Button style={{ fontFamily: fonts[2] }} className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained">
           <PersonRoundedIcon />
           Admin
         </Button>

@@ -50,7 +50,10 @@ const Home = () => {
         And the human race is filled with passion. 
         And medicine, law, business, engineering, these are noble pursuits and necessary to sustain life. 
         But poetry, beauty, romance, love... these are what we stay alive for. -Mr.Keating, Dead Poets Society</span>
-        <br/><br/><br/>
+        <br/><br/><br/><br/>
+        <br/><br/><br/><br/>
+        <br/><br/><br/><br/>
+
       </Grid>
     </Grid>
   );

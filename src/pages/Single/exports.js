@@ -6,7 +6,7 @@
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import { colors } from "../../assets/common";
+import { fonts, colors } from "../../assets/common";
 
 
 
@@ -24,6 +24,7 @@ export const useStyles = makeStyles({
         flexDirection: 'column'
     },
     title: {
+        fontFamily: fonts[1],
         borderRadius: '1em',
         textAlign: 'center', 
         marginTop: '2em',
@@ -56,10 +57,12 @@ export const useStyles = makeStyles({
         }
     },
     subheader: { 
+        fontFamily: fonts[0],
         display: 'flex',
         flexDirection: 'column',
     },
     author: {
+        fontFamily: fonts[0],
         fontSize: '2em',
         textAlign: 'center',
         borderRadius: '0.5em',

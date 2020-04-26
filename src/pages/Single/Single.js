@@ -20,7 +20,7 @@ import ReactTimeAgo from 'react-time-ago';
 
 /* Project Imports ****************************************************/
 import { getData, deleteData } from "../../services/api";
-import { useCommonStyles } from "../../assets/common";
+import { fonts, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 import { useStyles } from "./exports";
 /**********************************************************************/
@@ -154,10 +154,10 @@ function Single() {
       <br/>
       <center>
         <NavLink to={`/${type}/${urlId}/edit`}>
-            <Button variant="contained">Edit</Button>
+            <Button variant="contained" style={{ fontFamily: fonts[2] }}>Edit</Button>
           </NavLink>
             &nbsp;&nbsp;&nbsp;
-            <Button variant="contained" color="secondary" onClick={handleDeleteBtnClick}>Delete</Button>
+            <Button variant="contained" color="secondary" style={{ fontFamily: fonts[2] }} onClick={handleDeleteBtnClick}>Delete</Button>
             {isDeleteConfim && 
               <div>
                   <br/><br/>
@@ -189,6 +189,7 @@ function Single() {
                           By {data.createdBy}
                         </span>
                       </NavLink>  
+                      created <ReactTimeAgo date={data.createdAt} />
                     </span>
                     {isValidUser && buttons}
                   </span>
@@ -206,34 +207,45 @@ function Single() {
               )
               ||
               type === "quotes" &&
-              (<div>
-                <br/><br/>
-                <h1 classes={classes.title}><i>"{data.text}"</i></h1>
-                <br/><br/>
-                {data.author}
-                <br/><br/>
-                <NavLink to={"/profile" + "/" + data.createdBy}>
-                    <span className={common.createdBy}>
-                        By {data.createdBy}
+              (
+                <div className={classes.bgDiv}>
+                  <div className={classes.title}>
+                    <i>"{data.text}"</i>
+                  </div>
+                  <span className={classes.subheader}>
+                    <span className={classes.author}>
+                      <NavLink to={"/profile" + "/" + data.createdBy}>
+                        <span className={common.createdBy}>
+                          - {data.author}
+                        </span>
+                      </NavLink>  
+                      created <ReactTimeAgo date={data.createdAt} />
                     </span>
-                </NavLink>  
-                created <ReactTimeAgo date={data.createdAt} />
-                <br/><br/><br/>              
-              </div>)
+                    {isValidUser && buttons}
+                  </span>
+                </div>
+              )
               ||
               type === "prose" && 
-              (<div>
-                <h1 classes={classes.title}>{data.title}</h1>
-                <NavLink to={"/profile" + "/" + data.createdBy}>
-                    <span className={common.createdBy}>
-                        By {data.createdBy}
+              (
+                <div className={classes.bgDiv}>
+                  <span className={classes.title}>{data.title}</span>
+                  <span className={classes.subheader}>
+                    <span className={classes.author}>
+                      <NavLink to={"/profile" + "/" + data.createdBy}>
+                        <span className={common.createdBy}>
+                          By {data.createdBy}
+                        </span>
+                      </NavLink>  
+                      created <ReactTimeAgo date={data.createdAt} />
                     </span>
-                </NavLink>  
-                 created <ReactTimeAgo date={data.createdAt} />
-                <br/><br/>
-                {data.body}
-                <br/><br/><br/>
-              </div>)
+                    {isValidUser && buttons}
+                  </span>
+                  <div className={classes.body}>
+                    {data.body}
+                  </div>
+                </div>
+              )
               ||
               (<div>Sorry, this does not exist.</div>)
             )

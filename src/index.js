@@ -13,6 +13,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import JavascriptTimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+
+
 /**********************************************************************/
 
 
@@ -27,6 +29,8 @@ import store from './services/redux/store';
 // Initialize the desired locales. This is necessary to use
 // the JavascriptTimeAgo library.
 JavascriptTimeAgo.locale(en);
+
+
 
 ReactDOM.render(
   <Provider store={store}>
