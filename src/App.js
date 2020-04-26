@@ -33,8 +33,9 @@ import Create from "./pages/Create/Create";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import Admin from "./pages/Admin/Admin";
-
 import Redirect from "./pages/Redirect/Redirect";
+
+import Comments from "./components/Comments";
 
 import logo from "./assets/logo.svg";
 import share from "./assets/share.jpg";
@@ -57,7 +58,7 @@ const routes = [
   { path: "/:type/:urlId", 
     name: "Single", 
     Component: Single, 
-    bgType: 4
+    bgType: 3
   },
   { path: "/poetry", 
     name: "Poetry", 
@@ -233,7 +234,7 @@ function App() {
           : <span>
               <NavBar />
               <Switch>
-                {routes.map(({ path, Component, bgType }) => (
+                {routes.map(({ path, Component, bgType, name }) => (
                   <Route key={path} path={path}>
                     <div className={((bgType === 1) && classes.bgOne) 
                                 || ((bgType === 2) && classes.bgTwo)
@@ -242,6 +243,7 @@ function App() {
                                 }>    
                       <Component />
                     </div>
+                    {name === "Single" && <Comments />}
                   </Route>
                 ))}
               </Switch>
