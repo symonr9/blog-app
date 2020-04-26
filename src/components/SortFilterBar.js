@@ -22,7 +22,7 @@ import ViewHeadlineRoundedIcon from '@material-ui/icons/ViewHeadlineRounded';
 /**********************************************************************/
 
 /* Project Imports ****************************************************/
-import { colors, useCommonStyles } from "../assets/common";
+import { fonts, colors, useCommonStyles } from "../assets/common";
 /**********************************************************************/
 
 
@@ -97,11 +97,13 @@ const useStyles = makeStyles({
 
 const searchBarStyle = { 
     width: '80%', 
-    marginBottom: '1em' 
+    marginBottom: '1em',
+    fontFamily: fonts[2]
 };
 
 const chipStyle = {
     color: colors[5], 
+    fontFamily: fonts[2],
     backgroundColor: colors[3], 
     marginRight: '0.75em', 
     marginBottom : '0.75em' 

@@ -5,6 +5,7 @@
  **********************************************************************/
 
 import { makeStyles } from "@material-ui/core/styles";
+import WebFont from 'webfontloader';
 
 /* Color Schemes ****************************************************/
 /* [white, primary, secondary, base, font, accent] 
@@ -32,6 +33,19 @@ export const colors = ["white", "#3E92CC", "#FFEC60", "#F7F5E6", "#333745", "#23
 
 /**********************************************************************/
 
+//0 is body, 1 is header, 2 is button
+//export const fonts = ["Lato", "Permanent Marker", "Roboto"];
+//export const fonts = ["V323", "Ultra", "Bebas Neue"];
+export const fonts = ["Cutive Mono", "Permanent Marker", "Roboto"];
+
+//Loads Google Fonts in a safe and efficent way.
+WebFont.load({
+  google: {
+    families: [fonts[0], fonts[1], fonts[2]]
+  }
+});
+
+
 
 export const useCommonStyles = makeStyles({
   /* Component Styles  ************************************************/
@@ -57,7 +71,7 @@ export const useCommonStyles = makeStyles({
     }
   },
   spacingTop: {
-    marginBottom: '4em'
+    marginBottom: '5em'
   },
   /* Item Card Styles  ************************************************/
   containerDiv: {
@@ -98,6 +112,7 @@ export const useCommonStyles = makeStyles({
     },
   },
   title: {
+    fontFamily: fonts[1],
     fontSize: '1.3em',
     display: 'block',
     fontWeight: 'bold',
@@ -107,6 +122,7 @@ export const useCommonStyles = makeStyles({
     }
   },
   body: {
+    fontFamily: fonts[0],
     fontSize: '1em',
     display: 'block',
     marginTop: '0.75em',
@@ -114,16 +130,19 @@ export const useCommonStyles = makeStyles({
     whiteSpace: 'pre-wrap',
   },
   createdBy: {
+    fontFamily: fonts[0],
     fontSize: '0.8em',
     display: 'block',
     color: colors[5] + " !important",
 
   },
   smallText: {
+    fontFamily: fonts[1],
     fontSize: '0.75em',
     display: 'block'
   },
   createdAt: {
+    fontFamily: fonts[1],
     fontSize: '0.75em',
     display: 'block',
     position: 'relative',

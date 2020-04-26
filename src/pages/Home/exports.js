@@ -5,7 +5,7 @@
  **********************************************************************/
 
 import { makeStyles } from "@material-ui/core/styles";
-import { colors } from "../../assets/common";
+import { fonts, colors } from "../../assets/common";
 
 export const useStyles = makeStyles({
     logo: {
@@ -20,11 +20,13 @@ export const useStyles = makeStyles({
         marginTop: '5em !important'
     },
     introTitle: {
+        fontFamily: fonts[1],
         fontSize: '4em',
         color: colors[5],
         fontWeight: 'bold',
     },
     introQuote: {
+        fontFamily: fonts[0],
         marginTop: '2em',
         fontStyle: 'italic'
     },

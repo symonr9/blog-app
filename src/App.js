@@ -14,8 +14,9 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 /**********************************************************************/
 
+
 /* Project Imports ****************************************************/
-import { colors } from "./assets/common";
+import { fonts, colors } from "./assets/common";
 
 import store from "./services/redux/store";
 
@@ -33,8 +34,9 @@ import Create from "./pages/Create/Create";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import Admin from "./pages/Admin/Admin";
-
 import Redirect from "./pages/Redirect/Redirect";
+
+import Comments from "./components/Comments";
 
 import logo from "./assets/logo.svg";
 import share from "./assets/share.jpg";
@@ -57,7 +59,7 @@ const routes = [
   { path: "/:type/:urlId", 
     name: "Single", 
     Component: Single, 
-    bgType: 4
+    bgType: 3
   },
   { path: "/poetry", 
     name: "Poetry", 
@@ -116,8 +118,10 @@ const useStyles = makeStyles({
     + colors[2] + " 35%,"  
     + colors[3] + " 35%" 
     + ")",
+    fontFamily: fonts[0],
     "& h1, h2": {
-      color: colors[5] + " !important"
+      color: colors[5] + " !important",
+      fontFamily: fonts[1]
     },
     "& span": {
       color: colors[4]
@@ -130,8 +134,10 @@ const useStyles = makeStyles({
     + colors[1] + " 14%,"  
     + colors[3] + " 14%" 
     + ")",
+    fontFamily: fonts[0],
     "& h1, h2": {
-      color: colors[5] + " !important"
+      color: colors[5] + " !important",
+      fontFamily: fonts[1]
     },
     "& span": {
       color: colors[4]
@@ -146,8 +152,10 @@ const useStyles = makeStyles({
     + colors[2] + " 30%," 
     + colors[3] + " 30%" 
     + ")",
+    fontFamily: fonts[0],
     "& h1, h2": {
-      color: colors[5] + " !important"
+      color: colors[5] + " !important",
+      fontFamily: fonts[1]
     },
     "& span": {
       color: colors[4]
@@ -156,8 +164,10 @@ const useStyles = makeStyles({
   //All base
   bgFour: {
     background: colors[3],
+    fontFamily: fonts[0],
     "& h1, h2": {
-      color: colors[5] + " !important"
+      color: colors[5] + " !important",
+      fontFamily: fonts[1]
     },
     "& span": {
       color: colors[4]
@@ -166,6 +176,14 @@ const useStyles = makeStyles({
   //Three color, three striped
   bgMobile: {
     background: colors[3],
+    fontFamily: fonts[0],
+    "& h1, h2": {
+      color: colors[5] + " !important",
+      fontFamily: fonts[1]
+    },
+    "& span": {
+      color: colors[4]
+    },
     height: '100em'
   },
   logo: {
@@ -233,7 +251,7 @@ function App() {
           : <span>
               <NavBar />
               <Switch>
-                {routes.map(({ path, Component, bgType }) => (
+                {routes.map(({ path, Component, bgType, name }) => (
                   <Route key={path} path={path}>
                     <div className={((bgType === 1) && classes.bgOne) 
                                 || ((bgType === 2) && classes.bgTwo)
@@ -242,6 +260,7 @@ function App() {
                                 }>    
                       <Component />
                     </div>
+                    {name === "Single" && <div className={classes.bgFour}><Comments /></div>}
                   </Route>
                 ))}
               </Switch>
