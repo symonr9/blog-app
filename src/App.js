@@ -14,8 +14,9 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 /**********************************************************************/
 
+
 /* Project Imports ****************************************************/
-import { colors } from "./assets/common";
+import { fonts, colors } from "./assets/common";
 
 import store from "./services/redux/store";
 
@@ -117,8 +118,10 @@ const useStyles = makeStyles({
     + colors[2] + " 35%,"  
     + colors[3] + " 35%" 
     + ")",
+    fontFamily: fonts[0],
     "& h1, h2": {
-      color: colors[5] + " !important"
+      color: colors[5] + " !important",
+      fontFamily: fonts[1]
     },
     "& span": {
       color: colors[4]
@@ -131,8 +134,10 @@ const useStyles = makeStyles({
     + colors[1] + " 14%,"  
     + colors[3] + " 14%" 
     + ")",
+    fontFamily: fonts[0],
     "& h1, h2": {
-      color: colors[5] + " !important"
+      color: colors[5] + " !important",
+      fontFamily: fonts[1]
     },
     "& span": {
       color: colors[4]
@@ -147,8 +152,10 @@ const useStyles = makeStyles({
     + colors[2] + " 30%," 
     + colors[3] + " 30%" 
     + ")",
+    fontFamily: fonts[0],
     "& h1, h2": {
-      color: colors[5] + " !important"
+      color: colors[5] + " !important",
+      fontFamily: fonts[1]
     },
     "& span": {
       color: colors[4]
@@ -157,8 +164,10 @@ const useStyles = makeStyles({
   //All base
   bgFour: {
     background: colors[3],
+    fontFamily: fonts[0],
     "& h1, h2": {
-      color: colors[5] + " !important"
+      color: colors[5] + " !important",
+      fontFamily: fonts[1]
     },
     "& span": {
       color: colors[4]
@@ -167,6 +176,14 @@ const useStyles = makeStyles({
   //Three color, three striped
   bgMobile: {
     background: colors[3],
+    fontFamily: fonts[0],
+    "& h1, h2": {
+      color: colors[5] + " !important",
+      fontFamily: fonts[1]
+    },
+    "& span": {
+      color: colors[4]
+    },
     height: '100em'
   },
   logo: {
