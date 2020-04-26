@@ -243,7 +243,7 @@ function App() {
                                 }>    
                       <Component />
                     </div>
-                    {name === "Single" && <Comments />}
+                    {name === "Single" && <div className={classes.bgFour}><Comments /></div>}
                   </Route>
                 ))}
               </Switch>

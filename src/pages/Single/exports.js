@@ -26,7 +26,9 @@ export const useStyles = makeStyles({
     title: {
         borderRadius: '1em',
         textAlign: 'center', 
-        margin: '2em',
+        marginTop: '2em',
+        marginRight: '8em',
+        marginLeft: '8em',
         
         animationName: '$title-animation',
         animationDuration: '1.5s',
@@ -36,20 +38,20 @@ export const useStyles = makeStyles({
     '@keyframes title-animation': {
         '0%': {
             backgroundColor: '#d8e9f4',
-            border: 'solid 0.005em #333745',
-            fontSize: '0.4em',
+            border: 'solid 0.005em ' + colors[3],
+            fontSize: '0.25em',
             padding: '0.05em'
         }, 
         '50%': {
-            backgroundColor: '#FFEC60', 
-            border: 'solid 0.1em #333745',
-            fontSize: '2em',
-            padding: '0.25em'
+            backgroundColor: colors[2], 
+            border: 'solid 0.1em ' + colors[2],
+            fontSize: '1em',
+            padding: '0.25em',
         },
         '100%': {
-            backgroundColor: '#F7F5E6', 
-            border: 'solid 0.1em #333745',
-            fontSize: '4em',
+            backgroundColor: colors[3], 
+            border: 'solid 0.1em ' + colors[4],
+            fontSize: '2.5em',
             padding: '0.5em',
         }
     },
@@ -58,10 +60,12 @@ export const useStyles = makeStyles({
         flexDirection: 'column',
     },
     author: {
+        fontSize: '2em',
         textAlign: 'center',
         borderRadius: '0.5em',
-        marginLeft: '10em',
-        marginRight: '10em',
+        marginTop: '2em',
+        marginLeft: '12em',
+        marginRight: '12em',
         marginBottom: '1em',
     
         animationName: '$notes-animation',
@@ -71,9 +75,9 @@ export const useStyles = makeStyles({
     }, 
     notes: {
         textAlign: 'center',
-        borderRadius: '0.5em',
-        marginRight: '10em',
-        marginLeft: '10em',
+        borderRadius: '1em',
+        marginRight: '20em',
+        marginLeft: '20em',
         marginBottom: '5em',
         
         animationName: '$notes-animation',
@@ -111,20 +115,23 @@ export const useStyles = makeStyles({
             margin: '2em',
             marginTop: '8em'
         },
-        '50%': {
+        '70%': {
             fontSize: '1em',
-            padding: '6em',
+            padding: '4em',
             margin: '6em',
             marginLeft: '8em',
             marginRight: '8em',
-            border: 'solid 0.1em #F7F5E6',
-            backgroundColor: '#3E92CC'
+            border: 'solid 0.75em ' + colors[4],
+            backgroundColor: colors[1]
         },
         '100%': {
             fontSize: '1.25em',
             padding: '4em',
-            margin: '4em',
-            border: 'solid 0.25em #3E92CC',
+            marginTop: '2em',
+            marginLeft: '10em',
+            marginRight: '10em',
+            marginBottom: '2em',
+            border: 'solid 0.25em ' + colors[4],
             backgroundColor: '#ebe6bf',
         }
     }
