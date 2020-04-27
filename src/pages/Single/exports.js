@@ -36,6 +36,19 @@ export const useStyles = makeStyles({
         animationFillMode: 'forwards',
         animationTimingFunction: 'ease-in-out'
     },
+    mobileTitle: {
+        fontFamily: fonts[1],
+        borderRadius: '1em',
+        textAlign: 'center', 
+        marginTop: '2em',
+        marginRight: '1em',
+        marginLeft: '1em',
+        
+        animationName: '$title-animation',
+        animationDuration: '1.5s',
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-in-out'
+    },
     '@keyframes title-animation': {
         '0%': {
             backgroundColor: '#d8e9f4',
@@ -71,7 +84,22 @@ export const useStyles = makeStyles({
         marginRight: '12em',
         marginBottom: '1em',
     
-        animationName: '$notes-animation',
+        animationName: '$sub-animation',
+        animationDuration: '0.75s',
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-in-out'
+    }, 
+    mobileAuthor: {
+        fontFamily: fonts[0],
+        fontSize: '2em',
+        textAlign: 'center',
+        borderRadius: '0.5em',
+        marginTop: '2em',
+        marginLeft: '2em',
+        marginRight: '2em',
+        marginBottom: '1em',
+    
+        animationName: '$sub-animation',
         animationDuration: '0.75s',
         animationFillMode: 'forwards',
         animationTimingFunction: 'ease-in-out'
@@ -83,12 +111,24 @@ export const useStyles = makeStyles({
         marginLeft: '20em',
         marginBottom: '5em',
         
-        animationName: '$notes-animation',
+        animationName: '$sub-animation',
         animationDuration: '0.75s',
         animationFillMode: 'forwards',
         animationTimingFunction: 'ease-in-out'
     }, 
-    '@keyframes notes-animation': {
+    mobileNotes: {
+        textAlign: 'center',
+        borderRadius: '1em',
+        marginRight: '2em',
+        marginLeft: '2em',
+        marginBottom: '5em',
+        
+        animationName: '$sub-animation',
+        animationDuration: '0.75s',
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-in-out'
+    }, 
+    '@keyframes sub-animation': {
         '0%': {
             fontSize: '0.5em',
             padding: '0.25em',
@@ -106,6 +146,15 @@ export const useStyles = makeStyles({
         borderRadius: '1em',
         
         animationName: '$body-animation',
+        animationDuration: '1.25s',
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-in-out'
+    },
+    mobileBody: {
+        textAlign: 'center',
+        borderRadius: '1em',
+        
+        animationName: '$mobile-body-animation',
         animationDuration: '1.25s',
         animationFillMode: 'forwards',
         animationTimingFunction: 'ease-in-out'
@@ -136,6 +185,34 @@ export const useStyles = makeStyles({
             marginBottom: '2em',
             border: 'solid 0.25em ' + colors[4],
             backgroundColor: '#ebe6bf',
+        }
+    },
+    '@keyframes mobile-body-animation': {
+        '0%': {
+            fontSize: '0.25em',
+            border: 'solid 0.025em #3E92CC',
+            backgroundColor: '#FFEC60',
+            margin: '2em',
+            marginTop: '8em'
+        },
+        '70%': {
+            fontSize: '1em',
+            padding: '7em',
+            margin: '6em',
+            marginLeft: '2em',
+            marginRight: '2em',
+            border: 'solid 0.75em ' + colors[4],
+            backgroundColor: colors[1]
+        },
+        '100%': {
+            fontSize: '1.25em',
+            padding: '1em',
+            marginTop: '2em',
+            marginLeft: '1em',
+            marginRight: '1em',
+            marginBottom: '2em',
+            border: 'solid 0.25em ' + colors[4],
+            backgroundColor: colors[3],
         }
     }
 });
