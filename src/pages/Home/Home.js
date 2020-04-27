@@ -92,7 +92,8 @@ const Home = () => {
             <li>MongoDB</li>
             <li>Mongoose</li>
           </ul>
-        
+          Check out the source code <a href="https://github.com/symonr9/blog-app" target="_blank">here!</a>
+          <br/><br/>
         </div>
       </Grid>
     </Grid>
