@@ -107,14 +107,13 @@ const Login = () => {
         <h1>Login</h1>
       </Grid>
       <Grid item xs={12}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {basicTextField("username", "Username", handleUsernameChange)}
-          {passwordTextField("password", "Password", handlePasswordChange)}
-          {submitBtn("Login")}
-        </form>
-        <br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/>
+        <div className={`${common.formAnimation} ${classes.spacingBottom}`}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            {basicTextField("username", "Username", handleUsernameChange)}
+            {passwordTextField("password", "Password", handlePasswordChange)}
+            {submitBtn("Login")}
+          </form>
+        </div>
       </Grid>
     </Grid>
   );

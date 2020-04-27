@@ -6,4 +6,8 @@
 
 import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles({});
+export const useStyles = makeStyles({
+    spacingBottom: {
+        marginBottom: '20em'
+    }
+});

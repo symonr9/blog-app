@@ -412,7 +412,7 @@ function Create() {
       <Grid item xs={12} className={!isSideView && (classes.bodyDiv) || isSideView && (classes.sideBodyDiv)}>
         <br/>
         <h1>Create</h1>
-        <div className={!isSideView && (classes.formDiv) || isSideView && (classes.sideFormDiv)}>
+        <div className={`${!isSideView && (classes.formDiv) || isSideView && (classes.sideFormDiv)} ${common.formAnimation}`}>
         <form id="createForm" onSubmit={handleSubmit(onSubmit)}>
           {!isMobileView && (selectTextField(
             "poemType",
@@ -433,7 +433,7 @@ function Create() {
           {formInput}
         </form>
         </div>
-        <div className={!isSideView && (classes.wordLookupDiv) || isSideView && (classes.sideWordLookupDiv)}>
+        <div className={`${!isSideView && (classes.wordLookupDiv) || isSideView && (classes.sideWordLookupDiv)} ${common.formAnimation}`}>
           <hr/>
           {basicTextField("word", "Look a word up", handleWordChange)}
           {!isMobileView && (selectTextField(

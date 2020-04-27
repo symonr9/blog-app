@@ -219,5 +219,24 @@ export const useCommonStyles = makeStyles({
       padding: '10px',
       backgroundColor: colors[3],
   }
-}
+  },
+  formAnimation: {
+    borderRadius: '1em',
+    
+    animationName: '$form-animation',
+    animationDuration: '1.5s',
+    animationFillMode: 'forwards',
+    animationTimingFunction: 'ease-in-out'
+  },
+  '@keyframes form-animation': {
+    '0%': {
+        border: 'solid 1em ' + colors[1],
+    },  
+    '40%': {
+        margin: '6em',
+        border: 'solid 1em ' + colors[2],
+    },
+    '100%': {
+    }
+  },
 });
