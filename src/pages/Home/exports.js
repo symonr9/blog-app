@@ -21,19 +21,20 @@ export const useStyles = makeStyles({
     },
     introTitle: {
         fontFamily: fonts[1],
-        fontSize: '4em',
+        fontSize: '3.5em',
         color: colors[5],
         fontWeight: 'bold',
+        marginBottom: '0.25em',
     },
-    introQuote: {
-        fontFamily: fonts[0],
-        marginTop: '2em',
-        fontStyle: 'italic'
-    },
-    introSub: {
-        marginTop: '2em'
+    introText: {
+        fontFamily: fonts[2],
+        fontSize: '1.5em',
+        marginLeft: '1.5em'
     },
     homeSpacingDiv: {
-        marginTop: '25em'
+        marginTop: '20em'
+    },
+    smallSpacingDiv: {
+        marginTop: '10em'
     }
 });

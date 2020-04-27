@@ -29,6 +29,7 @@ import { colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
 import {
+  textFieldStyle,
   submitBtn,
   basicTextField,
   selectTextField
@@ -433,13 +434,8 @@ function Create() {
         </form>
         </div>
         <div className={!isSideView && (classes.wordLookupDiv) || isSideView && (classes.sideWordLookupDiv)}>
-          <TextField
-            label="Look a word up"
-            variant="outlined"
-            onChange={handleWordChange}
-            fullWidth
-            className={classes.spacing}
-          ></TextField>
+          <hr/>
+          {basicTextField("word", "Look a word up", handleWordChange)}
           {!isMobileView && (selectTextField(
             "kind",
             "What would you like to explore?",
@@ -487,6 +483,7 @@ function Create() {
             ))
             }
           </div>)}
+          <hr/>
         </div>
         <br/><br/><br/>
       <Snackbar open={isSnackbarOpen} autoHideDuration={3000} onClose={handleClose}>

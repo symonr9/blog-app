@@ -29,6 +29,7 @@ import { useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
 import {
+  textFieldStyle,
   submitBtn,
   editTextField,
   selectTextField
@@ -372,7 +373,7 @@ function Edit() {
             variant="outlined"
             onChange={handleWordChange}
             fullWidth
-            className={classes.spacing}
+            className={`${classes.spacing} ${textFieldStyle}`}
           ></TextField>
           {!isMobileView && (selectTextField(
             "kind",
