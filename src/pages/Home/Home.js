@@ -43,13 +43,13 @@ const Home = () => {
     <Grid container>
       <Grid item xs={12}>
         <div className={classes.homeSpacingDiv}></div>
-          <Paper className={`${classes.homePaper} ${common.paperAnimation}`} elevation="12">
+          <Paper className={`${classes.homePaper} ${(!isMobileView && classes.paperAnimation || (isMobileView && classes.mobilePaperAnimation))}`} elevation="12">
             <div className={classes.introTitle}>Had we but honey enough and time...</div>
             <div className={classes.introText}>Welcome to my blog! I'm Symon. I like to write 
             and write and write. This is a web application I wrote for fun from March to April 2020.
             </div>
           </Paper>
-        <Paper className={`${classes.homePaper} ${common.paperAnimation}`} elevation="12">
+        <Paper className={`${classes.homePaper} ${(!isMobileView && classes.paperAnimation || (isMobileView && classes.mobilePaperAnimation))}`} elevation="12">
           <div className={classes.introTitle}>Well, what does this app do?</div>
           <div className={classes.introText}>
             Here's a list of completed features: 
@@ -74,7 +74,7 @@ const Home = () => {
             </ul>
           </div>
         </Paper>
-        <Paper className={`${classes.homePaper} ${common.paperAnimation} ${classes.endPaper}`} elevation="12">
+        <Paper className={`${classes.homePaper} ${(!isMobileView && classes.paperAnimation || (isMobileView && classes.mobilePaperAnimation))} ${classes.endPaper}`} elevation="12">
           <div className={classes.introTitle}>Cool! How did you make it?</div>
           <div className={classes.introText}>
             Here's what I used:
