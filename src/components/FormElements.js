@@ -8,23 +8,38 @@
 /* Library Imports ****************************************************/
 import React from "react";
 
-import { Button, TextField, MenuItem } from "@material-ui/core";
+import { Button, TextField, MenuItem, InputProps } from "@material-ui/core";
 import PublishRoundedIcon from "@material-ui/icons/PublishRounded";
 /**********************************************************************/
 
-import { colors } from "../assets/common";
+import { fonts, colors } from "../assets/common";
+
 
 //Custom stylings.
-const textFieldStyle = {
+export const textFieldStyle = {
   marginTop: "1em",
   marginBottom: "1em",
+  backgroundColor: "white",
+  color: colors[5],
+  fontFamily: fonts[0],
+
 };
 
-const submitBtnStyle = {
+export const submitBtnStyle = {
   color: colors[4],
   backgroundColor: colors[1],
   marginTop: "2em",
   marginBottom: "2em",
+};
+
+const inputStyle = {
+  color: colors[5],
+  fontFamily: fonts[0]
+};
+
+const labelStyle = {
+  color: 'gray',
+  fontFamily: fonts[0]
 };
 
 //SubmitBtn JSX element. Assumes that it is wrapped within a form.
@@ -62,6 +77,12 @@ export const basicTextField = (name, label, onChangeFun, numOfLines = 1) => {
       rows={numOfLines}
       fullWidth
       style={textFieldStyle}
+      InputProps={{
+        style: inputStyle
+      }}
+      InputLabelProps={{
+        style: labelStyle
+      }}
       onChange={onChangeFun}
     ></TextField>
   );
@@ -80,6 +101,12 @@ export const passwordTextField = (name, label, onChangeFun, numOfLines = 1) => {
       rows={numOfLines}
       fullWidth
       style={textFieldStyle}
+      InputProps={{
+        style: inputStyle
+      }}
+      InputLabelProps={{
+        style: labelStyle
+      }}
       onChange={onChangeFun}
     ></TextField>
   );
@@ -104,6 +131,12 @@ export const editTextField = (
       rows={numOfLines}
       fullWidth
       style={textFieldStyle}
+      InputProps={{
+        style: inputStyle
+      }}
+      InputLabelProps={{
+        style: labelStyle
+      }}
       onChange={onChangeFun}
     ></TextField>
   );
@@ -122,9 +155,15 @@ export const selectTextField = (name, label, value, onChangeFun, options) => {
       onChange={onChangeFun}
       fullWidth
       style={textFieldStyle}
+      InputProps={{
+        style: inputStyle
+      }}
+      InputLabelProps={{
+        style: labelStyle
+      }}
     >
       {options.map((option) => (
-        <MenuItem key={option.value} value={option.value}>
+        <MenuItem key={option.value} value={option.value} style={textFieldStyle}>
           {option.label}
         </MenuItem>
       ))}

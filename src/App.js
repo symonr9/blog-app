@@ -79,17 +79,17 @@ const routes = [
   { path: "/create", 
     name: "Create", 
     Component: Create, 
-    bgType: 2 
+    bgType: 3
   },
   { path: "/login", 
     name: "Login", 
     Component: Login, 
-    bgType: 2 
+    bgType: 3 
   },
   { path: "/signup", 
     name: "Signup", 
     Component: Signup, 
-    bgType: 2 
+    bgType: 3 
   },
   { path: "/admin", 
     name: "Admin", 

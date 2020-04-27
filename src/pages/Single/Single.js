@@ -157,7 +157,8 @@ function Single() {
             <Button variant="contained" style={{ fontFamily: fonts[2] }}>Edit</Button>
           </NavLink>
             &nbsp;&nbsp;&nbsp;
-            <Button variant="contained" color="secondary" style={{ fontFamily: fonts[2] }} onClick={handleDeleteBtnClick}>Delete</Button>
+            <Button variant="contained" color="secondary" style={{ fontFamily: fonts[2] }} 
+            onClick={handleDeleteBtnClick}>Delete</Button>
             {isDeleteConfim && 
               <div>
                   <br/><br/>
@@ -181,9 +182,9 @@ function Single() {
         && ( type === "poetry" && 
               (
                 <div className={classes.bgDiv}>
-                  <span className={classes.title}>{data.title}</span>
+                  <span className={!isMobileView ? classes.title : classes.mobileTitle}>{data.title}</span>
                   <span className={classes.subheader}>
-                    <span className={classes.author}>
+                    <span className={!isMobileView ? classes.author : classes.mobileAuthor}>
                       <NavLink to={"/profile" + "/" + data.createdBy}>
                         <span className={common.createdBy}>
                           By {data.createdBy}
@@ -193,11 +194,11 @@ function Single() {
                     </span>
                     {isValidUser && buttons}
                   </span>
-                  <div className={classes.body}>
+                  <div className={!isMobileView ? classes.body : classes.mobileBody}>
                     {data.body}
                   </div>
                   <span className={classes.subheader}>
-                    <span className={classes.notes}>
+                    <span className={!isMobileView ? classes.notes : classes.mobileNotes}>
                       Type: {data.type} 
                       <br/><br/>
                       Notes: {data.notes}
@@ -209,11 +210,11 @@ function Single() {
               type === "quotes" &&
               (
                 <div className={classes.bgDiv}>
-                  <div className={classes.title}>
+                  <div className={!isMobileView ? classes.title : classes.mobileTitle}>
                     <i>"{data.text}"</i>
                   </div>
                   <span className={classes.subheader}>
-                    <span className={classes.author}>
+                    <span className={!isMobileView ? classes.author : classes.mobileAuthor}>
                       <NavLink to={"/profile" + "/" + data.createdBy}>
                         <span className={common.createdBy}>
                           - {data.author}
@@ -229,9 +230,9 @@ function Single() {
               type === "prose" && 
               (
                 <div className={classes.bgDiv}>
-                  <span className={classes.title}>{data.title}</span>
+                  <span className={!isMobileView ? classes.title : classes.mobileTitle}>{data.title}</span>
                   <span className={classes.subheader}>
-                    <span className={classes.author}>
+                    <span className={!isMobileView ? classes.author : classes.mobileAuthor}>
                       <NavLink to={"/profile" + "/" + data.createdBy}>
                         <span className={common.createdBy}>
                           By {data.createdBy}
@@ -241,7 +242,7 @@ function Single() {
                     </span>
                     {isValidUser && buttons}
                   </span>
-                  <div className={classes.body}>
+                  <div className={!isMobileView ? classes.body : classes.mobileBody}>
                     {data.body}
                   </div>
                 </div>

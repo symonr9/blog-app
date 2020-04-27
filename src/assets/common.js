@@ -34,9 +34,10 @@ export const colors = ["white", "#3E92CC", "#FFEC60", "#F7F5E6", "#333745", "#23
 /**********************************************************************/
 
 //0 is body, 1 is header, 2 is button
-//export const fonts = ["Lato", "Permanent Marker", "Roboto"];
+export const fonts = ["Cabin", "Julius Sans One", "Cabin Condensed"];
+//export const fonts = ["Cutive Mono", "Ramabhadra", "Ramabhadra"];
 //export const fonts = ["V323", "Ultra", "Bebas Neue"];
-export const fonts = ["Cutive Mono", "Permanent Marker", "Roboto"];
+//export const fonts = ["Cutive Mono", "Permanent Marker", "Roboto"];
 
 //Loads Google Fonts in a safe and efficent way.
 WebFont.load({
