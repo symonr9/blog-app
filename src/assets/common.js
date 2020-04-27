@@ -149,4 +149,7 @@ export const useCommonStyles = makeStyles({
     position: 'relative',
     bottom: '0'
   },
+  altFont: {
+    fontFamily: fonts[0] + ' !important'
+  },
 });

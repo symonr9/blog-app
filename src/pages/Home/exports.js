@@ -20,8 +20,8 @@ export const useStyles = makeStyles({
         marginTop: '5em !important'
     },
     introTitle: {
-        fontFamily: fonts[1],
-        fontSize: '3.5em',
+        fontFamily: fonts[0],
+        fontSize: '3em',
         color: colors[5],
         fontWeight: 'bold',
         marginBottom: '0.25em',

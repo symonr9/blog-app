@@ -43,13 +43,12 @@ const Home = () => {
     <Grid container>
       <Grid item xs={12}>
         <div className={classes.homeSpacingDiv}></div>
-        <div className={classes.introTitle}>Had we but Honey enough and time...</div>
+        <div className={classes.introTitle}>Had we but honey enough and time...</div>
         <div className={classes.introText}>Welcome to my blog! I'm Symon. I like to write 
         and write and write. This is a web application I wrote for fun from March to April 2020.
         </div>
         <div className={classes.smallSpacingDiv}></div>
         <div className={classes.introTitle}>Well, what does this app do?</div>
-        <br/><br/>
         <div className={classes.introText}>
           Here's a list of completed features: 
           <ul>
