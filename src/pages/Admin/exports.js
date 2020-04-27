@@ -7,5 +7,8 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles({
-    
+    adminDiv: {
+        marginLeft: '1em',
+        marginRight: '2em'
+    }
 });
