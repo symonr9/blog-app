@@ -34,7 +34,11 @@ export const useStyles = makeStyles({
     homeSpacingDiv: {
         marginTop: '20em'
     },
-    smallSpacingDiv: {
+    homePaper: {
+        padding: '2em',
         marginTop: '10em'
+    },
+    endPaper: {
+        marginBottom: '10em'
     }
 });

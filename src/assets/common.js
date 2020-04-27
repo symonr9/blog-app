@@ -83,7 +83,6 @@ export const useCommonStyles = makeStyles({
   itemDiv: {
     flex: '30%',
     padding: '10px',
-    backgroundColor: 'transparent',
     width: '100px',
     marginRight: '1em',
     marginBottom: '1em',
@@ -98,7 +97,6 @@ export const useCommonStyles = makeStyles({
   mobileItemDiv: {
     flex: '100%',
     padding: '10px',
-    backgroundColor: 'transparent',
     width: '90%',
     marginLeft: '1em',
     marginRight: '1em',
@@ -152,4 +150,74 @@ export const useCommonStyles = makeStyles({
   altFont: {
     fontFamily: fonts[0] + ' !important'
   },
+  paperAnimation: {
+    textAlign: 'center',
+    borderRadius: '1em',
+    
+    animationName: '$paper-animation',
+    animationDuration: '1.75s',
+    animationFillMode: 'forwards',
+    animationTimingFunction: 'ease-in-out'
+  },
+  mobilePaperAnimation: {
+    textAlign: 'center',
+    borderRadius: '1em',
+    
+    animationName: '$mobile-paper-animation',
+    animationDuration: '1.5s',
+    animationFillMode: 'forwards',
+    animationTimingFunction: 'ease-in-out'
+  },
+  '@keyframes paper-animation': {
+    '0%': {
+        flex: '15%',
+        fontSize: '0.25em',
+        border: 'solid 0.025em #3E92CC',
+        backgroundColor: colors[2],
+    },  
+    '70%': {
+        flex: '10%',
+        width: '20px',
+        fontSize: '0.5em',
+        padding: '2em',
+        margin: '6em',
+        marginLeft: '8em',
+        marginRight: '8em',
+        border: 'solid 0.75em ' + colors[2],
+        backgroundColor: colors[1]
+    },
+    '100%': {
+        flex: '30%',
+        width: '100px',
+        fontSize: '1em',
+        padding: '10px',
+        backgroundColor: colors[3],
+    }
+  },
+'@keyframes mobile-paper-animation': {
+    '0%': {
+      flex: '15%',
+      fontSize: '0.25em',
+      border: 'solid 0.025em #3E92CC',
+      backgroundColor: colors[2],
+  },  
+  '70%': {
+      flex: '20%',
+      width: '20px',
+      fontSize: '0.25em',
+      padding: '2px',
+      margin: '6em',
+      marginLeft: '8em',
+      marginRight: '8em',
+      border: 'solid 0.75em ' + colors[2],
+      backgroundColor: colors[1]
+  },
+  '100%': {
+      flex: '50%',
+      width: '100px',
+      fontSize: '1em',
+      padding: '10px',
+      backgroundColor: colors[3],
+  }
+}
 });
