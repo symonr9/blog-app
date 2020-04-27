@@ -79,7 +79,7 @@ const routes = [
   { path: "/create", 
     name: "Create", 
     Component: Create, 
-    bgType: 2 
+    bgType: 3
   },
   { path: "/login", 
     name: "Login", 
@@ -213,7 +213,8 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles();
   
-  const isMobileBrowserRender = isIos() && !isInStandaloneMode();
+  //const isMobileBrowserRender = isIos() && !isInStandaloneMode();
+  const isMobileBrowserRender = false;
 
   return (
     <BrowserRouter>
