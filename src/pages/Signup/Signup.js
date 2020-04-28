@@ -119,18 +119,18 @@ const Signup = () => {
     <Grid container>
       <Grid item xs={12}>
       {!isMobileView && (<div className={common.spacingTop}></div>)}
-      <br/>
+        <br/>
         <h1>Signup</h1>
       </Grid>
       <Grid item xs={12}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {basicTextField("email", "Email", handleEmailChange)}
-          {basicTextField("username", "Username", handleUsernameChange)}
-          {passwordTextField("password", "Password", handlePasswordChange)}
-          {submitBtn("Sign Up")}
-        </form>
-        <br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/>
+        <div className={`${common.formAnimation} ${classes.spacingBottom}`}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            {basicTextField("email", "Email", handleEmailChange)}
+            {basicTextField("username", "Username", handleUsernameChange)}
+            {passwordTextField("password", "Password", handlePasswordChange)}
+            {submitBtn("Sign Up")}
+          </form>
+        </div>
       </Grid>
     </Grid>
   );

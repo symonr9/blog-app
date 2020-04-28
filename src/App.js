@@ -16,7 +16,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 
 /* Project Imports ****************************************************/
-import { fonts, colors } from "./assets/common";
+import { fonts, colors, useCommonStyles } from "./assets/common";
 
 import store from "./services/redux/store";
 
@@ -186,6 +186,7 @@ const useStyles = makeStyles({
     },
     height: '100em'
   },
+
   logo: {
 
   },
@@ -212,6 +213,7 @@ const useStyles = makeStyles({
  **********************************************************************/
 function App() {
   const classes = useStyles();
+  const common = useCommonStyles();
   
   const isMobileBrowserRender = isIos() && !isInStandaloneMode();
 
@@ -224,7 +226,7 @@ function App() {
               {<span>
                 <object type="image/svg+xml" className={classes.logo} data={logo}></object>
                 <center>
-                  <h1>Entering Symon's Blog...</h1>
+                  <h1 className={common.altFont}>Entering Symon's Blog...</h1>
                   <p>Please follow these steps to install the app on your mobile device:</p>
                   <ul>
                     <li>Step 1: Click on your device's share button.

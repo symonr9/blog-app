@@ -34,14 +34,10 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 
 /* Project Imports ****************************************************/
 import { getData, postData, putData, deleteData } from "../../services/api";
-import { useCommonStyles } from "../../assets/common";
+import { fonts, colors, useCommonStyles } from "../../assets/common";
 import { getServerURL } from "../../config/config";
 
-import ItemCard from '../../components/ItemCard';
-
 import { useStyles } from "./exports";
-import zIndex from "@material-ui/core/styles/zIndex";
-
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -64,7 +60,23 @@ const tableIcons = {
   };  
 /**********************************************************************/
 
-
+const options = {
+  headerStyle: {
+    backgroundColor: colors[0],
+    color: colors[5],
+    fontFamily: fonts[0]
+  },
+  cellStyle: {
+    backgroundColor: colors[0],
+    color: colors[5],
+    fontFamily: fonts[0]   
+  },
+  searchFieldStyle: {
+    backgroundColor: colors[0],
+    color: colors[5],
+    fontFamily: fonts[0]  
+  },
+};
 
 /**********************************************************************
  * Function Name: Admin
@@ -93,6 +105,7 @@ function Admin() {
   const [poetry, setPoetry] = useState([]);
   const [quotes, setQuotes] = useState([]);
   const [prose, setProse] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const [dataChanged, setDataChanged] = useState(false);
 
@@ -127,9 +140,7 @@ function Admin() {
   const fetchData = isSubscribed => {
     getData(getServerURL("poetry"), response => {
       if (isSubscribed) {
-        let items = response.sort(() => {
-          return 0.5 - Math.random();
-        }); 
+        let items = response;
         for(let i = 0; i < items.length; i++){
           items[i].itemType = "poetry";
         }
@@ -138,9 +149,7 @@ function Admin() {
     });
     getData(getServerURL("quotes"), response => {
       if (isSubscribed) {
-        let items = response.sort(() => {
-          return 0.5 - Math.random();
-        }); 
+        let items = response;
         for(let i = 0; i < items.length; i++){
           items[i].itemType = "quotes";
         }
@@ -149,13 +158,20 @@ function Admin() {
     });
     getData(getServerURL("prose"), response => {
       if (isSubscribed) {
-        let items = response.sort(() => {
-          return 0.5 - Math.random();
-        }); 
+        let items = response;
         for(let i = 0; i < items.length; i++){
           items[i].itemType = "prose";
         }
         setProse(items);
+      }
+    });
+    getData(getServerURL("users"), response => {
+      if (isSubscribed) {
+        let items = response;
+        for(let i = 0; i < items.length; i++){
+          items[i].itemType = "users";
+        }
+        setUsers(items);
       }
     });
   };
@@ -171,7 +187,7 @@ function Admin() {
   const PoetryColumns = [
     { title: 'Item Type', field: 'itemType', initialEditValue: 'poetry' },
     { title: 'ID', field: '_id', hidden: true },
-    { title: 'Title', field: 'title' },
+    { title: 'Title', field: 'title', render: row => <NavLink to={`/poetry/${row.urlId}`}><span>{row.title}</span></NavLink> },
     { title: 'Type', field: 'type' },
     { title: 'Notes', field: 'notes', render: row => <span>{row.notes.substring(0,10) + "..."}</span> },
     { title: 'Body', field: 'body', render: row => <span>{row.body.substring(0,100) + "..."}</span> },
@@ -183,7 +199,7 @@ function Admin() {
   const QuotesColumns = [
     { title: 'Item Type', field: 'itemType', initialEditValue: 'quotes' },
     { title: 'ID', field: '_id', hidden: true },
-    { title: 'Text', field: 'text', render: row => <span>{row.text.substring(0,100) + "..."}</span> },
+    { title: 'Text', field: 'text', render: row => <NavLink to={`/quotes/${row.urlId}`}><span>{row.text.substring(0,100) + "..."}</span></NavLink> },
     { title: 'Author', field: 'author' },
     { title: 'Is Public', field: 'isPublic' },
     { title: 'Created By', field: 'createdBy', readonly: true },
@@ -193,10 +209,22 @@ function Admin() {
   const ProseColumns = [
     { title: 'Item Type', field: 'itemType', initialEditValue: 'prose' },
     { title: 'ID', field: '_id', hidden: true },
-    { title: 'Title', field: 'title' },
+    { title: 'Title', field: 'title', render: row => <NavLink to={`/prose/${row.urlId}`}><span>{row.title}</span></NavLink> },
     { title: 'Body', field: 'body', render: row => <span>{row.body.substring(0,100) + "..."}</span> },
     { title: 'Is Public', field: 'isPublic' },
     { title: 'Created By', field: 'createdBy', readonly: true },
+    { title: 'Created At', field: 'createdAt', readonly: true }
+  ];
+
+  const UsersColumns = [
+    { title: 'Item Type', field: 'itemType', initialEditValue: 'users' },
+    { title: 'ID', field: '_id', hidden: true },
+    { title: 'username', field: 'username', render: row => <NavLink to={`/profile/${row.username}`}><span>{row.username}</span></NavLink> },
+    { title: 'email', field: 'email' },
+    { title: 'password', field: 'password' },
+    { title: 'bio', field: 'bio' },
+    { title: 'colorPrefs', field: 'colorPrefs', render: row => <span>{row.colorPrefs.map((r) => <div key={r}>r</div>)}</span> },
+    { title: 'fontPrefs', field: 'fontPrefs', render: row => <span>{row.fontPrefs.map((r) => <div key={r}>r</div>)}</span>},
     { title: 'Created At', field: 'createdAt', readonly: true }
   ];
 
@@ -205,8 +233,6 @@ function Admin() {
   const handleRowAdd = (event) => {
     let data = {};
     let url = "";
-
-    console.log(event);
 
     if(isLoggedIn){
       //type is defined based on the initial Select input value.
@@ -241,6 +267,18 @@ function Admin() {
             "isPublic": event.isPublic
           };
           url = "prose/create";
+
+          break;
+        case "users":
+          data = {
+            "username": event.username,
+            "email": event.email,
+            "password": event.password,
+            "bio": event.bio,
+            "colorPrefs": event.colorPrefs,
+            "fontPrefs": event.fontPrefs,
+          };
+          url = "users/signup";
 
           break;
         default:
@@ -300,6 +338,18 @@ function Admin() {
           url = "prose/edit/" + event._id;
 
           break;
+        case "users":
+          data = {
+            "username": event.username,
+            "email": event.email,
+            "password": event.password,
+            "bio": event.bio,
+            "colorPrefs": event.colorPrefs,
+            "fontPrefs": event.fontPrefs,
+          };
+          url = "users/edit/" + event._id;
+
+          break;
         default:
           console.log("Something went wrong..."); 
           return 0;
@@ -333,6 +383,9 @@ function Admin() {
         case "prose":
           url = "prose/delete/" + event._id;
           break;
+        case "prose":
+          url = "users/delete/" + event._id;
+          break;
         default:
           console.log("Something went wrong..."); 
           return 0;
@@ -355,42 +408,147 @@ function Admin() {
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
         <h1>Admin</h1>
-        <MaterialTable
-          title="Poetry"
-          columns={PoetryColumns}
-          data={poetry}
-          editable={{
-            onRowAdd: handleRowAdd,
-            onRowUpdate: handleRowUpdate,
-            onRowDelete: handleRowDelete,
-          }}
-          icons={tableIcons} 
-        />
-        <br/>
-        <MaterialTable
-          title="Quotes"
-          columns={QuotesColumns}
-          data={quotes}
-          editable={{
-            onRowAdd: handleRowAdd,
-            onRowUpdate: handleRowUpdate,
-            onRowDelete: handleRowDelete,
-          }}
-          icons={tableIcons} 
-        />
-        <br/>
-        <MaterialTable
-          title="Prose"
-          columns={ProseColumns}
-          data={prose}
-          editable={{
-            onRowAdd: handleRowAdd,
-            onRowUpdate: handleRowUpdate,
-            onRowDelete: handleRowDelete,
-          }}
-          icons={tableIcons} 
-        />
-        <br/>
+        <div className={classes.adminDiv}>
+          <MaterialTable
+              title="Users"
+              columns={UsersColumns}
+              data={users}
+              editable={{
+                onRowAdd: handleRowAdd,
+                onRowUpdate: handleRowUpdate,
+                onRowDelete: handleRowDelete,
+              }}
+              options={options}
+              detailPanel={[
+                {
+                  tooltip: 'Show Details',
+                  render: row => {
+                    return (
+                      <div
+                        style={{
+                          textAlign: 'center',
+                          color: colors[4],
+                          backgroundColor: colors[3]
+                        }}
+                      >
+                        <span className={common.title}>{row.username}</span>
+                        <span className={common.createdAt}>{row.createdAt}</span>
+                        <span className={common.body}>{row.email}</span>
+                        <span className={common.body}>{row.bio}</span>
+                        <span className={common.body}>{row.colorPrefs.map((r) => <div key={r}>r</div>)}</span>
+                        <span className={common.body}>{row.fontPrefs.map((r) => <div key={r}>r</div>)}</span>
+                      </div>
+                    )
+                  },
+                }
+              ]}    
+              icons={tableIcons} 
+          />
+          <br/>
+          <MaterialTable
+            title="Poetry"
+            columns={PoetryColumns}
+            data={poetry}
+            editable={{
+              onRowAdd: handleRowAdd,
+              onRowUpdate: handleRowUpdate,
+              onRowDelete: handleRowDelete,
+            }}
+            options={options}
+            detailPanel={[
+              {
+                tooltip: 'Show Details',
+                render: row => {
+                  return (
+                    <div
+                      style={{
+                        textAlign: 'center',
+                        color: colors[4],
+                        backgroundColor: colors[3]
+                      }}
+                    >
+                      <span className={common.title}>{row.title}</span>
+                      <span className={common.createdBy}>By {row.createdBy}</span>
+                      <span className={common.createdAt}>{row.createdAt}</span>
+                      <span className={common.body}>{row.body}</span>
+                      <span className={common.smallText}>Type: {row.type}<br/>Notes: {row.notes}</span>
+                    </div>
+                  )
+                },
+              }
+            ]}    
+            icons={tableIcons} 
+          />
+          <br/>
+          <MaterialTable
+            title="Quotes"
+            columns={QuotesColumns}
+            data={quotes}
+            editable={{
+              onRowAdd: handleRowAdd,
+              onRowUpdate: handleRowUpdate,
+              onRowDelete: handleRowDelete,
+            }}
+            options={options}
+            detailPanel={[
+              {
+                tooltip: 'Show Details',
+                render: row => {
+                  return (
+                    <div
+                      style={{
+                        textAlign: 'center',
+                        color: colors[4],
+                        backgroundColor: colors[3]
+                      }}
+                    >
+                      <span className={common.title}>{row.text}</span>
+                      <span className={common.createdBy}>By {row.author}</span>
+                      <span className={common.createdAt}>{row.createdAt}</span>
+                      <span className={common.body}>Created By {row.createdBy}</span>
+                    </div>
+                  )
+                },
+              }
+            ]}    
+            icons={tableIcons} 
+          />
+          <br/>
+          <MaterialTable
+            title="Prose"
+            columns={ProseColumns}
+            data={prose}
+            editable={{
+              onRowAdd: handleRowAdd,
+              onRowUpdate: handleRowUpdate,
+              onRowDelete: handleRowDelete,
+            }}
+            options={options}
+            detailPanel={[
+              {
+                tooltip: 'Show Details',
+                render: row => {
+                  return (
+                    <div
+                      style={{
+                        textAlign: 'center',
+                        color: colors[4],
+                        backgroundColor: colors[3]
+                      }}
+                    >
+                      <span className={common.title}>{row.title}</span>
+                      <span className={common.createdBy}>By {row.createdBy}</span>
+                      <span className={common.createdAt}>{row.createdAt}</span>
+                      <span className={common.body}>{row.body}</span>
+                    </div>
+                  )
+                },
+              }
+            ]}    
+            icons={tableIcons} 
+          />
+          <br/>
+        </div>
         <Snackbar open={isSnackbarOpen} autoHideDuration={3000} onClose={handleClose}>
           <MuiAlert elevation={6} variant="filled" onClose={handleClose} severity="success">
             Successful operation!

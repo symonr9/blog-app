@@ -101,7 +101,7 @@ const ItemCard = params => {
         <Paper
         key={params.key}
         elevation={7}
-        className={(!params.isMobileView && common.itemDiv || (params.isMobileView && common.mobileItemDiv))}>
+        className={`${(!params.isMobileView && common.itemDiv || (params.isMobileView && common.mobileItemDiv))} ${(!params.isMobileView && common.paperAnimation || (params.isMobileView && common.mobilePaperAnimation))}`}>
             {(type === "poetry" || type === "prose") && titleSection}
             {(type === "poetry" || type === "prose") && createdBySection}
             {(type === "quotes") && textSection}

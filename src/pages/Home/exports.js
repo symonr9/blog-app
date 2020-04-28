@@ -20,8 +20,8 @@ export const useStyles = makeStyles({
         marginTop: '5em !important'
     },
     introTitle: {
-        fontFamily: fonts[1],
-        fontSize: '3.5em',
+        fontFamily: fonts[0],
+        fontSize: '3em',
         color: colors[5],
         fontWeight: 'bold',
         marginBottom: '0.25em',
@@ -34,7 +34,66 @@ export const useStyles = makeStyles({
     homeSpacingDiv: {
         marginTop: '20em'
     },
-    smallSpacingDiv: {
+    homePaper: {
         marginTop: '10em'
-    }
+    },
+    endPaper: {
+        marginBottom: '10em'
+    },
+    paperAnimation: {
+        borderRadius: '1em',
+        
+        animationName: '$paper-animation',
+        animationDuration: '1.5s',
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-in-out'
+    },
+    '@keyframes paper-animation': {
+        '0%': {
+            fontSize: '2em',
+            border: 'solid 0.025em #3E92CC',
+            backgroundColor: colors[2],
+        },  
+        '70%': {
+            fontSize: '1em',
+            padding: '4em',
+            margin: '6em',
+            marginLeft: '8em',
+            marginRight: '8em',
+            border: 'solid 0.75em ' + colors[2],
+            backgroundColor: colors[1]
+        },
+        '100%': {
+            padding: '3em',
+            backgroundColor: colors[3],
+        }
+    },
+    mobilePaperAnimation: {
+        borderRadius: '1em',
+        
+        animationName: '$mobile-paper-animation',
+        animationDuration: '1.5s',
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-in-out'
+    },
+    '@keyframes mobile-paper-animation': {
+        '0%': {
+            fontSize: '1.25em',
+            border: 'solid 0.025em #3E92CC',
+            backgroundColor: colors[2],
+        },  
+        '70%': {
+            fontSize: '0.5em',
+            padding: '6em',
+            border: 'solid 0.75em ' + colors[2],
+            backgroundColor: colors[1]
+        },
+        '100%': {
+            padding: '3em',
+            fontSize: '0.75em',
+            marginLeft: '1em',
+            marginRight: '2em',
+            backgroundColor: colors[3],
+        }
+      },
 });

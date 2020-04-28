@@ -41,8 +41,8 @@ export const useStyles = makeStyles({
         borderRadius: '1em',
         textAlign: 'center', 
         marginTop: '2em',
-        marginRight: '1em',
-        marginLeft: '1em',
+        marginRight: '0.5em',
+        marginLeft: '0.5em',
         
         animationName: '$title-animation',
         animationDuration: '1.5s',
@@ -76,12 +76,11 @@ export const useStyles = makeStyles({
     },
     author: {
         fontFamily: fonts[0],
-        fontSize: '2em',
         textAlign: 'center',
         borderRadius: '0.5em',
         marginTop: '2em',
-        marginLeft: '12em',
-        marginRight: '12em',
+        marginLeft: '24em',
+        marginRight: '24em',
         marginBottom: '1em',
     
         animationName: '$sub-animation',
@@ -91,12 +90,11 @@ export const useStyles = makeStyles({
     }, 
     mobileAuthor: {
         fontFamily: fonts[0],
-        fontSize: '2em',
         textAlign: 'center',
         borderRadius: '0.5em',
         marginTop: '2em',
-        marginLeft: '2em',
-        marginRight: '2em',
+        marginLeft: '4.5em',
+        marginRight: '4.5em',
         marginBottom: '1em',
     
         animationName: '$sub-animation',
@@ -136,7 +134,7 @@ export const useStyles = makeStyles({
         },
         '100%': {
             fontSize: '1em',
-            padding: '1em',
+            padding: '0.5em',
             border: 'solid 0.1em #333745',
             backgroundColor: '#F7F5E6',
         }
@@ -180,11 +178,11 @@ export const useStyles = makeStyles({
             fontSize: '1.25em',
             padding: '4em',
             marginTop: '2em',
-            marginLeft: '10em',
-            marginRight: '10em',
+            marginLeft: '8em',
+            marginRight: '8em',
             marginBottom: '2em',
             border: 'solid 0.25em ' + colors[4],
-            backgroundColor: '#ebe6bf',
+            backgroundColor: colors[3],
         }
     },
     '@keyframes mobile-body-animation': {
@@ -208,8 +206,8 @@ export const useStyles = makeStyles({
             fontSize: '1.25em',
             padding: '1em',
             marginTop: '2em',
-            marginLeft: '1em',
-            marginRight: '1em',
+            marginLeft: '0.5em',
+            marginRight: '0.5em',
             marginBottom: '2em',
             border: 'solid 0.25em ' + colors[4],
             backgroundColor: colors[3],
