@@ -170,50 +170,39 @@ export const useCommonStyles = makeStyles({
   },
   '@keyframes paper-animation': {
     '0%': {
-        flex: '15%',
-        fontSize: '0.25em',
+        flex: '100%',
+        fontSize: '2em',
         border: 'solid 0.025em #3E92CC',
         backgroundColor: colors[2],
     },  
     '70%': {
         flex: '10%',
-        width: '20px',
-        fontSize: '0.5em',
+        fontSize: '0.75em',
         padding: '2em',
-        margin: '6em',
-        marginLeft: '8em',
-        marginRight: '8em',
         border: 'solid 0.75em ' + colors[2],
         backgroundColor: colors[1]
     },
     '100%': {
         flex: '30%',
-        width: '100px',
         fontSize: '1em',
         padding: '10px',
         backgroundColor: colors[3],
     }
-  },
+},
 '@keyframes mobile-paper-animation': {
     '0%': {
-      flex: '15%',
-      fontSize: '0.25em',
+      flex: '100%',
+      fontSize: '2em',
       border: 'solid 0.025em #3E92CC',
       backgroundColor: colors[2],
   },  
   '70%': {
-      flex: '20%',
-      width: '20px',
-      fontSize: '0.25em',
-      padding: '2px',
-      margin: '6em',
-      marginLeft: '8em',
-      marginRight: '8em',
+      fontSize: '0.75em',
+      padding: '3em',
       border: 'solid 0.75em ' + colors[2],
       backgroundColor: colors[1]
   },
   '100%': {
-      flex: '50%',
       width: '100px',
       fontSize: '1em',
       padding: '10px',
@@ -224,7 +213,7 @@ export const useCommonStyles = makeStyles({
     borderRadius: '1em',
     
     animationName: '$form-animation',
-    animationDuration: '1.5s',
+    animationDuration: '1.25s',
     animationFillMode: 'forwards',
     animationTimingFunction: 'ease-in-out'
   },
@@ -233,7 +222,7 @@ export const useCommonStyles = makeStyles({
         border: 'solid 1em ' + colors[1],
     },  
     '40%': {
-        margin: '6em',
+        margin: '4em',
         border: 'solid 1em ' + colors[2],
     },
     '100%': {
