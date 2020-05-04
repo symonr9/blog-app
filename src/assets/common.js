@@ -176,7 +176,7 @@ export const useCommonStyles = makeStyles({
         backgroundColor: colors[2],
     },  
     '70%': {
-        flex: '10%',
+        flex: '20%',
         fontSize: '0.75em',
         padding: '2em',
         border: 'solid 0.75em ' + colors[2],
