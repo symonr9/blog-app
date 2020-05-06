@@ -22,8 +22,22 @@ import WebFont from 'webfontloader';
  */
 
 
+ /**
+  * rgb(255, 243, 41) --> yellow
+  * rgb(146, 41, 255) --> purple
+  * rgb(48,48,48) --> dark gray background
+  * 
+  */
+export const colors = [
+  "white", 
+  "rgb(146, 41, 255)", 
+  "rgb(255, 243, 41)", 
+  "rgb(255, 255, 255)", 
+  "rgb(48,48,48)", 
+  "rgb(48,48,48)"];
+
 //celestial blue, maize, old lace, onyx, charleston green
-export const colors = ["white", "#3E92CC", "#FFEC60", "#F7F5E6", "#333745", "#232630"];
+//export const colors = ["white", "#3E92CC", "#FFEC60", "#F7F5E6", "#333745", "#232630"];
 
 //stil de graine yellow, jet, beige, cafe noir, smokey black
 //export const colors = ["white", "#F5CB5C", "#333533", "#F5F7DC", "#4F3421", "#0D0A0B"];
@@ -73,6 +87,16 @@ export const useCommonStyles = makeStyles({
   },
   spacingTop: {
     marginBottom: '5em'
+  },
+  pageHeader: {
+    fontSize: '1.5em',
+    fontFamily: fonts[1],
+    backgroundColor: colors[3],
+    border: 'solid 2px ' + colors[3],
+    borderRadius: '5px',
+    boxShadow: '5px 5px 5px 5px ' + colors[4],
+    padding: '1em',
+    marginRight: '1em',
   },
   /* Item Card Styles  ************************************************/
   containerDiv: {
