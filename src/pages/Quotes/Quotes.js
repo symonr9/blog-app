@@ -185,7 +185,7 @@ function Quotes() {
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
-        <h1>Quotes</h1>
+        <h1 className={common.pageHeader}>Quotes</h1>
         <SortFilterBar
           type={"quotes"}
           items={quotes}

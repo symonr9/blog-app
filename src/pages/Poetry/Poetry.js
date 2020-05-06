@@ -201,7 +201,7 @@ function Poetry() {
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
-        <h1>Poetry</h1>
+        <h1 className={common.pageHeader}>Poetry</h1>
         <SortFilterBar
           type={"poetry"} 
           items={poetry}

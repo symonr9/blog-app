@@ -120,7 +120,7 @@ const Signup = () => {
       <Grid item xs={12}>
       {!isMobileView && (<div className={common.spacingTop}></div>)}
         <br/>
-        <h1>Signup</h1>
+        <h1 className={common.pageHeader}>Signup</h1>
       </Grid>
       <Grid item xs={12}>
         <div className={`${common.formAnimation} ${classes.spacingBottom}`}>

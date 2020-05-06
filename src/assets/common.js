@@ -22,8 +22,22 @@ import WebFont from 'webfontloader';
  */
 
 
+ /**
+  * rgb(255, 243, 41) --> yellow
+  * rgb(146, 41, 255) --> purple
+  * rgb(48,48,48) --> dark gray background
+  * 
+  */
+export const colors = [
+  "white", 
+  "rgb(146, 41, 255)", 
+  "rgb(255, 243, 41)", 
+  "rgb(255, 255, 255)", 
+  "rgb(48,48,48)", 
+  "rgb(48,48,48)"];
+
 //celestial blue, maize, old lace, onyx, charleston green
-export const colors = ["white", "#3E92CC", "#FFEC60", "#F7F5E6", "#333745", "#232630"];
+//export const colors = ["white", "#3E92CC", "#FFEC60", "#F7F5E6", "#333745", "#232630"];
 
 //stil de graine yellow, jet, beige, cafe noir, smokey black
 //export const colors = ["white", "#F5CB5C", "#333533", "#F5F7DC", "#4F3421", "#0D0A0B"];
@@ -73,6 +87,16 @@ export const useCommonStyles = makeStyles({
   },
   spacingTop: {
     marginBottom: '5em'
+  },
+  pageHeader: {
+    fontSize: '1.5em',
+    fontFamily: fonts[1],
+    backgroundColor: colors[3],
+    border: 'solid 2px ' + colors[3],
+    borderRadius: '5px',
+    boxShadow: '5px 5px 5px 5px ' + colors[4],
+    padding: '1em',
+    marginRight: '1em',
   },
   /* Item Card Styles  ************************************************/
   containerDiv: {
@@ -170,50 +194,39 @@ export const useCommonStyles = makeStyles({
   },
   '@keyframes paper-animation': {
     '0%': {
-        flex: '15%',
-        fontSize: '0.25em',
+        flex: '100%',
+        fontSize: '2em',
         border: 'solid 0.025em #3E92CC',
         backgroundColor: colors[2],
     },  
     '70%': {
-        flex: '10%',
-        width: '20px',
-        fontSize: '0.5em',
+        flex: '20%',
+        fontSize: '0.75em',
         padding: '2em',
-        margin: '6em',
-        marginLeft: '8em',
-        marginRight: '8em',
         border: 'solid 0.75em ' + colors[2],
         backgroundColor: colors[1]
     },
     '100%': {
         flex: '30%',
-        width: '100px',
         fontSize: '1em',
         padding: '10px',
         backgroundColor: colors[3],
     }
-  },
+},
 '@keyframes mobile-paper-animation': {
     '0%': {
-      flex: '15%',
-      fontSize: '0.25em',
+      flex: '100%',
+      fontSize: '2em',
       border: 'solid 0.025em #3E92CC',
       backgroundColor: colors[2],
   },  
   '70%': {
-      flex: '20%',
-      width: '20px',
-      fontSize: '0.25em',
-      padding: '2px',
-      margin: '6em',
-      marginLeft: '8em',
-      marginRight: '8em',
+      fontSize: '0.75em',
+      padding: '3em',
       border: 'solid 0.75em ' + colors[2],
       backgroundColor: colors[1]
   },
   '100%': {
-      flex: '50%',
       width: '100px',
       fontSize: '1em',
       padding: '10px',
@@ -224,7 +237,7 @@ export const useCommonStyles = makeStyles({
     borderRadius: '1em',
     
     animationName: '$form-animation',
-    animationDuration: '1.5s',
+    animationDuration: '1.25s',
     animationFillMode: 'forwards',
     animationTimingFunction: 'ease-in-out'
   },
@@ -233,7 +246,7 @@ export const useCommonStyles = makeStyles({
         border: 'solid 1em ' + colors[1],
     },  
     '40%': {
-        margin: '6em',
+        margin: '4em',
         border: 'solid 1em ' + colors[2],
     },
     '100%': {

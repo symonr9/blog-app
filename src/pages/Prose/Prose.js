@@ -199,7 +199,7 @@ function Prose() {
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
-        <h1>Prose</h1>
+        <h1 className={common.pageHeader}>Prose</h1>
         <SortFilterBar
           type={"prose"} 
           items={prose}

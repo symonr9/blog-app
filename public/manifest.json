@@ -1,9 +1,9 @@
 {
-  "short_name": "SyBlog",
-  "name": "Symon's Blog PWA",
+  "short_name": "Verbum Volitans",
+  "name": "Verbum Volitans",
   "icons": [
     {
-      "src": "logo.png",
+      "src": "logo.svg",
       "sizes": "248x248 100x100 64x64 32x32 24x24 16x16",
       "type": "image/png"
     }

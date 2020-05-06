@@ -47,7 +47,7 @@ const Redirect = () => {
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
-        <h1>Sorry!</h1>
+        <h1 className={common.pageHeader}>Sorry!</h1>
         <br/>
         It doesn't look like you have access to this page. Please login.
         <br/><br/>

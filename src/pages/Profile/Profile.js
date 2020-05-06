@@ -215,7 +215,7 @@ function Profile() {
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
-        <h1>{username}'s Profile</h1>
+          <h1 className={common.pageHeader}>{username}'s Profile</h1>
           {user && (<Paper className={classes.userDiv}>
             <div className={classes.bio}>Bio: {user[0].bio}</div>
             <div className={classes.email}>Email: {user[0].email}</div>

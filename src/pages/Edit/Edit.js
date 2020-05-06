@@ -448,7 +448,7 @@ function Edit() {
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
-        <h1>Edit</h1>
+        <h1 className={common.pageHeader}>Edit</h1>
         <div className={classes.editContainerDiv}>
           {(data && 
           <form onSubmit={handleSubmit(onSubmit)}>

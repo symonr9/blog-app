@@ -22,7 +22,7 @@ export const textFieldStyle = {
   backgroundColor: "white",
   color: colors[5],
   fontFamily: fonts[0],
-
+  borderRadius: '5px'
 };
 
 export const submitBtnStyle = {

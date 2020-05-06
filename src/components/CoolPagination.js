@@ -36,7 +36,8 @@ const useStyles = makeStyles({
 
 const paginationStyles = {
     marginLeft: '10em',
-    width: '1em'
+    width: '1em',
+    color: 'white'
 }
 /**********************************************************************
  * Function Name: CoolPagination

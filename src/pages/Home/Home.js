@@ -44,9 +44,15 @@ const Home = () => {
       <Grid item xs={12}>
         <div className={classes.homeSpacingDiv}></div>
           <Paper className={`${classes.homePaper} ${(!isMobileView && classes.paperAnimation || (isMobileView && classes.mobilePaperAnimation))}`} elevation="12">
-            <div className={classes.introTitle}>Had we but honey enough and time...</div>
-            <div className={classes.introText}>Welcome to my blog! I'm Symon. I like to write 
-            and write and write. This is a web application I wrote for fun from March to April 2020.
+            <div className={classes.introTitle}>Verbum Volitans</div>
+            <div className={classes.introText}>
+              mine hope engraved in ink <br/>
+              the grave in me begins to sink <br/>
+              into the paper <br/>
+              <br/>
+              the pen becomes a spade <br/>
+              my life becomes <br/>
+              your labor <br/>
             </div>
           </Paper>
         <Paper className={`${classes.homePaper} ${(!isMobileView && classes.paperAnimation || (isMobileView && classes.mobilePaperAnimation))}`} elevation="12">

@@ -411,7 +411,7 @@ function Create() {
     <Grid container>
       <Grid item xs={12} className={!isSideView && (classes.bodyDiv) || isSideView && (classes.sideBodyDiv)}>
         <br/>
-        <h1>Create</h1>
+        <h1 className={common.pageHeader}>Create</h1>
         <div className={`${!isSideView && (classes.formDiv) || isSideView && (classes.sideFormDiv)} ${common.formAnimation}`}>
         <form id="createForm" onSubmit={handleSubmit(onSubmit)}>
           {!isMobileView && (selectTextField(

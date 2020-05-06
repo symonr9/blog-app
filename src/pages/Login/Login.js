@@ -104,7 +104,7 @@ const Login = () => {
       <Grid item xs={12}>
       {!isMobileView && (<div className={common.spacingTop}></div>)}
       <br/><br/>
-        <h1>Login</h1>
+        <h1 className={common.pageHeader}>Login</h1>
       </Grid>
       <Grid item xs={12}>
         <div className={`${common.formAnimation} ${classes.spacingBottom}`}>

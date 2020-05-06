@@ -35,7 +35,7 @@ import { fonts, colors } from "../assets/common";
 
 import { logoutUser } from "../services/redux/actions";
 
-import logo from "../assets/logo2.svg";
+import logo from "../assets/logo.svg";
 /**********************************************************************/
 
 const useStyles = makeStyles({
@@ -91,16 +91,17 @@ const useStyles = makeStyles({
     position: 'fixed',
   },
   logo: {
-    width: '10em',
-    height: '10em',
+    width: '5em',
+    height: '5em',
     position: 'fixed',
     marginBottom: '10em'
   },
   mobileLogo: {
-    width: '10em',
-    height: '10em',
+    width: '5em',
+    height: '5em',
     position: 'fixed',
     margin: '0 !important',
+    marginTop: '2em !important',
     top: '0'
   }
 });
