@@ -182,7 +182,13 @@ const useStyles = makeStyles({
   },
   //Three color, three striped
   bgMobile: {
-    background: colors[3],
+    background: "linear-gradient(to bottom, " 
+    + colors[1] + ","
+    + colors[1] + " 15%," 
+    + colors[2] + " 15%," 
+    + colors[2] + " 30%," 
+    + 'white' + " 30%" 
+    + ")",
     fontFamily: fonts[0],
     "& h1, h2": {
       color: colors[5] + " !important",
@@ -195,7 +201,11 @@ const useStyles = makeStyles({
   },
 
   logo: {
-
+    width: '10em',
+    height: '10em',
+    marginLeft: '8em',
+    marginRight: '8em',
+    marginTop: '4em'
   },
   shareImg: {
     width: '8em',
