@@ -42,6 +42,9 @@ import logo from "./assets/logo.svg";
 import share from "./assets/share.jpg";
 import homescreen from "./assets/homescreen.jpg";
 import addhomescreen from "./assets/addhomescreen.jpg";
+
+//1, 4, 7
+import back from "./assets/back1.PNG";
 import { isIos, isInStandaloneMode } from './services/utils';
 /**********************************************************************/
 
@@ -54,27 +57,27 @@ const routes = [
   { path: "/:type/:urlId/edit", 
     name: "Edit", 
     Component: Edit, 
-    bgType: 2 
+    bgType: 3 
   },
   { path: "/:type/:urlId", 
     name: "Single", 
     Component: Single, 
-    bgType: 3
+    bgType: 1
   },
   { path: "/poetry", 
     name: "Poetry", 
     Component: Poetry, 
-    bgType: 3 
+    bgType: 1 
   },
   { path: "/quotes", 
     name: "Quotes", 
     Component: Quotes, 
-    bgType: 3 
+    bgType: 1 
   },
   { path: "/prose", 
     name: "Prose", 
     Component: Prose, 
-    bgType: 3 
+    bgType: 1 
   },
   { path: "/create", 
     name: "Create", 
@@ -84,17 +87,17 @@ const routes = [
   { path: "/login", 
     name: "Login", 
     Component: Login, 
-    bgType: 3 
+    bgType: 1 
   },
   { path: "/signup", 
     name: "Signup", 
     Component: Signup, 
-    bgType: 3 
+    bgType: 1 
   },
   { path: "/admin", 
     name: "Admin", 
     Component: Admin, 
-    bgType: 4
+    bgType: 3
   },
   { path: "/redirect", 
     name: "Redirect", 
@@ -111,6 +114,9 @@ const routes = [
 const useStyles = makeStyles({
   //One color header, other color base
   bgOne: {
+    background: `url(${back}) no-repeat center center fixed`,
+    backgroundSize: 'cover',
+    /*
     background: "linear-gradient(to bottom, " 
     + colors[1] + ","
     + colors[1] + " 25%,"
@@ -126,6 +132,7 @@ const useStyles = makeStyles({
     "& span": {
       color: colors[4]
     }
+    */
   },
   //One color small header, other color base
   bgTwo: {
@@ -150,7 +157,7 @@ const useStyles = makeStyles({
     + colors[1] + " 15%," 
     + colors[2] + " 15%," 
     + colors[2] + " 30%," 
-    + colors[3] + " 30%" 
+    + colors[4] + " 30%" 
     + ")",
     fontFamily: fonts[0],
     "& h1, h2": {
@@ -216,6 +223,7 @@ function App() {
   const common = useCommonStyles();
   
   const isMobileBrowserRender = isIos() && !isInStandaloneMode();
+  //const isMobileBrowserRender = false;
 
   return (
     <BrowserRouter>

@@ -97,10 +97,11 @@ const useStyles = makeStyles({
     marginBottom: '10em'
   },
   mobileLogo: {
-    width: '10em',
-    height: '10em',
+    width: '5em',
+    height: '5em',
     position: 'fixed',
     margin: '0 !important',
+    marginTop: '2em !important',
     top: '0'
   }
 });
