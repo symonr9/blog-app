@@ -52,13 +52,13 @@ const useStyles = makeStyles({
     },
     sortWidget: {
         cursor: 'pointer',
-        color: colors[4],
+        color: 'white',
         fontSize: '3em',
         marginLeft: '0.5em',
     },
     mobileSortWidget: {
         cursor: 'pointer',
-        color: colors[4],
+        color: 'white',
         fontSize: '3em',
         display: 'flex',
         marginLeft: '0.5em',
@@ -98,7 +98,8 @@ const useStyles = makeStyles({
 const searchBarStyle = { 
     width: '80%', 
     marginBottom: '1em',
-    fontFamily: fonts[2]
+    fontFamily: fonts[2],
+    color: 'white'
 };
 
 const chipStyle = {
