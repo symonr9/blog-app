@@ -407,7 +407,7 @@ function Admin() {
     <Grid container>
       <Grid item xs={12}>
         <div className={common.spacingTop}></div>
-        <h1>Admin</h1>
+        <h1 className={common.pageHeader}>Admin</h1>
         <div className={classes.adminDiv}>
           <MaterialTable
               title="Users"
