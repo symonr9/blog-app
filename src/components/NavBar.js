@@ -43,6 +43,7 @@ const useStyles = makeStyles({
     position: "fixed",
     top: "0.25em",
     margin: "1em",
+    zIndex: '100000000 !important',
     "& a": {
       margin: "0.5em",
       textDecoration: "none",
@@ -103,7 +104,39 @@ const useStyles = makeStyles({
     margin: '0 !important',
     marginTop: '2em !important',
     top: '0'
-  }
+  },
+  isScrolledDown: {
+    animationName: '$scrolled-down-animation',
+    animationDuration: '0.5s',
+    animationFillMode: 'forwards',
+    animationTimingFunction: 'ease-in-out'
+  },
+  '@keyframes scrolled-down-animation': {
+    '0%': {
+      padding: '0em'
+    },  
+    '100%': {
+      backgroundColor: colors[1],
+      borderRadius: '1em',
+      padding: '2em',
+    }
+  },
+  isScrolledUp: {
+    animationName: '$scrolled-up-animation',
+    animationDuration: '0.5s',
+    animationFillMode: 'forwards',
+    animationTimingFunction: 'ease-in-out'
+  },
+  '@keyframes scrolled-up-animation': {
+    '0%': {
+      backgroundColor: colors[1],
+      borderRadius: '1em',
+      padding: '2em'
+    },  
+    '100%': {
+      padding: '0em'
+    }
+  },
 });
 
 //Styles have to be defined like this for the hamburger menu.
@@ -193,10 +226,15 @@ function NavBar() {
   );
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
 
+  const [isScrolledDown, setIsScrolledDown] = useState(window.scrollY > 100);
+
   //Adds a listener to re-render the component when the window width changes.
   useEffect(() => {
-    const handler = e => setIsMobileView(e.matches);
-    window.matchMedia("(max-width: 1125px)").addListener(handler);
+    const mobileHandler = e => setIsMobileView(e.matches);
+    window.matchMedia("(max-width: 1125px)").addListener(mobileHandler);
+
+    const scrollHandler = e => setIsScrolledDown(window.scrollY > 100);
+    window.addEventListener('scroll', scrollHandler);
   }, []);
   /**********************************************************************/
 
@@ -249,42 +287,44 @@ function NavBar() {
           {<object type="image/svg+xml" className={!isMobileView ? classes.logo : classes.mobileLogo} data={logo}></object>}
         </Button>
       </NavLink>
-      <NavLink to={"/"}>
-        <Button style={{ fontFamily: fonts[2] }} className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained">
-          <HomeRounded />
-          Home
-        </Button>
-      </NavLink>
-      {isLoggedIn && (
-        loggedInRoutes.map(({ path, name, icon, isLogOut }) => (
-          <NavLink to={path} key={name}>
-            <Button style={{ fontFamily: fonts[2] }} className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained" onClick={(isLogOut && handleLogoutBtnClick || placeholderClick)}>
-              {icon}
-              {name}
-            </Button>
-          </NavLink>
-        ))
-      )
-      ||
-      !isLoggedIn && (
-        loggedOutRoutes.map(({ path, name, icon }) => (
-          <NavLink to={path} key={name}>
-            <Button style={{ fontFamily: fonts[2] }} className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained">
-              {icon}
-              {name}
-            </Button>
-          </NavLink>
-        ))
-      )
-      }
+      <span className={!isMobileView && (isScrolledDown ? classes.isScrolledDown : classes.isScrolledUp)}>
+        <NavLink to={"/"}>
+          <Button style={{ fontFamily: fonts[2] }} className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained">
+            <HomeRounded />
+            Home
+          </Button>
+        </NavLink>
+        {isLoggedIn && (
+          loggedInRoutes.map(({ path, name, icon, isLogOut }) => (
+            <NavLink to={path} key={name}>
+              <Button style={{ fontFamily: fonts[2] }} className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained" onClick={(isLogOut && handleLogoutBtnClick || placeholderClick)}>
+                {icon}
+                {name}
+              </Button>
+            </NavLink>
+          ))
+        )
+        ||
+        !isLoggedIn && (
+          loggedOutRoutes.map(({ path, name, icon }) => (
+            <NavLink to={path} key={name}>
+              <Button style={{ fontFamily: fonts[2] }} className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained">
+                {icon}
+                {name}
+              </Button>
+            </NavLink>
+          ))
+        )
+        }
 
-      {isAdmin && (<NavLink to={"/admin"}>
-        <Button style={{ fontFamily: fonts[2] }} className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained">
-          <PersonRoundedIcon />
-          Admin
-        </Button>
-      </NavLink>)
-      }
+        {isAdmin && (<NavLink to={"/admin"}>
+          <Button style={{ fontFamily: fonts[2] }} className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained">
+            <PersonRoundedIcon />
+            Admin
+          </Button>
+        </NavLink>)
+        }
+      </span>
     </div>
   );
 

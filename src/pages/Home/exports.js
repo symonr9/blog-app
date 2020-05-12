@@ -20,7 +20,7 @@ export const useStyles = makeStyles({
         marginTop: '5em !important'
     },
     introTitle: {
-        fontFamily: fonts[0],
+        fontFamily: fonts[1],
         fontSize: '3em',
         color: colors[5],
         fontWeight: 'bold',
@@ -64,7 +64,7 @@ export const useStyles = makeStyles({
             backgroundColor: colors[1]
         },
         '100%': {
-            padding: '3em',
+            padding: '2em',
             backgroundColor: colors[3],
         }
     },

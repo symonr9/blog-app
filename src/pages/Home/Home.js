@@ -42,9 +42,8 @@ const Home = () => {
   const body = (
     <Grid container>
       <Grid item xs={12}>
-        <div className={classes.homeSpacingDiv}></div>
           <Paper className={`${classes.homePaper} ${(!isMobileView && classes.paperAnimation || (isMobileView && classes.mobilePaperAnimation))}`} elevation="12">
-            <div className={classes.introTitle}>Verbum Volitans</div>
+            <div className={classes.introTitle}>Verbum</div>
             <div className={classes.introText}>
               mine hope engraved in ink <br/>
               the grave in me begins to sink <br/>

@@ -453,16 +453,13 @@ function Create() {
             ))
           }
 
-          <IconButton 
-          onClick={handleSwitchView}
-          className={classes.switchViewBtn}>
-            {!isSideView && (<ViewColumnRoundedIcon />) || (isSideView && (<ViewStreamRoundedIcon />))}
-          </IconButton>
+          {!isSideView && (<ViewColumnRoundedIcon className={classes.switchViewBtn} onClick={handleSwitchView}/>) 
+          || (isSideView && (<ViewStreamRoundedIcon className={classes.switchViewBtn} onClick={handleSwitchView}/>))}
 
           {words && 
           (<div className={classes.wordCardContainer}>
             {words && words.map(option => (
-              <div className={(!isMobileView && classes.wordCard || (isMobileView && classes.mobileWordCard))} key={wordKey++}>
+              <div className={classes.wordCard} key={wordKey++}>
                 {/* [0] --> definition, [1] --> part of speech */}
                 {kind === "definitions" && (
                   <span>

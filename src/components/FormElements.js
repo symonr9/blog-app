@@ -26,8 +26,8 @@ export const textFieldStyle = {
 };
 
 export const submitBtnStyle = {
-  color: colors[4],
-  backgroundColor: colors[1],
+  color: colors[5],
+  backgroundColor: colors[2],
   marginTop: "2em",
   marginBottom: "2em",
 };

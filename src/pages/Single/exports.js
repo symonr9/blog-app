@@ -8,9 +8,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { fonts, colors } from "../../assets/common";
 
-
-
-
 export const useStyles = makeStyles({
     singleContainerDiv: {
         whiteSpace: 'pre-wrap',
@@ -25,43 +22,39 @@ export const useStyles = makeStyles({
     },
     title: {
         fontFamily: fonts[1],
-        borderRadius: '1em',
+        borderRadius: '0.5em',
         textAlign: 'center', 
         marginTop: '2em',
         marginRight: '8em',
         marginLeft: '8em',
+        boxShadow: '5px 5px 5px 5px ' + colors[4],
         
         animationName: '$title-animation',
-        animationDuration: '1.5s',
+        animationDuration: '1s',
         animationFillMode: 'forwards',
         animationTimingFunction: 'ease-in-out'
     },
     mobileTitle: {
         fontFamily: fonts[1],
-        borderRadius: '1em',
+        borderRadius: '0.5em',
         textAlign: 'center', 
         marginTop: '2em',
         marginRight: '0.5em',
         marginLeft: '0.5em',
+        boxShadow: '5px 5px 5px 5px ' + colors[4],
         
         animationName: '$title-animation',
-        animationDuration: '1.5s',
+        animationDuration: '1s',
         animationFillMode: 'forwards',
         animationTimingFunction: 'ease-in-out'
     },
     '@keyframes title-animation': {
         '0%': {
-            backgroundColor: '#d8e9f4',
+            backgroundColor: colors[2],
             border: 'solid 0.005em ' + colors[3],
-            fontSize: '0.25em',
+            fontSize: '1em',
             padding: '0.05em'
         }, 
-        '50%': {
-            backgroundColor: colors[2], 
-            border: 'solid 0.1em ' + colors[2],
-            fontSize: '1em',
-            padding: '0.25em',
-        },
         '100%': {
             backgroundColor: colors[3], 
             border: 'solid 0.1em ' + colors[4],
@@ -82,6 +75,8 @@ export const useStyles = makeStyles({
         marginLeft: '24em',
         marginRight: '24em',
         marginBottom: '1em',
+        boxShadow: '3px 3px 3px 3px ' + colors[4],
+        opacity: '0.9',
     
         animationName: '$sub-animation',
         animationDuration: '0.75s',
@@ -96,6 +91,8 @@ export const useStyles = makeStyles({
         marginLeft: '4.5em',
         marginRight: '4.5em',
         marginBottom: '1em',
+        boxShadow: '3px 3px 3px 3px ' + colors[4],
+        opacity: '0.9',
     
         animationName: '$sub-animation',
         animationDuration: '0.75s',
@@ -108,6 +105,7 @@ export const useStyles = makeStyles({
         marginRight: '20em',
         marginLeft: '20em',
         marginBottom: '5em',
+        boxShadow: '3px 3px 3px 3px ' + colors[4],
         
         animationName: '$sub-animation',
         animationDuration: '0.75s',
@@ -120,6 +118,7 @@ export const useStyles = makeStyles({
         marginRight: '2em',
         marginLeft: '2em',
         marginBottom: '5em',
+        boxShadow: '3px 3px 3px 3px ' + colors[4],
         
         animationName: '$sub-animation',
         animationDuration: '0.75s',
@@ -130,30 +129,34 @@ export const useStyles = makeStyles({
         '0%': {
             fontSize: '0.5em',
             padding: '0.25em',
-            backgroundColor: '#FFEC60'
+            backgroundColor: colors[2]
         },
         '100%': {
             fontSize: '1em',
             padding: '0.5em',
             border: 'solid 0.1em #333745',
-            backgroundColor: '#F7F5E6',
+            backgroundColor: colors[3]
         }
     }, 
     body: {
         textAlign: 'center',
-        borderRadius: '1em',
+        borderRadius: '0.5em',
+        boxShadow: '5px 5px 5px 5px ' + colors[4],
+        opacity: 0.95,
         
         animationName: '$body-animation',
-        animationDuration: '1.25s',
+        animationDuration: '1s',
         animationFillMode: 'forwards',
         animationTimingFunction: 'ease-in-out'
     },
     mobileBody: {
         textAlign: 'center',
-        borderRadius: '1em',
+        borderRadius: '0.5em',
+        boxShadow: '5px 5px 5px 5px ' + colors[4],
+        opacity: 0.95,
         
         animationName: '$mobile-body-animation',
-        animationDuration: '1.25s',
+        animationDuration: '1s',
         animationFillMode: 'forwards',
         animationTimingFunction: 'ease-in-out'
     },
@@ -161,18 +164,9 @@ export const useStyles = makeStyles({
         '0%': {
             fontSize: '0.25em',
             border: 'solid 0.025em #3E92CC',
-            backgroundColor: '#FFEC60',
+            backgroundColor: colors[2],
             margin: '2em',
             marginTop: '8em'
-        },
-        '70%': {
-            fontSize: '1em',
-            padding: '4em',
-            margin: '6em',
-            marginLeft: '8em',
-            marginRight: '8em',
-            border: 'solid 0.75em ' + colors[4],
-            backgroundColor: colors[1]
         },
         '100%': {
             fontSize: '1.25em',
@@ -192,15 +186,6 @@ export const useStyles = makeStyles({
             backgroundColor: '#FFEC60',
             margin: '2em',
             marginTop: '8em'
-        },
-        '70%': {
-            fontSize: '1em',
-            padding: '7em',
-            margin: '6em',
-            marginLeft: '2em',
-            marginRight: '2em',
-            border: 'solid 0.75em ' + colors[4],
-            backgroundColor: colors[1]
         },
         '100%': {
             fontSize: '1.25em',

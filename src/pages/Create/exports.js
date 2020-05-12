@@ -6,6 +6,9 @@
 
 import { makeStyles } from "@material-ui/core/styles";
 
+import { colors } from "../../assets/common";
+
+
 export const useStyles = makeStyles({
   wordLookupDiv: {
     
@@ -15,37 +18,39 @@ export const useStyles = makeStyles({
   },
   wordCardContainer: {
     overflowY: "scroll",
-    height: "28em",
+    height: "30em",
     display: "flex",
     flexDirection: "column",
     flexWrap: "wrap",
+    flexFlow: 'space-evenly',
     marginBottom: "1em",
     borderRadius: "10px",
     backgroundColor: 'transparent'
   },
   wordCard: {
-    width: "10em",
-    marginBottom: "0.25em",
-    marginRight: "0.25em",
-    border: '2px solid #bebebe',
-    borderRadius: '5px',
+    backgroundColor: colors[3],
+    color: colors[4],
+    padding: '1em',
+    border: '2px solid ' + colors[4],
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px ' + colors[4],
   },
   mobileWord: {
-    fontSize: "1.25em"
-  },
-  mobileWordCard: {
-    width: '13em',
-    marginBottom: "0.25em",
-    marginRight: "0.25em",
-    border: '2px solid #bebebe',
-    borderRadius: '5px',
+    fontSize: "1em"
   },
   spacing: {
     marginTop: "0.75em",
     marginBottom: "0.75em"
   },
   switchViewBtn: {
-
+    backgroundColor: colors[2],
+    color: colors[4],
+    borderRadius: '5em',
+    padding: '0.4em',
+    cursor: 'pointer',
+    "& :hover": {
+      color: colors[1]
+    }
   },
   wordLookupDiv: {
     marginBottom: '5em'
