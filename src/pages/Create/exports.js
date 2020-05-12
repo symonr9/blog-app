@@ -6,6 +6,9 @@
 
 import { makeStyles } from "@material-ui/core/styles";
 
+import { colors } from "../../assets/common";
+
+
 export const useStyles = makeStyles({
   wordLookupDiv: {
     
@@ -45,7 +48,14 @@ export const useStyles = makeStyles({
     marginBottom: "0.75em"
   },
   switchViewBtn: {
-
+    backgroundColor: colors[2],
+    color: colors[4],
+    borderRadius: '5em',
+    padding: '0.4em',
+    cursor: 'pointer',
+    "& :hover": {
+      color: colors[1]
+    }
   },
   wordLookupDiv: {
     marginBottom: '5em'

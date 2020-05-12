@@ -453,11 +453,8 @@ function Create() {
             ))
           }
 
-          <IconButton 
-          onClick={handleSwitchView}
-          className={classes.switchViewBtn}>
-            {!isSideView && (<ViewColumnRoundedIcon />) || (isSideView && (<ViewStreamRoundedIcon />))}
-          </IconButton>
+          {!isSideView && (<ViewColumnRoundedIcon className={classes.switchViewBtn} onClick={handleSwitchView}/>) 
+          || (isSideView && (<ViewStreamRoundedIcon className={classes.switchViewBtn} onClick={handleSwitchView}/>))}
 
           {words && 
           (<div className={classes.wordCardContainer}>
