@@ -86,7 +86,7 @@ export const useCommonStyles = makeStyles({
     }
   },
   spacingTop: {
-    marginBottom: '5em'
+    marginBottom: '6em'
   },
   pageHeader: {
     fontSize: '1.5em',
@@ -179,7 +179,7 @@ export const useCommonStyles = makeStyles({
     borderRadius: '1em',
     
     animationName: '$paper-animation',
-    animationDuration: '1.75s',
+    animationDuration: '1s',
     animationFillMode: 'forwards',
     animationTimingFunction: 'ease-in-out'
   },
@@ -188,7 +188,7 @@ export const useCommonStyles = makeStyles({
     borderRadius: '1em',
     
     animationName: '$mobile-paper-animation',
-    animationDuration: '1.5s',
+    animationDuration: '1s',
     animationFillMode: 'forwards',
     animationTimingFunction: 'ease-in-out'
   },
@@ -237,7 +237,7 @@ export const useCommonStyles = makeStyles({
     borderRadius: '1em',
     
     animationName: '$form-animation',
-    animationDuration: '1.25s',
+    animationDuration: '1s',
     animationFillMode: 'forwards',
     animationTimingFunction: 'ease-in-out'
   },
