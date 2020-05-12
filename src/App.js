@@ -7,7 +7,7 @@
  **********************************************************************/
 
 /* Library Imports ****************************************************/
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
@@ -116,13 +116,22 @@ const useStyles = makeStyles({
   bgOne: {
     background: `url(${back}) no-repeat center center fixed`,
     backgroundSize: 'cover',
-    /*
+    fontFamily: fonts[0],
+    "& h1, h2": {
+      color: colors[5] + " !important",
+      fontFamily: fonts[1]
+    },
+    "& span": {
+      color: colors[4]
+    }
+  },
+  bgOneMobile: {
     background: "linear-gradient(to bottom, " 
     + colors[1] + ","
     + colors[1] + " 25%,"
     + colors[2] + " 25%,"
     + colors[2] + " 35%,"  
-    + colors[3] + " 35%" 
+    + colors[4] + " 35%" 
     + ")",
     fontFamily: fonts[0],
     "& h1, h2": {
@@ -132,7 +141,6 @@ const useStyles = makeStyles({
     "& span": {
       color: colors[4]
     }
-    */
   },
   //One color small header, other color base
   bgTwo: {
@@ -182,13 +190,7 @@ const useStyles = makeStyles({
   },
   //Three color, three striped
   bgMobile: {
-    background: "linear-gradient(to bottom, " 
-    + colors[1] + ","
-    + colors[1] + " 15%," 
-    + colors[2] + " 15%," 
-    + colors[2] + " 30%," 
-    + 'white' + " 30%" 
-    + ")",
+    background: colors[3],
     fontFamily: fonts[0],
     "& h1, h2": {
       color: colors[5] + " !important",
@@ -235,6 +237,18 @@ function App() {
   const isMobileBrowserRender = isIos() && !isInStandaloneMode();
   //const isMobileBrowserRender = false;
 
+  /* Mobile View Handler ************************************************/
+  const [isMobileView, setIsMobileView] = useState(
+    window.matchMedia("(max-width: 1125px)").matches
+  );
+  //Adds a listener to re-render the component when the window width changes.
+  useEffect(() => {
+    const handler = e => setIsMobileView(e.matches);
+    window.matchMedia("(max-width: 1125px)").addListener(handler);
+  }, []);
+  /**********************************************************************/
+
+
   return (
     <BrowserRouter>
       <Provider store={store}>
@@ -273,7 +287,7 @@ function App() {
               <Switch>
                 {routes.map(({ path, Component, bgType, name }) => (
                   <Route key={path} path={path}>
-                    <div className={((bgType === 1) && classes.bgOne) 
+                    <div className={((bgType === 1) && (!isMobileView ? classes.bgOne : classes.bgOneMobile)) 
                                 || ((bgType === 2) && classes.bgTwo)
                                 || ((bgType === 3) && classes.bgThree)
                                 || ((bgType === 4) && classes.bgFour)
