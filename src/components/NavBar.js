@@ -139,7 +139,7 @@ var styles = {
     + colors[1] + " 25%," 
     + colors[2] + " 25%," 
     + colors[2] + " 50%," 
-    + colors[3] + " 50%" 
+    + colors[4] + " 50%" 
     + ")",
     fontSize: "1.15em",
     overflow: "hidden",
