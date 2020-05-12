@@ -1,6 +1,6 @@
-# Symon's Blog App
+# Verbum
 
-Link to Site: https://symon-blog.netlify.com/
+Link to Site: https://verbum.netlify.app/
 
 Link to Demo and Screenshots: https://github.com/symonr9/blog-app/tree/master/docs
 
