@@ -226,7 +226,7 @@ function NavBar() {
   );
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
 
-  const [isScrolledDown, setIsScrolledDown] = useState(false);
+  const [isScrolledDown, setIsScrolledDown] = useState(window.scrollY > 100);
 
   //Adds a listener to re-render the component when the window width changes.
   useEffect(() => {
