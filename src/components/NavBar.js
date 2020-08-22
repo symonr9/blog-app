@@ -117,8 +117,9 @@ const useStyles = makeStyles({
     },  
     '100%': {
       backgroundColor: colors[1],
-      borderRadius: '1em',
-      padding: '2em',
+      borderRadius: '0.4em',
+      padding: '1.75em',
+      paddingRight: '15em'
     }
   },
   isScrolledUp: {

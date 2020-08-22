@@ -43,15 +43,15 @@ const Home = () => {
     <Grid container>
       <Grid item xs={12}>
           <Paper className={`${classes.homePaper} ${(!isMobileView && classes.paperAnimation || (isMobileView && classes.mobilePaperAnimation))}`} elevation="12">
-            <div className={classes.introTitle}>Verbum</div>
+            <div className={classes.introTitle}><b>Verbum</b></div>
+          </Paper>
+          <Paper className={`${classes.homePaper} ${(!isMobileView && classes.paperAnimation || (isMobileView && classes.mobilePaperAnimation))}`} elevation="12">
             <div className={classes.introText}>
-              mine hope engraved in ink <br/>
-              the grave in me begins to sink <br/>
-              into the paper <br/>
-              <br/>
-              the pen becomes a spade <br/>
-              my life becomes <br/>
-              your labor <br/>
+              <h2>Welcome to my blog!</h2>
+              <b>This is a progressive web application built by me, Symon.<br/><br/>
+              I made this as a place to put my poetry and prose, as well as quotes that I hear that I think are
+              worth remembering.<br/><br/>You are welcome to check out what I've written by clicking on one of the 
+              menu buttons above (EX: Poetry).<br/><br/>Thank you for checking out my site!</b>
             </div>
           </Paper>
         <Paper className={`${classes.homePaper} ${(!isMobileView && classes.paperAnimation || (isMobileView && classes.mobilePaperAnimation))}`} elevation="12">

@@ -81,14 +81,19 @@ const useStyles = makeStyles({
         marginTop: '1em',
         width: '8em',
         marginBottom: '1em',
-        marginLeft: '1.75em'
+        marginLeft: '1.75em',
+        color: colors[2],
+        backgroundColor: colors[2],
+        borderRadius: '5px'
     },
     mobileNumOfItemsSelect: {
         display: 'flex',
         marginTop: '1em',
         marginBottom: '1em',
         width: '40%',
-        marginLeft: '1.75em'
+        marginLeft: '1.75em',
+        backgroundColor: colors[2],
+        borderRadius: '5px'
     },
     sortMenu: {
     },
@@ -99,13 +104,15 @@ const searchBarStyle = {
     width: '80%', 
     marginBottom: '1em',
     fontFamily: fonts[2],
-    color: 'white'
+    color: colors[3],
+    backgroundColor: colors[2],
+    borderRadius: '5px'
 };
 
 const chipStyle = {
     color: colors[5], 
     fontFamily: fonts[2],
-    backgroundColor: colors[3], 
+    backgroundColor: colors[2], 
     marginRight: '0.75em', 
     marginBottom : '0.75em' 
 };
@@ -232,7 +239,7 @@ const SortFilterBar = params => {
         id="numOfItemsPerPageSelect"
         name="numOfItemsPerPageSelect"
         label="Items to display?"
-        variant="outlined"
+        variant="filled"
         value={params.numOfItemsPerPage}
         select
         onChange={handleNumOfItemsPerPageChange}
