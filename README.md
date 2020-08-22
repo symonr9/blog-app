@@ -2,13 +2,9 @@
 
 Link to Site: https://verbum.netlify.app/
 
-Link to Demo and Screenshots: https://github.com/symonr9/blog-app/tree/master/docs
-
 Backend Repository: https://github.com/symonr9/blog-app-backend
 
 ## This is a web application I created to act as a portfolio blog for my personal writing. 
-
-![Browser Poetry Page](https://github.com/symonr9/blog-app/blob/master/docs/screenshots/browser_poetry_1.PNG)
 
 ## Technology Used
 
