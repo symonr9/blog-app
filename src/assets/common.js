@@ -103,6 +103,7 @@ export const useCommonStyles = makeStyles({
   containerDiv: {
     display: 'flex',
     flexFlow: "row wrap",
+    marginTop: '5em',
     marginBottom: '5em'
   },
   itemDiv: {

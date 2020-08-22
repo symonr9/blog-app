@@ -26,6 +26,7 @@ const useStyles = makeStyles({
         padding: '5px'
       },
     mobileTopPagination: {
+        float: 'left',
         backgroundColor: colors[2], 
         borderRadius: '5px',
         padding: '5px'

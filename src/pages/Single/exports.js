@@ -34,16 +34,30 @@ export const useStyles = makeStyles({
         animationFillMode: 'forwards',
         animationTimingFunction: 'ease-in-out'
     },
-    mobileTitle: {
+    title: {
         fontFamily: fonts[1],
+        borderRadius: '0.5em',
+        textAlign: 'center', 
+        marginTop: '2em',
+        marginRight: '4em',
+        marginLeft: '4em',
+        boxShadow: '5px 5px 5px 5px ' + colors[4],
+        
+        animationName: '$title-animation',
+        animationDuration: '1s',
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-in-out'
+    },
+    quote: {
+        fontFamily: fonts[3],
         borderRadius: '0.5em',
         textAlign: 'center', 
         marginTop: '2em',
         marginRight: '0.5em',
         marginLeft: '0.5em',
         boxShadow: '5px 5px 5px 5px ' + colors[4],
-        
-        animationName: '$title-animation',
+
+        animationName: '$quote-animation',
         animationDuration: '1s',
         animationFillMode: 'forwards',
         animationTimingFunction: 'ease-in-out'
@@ -61,6 +75,34 @@ export const useStyles = makeStyles({
             fontSize: '2.5em',
             padding: '0.5em',
         }
+    },
+    '@keyframes quote-animation': {
+        '0%': {
+            backgroundColor: colors[2],
+            border: 'solid 0.005em ' + colors[3],
+            fontSize: '1em',
+            padding: '0.05em'
+        }, 
+        '100%': {
+            backgroundColor: colors[3], 
+            border: 'solid 0.1em ' + colors[4],
+            fontSize: '1.5em',
+            padding: '2em',
+        }
+    },
+    mobileQuote: {
+        fontFamily: fonts[3],
+        borderRadius: '0.5em',
+        textAlign: 'center', 
+        marginTop: '2em',
+        marginRight: '0.5em',
+        marginLeft: '0.5em',
+        boxShadow: '5px 5px 5px 5px ' + colors[4],
+        
+        animationName: '$quote-animation',
+        animationDuration: '1s',
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-in-out'
     },
     subheader: { 
         fontFamily: fonts[0],
