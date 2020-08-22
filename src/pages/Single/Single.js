@@ -210,7 +210,7 @@ function Single() {
               type === "quotes" &&
               (
                 <div className={classes.bgDiv}>
-                  <div className={!isMobileView ? classes.title : classes.mobileTitle}>
+                  <div className={!isMobileView ? classes.quote : classes.mobileQuote}>
                     <i>"{data.text}"</i>
                   </div>
                   <span className={classes.subheader}>

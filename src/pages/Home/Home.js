@@ -48,10 +48,10 @@ const Home = () => {
           <Paper className={`${classes.homePaper} ${(!isMobileView && classes.paperAnimation || (isMobileView && classes.mobilePaperAnimation))}`} elevation="12">
             <div className={classes.introText}>
               <h2>Welcome to my blog!</h2>
-              <b>This is a progressive web application built by me, Symon.<br/><br/>
+              This is a progressive web application built by me, Symon.<br/><br/>
               I made this as a place to put my poetry and prose, as well as quotes that I hear that I think are
               worth remembering.<br/><br/>You are welcome to check out what I've written by clicking on one of the 
-              menu buttons above (EX: Poetry).<br/><br/>Thank you for checking out my site!</b>
+              menu buttons above (EX: Poetry).<br/><br/>Thank you for checking out my site!
             </div>
           </Paper>
         <Paper className={`${classes.homePaper} ${(!isMobileView && classes.paperAnimation || (isMobileView && classes.mobilePaperAnimation))}`} elevation="12">
