@@ -34,7 +34,7 @@ export const useStyles = makeStyles({
         animationFillMode: 'forwards',
         animationTimingFunction: 'ease-in-out'
     },
-    title: {
+    mobileTitle: {
         fontFamily: fonts[1],
         borderRadius: '0.5em',
         textAlign: 'center', 
