@@ -206,6 +206,9 @@ var styles = {
  * Notes: None
  **********************************************************************/
 function NavBar() {
+
+  const isFirefox = typeof InstallTrigger !== 'undefined';
+
   /* Authentication Handling ********************************************/
   const username = useSelector(state => state.username);
 
@@ -283,11 +286,13 @@ function NavBar() {
   //Font Family only works for inline styles for buttons :(
   const body = (
     <div>
-      <NavLink to={"/"}>
+      {isFirefox && 
+      (<NavLink to={"/"}>
         <Button>
           {<object type="image/svg+xml" className={!isMobileView ? classes.logo : classes.mobileLogo} data={logo}></object>}
         </Button>
-      </NavLink>
+      </NavLink>)
+      }
       <span className={!isMobileView && (isScrolledDown ? classes.isScrolledDown : classes.isScrolledUp)}>
         <NavLink to={"/"}>
           <Button style={{ fontFamily: fonts[2] }} className={!isMobileView ? classes.navBtn : classes.mobileNavBtn} variant="contained">
