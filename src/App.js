@@ -107,15 +107,14 @@ const routes = [
   { path: "/", 
     name: "Home", 
     Component: Home, 
-    bgType: 1
+    bgType: 3
   }
 ];
 
 const useStyles = makeStyles({
   //One color header, other color base
   bgOne: {
-    background: `url(${back}) no-repeat center center fixed`,
-    backgroundSize: 'cover',
+    background: colors[1],
     fontFamily: fonts[0],
     "& h1, h2": {
       color: colors[5] + " !important",
@@ -235,7 +234,6 @@ function App() {
   const common = useCommonStyles();
   
   const isMobileBrowserRender = isIos() && !isInStandaloneMode();
-  //const isMobileBrowserRender = false;
 
   /* Mobile View Handler ************************************************/
   const [isMobileView, setIsMobileView] = useState(

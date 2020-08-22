@@ -259,7 +259,6 @@ function Single() {
   const body = (
     <Grid container>
       <Grid item xs={12}>
-        <div className={common.spacingTop}></div>
         <br/><br/>
         <div className={classes.singleContainerDiv}>
           {(data && bodyContent) ||

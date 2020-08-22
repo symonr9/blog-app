@@ -28,13 +28,14 @@ import WebFont from 'webfontloader';
   * rgb(48,48,48) --> dark gray background
   * 
   */
+ 
 export const colors = [
   "white", 
-  "rgb(146, 41, 255)", 
-  "rgb(255, 243, 41)", 
-  "rgb(255, 255, 255)", 
-  "rgb(48,48,48)", 
-  "rgb(48,48,48)"];
+  "#18181D", 
+  "#EFE8D9", 
+  "#9A999A", 
+  "#333745", 
+  "#353636"];
 
 //celestial blue, maize, old lace, onyx, charleston green
 //export const colors = ["white", "#3E92CC", "#FFEC60", "#F7F5E6", "#333745", "#232630"];
@@ -48,7 +49,7 @@ export const colors = [
 /**********************************************************************/
 
 //0 is body, 1 is header, 2 is button
-export const fonts = ["Cabin", "Julius Sans One", "Cabin Condensed"];
+export const fonts = ["Open Sans", "Julius Sans One", "Cabin Condensed", "Dosis"];
 //export const fonts = ["Cutive Mono", "Ramabhadra", "Ramabhadra"];
 //export const fonts = ["V323", "Ultra", "Bebas Neue"];
 //export const fonts = ["Cutive Mono", "Permanent Marker", "Roboto"];
@@ -56,7 +57,7 @@ export const fonts = ["Cabin", "Julius Sans One", "Cabin Condensed"];
 //Loads Google Fonts in a safe and efficent way.
 WebFont.load({
   google: {
-    families: [fonts[0], fonts[1], fonts[2]]
+    families: [fonts[0], fonts[1], fonts[2], fonts[3]]
   }
 });
 
@@ -194,17 +195,17 @@ export const useCommonStyles = makeStyles({
   },
   '@keyframes paper-animation': {
     '0%': {
-        flex: '100%',
-        fontSize: '2em',
+        flex: '50%',
+        fontSize: '1.5em',
         border: 'solid 0.025em #3E92CC',
         backgroundColor: colors[2],
     },  
     '70%': {
         flex: '20%',
         fontSize: '0.75em',
-        padding: '2em',
+        padding: '1.5em',
         border: 'solid 0.75em ' + colors[2],
-        backgroundColor: colors[1]
+        backgroundColor: colors[3]
     },
     '100%': {
         flex: '30%',
@@ -237,7 +238,7 @@ export const useCommonStyles = makeStyles({
     borderRadius: '1em',
     
     animationName: '$form-animation',
-    animationDuration: '1s',
+    animationDuration: '0s',
     animationFillMode: 'forwards',
     animationTimingFunction: 'ease-in-out'
   },
