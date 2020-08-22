@@ -286,7 +286,7 @@ function NavBar() {
   //Font Family only works for inline styles for buttons :(
   const body = (
     <div>
-      {isFirefox && 
+      {!isFirefox && 
       (<NavLink to={"/"}>
         <Button>
           {<object type="image/svg+xml" className={!isMobileView ? classes.logo : classes.mobileLogo} data={logo}></object>}
