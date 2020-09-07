@@ -34,12 +34,14 @@ const useStyles = makeStyles({
     bottomPagination: {
         float: 'right',
         marginTop: '2em',
+        marginBottom: '2em',
         backgroundColor: colors[2],
         borderRadius: '5px',
         padding: '5px'
     },
     mobileBottomPagination: {
         marginTop: '2em',
+        marginBottom: '2em',
         backgroundColor: colors[2],
         borderRadius: '5px',
         padding: '5px'

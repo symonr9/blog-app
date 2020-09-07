@@ -62,9 +62,17 @@ function Poetry() {
   const fetchData = isSubscribed => {
     getData(getServerURL("poetry"), response => {
       if (isSubscribed) {
-        const items = response.sort(() => {
-          return 0.5 - Math.random();
-        });
+        const items = (response.sort((a,b) => {
+          let aItem = new Date(a.createdAt).getTime();
+          let bItem = new Date(b.createdAt).getTime();
+  
+          let isDesc = sortDescDate;
+          setSortDescDate(!sortDescDate);  
+          if(isDesc){
+            return (aItem > bItem) ? -1 : (aItem < bItem) ? 1 : 0;
+          }
+          return (aItem < bItem) ? -1 : (aItem > bItem) ? 1 : 0;
+        }));
         setPoetry(items);
         setCurrentPage(items.slice(0, numOfItemsPerPage));
         setNumOfPages(Math.ceil(items.length / numOfItemsPerPage));
@@ -260,6 +268,7 @@ function Poetry() {
                 <CircularProgress />
               </div>
             ))}
+          </div>
             <CoolPagination 
               type={"poetry"}
               location={"bottom"}
@@ -273,7 +282,6 @@ function Poetry() {
               setCurrentPage={setCurrentPage}
               isMobileView={isMobileView}
             />
-        </div>
       </Grid>
     </Grid>
   );

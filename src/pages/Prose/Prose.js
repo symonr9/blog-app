@@ -60,9 +60,17 @@ function Prose() {
   const fetchData = isSubscribed => {
     getData(getServerURL("prose"), response => {
       if (isSubscribed) {
-        const items = response.sort(() => {
-          return 0.5 - Math.random();
-        });
+        const items = (response.sort((a,b) => {
+          let aItem = new Date(a.createdAt).getTime();
+          let bItem = new Date(b.createdAt).getTime();
+  
+          let isDesc = sortDescDate;
+          setSortDescDate(!sortDescDate);
+          if(isDesc){
+            return (aItem > bItem) ? -1 : (aItem < bItem) ? 1 : 0;
+          }
+          return (aItem < bItem) ? -1 : (aItem > bItem) ? 1 : 0;
+        }));
         setProse(items);
         setCurrentPage(items.slice(0, numOfItemsPerPage));
         setNumOfPages(Math.ceil(items.length / numOfItemsPerPage));
@@ -91,7 +99,7 @@ function Prose() {
 
   const [sortDescTitle, setSortDescTitle] = useState(true);
   const [sortDescAuthor, setSortDescAuthor] = useState(true);
-  const [sortDescDate, setSortDescDate] = useState(false);
+  const [sortDescDate, setSortDescDate] = useState(true);
 
   const [isFullText, setIsFullText] = useState(false);
 
@@ -258,6 +266,7 @@ function Prose() {
                 <CircularProgress />
               </div>
             ))}
+        </div>
         <CoolPagination 
           type={"prose"}
           location={"bottom"}
@@ -271,7 +280,6 @@ function Prose() {
           setCurrentPage={setCurrentPage}
           isMobileView={isMobileView}
         />
-        </div>
       </Grid>
     </Grid>
   );

@@ -61,9 +61,17 @@ function Quotes() {
   const fetchData = isSubscribed => {
     getData(getServerURL("quotes"), response => {
       if (isSubscribed) {
-        const items = response.sort(() => {
-          return 0.5 - Math.random();
-        });
+        const items = response.sort((a, b) => {
+          let aItem = a.author.toUpperCase();
+          let bItem = b.author.toUpperCase();
+
+          let isDesc = sortDescAuthor;
+          setSortDescAuthor(!sortDescAuthor);
+          if (isDesc) {
+            return aItem > bItem ? -1 : aItem < bItem ? 1 : 0;
+          }
+          return aItem < bItem ? -1 : aItem > bItem ? 1 : 0;
+        })
         setQuotes(items);
         setCurrentPage(items.slice(0, numOfItemsPerPage));
         setNumOfPages(Math.ceil(items.length / numOfItemsPerPage));
@@ -238,6 +246,7 @@ function Quotes() {
                 <CircularProgress />
               </div>
             ))}
+        </div>
         <CoolPagination 
           type={"quotes"}
           location={"bottom"}
@@ -251,7 +260,6 @@ function Quotes() {
           setCurrentPage={setCurrentPage}
           isMobileView={isMobileView}
         />
-        </div>
       </Grid>
     </Grid>
   );
